@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>圆落星的个人主页</title>
+<title>圆落星 · 星空主页</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -14,58 +15,66 @@ box-sizing:border-box;
 }
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#020617;
-color:white;
+font-family:"Microsoft YaHei",sans-serif;
 min-height:100vh;
+color:white;
 overflow-x:hidden;
+background:
+radial-gradient(circle at 20% 20%,#5b21b6 0%,transparent 30%),
+radial-gradient(circle at 80% 10%,#2563eb 0%,transparent 25%),
+linear-gradient(#020617,#0f172a);
 }
 
-/* 星空背景 */
-body::before{
+
+/* 星空 */
+
+body:before{
 content:"";
 position:fixed;
-width:200%;
-height:200%;
-top:-50%;
-left:-50%;
+inset:0;
 background-image:
 radial-gradient(white 1px,transparent 1px);
-background-size:50px 50px;
-animation:stars 20s linear infinite;
+background-size:45px 45px;
 opacity:.35;
-z-index:-1;
+animation:stars 20s linear infinite;
+z-index:-2;
 }
+
 
 @keyframes stars{
 from{
 transform:translateY(0);
 }
 to{
-transform:translateY(100px);
+transform:translateY(80px);
 }
 }
 
 
-/* 流星 */
-.meteor{
+/* 星云光 */
+
+body:after{
+content:"";
 position:fixed;
-width:2px;
-height:120px;
-background:linear-gradient(white,transparent);
-transform:rotate(-45deg);
-animation:shoot 5s infinite;
-opacity:.8;
+width:500px;
+height:500px;
+border-radius:50%;
+background:#a855f7;
+filter:blur(120px);
+opacity:.25;
+top:20%;
+left:20%;
+z-index:-1;
+animation:nebula 8s infinite alternate;
 }
 
-@keyframes shoot{
-0%{
-top:-150px;
-right:0;
+
+@keyframes nebula{
+from{
+transform:translate(0,0);
 }
-100%{
-top:100vh;
-right:100%;
+to{
+transform:translate(100px,-50px);
 }
 }
 
@@ -73,7 +82,7 @@ right:100%;
 .container{
 max-width:900px;
 margin:auto;
-padding:25px;
+padding:30px;
 }
 
 
@@ -81,7 +90,6 @@ nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 0;
 }
 
 
@@ -92,203 +100,342 @@ font-weight:bold;
 
 
 .nav-btn{
-padding:10px 18px;
-border:1px solid #555;
-border-radius:20px;
 color:white;
 text-decoration:none;
+border:1px solid rgba(255,255,255,.3);
+padding:10px 20px;
+border-radius:30px;
 }
 
 
-/* 主标题 */
 .hero{
-min-height:75vh;
+
+height:75vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+
 }
 
 
 .hero h1{
-font-size:60px;
-margin-bottom:20px;
+
+font-size:65px;
 
 background:linear-gradient(
 90deg,
-#ffffff,
-#8b5cf6,
+#fff,
+#c084fc,
 #38bdf8
 );
 
 -webkit-background-clip:text;
 color:transparent;
 
-animation:glow 2s infinite alternate;
+animation:light 2s infinite alternate;
+
 }
 
 
-/* 名字发光 */
-@keyframes glow{
+@keyframes light{
 
 from{
-filter:drop-shadow(0 0 10px #8b5cf6);
+filter:drop-shadow(0 0 10px #a855f7);
 }
 
 to{
-filter:drop-shadow(0 0 30px #38bdf8);
+filter:drop-shadow(0 0 35px #38bdf8);
 }
 
 }
 
 
 .hero p{
-color:#cbd5e1;
-font-size:18px;
-line-height:1.8;
+
+margin-top:25px;
+font-size:20px;
+line-height:2;
+color:#ddd;
+
 }
 
 
 .button{
-margin-top:30px;
-padding:14px 30px;
-border-radius:30px;
+
+margin-top:35px;
+padding:15px 35px;
+border-radius:40px;
 background:white;
 color:#111;
 text-decoration:none;
 font-weight:bold;
+
 }
-
-
 .card{
-margin-top:30px;
-padding:30px;
+
+margin-top:35px;
+padding:35px;
+
 background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,.15);
-border-radius:24px;
+
+border:1px solid rgba(255,255,255,.18);
+
+border-radius:30px;
+
+backdrop-filter:blur(15px);
+
+box-shadow:0 0 40px rgba(0,0,0,.3);
+
 }
 
 
 .card h2{
+
 margin-bottom:15px;
+
+font-size:28px;
+
 }
 
 
 .card p{
-color:#cbd5e1;
-line-height:1.8;
+
+color:#ddd;
+
+line-height:2;
+
+font-size:17px;
+
+}
+
+
+/* 月亮 */
+
+.moon{
+
+position:fixed;
+
+right:80px;
+
+top:100px;
+
+width:100px;
+
+height:100px;
+
+background:#fff;
+
+border-radius:50%;
+
+box-shadow:
+
+0 0 30px white,
+
+0 0 80px #93c5fd;
+
 }
 
 
 footer{
+
 text-align:center;
-padding:40px 0;
-color:#94a3b8;
+
+padding:50px 0;
+
+color:#aaa;
+
 }
 
+
+/* 手机适配 */
 
 @media(max-width:600px){
 
 .hero h1{
+
 font-size:42px;
+
+}
+
+.moon{
+
+width:60px;
+
+height:60px;
+
+right:30px;
+
+top:80px;
+
 }
 
 }
+
 </style>
 
 </head>
+
+
 <body>
 
-<div class="meteor"></div>
+
+<div class="moon"></div>
+
 
 <div class="container">
 
+
 <nav>
-  <div class="logo">🌙 圆落星</div>
-  <a class="nav-btn" href="#about">关于我</a>
+
+<div class="logo">
+🌙 圆落星
+</div>
+
+
+<a class="nav-btn" href="#about">
+关于我
+</a>
+
 </nav>
+
 
 
 <section class="hero">
 
-<h1>你好，我是圆落星</h1>
+
+<h1>
+圆落星
+</h1>
+
 
 <p>
-欢迎来到我的星空个人主页。<br>
-追逐星光 · 热爱生活 · 创造属于自己的故事
+
+追逐星光 · 热爱生活<br>
+
+欢迎来到我的星空个人主页
+
 </p>
 
+
 <a class="button" href="#about">
-探索更多
+
+探索宇宙
+
 </a>
 
+
 </section>
+
 
 
 
 <section class="card" id="about">
 
-<h2>✨ 关于我</h2>
+
+<h2>
+✨ 关于我
+</h2>
+
 
 <p>
-我是圆落星，一个喜欢探索、创造和记录的人。<br>
-这里会分享我的想法、作品、兴趣以及成长旅程。
+
+我是圆落星，一个喜欢探索和创造的人。<br>
+
+这里记录我的作品、想法和成长旅程。
+
 </p>
+
 
 </section>
 
 
 
+
 <section class="card">
 
-<h2>🚀 我的作品</h2>
+
+<h2>
+🚀 我的作品
+</h2>
+
 
 <p>
-这里可以展示我的摄影、设计、项目、
-AI创作或者任何值得分享的作品。
+
+摄影 · 设计 · AI创作 · 个人项目
+
+<br>
+
+未来会在这里展示更多内容。
+
 </p>
+
 
 </section>
 
 
 
+
 <section class="card">
 
-<h2>⭐ 我的兴趣</h2>
+
+<h2>
+⭐ 我的兴趣
+</h2>
+
 
 <p>
+
 🌌 星空<br>
+
 🎨 创意设计<br>
+
 💻 科技探索<br>
-📷 记录美好瞬间
+
+📷 记录美好
+
 </p>
 
+
 </section>
+
 
 
 
 <section class="card">
 
-<h2>📩 联系我</h2>
+
+<h2>
+📩 联系我
+</h2>
+
 
 <p>
+
 邮箱：你的邮箱<br>
+
 社交账号：你的账号
+
 </p>
 
+
 </section>
+
 
 
 
 <footer>
-© 2026 圆落星 · 星空个人主页
+
+© 2026 圆落星 · 星空主页
+
 </footer>
+
 
 
 </div>
 
 
 </body>
+
 </html>
