@@ -1,500 +1,320 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>圆落星 · 梦幻星空主页</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>圆落星 · Personal Space</title>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-min-height:100vh;
-font-family:"Microsoft YaHei",sans-serif;
-color:white;
-overflow-x:hidden;
-
-background:
-radial-gradient(circle at 20% 20%,rgba(168,85,247,.5),transparent 35%),
-radial-gradient(circle at 80% 30%,rgba(59,130,246,.45),transparent 35%),
-linear-gradient(#020617,#0b1026);
+margin:0;
+background:#050507;
+color:#f5f2ea;
+font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif
 }
-
-
-/* 星空 */
-
-.stars{
+body:before{
+content:"";
 position:fixed;
 inset:0;
-background-image:
-radial-gradient(white 1px,transparent 1px),
-radial-gradient(#fff 1px,transparent 1px);
-
-background-size:
-50px 50px,
-90px 90px;
-
-background-position:
-0 0,
-40px 40px;
-
-animation:moveStars 25s linear infinite;
-
-opacity:.45;
-z-index:-3;
-}
-
-
-@keyframes moveStars{
-
-from{
-transform:translateY(0);
-}
-
-to{
-transform:translateY(120px);
-}
-
-}
-
-
-
-/* 星云 */
-
-.nebula{
-
-position:fixed;
-
-width:500px;
-height:500px;
-
-border-radius:50%;
-
-background:#8b5cf6;
-
-filter:blur(150px);
-
-opacity:.25;
-
-top:20%;
-left:30%;
-
-animation:float 8s infinite alternate;
-
-z-index:-2;
-
-}
-
-
-@keyframes float{
-
-from{
-transform:translate(0,0);
-}
-
-to{
-transform:translate(100px,-80px);
-}
-
-}
-
-
-/* 月亮 */
-
-.moon{
-
-position:fixed;
-
-right:80px;
-top:80px;
-
-width:120px;
-height:120px;
-
-border-radius:50%;
-
-background:#fff;
-
-box-shadow:
-
-0 0 30px #fff,
-0 0 80px #93c5fd;
-
-}
-
-
-.container{
-
-max-width:900px;
-
-margin:auto;
-
-padding:30px;
-
-}
-
-
-nav{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-}
-
-
-.logo{
-
-font-size:26px;
-
-font-weight:bold;
-
-}
-
-
-.nav-btn{
-
-color:white;
-
-text-decoration:none;
-
-border:1px solid rgba(255,255,255,.3);
-
-padding:10px 22px;
-
-border-radius:30px;
-
-}
-
-
-.hero{
-
-height:75vh;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-}
-
-
-.hero h1{
-
-font-size:70px;
-
-letter-spacing:8px;
-
 background:
-
-linear-gradient(
-90deg,
-#fff,
-#e9d5ff,
-#60a5fa
-);
-
--webkit-background-clip:text;
-
-color:transparent;
-
-
-animation:glow 2s infinite alternate;
-
+radial-gradient(circle at 70% 18%,#7e5dff2e,transparent 28%),
+radial-gradient(circle at 15% 65%,#3c78ff1a,transparent 30%);
+pointer-events:none
 }
-
-
-@keyframes glow{
-
-from{
-
-filter:drop-shadow(0 0 15px #a855f7);
-
+header{
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:10;
+padding:22px 7vw;
+display:flex;
+justify-content:space-between;
+background:linear-gradient(#050507dd,transparent);
+backdrop-filter:blur(8px)
 }
-
-to{
-
-filter:drop-shadow(0 0 45px #38bdf8);
-
-}
-
-}
-.hero p{
-
-margin-top:25px;
-
-font-size:20px;
-
-line-height:2;
-
-color:#e2e8f0;
-
-}
-
-
-.button{
-
-margin-top:35px;
-
-padding:15px 35px;
-
-border-radius:40px;
-
-background:white;
-
-color:#111;
-
-text-decoration:none;
-
-font-weight:bold;
-
-box-shadow:0 0 30px rgba(255,255,255,.5);
-
-}
-
-
-
-.card{
-
-margin-top:35px;
-
-padding:35px;
-
-background:rgba(255,255,255,.1);
-
-border:1px solid rgba(255,255,255,.2);
-
-border-radius:30px;
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-
-0 0 40px rgba(0,0,0,.3);
-
-}
-
-
-.card h2{
-
-font-size:28px;
-
-margin-bottom:15px;
-
-}
-
-
-.card p{
-
-font-size:17px;
-
-line-height:2;
-
-color:#e5e7eb;
-
-}
-
-
-footer{
-
-text-align:center;
-
-padding:50px 0;
-
+.logo{letter-spacing:3px}
+nav a{
 color:#aaa;
-
+text-decoration:none;
+margin-left:28px;
+font-size:13px
 }
-
-
-
-/* 手机 */
-
-@media(max-width:600px){
-
-.hero h1{
-
-font-size:42px;
-
-letter-spacing:4px;
-
+.hero{
+min-height:100vh;
+display:grid;
+place-items:center;
+padding:120px 7vw 80px;
+text-align:center;
+position:relative
 }
-
-
-.moon{
-
-width:70px;
-
-height:70px;
-
-right:30px;
-
-top:70px;
-
+.hero-inner{width:min(1100px,100%)}
+.eyebrow{
+font-size:11px;
+letter-spacing:7px;
+color:#9b93b9;
+margin-bottom:28px
 }
-
+h1{
+font:400 clamp(72px,15vw,170px)/.9 Georgia,serif;
+letter-spacing:-5px;
+margin:0;
+background:linear-gradient(120deg,#fff,#d8d0ff,#8e86ff);
+-webkit-background-clip:text;
+color:transparent
 }
-
+.subtitle{
+margin:34px auto 0;
+color:#aaa;
+line-height:2;
+font-size:15px;
+letter-spacing:2px
+}
+.cta{
+display:inline-block;
+margin-top:42px;
+padding:13px 26px;
+border:1px solid #444;
+border-radius:99px;
+color:#eee;
+text-decoration:none;
+font-size:13px;
+letter-spacing:2px
+}
+.orbit{
+position:absolute;
+width:min(72vw,680px);
+height:min(72vw,680px);
+border:1px solid #ffffff12;
+border-radius:50%;
+z-index:-1
+}
+.orbit:after{
+content:"✦";
+position:absolute;
+top:-9px;
+left:50%;
+color:#fff
+}
+.section{
+width:min(1050px,86vw);
+margin:auto;
+padding:110px 0
+}
+.section-title{
+display:flex;
+align-items:end;
+justify-content:space-between;
+border-bottom:1px solid #222;
+padding-bottom:18px;
+margin-bottom:34px
+}
+.section-title h2{
+margin:0;
+font:400 34px Georgia,serif
+}
+.section-title span,.num{
+font-size:11px;
+color:#666;
+letter-spacing:2px
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px
+}
+.card{
+min-height:230px;
+border:1px solid #202024;
+border-radius:20px;
+padding:28px;
+background:linear-gradient(145deg,#ffffff0e,#ffffff04);
+transition:.35s
+}
+.card:hover{
+transform:translateY(-6px);
+border-color:#555
+}
+.card h3{
+font:400 26px Georgia,serif;
+margin:65px 0 12px
+}
+.card p{
+margin:0;
+color:#999;
+line-height:1.8;
+font-size:13px
+}
+.quote{
+width:min(850px,86vw);
+margin:40px auto 130px;
+text-align:center;
+color:#aaa;
+font:italic 26px/1.8 Georgia,serif
+}
+footer{
+border-top:1px solid #1c1c20;
+padding:35px 7vw;
+color:#666;
+font-size:11px;
+letter-spacing:2px;
+display:flex;
+justify-content:space-between
+}
+@media(max-width:700px){
+header{padding:18px 5vw}
+nav a{margin-left:13px;font-size:11px}
+.hero{padding-left:5vw;padding-right:5vw}
+h1{letter-spacing:-3px}
+.subtitle{font-size:13px}
+.grid{grid-template-columns:1fr}
+.card{min-height:190px}
+.section{padding:80px 0}
+.quote{font-size:20px;margin-bottom:90px}
+footer{padding:28px 5vw}
+}
 </style>
-
 </head>
-
 
 <body>
 
-
-<div class="stars"></div>
-
-<div class="nebula"></div>
-
-<div class="moon"></div>
-
-
-<div class="container">
-
-
+<header>
+<div class="logo">圆落星</div>
 <nav>
+<a href="#about">关于</a>
+<a href="#works">作品</a>
+<a href="#contact">联系</a>
+</nav>
+</header>
 
-<div class="logo">
-🌙 圆落星
+<main>
+
+<section class="hero">
+<div class="orbit"></div>
+
+<div class="hero-inner">
+
+<div class="eyebrow">
+PERSONAL SPACE · 2026
+</div>
+
+<h1>圆落星</h1>
+
+<p class="subtitle">
+在自己的轨道上生活。<br>
+记录灵感、审美与正在发生的一切。
+</p>
+
+<a class="cta" href="#about">
+进入我的世界　→
+</a>
+
+</div>
+</section>
+
+
+<section class="section" id="about">
+
+<div class="section-title">
+<h2>关于我</h2>
+<span>01 / ABOUT</span>
+</div>
+
+<div class="grid">
+
+<article class="card">
+<div class="num">A01</div>
+<h3>关于</h3>
+<p>
+一个属于圆落星的私人空间，留下喜欢的人、事、物。
+</p>
+</article>
+
+<article class="card">
+<div class="num">A02</div>
+<h3>审美</h3>
+<p>
+喜欢干净、克制、有一点神秘感的视觉世界。
+</p>
+</article>
+
+<article class="card">
+<div class="num">A03</div>
+<h3>生活</h3>
+<p>
+慢慢记录，慢慢探索，也慢慢成为自己。
+</p>
+</article>
+
+</div>
+</section>
+
+
+<section class="section" id="works">
+
+<div class="section-title">
+<h2>我的世界</h2>
+<span>02 / WORLD</span>
+</div>
+
+<div class="grid">
+
+<article class="card">
+<div class="num">01</div>
+<h3>AI 创作</h3>
+<p>
+图像、视觉实验与各种有趣的创意。
+</p>
+</article>
+
+<article class="card">
+<div class="num">02</div>
+<h3>影像</h3>
+<p>
+把值得记住的瞬间，留在自己的时间线上。
+</p>
+</article>
+
+<article class="card">
+<div class="num">03</div>
+<h3>灵感</h3>
+<p>
+星空、设计、科技，以及所有让我心动的东西。
+</p>
+</article>
+
+</div>
+</section>
+
+
+<div class="quote">
+“愿你始终有自己的光，也有自己的轨道。”
 </div>
 
 
-<a class="nav-btn" href="#about">
-关于我
-</a>
+<section class="section" id="contact">
 
-</nav>
+<div class="section-title">
+<h2>联系</h2>
+<span>03 / CONTACT</span>
+</div>
 
-
-
-<section class="hero">
-
-
-<h1>
-圆落星
-</h1>
-
-
+<div class="card">
 <p>
-
-追逐星光 · 热爱生活<br>
-
-欢迎来到我的梦幻星空
-
+这里以后可以放你的邮箱、社交账号或其他联系方式。
 </p>
-
-
-<a class="button" href="#about">
-
-进入我的世界
-
-</a>
-
+</div>
 
 </section>
 
-
-
-<section class="card" id="about">
-
-<h2>
-✨ 关于我
-</h2>
-
-<p>
-
-我是圆落星。<br>
-
-在浩瀚宇宙中寻找属于自己的光，
-
-记录想法、作品和美好瞬间。
-
-</p>
-
-</section>
-
-
-
-<section class="card">
-
-<h2>
-🌌 我的作品
-</h2>
-
-<p>
-
-摄影 · 创意设计 · AI创作 · 个人项目
-
-<br>
-
-这里会展示我的探索和创造。
-
-</p>
-
-</section>
-<section class="card">
-
-<h2>
-⭐ 我的兴趣
-</h2>
-
-<p>
-
-🌙 星空探索<br>
-
-🎨 创意设计<br>
-
-💻 科技与未来<br>
-
-📷 记录生活
-
-</p>
-
-</section>
-
-
-
-<section class="card">
-
-<h2>
-📩 联系我
-</h2>
-
-<p>
-
-邮箱：你的邮箱<br>
-
-社交账号：你的账号
-
-</p>
-
-</section>
-
+</main>
 
 
 <footer>
-
-© 2026 圆落星 · 梦幻星空主页
-
+<span>© 2026 YUANLUOXING</span>
+<span>PERSONAL SPACE</span>
 </footer>
 
-
-</div>
-
-
 </body>
-
 </html>
