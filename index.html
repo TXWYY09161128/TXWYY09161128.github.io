@@ -13,439 +13,329 @@
     box-sizing:border-box;
 }
 
+:root{
+    --bg:#eee5da;
+    --text:#4a382c;
+    --sub:#806b59;
+    --accent:#b18a5a;
+    --glow:rgba(255,210,140,.35);
+}
+
 html{
     scroll-behavior:smooth;
 }
 
 body{
-    background:#eee5da;
-    color:#302721;
-    font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+    min-height:100vh;
     overflow-x:hidden;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    transition:
+        background 2s ease,
+        color 2s ease;
 }
 
-/* ===== 背景光影 ===== */
+/* =========================
+   背景光
+========================= */
 
 body::before{
     content:"";
     position:fixed;
-    width:600px;
-    height:600px;
+    width:60vw;
+    height:60vw;
+    max-width:800px;
+    max-height:800px;
     border-radius:50%;
-    background:rgba(190,130,75,.13);
+    background:var(--glow);
     filter:blur(90px);
-    top:-200px;
-    left:-150px;
+    top:-20%;
+    right:-15%;
     pointer-events:none;
-    z-index:-2;
-    animation:sunlight 10s ease-in-out infinite alternate;
+    animation:lightMove 12s ease-in-out infinite alternate;
+    z-index:-3;
 }
 
 body::after{
     content:"";
     position:fixed;
-    width:500px;
-    height:500px;
+    width:45vw;
+    height:45vw;
+    max-width:600px;
+    max-height:600px;
     border-radius:50%;
-    background:rgba(130,72,45,.08);
+    background:var(--glow);
     filter:blur(100px);
-    right:-180px;
-    bottom:-150px;
+    bottom:-20%;
+    left:-15%;
     pointer-events:none;
-    z-index:-2;
-    animation:sunlight2 12s ease-in-out infinite alternate;
+    animation:lightMove2 15s ease-in-out infinite alternate;
+    z-index:-3;
 }
 
-@keyframes sunlight{
-    from{transform:translate(0,0);}
-    to{transform:translate(160px,100px);}
-}
-
-@keyframes sunlight2{
-    from{transform:translate(0,0);}
-    to{transform:translate(-130px,-80px);}
-}
-
-/* ===== 枫叶 ===== */
-
-.leaves{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:20;
-}
-
-.leaf{
-    position:absolute;
-    top:-70px;
-    font-size:26px;
-    opacity:.7;
-    animation:fall linear infinite;
-}
-
-@keyframes fall{
-    0%{
-        transform:translate3d(0,-80px,0) rotate(0deg);
-        opacity:0;
+@keyframes lightMove{
+    from{
+        transform:translate(0,0) scale(1);
     }
-
-    10%{
-        opacity:.75;
-    }
-
-    50%{
-        transform:translate3d(100px,55vh,0) rotate(180deg);
-    }
-
-    100%{
-        transform:translate3d(-80px,110vh,0) rotate(360deg);
-        opacity:0;
+    to{
+        transform:translate(-60px,80px) scale(1.15);
     }
 }
 
-/* ===== 页面 ===== */
-
-.container{
-    width:min(1180px,90%);
-    margin:auto;
+@keyframes lightMove2{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(80px,-60px) scale(1.2);
+    }
 }
+
+/* =========================
+   顶部
+========================= */
 
 header{
-    padding:30px 0;
+    position:relative;
+    z-index:10;
+    padding:28px 6vw;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    animation:headerIn 1.2s ease both;
+    letter-spacing:.15em;
 }
 
 .logo{
-    font-family:Georgia,serif;
-    font-size:20px;
-    letter-spacing:4px;
+    font-size:12px;
+    font-weight:600;
 }
 
 .date{
-    font-size:11px;
-    letter-spacing:3px;
-    color:#77655b;
+    font-size:12px;
+    opacity:.65;
 }
 
-@keyframes headerIn{
-    from{
-        opacity:0;
-        transform:translateY(-30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* ===== 首屏 ===== */
+/* =========================
+   主视觉
+========================= */
 
 .hero{
-    min-height:760px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:70px;
+    min-height:78vh;
+    padding:7vh 8vw 10vh;
+    display:flex;
     align-items:center;
-    padding:60px 0 110px;
-}
-
-.hero-left{
-    animation:textIn 1.4s .2s cubic-bezier(.22,1,.36,1) both;
-}
-
-@keyframes textIn{
-    from{
-        opacity:0;
-        transform:translateY(80px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.kicker{
-    font-size:10px;
-    letter-spacing:5px;
-    color:#9b6b50;
-    margin-bottom:30px;
-}
-
-h1{
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:clamp(75px,11vw,145px);
-    font-weight:400;
-    line-height:.85;
-    letter-spacing:-7px;
-    margin-bottom:45px;
+    justify-content:space-between;
+    gap:60px;
 }
 
 .hero-text{
-    max-width:390px;
-    font-family:Georgia,serif;
-    font-size:20px;
+    max-width:620px;
+    animation:heroIn 1.5s ease both;
+}
+
+.small-title{
+    font-size:12px;
+    letter-spacing:.35em;
+    color:var(--accent);
+    margin-bottom:28px;
+    transition:color 2s ease;
+}
+
+h1{
+    font-size:clamp(70px,12vw,170px);
+    line-height:.85;
+    letter-spacing:-.07em;
+    font-weight:500;
+}
+
+.description{
+    margin-top:35px;
+    max-width:420px;
+    color:var(--sub);
+    font-size:14px;
     line-height:2;
-    color:#67564c;
-    margin-bottom:45px;
 }
 
-.hero-link{
-    font-size:10px;
-    letter-spacing:4px;
-    padding-bottom:10px;
-    border-bottom:1px solid #382d27;
-    transition:.5s ease;
+.enter{
+    display:inline-block;
+    margin-top:35px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--accent);
+    color:var(--accent);
+    font-size:12px;
+    letter-spacing:.25em;
+    text-decoration:none;
+    transition:
+        transform .4s ease,
+        color .6s ease,
+        border-color .6s ease;
 }
 
-.hero-link:hover{
-    letter-spacing:7px;
+.enter:hover{
+    transform:translateX(8px);
 }
 
-/* ===== 人物区域 ===== */
+/* =========================
+   人物区域
+========================= */
 
 .person{
-    height:650px;
+    width:min(38vw,500px);
+    height:min(55vw,650px);
+    min-width:280px;
+    min-height:380px;
+    border-radius:220px 220px 30px 30px;
     position:relative;
     overflow:hidden;
     background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(255,255,255,.8),
+            transparent 35%
+        ),
         linear-gradient(
             135deg,
-            #b99578,
-            #dfc8b0 45%,
-            #8d6652
+            rgba(255,210,150,.6),
+            rgba(130,100,80,.35)
         );
-    animation:personIn 1.6s .35s cubic-bezier(.22,1,.36,1) both;
-    transition:transform .5s ease;
-}
-
-@keyframes personIn{
-    from{
-        opacity:0;
-        transform:translateX(120px) scale(.9);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0) scale(1);
-    }
+    box-shadow:
+        0 40px 100px rgba(70,45,30,.15);
+    animation:personFloat 6s ease-in-out infinite;
+    transform-style:preserve-3d;
 }
 
 .person::before{
     content:"";
     position:absolute;
-    width:320px;
-    height:320px;
-    border-radius:50%;
-    background:rgba(255,225,185,.35);
-    filter:blur(50px);
-    top:-100px;
-    right:-80px;
-    animation:lightMove 7s ease-in-out infinite alternate;
-}
-
-@keyframes lightMove{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(-130px,180px);
-    }
-}
-
-.person-placeholder{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    padding-bottom:45px;
-    color:rgba(255,255,255,.8);
-    font-family:Georgia,serif;
-    font-size:13px;
-    letter-spacing:4px;
+    inset:-30%;
     background:
-        linear-gradient(
-            to top,
-            rgba(50,35,28,.5),
-            transparent 55%
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.5),
+            transparent 30%
         );
+    animation:personLight 8s linear infinite;
 }
 
-/* ===== 分隔线 ===== */
-
-.line{
-    width:100%;
-    height:1px;
-    background:#d0c1b3;
-}
-
-/* ===== 内容 ===== */
-
-.section{
-    padding:130px 0;
-}
-
-.section-title{
-    font-family:Georgia,serif;
-    font-size:52px;
-    font-weight:400;
-    margin-bottom:65px;
-}
-
-.story{
-    display:grid;
-    grid-template-columns:90px 1fr 200px;
-    gap:30px;
-    padding:35px 0;
-    border-top:1px solid #d0c1b3;
-    transition:.5s ease;
-}
-
-.story:last-child{
-    border-bottom:1px solid #d0c1b3;
-}
-
-.story:hover{
-    padding-left:25px;
-    background:rgba(255,255,255,.18);
-}
-
-.story-number{
-    font-size:10px;
-    letter-spacing:3px;
-    color:#a16f51;
-}
-
-.story-title{
-    font-family:Georgia,serif;
-    font-size:30px;
-}
-
-.story-text{
-    font-size:12px;
-    line-height:1.9;
-    color:#76645a;
-}
-
-/* ===== 大视觉 ===== */
-
-.visual{
-    height:560px;
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-        linear-gradient(
-            125deg,
-            #a97758,
-            #d6b99c,
-            #80604e
-        );
-}
-
-.visual::before{
+.person::after{
     content:"";
     position:absolute;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    background:rgba(255,226,190,.25);
-    filter:blur(50px);
-    animation:visualLight 8s ease-in-out infinite alternate;
+    inset:0;
+    background:
+        linear-gradient(
+            120deg,
+            transparent 35%,
+            rgba(255,255,255,.2),
+            transparent 65%
+        );
+    transform:translateX(-100%);
+    animation:shine 7s ease-in-out infinite;
 }
 
-@keyframes visualLight{
-    from{
-        transform:translate(-150px,-80px);
-    }
-    to{
-        transform:translate(150px,100px);
-    }
-}
-
-.visual-text{
-    position:relative;
+.person span{
+    position:absolute;
     z-index:2;
-    color:white;
-    font-family:Georgia,serif;
-    font-size:clamp(45px,7vw,90px);
-    letter-spacing:8px;
-    animation:pulseText 5s ease-in-out infinite;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    width:80%;
+    font-size:11px;
+    letter-spacing:.25em;
+    line-height:2;
+    opacity:.65;
 }
 
-@keyframes pulseText{
+@keyframes personFloat{
     0%,100%{
-        transform:scale(1);
-        opacity:.85;
+        transform:translateY(0) rotate(0deg);
     }
-
     50%{
-        transform:scale(1.04);
-        opacity:1;
+        transform:translateY(-12px) rotate(.5deg);
     }
 }
 
-/* ===== 引语 ===== */
+@keyframes personLight{
+    0%{
+        transform:translate(-20%,-20%);
+    }
+    50%{
+        transform:translate(20%,20%);
+    }
+    100%{
+        transform:translate(-20%,-20%);
+    }
+}
+
+@keyframes shine{
+    0%,45%{
+        transform:translateX(-100%);
+    }
+    70%,100%{
+        transform:translateX(100%);
+    }
+}
+
+/* =========================
+   今日
+========================= */
+
+.daily{
+    padding:10vh 8vw;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    border-top:1px solid rgba(80,60,40,.12);
+}
+
+.daily-label{
+    font-size:11px;
+    letter-spacing:.3em;
+    color:var(--accent);
+    margin-bottom:25px;
+}
 
 .quote{
-    padding:160px 0;
-    text-align:center;
+    font-size:clamp(24px,3vw,42px);
+    line-height:1.5;
+    font-weight:400;
 }
 
-.quote p{
-    max-width:800px;
-    margin:auto;
-    font-family:Georgia,serif;
-    font-size:clamp(28px,4vw,54px);
-    line-height:1.55;
+.info{
+    color:var(--sub);
+    font-size:13px;
+    line-height:2.2;
 }
 
-/* ===== 联系 ===== */
-
-.contact{
-    padding:100px 0 150px;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-}
-
-.contact-title{
-    font-family:Georgia,serif;
-    font-size:clamp(50px,7vw,80px);
-}
-
-.contact-info{
-    font-size:11px;
-    line-height:2;
-    letter-spacing:1px;
-    color:#77655b;
-}
-
-/* ===== 底部 ===== */
+/* =========================
+   页脚
+========================= */
 
 footer{
-    border-top:1px solid #d0c1b3;
-    padding:25px 0;
+    padding:60px 8vw;
+    color:var(--sub);
+    font-size:11px;
+    letter-spacing:.2em;
     display:flex;
     justify-content:space-between;
-    font-size:9px;
-    letter-spacing:3px;
-    color:#88756a;
 }
 
-/* ===== 滚动动画 ===== */
+/* =========================
+   滚动动画
+========================= */
 
 .reveal{
     opacity:0;
-    transform:translateY(90px);
+    transform:translateY(40px);
     transition:
-        opacity 1.2s ease,
-        transform 1.2s cubic-bezier(.22,1,.36,1);
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 .reveal.show{
@@ -453,252 +343,211 @@ footer{
     transform:translateY(0);
 }
 
-/* ===== 手机 ===== */
+/* =========================
+   飘落元素
+========================= */
+
+.effects{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:20;
+}
+
+.particle{
+    position:absolute;
+    top:-50px;
+    user-select:none;
+    animation:
+        fall linear infinite,
+        sway ease-in-out infinite alternate;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(115vh) rotate(360deg);
+    }
+}
+
+@keyframes sway{
+    from{
+        margin-left:-30px;
+    }
+    to{
+        margin-left:30px;
+    }
+}
+
+/* =========================
+   四季主题
+========================= */
+
+/* 春 */
+body.spring{
+    --bg:#eee9e0;
+    --text:#493f37;
+    --sub:#786e63;
+    --accent:#a47768;
+    --glow:rgba(255,210,220,.4);
+}
+
+/* 夏 */
+body.summer{
+    --bg:#eee9d8;
+    --text:#493d2c;
+    --sub:#776a55;
+    --accent:#9c7740;
+    --glow:rgba(255,220,130,.45);
+}
+
+/* 秋 */
+body.autumn{
+    --bg:#eee5da;
+    --text:#4a382c;
+    --sub:#806b59;
+    --accent:#b18a5a;
+    --glow:rgba(255,190,110,.4);
+}
+
+/* 冬 */
+body.winter{
+    --bg:#e8edf1;
+    --text:#39434a;
+    --sub:#68747d;
+    --accent:#718b9b;
+    --glow:rgba(210,230,245,.5);
+}
+
+/* =========================
+   手机
+========================= */
 
 @media(max-width:800px){
 
-    .container{
-        width:88%;
-    }
-
     header{
-        padding:22px 0;
-    }
-
-    .date{
-        font-size:9px;
+        padding:22px 6vw;
     }
 
     .hero{
-        grid-template-columns:1fr;
-        gap:45px;
-        padding-top:50px;
+        min-height:auto;
+        padding-top:8vh;
+        flex-direction:column;
+        align-items:flex-start;
     }
 
     h1{
-        font-size:85px;
-    }
-
-    .hero-text{
-        font-size:18px;
+        font-size:22vw;
     }
 
     .person{
-        height:520px;
+        width:82vw;
+        height:110vw;
+        min-width:0;
+        min-height:0;
+        align-self:center;
+        margin-top:20px;
     }
 
-    .story{
-        grid-template-columns:50px 1fr;
+    .daily{
+        grid-template-columns:1fr;
+        gap:50px;
+        padding-top:80px;
+    }
+
+    footer{
+        flex-direction:column;
         gap:15px;
-    }
-
-    .story-text{
-        grid-column:2;
-        margin-top:8px;
-    }
-
-    .contact{
-        display:block;
-    }
-
-    .contact-info{
-        margin-top:35px;
-    }
-
-    .leaf{
-        font-size:20px;
     }
 }
 </style>
 </head>
 
-
 <body>
 
-<!-- 动态枫叶 -->
-<div class="leaves"></div>
-
-
-<div class="container">
-
 <header>
-
-    <div class="logo">
-        YUAN LUO XING
-    </div>
-
-    <!-- 自动日期 -->
+    <div class="logo">YUAN LUO XING</div>
     <div class="date" id="today"></div>
-
 </header>
 
-
-<!-- 首页 -->
+<main>
 
 <section class="hero">
 
-    <div class="hero-left">
+    <div class="hero-text">
 
-        <div class="kicker">
-            PRIVATE JOURNAL
+        <div class="small-title" id="seasonTitle">
+            A QUIET PLACE
         </div>
 
         <h1>圆落星</h1>
 
-        <p class="hero-text">
-            记录喜欢的事物，
-            收藏正在发生的瞬间，
-            也记录属于自己的生活。
-        </p>
+        <div class="description">
+            把喜欢的人、事、照片和那些
+            不想忘记的瞬间，慢慢留在这里。
+        </div>
 
-        <a class="hero-link" href="#stories">
-            ENTER MY WORLD　→
+        <a href="#daily" class="enter">
+            ENTER MY WORLD →
         </a>
 
     </div>
 
+    <div class="person" id="person">
+        <span>
+            YOUR PORTRAIT<br>
+            YOUR STORY
+        </span>
+    </div>
 
-    <!-- 以后把人物照片放在这里 -->
+</section>
 
-    <div class="person">
 
-        <div class="person-placeholder">
-            YOUR PORTRAIT · YOUR STORY
+<section class="daily reveal" id="daily">
+
+    <div>
+
+        <div class="daily-label">
+            TODAY
+        </div>
+
+        <div class="quote" id="dailyQuote">
+            把喜欢的事物，慢慢留下来。
+        </div>
+
+    </div>
+
+    <div class="info">
+
+        <div id="todayInfo">
+            今天也值得记录一点什么。
+        </div>
+
+        <br>
+
+        <div id="timeMood">
+            LIGHT / MEMORY / MOMENT
         </div>
 
     </div>
 
 </section>
 
-
-<div class="line"></div>
-
-
-<!-- Stories -->
-
-<section class="section reveal" id="stories">
-
-    <div class="section-title">
-        Stories
-    </div>
-
-
-    <div class="story">
-
-        <div class="story-number">
-            01
-        </div>
-
-        <div class="story-title">
-            关于生活
-        </div>
-
-        <div class="story-text">
-            一些日常，一些想法，
-            还有正在发生的小事。
-        </div>
-
-    </div>
-
-
-    <div class="story">
-
-        <div class="story-number">
-            02
-        </div>
-
-        <div class="story-title">
-            关于喜欢
-        </div>
-
-        <div class="story-text">
-            喜欢的人、喜欢的地方，
-            以及喜欢收藏的瞬间。
-        </div>
-
-    </div>
-
-
-    <div class="story">
-
-        <div class="story-number">
-            03
-        </div>
-
-        <div class="story-title">
-            关于记录
-        </div>
-
-        <div class="story-text">
-            把值得留下的东西，
-            慢慢放进这里。
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- 大视觉 -->
-
-<section class="visual reveal">
-
-    <div class="visual-text">
-        MOMENTS
-    </div>
-
-</section>
-
-
-<!-- 引语 -->
-
-<section class="quote reveal">
-
-    <p>
-        “生活不是为了被记录，
-        而是因为有些瞬间，
-        值得被留下。”
-    </p>
-
-</section>
-
-
-<!-- 联系 -->
-
-<section class="contact reveal">
-
-    <div class="contact-title">
-        Stay a while.
-    </div>
-
-    <div class="contact-info">
-        PRIVATE JOURNAL<br>
-        YUAN LUO XING
-    </div>
-
-</section>
-
+</main>
 
 <footer>
-
-    <span>
-        © YUAN LUO XING
-    </span>
-
-    <span>
-        PRIVATE JOURNAL
-    </span>
-
+    <span>YUAN LUO XING</span>
+    <span id="footerDate"></span>
 </footer>
 
-</div>
+<div class="effects" id="effects"></div>
 
 
 <script>
 
-/* =========================
-   自动日期
-========================= */
+/* ==================================================
+   1. 自动日期
+================================================== */
 
 function updateDate(){
 
@@ -710,139 +559,244 @@ function updateDate(){
     const day =
         String(now.getDate()).padStart(2,"0");
 
-    document.getElementById("today")
-        .textContent = month + "." + day;
+    const dateText = month + "." + day;
+
+    document.getElementById("today").textContent =
+        dateText;
+
+    document.getElementById("footerDate").textContent =
+        dateText;
 }
 
 updateDate();
 
 
-/* =========================
-   自动生成枫叶
-========================= */
+/* ==================================================
+   2. 自动四季
+================================================== */
 
-const leaves =
-document.querySelector(".leaves");
+function updateSeason(){
 
-const leafSymbols =
-["🍁","🍂","🍁","🍂"];
+    const month = new Date().getMonth()+1;
 
-for(let i=0;i<14;i++){
+    let season;
 
-    const leaf =
-        document.createElement("div");
+    if(month >= 3 && month <= 5){
+        season = "spring";
+    }
+    else if(month >= 6 && month <= 8){
+        season = "summer";
+    }
+    else if(month >= 9 && month <= 11){
+        season = "autumn";
+    }
+    else{
+        season = "winter";
+    }
 
-    leaf.className="leaf";
+    document.body.className = season;
 
-    leaf.textContent =
-        leafSymbols[
-            Math.floor(
-                Math.random()*leafSymbols.length
-            )
-        ];
+    createSeasonEffects(season);
+}
 
-    leaf.style.left =
-        Math.random()*100 + "%";
+updateSeason();
 
-    leaf.style.fontSize =
-        (16 + Math.random()*20) + "px";
 
-    leaf.style.animationDuration =
-        (9 + Math.random()*9) + "s";
+/* ==================================================
+   3. 四季飘落 / 光效
+================================================== */
 
-    leaf.style.animationDelay =
-        (-Math.random()*15) + "s";
+function createSeasonEffects(season){
 
-    leaves.appendChild(leaf);
+    const container =
+        document.getElementById("effects");
+
+    container.innerHTML = "";
+
+    let symbol = "";
+    let count = 14;
+
+    if(season === "spring"){
+        symbol = "🌸";
+        count = 12;
+    }
+
+    if(season === "summer"){
+        symbol = "✦";
+        count = 10;
+    }
+
+    if(season === "autumn"){
+        symbol = Math.random() > .5 ? "🍁" : "🍂";
+        count = 15;
+    }
+
+    if(season === "winter"){
+        symbol = "❄";
+        count = 22;
+    }
+
+    for(let i=0;i<count;i++){
+
+        const p =
+            document.createElement("div");
+
+        p.className = "particle";
+
+        p.textContent = symbol;
+
+        p.style.left =
+            Math.random()*100 + "%";
+
+        p.style.fontSize =
+            (10 + Math.random()*18) + "px";
+
+        p.style.opacity =
+            .3 + Math.random()*.6;
+
+        p.style.animationDuration =
+            (7 + Math.random()*9) + "s";
+
+        p.style.animationDelay =
+            (-Math.random()*12) + "s";
+
+        container.appendChild(p);
+    }
 }
 
 
-/* =========================
-   滚动动画
-========================= */
+/* ==================================================
+   4. 根据时间改变氛围
+================================================== */
 
-const reveals =
-document.querySelectorAll(".reveal");
+function updateTimeMood(){
 
-const observer =
-new IntersectionObserver(
+    const hour =
+        new Date().getHours();
 
-    entries => {
+    let text = "";
 
-        entries.forEach(entry => {
+    if(hour >= 5 && hour < 10){
 
-            if(entry.isIntersecting){
+        text = "SOFT MORNING LIGHT";
 
-                entry.target.classList.add("show");
+    }else if(hour >= 10 && hour < 17){
 
-            }
+        text = "WARM DAYLIGHT";
 
-        });
+    }else if(hour >= 17 && hour < 21){
 
-    },
+        text = "GOLDEN EVENING";
 
-    {
-        threshold:.15
+    }else{
+
+        text = "QUIET NIGHT";
     }
 
-);
+    document.getElementById("timeMood")
+        .textContent = text;
+}
 
-reveals.forEach(el => {
-
-    observer.observe(el);
-
-});
+updateTimeMood();
 
 
-/* =========================
-   鼠标视差
-========================= */
+/* ==================================================
+   5. 每天自动换一句话
+================================================== */
+
+const quotes = [
+
+    "把喜欢的事物，慢慢留下来。",
+
+    "有些瞬间，值得被记住。",
+
+    "今天也可以只做让自己开心的事。",
+
+    "生活不急，慢慢走就好。",
+
+    "把光留给值得的人。",
+
+    "愿每一次记录，都成为以后回看的温柔。",
+
+    "喜欢的东西，就好好珍藏。",
+
+    "普通的一天，也值得拥有一点仪式感。",
+
+    "风吹过的时候，记得抬头看看。",
+
+    "时间会走，但喜欢可以留下。"
+
+];
+
+const dayNumber =
+    Math.floor(Date.now()/86400000);
+
+const quote =
+    quotes[dayNumber % quotes.length];
+
+document.getElementById("dailyQuote")
+    .textContent = quote;
+
+
+/* ==================================================
+   6. 鼠标视差
+================================================== */
 
 const person =
-document.querySelector(".person");
+    document.getElementById("person");
 
-document.addEventListener("mousemove",e=>{
+document.addEventListener("mousemove",(e)=>{
 
     const x =
-        (e.clientX/window.innerWidth-.5);
+        (e.clientX/window.innerWidth-.5)*12;
 
     const y =
-        (e.clientY/window.innerHeight-.5);
+        (e.clientY/window.innerHeight-.5)*12;
 
     person.style.transform =
-        `translate(${x*10}px,${y*7}px)`;
+        `translate(${x}px,${y}px)`;
 
 });
 
 
-/* =========================
-   平滑跳转
-========================= */
+/* ==================================================
+   7. 滚动出现动画
+================================================== */
 
-document.querySelectorAll(
-    "a[href^='#']"
-).forEach(link=>{
+const observer =
+    new IntersectionObserver(
+        entries => {
 
-    link.addEventListener("click",e=>{
+            entries.forEach(entry => {
 
-        e.preventDefault();
+                if(entry.isIntersecting){
 
-        const target =
-            document.querySelector(
-                link.getAttribute("href")
-            );
+                    entry.target.classList.add("show");
 
-        if(target){
+                }
 
-            target.scrollIntoView({
-                behavior:"smooth"
             });
 
+        },
+        {
+            threshold:.15
         }
+    );
 
-    });
+document.querySelectorAll(".reveal")
+    .forEach(el => observer.observe(el));
 
-});
+
+/* ==================================================
+   8. 每天自动刷新一次页面状态
+================================================== */
+
+setInterval(()=>{
+
+    updateDate();
+    updateTimeMood();
+
+},60000);
 
 </script>
 
