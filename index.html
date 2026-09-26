@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>圆落星</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圆落星 · A QUIET PLACE</title>
 
 <style>
 *{
@@ -17,517 +17,374 @@ html{
 }
 
 body{
-  min-height:100vh;
+  background:#050711;
+  color:white;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
   overflow-x:hidden;
-  color:#f5f2ea;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-
-  background:
-    radial-gradient(circle at 70% 20%,var(--glow),transparent 30%),
-    linear-gradient(145deg,var(--bg1),var(--bg2),var(--bg3));
-
-  transition:background 2s ease;
 }
 
-
-/* =========================
-   星空
-========================= */
+/* ================= 星空首页 ================= */
 
 .hero{
-  min-height:100vh;
   position:relative;
+  min-height:100vh;
+  overflow:hidden;
   display:flex;
   align-items:center;
-  overflow:hidden;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 45%,#18213d 0%,#090d1d 42%,#03040b 100%);
 }
+
+/* 星星 */
 
 .stars,
 .stars2,
 .stars3{
   position:absolute;
   inset:0;
+  background-repeat:repeat;
   pointer-events:none;
 }
 
 .stars{
   background-image:
-    radial-gradient(circle,#fff 1px,transparent 1.5px),
-    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px);
-
-  background-size:150px 150px,260px 260px;
-
-  animation:starsMove 40s linear infinite;
-
+    radial-gradient(circle,rgba(255,255,255,.9) 1px,transparent 1.5px);
+  background-size:120px 120px;
+  animation:moveStars 35s linear infinite;
   opacity:.65;
 }
 
 .stars2{
   background-image:
-    radial-gradient(circle,rgba(180,200,255,.9) 1.2px,transparent 2px);
-
-  background-size:330px 330px;
-
-  animation:starsMove 65s linear infinite reverse;
-
-  opacity:.5;
+    radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1.5px);
+  background-size:190px 190px;
+  animation:moveStars 55s linear infinite reverse;
+  opacity:.45;
 }
 
 .stars3{
   background-image:
-    radial-gradient(circle,rgba(255,240,180,.9) 1.5px,transparent 2.5px);
-
-  background-size:430px 430px;
-
-  animation:twinkle 4s ease-in-out infinite;
+    radial-gradient(circle,rgba(190,210,255,.8) 1px,transparent 1px);
+  background-size:260px 260px;
+  animation:twinkle 4s ease-in-out infinite alternate;
+  opacity:.35;
 }
 
-
-/* =========================
-   月亮
-========================= */
-
-.moon{
-  position:absolute;
-
-  width:190px;
-  height:190px;
-
-  right:11%;
-  top:16%;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fffdf1,
-      #e6e0c8 55%,
-      #aaa58f
-    );
-
-  box-shadow:
-    0 0 40px rgba(240,235,205,.25),
-    0 0 120px rgba(120,145,220,.12);
-
-  transition:all 2s ease;
-
-  animation:moonFloat 8s ease-in-out infinite;
-}
-
-
-/* =========================
-   日期时间
-========================= */
-
-.time{
-  position:absolute;
-
-  top:38px;
-  right:7%;
-
-  text-align:right;
-  z-index:10;
-}
-
-#date{
-  display:block;
-
-  font-family:Georgia,serif;
-
-  font-size:13px;
-  letter-spacing:4px;
-
-  color:#b9bdcf;
-
-  margin-bottom:7px;
-}
-
-#clock{
-  display:block;
-
-  font-family:Georgia,serif;
-
-  font-size:24px;
-  letter-spacing:3px;
-}
-
-
-/* =========================
-   主内容
-========================= */
-
-.content{
-  width:min(1000px,86%);
-  margin-left:9%;
-
-  position:relative;
-  z-index:5;
-
-  animation:fadeUp 1.4s ease both;
-}
-
-.small{
-  font-size:10px;
-  letter-spacing:7px;
-
-  color:#9fa6c1;
-
-  margin-bottom:35px;
-}
-
-h1{
-  font-family:Georgia,"Times New Roman",serif;
-
-  font-size:clamp(80px,13vw,170px);
-
-  font-weight:400;
-
-  letter-spacing:-8px;
-
-  line-height:.9;
-
-  margin-bottom:40px;
-
-  text-shadow:
-    0 0 40px rgba(170,190,255,.12);
-}
-
-.line{
-  width:85px;
-  height:1px;
-
-  background:#8993bb;
-
-  margin-bottom:30px;
-}
-
-.description{
-  max-width:520px;
-
-  font-size:15px;
-
-  line-height:2.1;
-
-  color:#a8acbd;
-
-  letter-spacing:1px;
-}
-
-.enter{
-  display:inline-block;
-
-  margin-top:45px;
-
-  padding:16px 30px;
-
-  border:1px solid rgba(190,200,230,.45);
-
-  color:#eeeef4;
-
-  text-decoration:none;
-
-  font-size:10px;
-
-  letter-spacing:4px;
-
-  transition:.4s;
-}
-
-.enter:hover{
-  background:#eeeef4;
-  color:#080b18;
-
-  transform:translateY(-4px);
-}
-
-
-/* =========================
-   Day计数
-========================= */
-
-.day{
-  position:absolute;
-
-  right:7%;
-  bottom:7%;
-
-  font-family:Georgia,serif;
-
-  text-align:right;
-
-  z-index:5;
-}
-
-.day-number{
-  font-size:85px;
-
-  color:rgba(255,255,255,.07);
-}
-
-.day-text{
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  color:#858aa1;
-}
-
-
-/* =========================
-   第二屏
-========================= */
-
-.memory{
-  min-height:100vh;
-
-  padding:120px 9%;
-
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(100,120,180,.13),
-      transparent 30%
-    ),
-    #070912;
-
-  display:flex;
-  align-items:center;
-}
-
-.memory-inner{
-  width:min(1000px,100%);
-  margin:auto;
-}
-
-.label{
-  font-size:10px;
-
-  letter-spacing:6px;
-
-  color:#7e86a7;
-
-  margin-bottom:35px;
-}
-
-.quote{
-  font-family:Georgia,serif;
-
-  font-size:clamp(35px,5vw,68px);
-
-  line-height:1.4;
-
-  max-width:900px;
-}
-
-
-/* =========================
-   每日信息
-========================= */
-
-.daily{
-  margin-top:90px;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:25px;
-}
-
-.card{
-  padding:25px;
-
-  border:1px solid rgba(255,255,255,.1);
-
-  background:rgba(255,255,255,.025);
-
-  backdrop-filter:blur(10px);
-}
-
-.card-title{
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  color:#777d98;
-
-  margin-bottom:15px;
-}
-
-.card-value{
-  font-family:Georgia,serif;
-
-  font-size:22px;
-}
-
-
-/* =========================
-   每日照片
-========================= */
-
-.photo{
-  margin-top:25px;
-
-  height:300px;
-
-  border:1px solid rgba(255,255,255,.1);
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.05),
-      rgba(255,255,255,.01)
-    );
-
-  color:#777d98;
-
-  letter-spacing:4px;
-
-  font-size:10px;
-}
-
-
-/* =========================
-   底部
-========================= */
-
-.bottom{
-  margin-top:80px;
-
-  padding-top:22px;
-
-  border-top:1px solid rgba(255,255,255,.12);
-
-  display:flex;
-  justify-content:space-between;
-
-  font-size:9px;
-
-  letter-spacing:4px;
-
-  color:#6f748b;
-}
-
-
-/* =========================
-   动画
-========================= */
-
-@keyframes fadeUp{
+@keyframes moveStars{
   from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-
-  to{
-    opacity:1;
     transform:translateY(0);
   }
-}
-
-@keyframes starsMove{
-  from{
-    transform:translate(0,0);
-  }
-
   to{
-    transform:translate(-100px,60px);
+    transform:translateY(-120px);
   }
 }
 
 @keyframes twinkle{
-  0%,100%{
+  from{
     opacity:.2;
   }
-
-  50%{
-    opacity:.9;
+  to{
+    opacity:.65;
   }
+}
+
+/* 月亮 */
+
+.moon{
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  right:13%;
+  top:13%;
+  background:
+    radial-gradient(circle at 35% 30%,
+      #ffffff 0%,
+      #e7e9ef 55%,
+      #aeb3c2 100%);
+  box-shadow:
+    0 0 35px rgba(220,230,255,.35),
+    0 0 100px rgba(150,180,255,.12);
+  animation:moonFloat 7s ease-in-out infinite;
 }
 
 @keyframes moonFloat{
   0%,100%{
     transform:translateY(0);
   }
-
   50%{
-    transform:translateY(-12px);
+    transform:translateY(-10px);
   }
 }
 
+/* 时间 */
 
-/* =========================
-   手机
-========================= */
+.time{
+  position:absolute;
+  top:35px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:18px;
+  font-size:12px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.62);
+  z-index:5;
+  white-space:nowrap;
+}
 
-@media(max-width:600px){
+/* 主内容 */
 
-  .hero{
-    min-height:720px;
-  }
+.content{
+  position:relative;
+  z-index:3;
+  text-align:center;
+  padding:20px;
+}
 
-  .content{
-    width:82%;
-    margin-left:9%;
-  }
+.small{
+  font-size:11px;
+  letter-spacing:6px;
+  color:rgba(255,255,255,.55);
+  margin-bottom:22px;
+}
 
-  h1{
-    font-size:78px;
-    letter-spacing:-5px;
+h1{
+  font-size:clamp(54px,10vw,110px);
+  font-weight:300;
+  letter-spacing:15px;
+  margin-left:15px;
+  text-shadow:
+    0 0 30px rgba(255,255,255,.15);
+}
+
+.line{
+  width:55px;
+  height:1px;
+  background:rgba(255,255,255,.4);
+  margin:28px auto;
+}
+
+.description{
+  font-size:14px;
+  line-height:2.2;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.66);
+}
+
+.enter{
+  display:inline-block;
+  margin-top:42px;
+  padding:13px 28px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:40px;
+  color:white;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:3px;
+  transition:.35s;
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(8px);
+}
+
+.enter:hover{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.55);
+  transform:translateY(-3px);
+}
+
+/* 天数 */
+
+.day{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  z-index:3;
+}
+
+.day-number{
+  font-size:26px;
+  letter-spacing:5px;
+  font-weight:200;
+}
+
+.day-text{
+  font-size:8px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.4);
+  margin-top:6px;
+}
+
+/* ================= 记忆区 ================= */
+
+.memory{
+  min-height:100vh;
+  padding:110px 20px 60px;
+  background:
+    radial-gradient(circle at 50% 0%,#131a31 0%,#070914 45%,#03040a 100%);
+}
+
+.memory-inner{
+  width:min(900px,100%);
+  margin:auto;
+}
+
+.label{
+  font-size:10px;
+  letter-spacing:5px;
+  color:rgba(255,255,255,.4);
+  margin-bottom:28px;
+}
+
+.quote{
+  font-size:clamp(25px,4vw,42px);
+  font-weight:300;
+  line-height:1.8;
+  letter-spacing:2px;
+  margin-bottom:65px;
+}
+
+/* 数据卡 */
+
+.daily{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  min-height:145px;
+  padding:25px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(15px);
+  border-radius:18px;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.05);
+}
+
+.card-title{
+  font-size:9px;
+  letter-spacing:4px;
+  color:rgba(255,255,255,.38);
+  margin-bottom:18px;
+}
+
+.card-value{
+  font-size:18px;
+  line-height:1.7;
+  font-weight:300;
+}
+
+.weather-city{
+  font-size:10px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.42);
+  margin-bottom:5px;
+}
+
+.weather-detail{
+  font-size:10px;
+  line-height:1.8;
+  color:rgba(255,255,255,.45);
+  margin-top:5px;
+}
+
+.weather-temp{
+  font-size:28px;
+  letter-spacing:1px;
+}
+
+/* 每日照片 */
+
+.photo{
+  height:360px;
+  margin-top:60px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.08);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.05),
+      rgba(255,255,255,.01)
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:rgba(255,255,255,.25);
+  letter-spacing:5px;
+  font-size:10px;
+}
+
+/* 底部 */
+
+.bottom{
+  display:flex;
+  justify-content:space-between;
+  margin-top:80px;
+  padding-top:25px;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-size:9px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.3);
+}
+
+/* 手机 */
+
+@media(max-width:650px){
+
+  .time{
+    top:25px;
+    font-size:9px;
+    letter-spacing:2px;
+    gap:10px;
   }
 
   .moon{
-    width:125px;
-    height:125px;
-
-    right:-20px;
-    top:18%;
+    width:90px;
+    height:90px;
+    right:9%;
+    top:12%;
   }
 
-  .time{
-    top:28px;
-    right:8%;
+  h1{
+    font-size:60px;
+    letter-spacing:9px;
   }
 
-  #date{
-    font-size:10px;
-    letter-spacing:2px;
-  }
-
-  #clock{
-    font-size:19px;
-  }
-
-  .day-number{
-    font-size:65px;
-  }
-
-  .memory{
-    padding:100px 10%;
-  }
-
-  .quote{
-    font-size:34px;
+  .description{
+    font-size:12px;
+    letter-spacing:1px;
   }
 
   .daily{
     grid-template-columns:1fr;
   }
 
+  .card{
+    min-height:125px;
+  }
+
   .photo{
-    height:220px;
+    height:260px;
   }
 
   .bottom{
-    flex-direction:column;
-    gap:14px;
+    font-size:8px;
   }
 }
 </style>
@@ -536,6 +393,7 @@ h1{
 
 <body>
 
+<!-- ================= 首页 ================= -->
 
 <section class="hero">
 
@@ -543,36 +401,25 @@ h1{
   <div class="stars2"></div>
   <div class="stars3"></div>
 
-  <div class="moon" id="moon"></div>
+  <div class="moon"></div>
 
-
-  <!-- 自动日期和时间 -->
-
+  <!-- 自动日期 + 中国时间 -->
   <div class="time">
-
-    <span id="date"></span>
-
-    <span id="clock"></span>
-
+    <span id="date">2026.01.01</span>
+    <span id="clock">00:00:00</span>
   </div>
-
 
   <div class="content">
 
-    <div class="small">
-      A QUIET PLACE
-    </div>
+    <div class="small">A QUIET PLACE</div>
 
     <h1>圆落星</h1>
 
     <div class="line"></div>
 
     <div class="description">
-
       把喜欢的人、事、照片和那些<br>
-
       不想忘记的瞬间，慢慢留在这里。
-
     </div>
 
     <a href="#memory" class="enter">
@@ -581,44 +428,23 @@ h1{
 
   </div>
 
-
-  <!-- 自动Day -->
-
   <div class="day">
-
-    <div
-      class="day-number"
-      id="dayNumber"
-    >
-      001
-    </div>
-
-    <div class="day-text">
-      DAYS OF MEMORY
-    </div>
-
+    <div class="day-number" id="dayNumber">001</div>
+    <div class="day-text">DAYS OF MEMORY</div>
   </div>
 
 </section>
 
 
+<!-- ================= 记忆 ================= -->
 
-<section
-  class="memory"
-  id="memory"
->
+<section class="memory" id="memory">
 
   <div class="memory-inner">
 
-    <div class="label">
-      TODAY
-    </div>
+    <div class="label">TODAY</div>
 
-
-    <div
-      class="quote"
-      id="quote"
-    >
+    <div class="quote" id="quote">
       “有些瞬间不需要被解释，<br>
       只需要被好好留下。”
     </div>
@@ -626,8 +452,7 @@ h1{
 
     <div class="daily">
 
-
-      <!-- 月相 -->
+      <!-- 月亮 -->
 
       <div class="card">
 
@@ -637,8 +462,7 @@ h1{
 
         <div
           class="card-value"
-          id="moonPhase"
-        >
+          id="moonPhase">
           —
         </div>
 
@@ -655,15 +479,14 @@ h1{
 
         <div
           class="card-value"
-          id="season"
-        >
+          id="season">
           —
         </div>
 
       </div>
 
 
-      <!-- 天气接口 -->
+      <!-- 上海天气 -->
 
       <div class="card">
 
@@ -671,11 +494,19 @@ h1{
           WEATHER
         </div>
 
+        <div class="weather-city">
+          SHANGHAI · 上海
+        </div>
+
         <div
           class="card-value"
-          id="weather"
-        >
-          —
+          id="weather">
+          正在获取…
+        </div>
+
+        <div
+          class="weather-detail"
+          id="weatherDetail">
         </div>
 
       </div>
@@ -683,26 +514,14 @@ h1{
     </div>
 
 
-    <!-- 每日照片位置 -->
-
-    <div
-      class="photo"
-      id="dailyPhoto"
-    >
+    <div class="photo">
       DAILY PHOTO
     </div>
 
 
     <div class="bottom">
-
-      <span>
-        A PLACE FOR MEMORY
-      </span>
-
-      <span>
-        2026
-      </span>
-
+      <span>A PLACE FOR MEMORY</span>
+      <span>2026</span>
     </div>
 
   </div>
@@ -710,321 +529,431 @@ h1{
 </section>
 
 
-
 <script>
 
-/* =========================
-   每日自动数据
-========================= */
+/* ================= 自动日期时间 ================= */
 
-const now = new Date();
+function updateClock(){
 
+  const now = new Date();
 
-/* 中国日期 */
-
-const chinaDate =
-  new Intl.DateTimeFormat(
+  const date = new Intl.DateTimeFormat(
     "zh-CN",
     {
       timeZone:"Asia/Shanghai",
       year:"numeric",
       month:"2-digit",
-      day:"2-digit"
+      day:"2-digit",
+      weekday:"short"
     }
-  )
-  .format(now)
-  .replace(/\//g,".");
+  ).format(now);
 
+  const time = new Intl.DateTimeFormat(
+    "zh-CN",
+    {
+      timeZone:"Asia/Shanghai",
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit",
+      hour12:false
+    }
+  ).format(now);
 
-/* 中国时间 */
+  document.getElementById("date").textContent =
+    date;
 
-function updateClock(){
-
-  const current = new Date();
-
-  const time =
-    new Intl.DateTimeFormat(
-      "zh-CN",
-      {
-        timeZone:"Asia/Shanghai",
-        hour:"2-digit",
-        minute:"2-digit",
-        second:"2-digit",
-        hour12:false
-      }
-    )
-    .format(current);
-
-  document.getElementById("clock")
-    .textContent=time;
-
+  document.getElementById("clock").textContent =
+    time;
 }
-
-
-document.getElementById("date")
-  .textContent=chinaDate;
 
 updateClock();
 
 setInterval(updateClock,1000);
 
 
-/* =========================
-   Day计数
-========================= */
+/* ================= 2026 天数 ================= */
 
-const startDate =
-  new Date("2026-01-01T00:00:00");
+function updateDay(){
 
-const today =
-  new Date();
+  const now = new Date();
 
-const days =
-  Math.floor(
-    (today-startDate)
-    /(1000*60*60*24)
-  )+1;
+  const start = new Date("2026-01-01T00:00:00");
 
-document.getElementById("dayNumber")
-  .textContent=
-  String(days).padStart(3,"0");
+  const diff =
+    Math.floor(
+      (now-start)/(1000*60*60*24)
+    ) + 1;
+
+  document.getElementById("dayNumber")
+    .textContent =
+    String(diff).padStart(3,"0");
+}
+
+updateDay();
 
 
-/* =========================
-   每日一句
-========================= */
+/* ================= 每日文字 ================= */
 
-const quotes=[
+const quotes = [
 
-  "“有些瞬间不需要被解释，<br>只需要被好好留下。”",
+  "有些瞬间不需要被解释，<br>只需要被好好留下。",
 
-  "“慢一点，也没关系。”",
+  "慢一点，也没关系。<br>喜欢的东西值得等待。",
 
-  "“今天的风，也值得记住。”",
+  "愿每一个普通的日子，<br>都有一点值得记住的光。",
 
-  "“生活不必喧哗，自有它的光。”",
+  "世界很大，<br>也要记得给自己留一个安静的角落。",
 
-  "“喜欢的东西，就好好收藏。”",
+  "今天看到的星星，<br>也是属于今天的。",
 
-  "“愿每一天都有值得记住的瞬间。”",
+  "有些记忆不会消失，<br>它只是安静地住在那里。",
 
-  "“安静下来，听听自己的心。”",
+  "喜欢本身，<br>就是一件很浪漫的事情。",
 
-  "“日子很长，慢慢生活。”",
-
-  "“有些美好，只适合留在记忆里。”",
-
-  "“今晚的星星，也在替你保存秘密。”"
+  "愿你永远拥有，<br>重新开始的勇气。"
 
 ];
 
-const quoteIndex =
-  Math.floor(
-    (Date.now() / 86400000)
-  ) % quotes.length;
+function updateQuote(){
 
-document.getElementById("quote")
-  .innerHTML=quotes[quoteIndex];
+  const day =
+    Math.floor(
+      Date.now()/(1000*60*60*24)
+    );
 
+  const index =
+    day % quotes.length;
 
-/* =========================
-   季节自动变化
-========================= */
-
-const month =
-  new Date().getMonth()+1;
-
-let season="";
-
-if(month>=3 && month<=5){
-  season="SPRING · 春";
+  document.getElementById("quote")
+    .innerHTML =
+    "“" + quotes[index] + "”";
 }
 
-else if(month>=6 && month<=8){
-  season="SUMMER · 夏";
+updateQuote();
+
+
+/* ================= 季节 ================= */
+
+function updateSeason(){
+
+  const month =
+    new Date().getMonth()+1;
+
+  let season="";
+
+  if(month>=3 && month<=5){
+    season="SPRING · 春";
+  }
+  else if(month>=6 && month<=8){
+    season="SUMMER · 夏";
+  }
+  else if(month>=9 && month<=11){
+    season="AUTUMN · 秋";
+  }
+  else{
+    season="WINTER · 冬";
+  }
+
+  document.getElementById("season")
+    .textContent=season;
 }
 
-else if(month>=9 && month<=11){
-  season="AUTUMN · 秋";
+updateSeason();
+
+
+/* ================= 月相 ================= */
+
+function updateMoon(){
+
+  const knownNewMoon =
+    new Date("2024-01-11T11:57:00");
+
+  const now =
+    new Date();
+
+  const days =
+    (now-knownNewMoon) /
+    (1000*60*60*24);
+
+  const cycle =
+    29.530588;
+
+  const age =
+    ((days % cycle)+cycle)%cycle;
+
+  let phase="";
+
+  if(age<1.85){
+    phase="🌑 新月";
+  }
+  else if(age<7.38){
+    phase="🌒 娥眉月";
+  }
+  else if(age<9.23){
+    phase="🌓 上弦月";
+  }
+  else if(age<14.77){
+    phase="🌔 盈凸月";
+  }
+  else if(age<16.61){
+    phase="🌕 满月";
+  }
+  else if(age<22.15){
+    phase="🌖 亏凸月";
+  }
+  else if(age<24){
+    phase="🌗 下弦月";
+  }
+  else{
+    phase="🌘 残月";
+  }
+
+  document.getElementById("moonPhase")
+    .textContent=phase;
 }
 
-else{
-  season="WINTER · 冬";
-}
-
-document.getElementById("season")
-  .textContent=season;
+updateMoon();
 
 
-/* =========================
-   月相
-========================= */
+/* ================= 上海真实天气 ================= */
 
-const lunarCycle=29.530588;
+/*
+  上海坐标：
+  纬度 31.2304
+  经度 121.4737
 
-const knownNewMoon=
-  new Date("2026-01-18T19:52:00");
+  使用 Open-Meteo
+  不需要 API Key
+*/
 
-const daysSince=
-  (new Date()-knownNewMoon)
-  /(1000*60*60*24);
-
-let moonAge=
-  daysSince%lunarCycle;
-
-if(moonAge<0){
-  moonAge+=lunarCycle;
-}
-
-let moonName="";
-
-if(moonAge<1.85){
-  moonName="🌑 新月";
-}
-
-else if(moonAge<7.38){
-  moonName="🌒 娥眉月";
-}
-
-else if(moonAge<9.23){
-  moonName="🌓 上弦月";
-}
-
-else if(moonAge<14.77){
-  moonName="🌔 盈凸月";
-}
-
-else if(moonAge<16.62){
-  moonName="🌕 满月";
-}
-
-else if(moonAge<22.15){
-  moonName="🌖 亏凸月";
-}
-
-else if(moonAge<24.00){
-  moonName="🌗 下弦月";
-}
-
-else{
-  moonName="🌘 残月";
-}
-
-document.getElementById("moonPhase")
-  .textContent=moonName;
+const SHANGHAI_LAT = 31.2304;
+const SHANGHAI_LON = 121.4737;
 
 
-/* =========================
-   根据时间改变氛围
-========================= */
+/* 天气代码转换 */
 
-const hour =
-  new Date().getHours();
+function getWeatherInfo(code){
 
-const root =
-  document.documentElement;
+  if(code === 0){
+    return {
+      icon:"☀️",
+      text:"晴"
+    };
+  }
 
-if(hour>=6 && hour<11){
+  if([1,2,3].includes(code)){
+    return {
+      icon:"⛅",
+      text:"多云"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg1","#18233b"
-  );
+  if([45,48].includes(code)){
+    return {
+      icon:"🌫️",
+      text:"雾"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg2","#0d1428"
-  );
+  if([51,53,55].includes(code)){
+    return {
+      icon:"🌦️",
+      text:"毛毛雨"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg3","#19243d"
-  );
+  if([56,57].includes(code)){
+    return {
+      icon:"🌧️",
+      text:"冻雨"
+    };
+  }
 
-  root.style.setProperty(
-    "--glow","rgba(170,190,240,.22)"
-  );
+  if([61,63,65].includes(code)){
+    return {
+      icon:"🌧️",
+      text:"下雨"
+    };
+  }
 
-}
+  if([66,67].includes(code)){
+    return {
+      icon:"🌧️",
+      text:"冻雨"
+    };
+  }
 
-else if(hour>=11 && hour<17){
+  if([71,73,75,77].includes(code)){
+    return {
+      icon:"❄️",
+      text:"下雪"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg1","#172033"
-  );
+  if([80,81,82].includes(code)){
+    return {
+      icon:"🌦️",
+      text:"阵雨"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg2","#0b1121"
-  );
+  if([85,86].includes(code)){
+    return {
+      icon:"🌨️",
+      text:"阵雪"
+    };
+  }
 
-  root.style.setProperty(
-    "--bg3","#202b42"
-  );
+  if(code === 95){
+    return {
+      icon:"⛈️",
+      text:"雷雨"
+    };
+  }
 
-  root.style.setProperty(
-    "--glow","rgba(200,210,255,.18)"
-  );
+  if([96,99].includes(code)){
+    return {
+      icon:"⛈️",
+      text:"雷雨冰雹"
+    };
+  }
 
-}
-
-else if(hour>=17 && hour<21){
-
-  root.style.setProperty(
-    "--bg1","#261b2e"
-  );
-
-  root.style.setProperty(
-    "--bg2","#0c1020"
-  );
-
-  root.style.setProperty(
-    "--bg3","#321d2c"
-  );
-
-  root.style.setProperty(
-    "--glow","rgba(230,150,180,.16)"
-  );
-
-}
-
-else{
-
-  root.style.setProperty(
-    "--bg1","#050711"
-  );
-
-  root.style.setProperty(
-    "--bg2","#03040b"
-  );
-
-  root.style.setProperty(
-    "--bg3","#11152a"
-  );
-
-  root.style.setProperty(
-    "--glow","rgba(100,126,200,.20)"
-  );
-
+  return {
+    icon:"🌤️",
+    text:"天气未知"
+  };
 }
 
 
-/* =========================
-   天气占位
-   以后可以接真实天气API
-========================= */
+/* 获取上海天气 */
 
-document.getElementById("weather")
-  .textContent="Weather · Soon";
+async function loadWeather(){
+
+  const weather =
+    document.getElementById("weather");
+
+  const detail =
+    document.getElementById("weatherDetail");
+
+  try{
+
+    weather.textContent =
+      "正在获取…";
+
+    const url =
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=" + SHANGHAI_LAT +
+      "&longitude=" + SHANGHAI_LON +
+      "&current=" +
+      "temperature_2m," +
+      "relative_humidity_2m," +
+      "apparent_temperature," +
+      "weather_code," +
+      "wind_speed_10m" +
+      "&timezone=Asia%2FShanghai";
+
+    const response =
+      await fetch(url);
+
+    if(!response.ok){
+      throw new Error("Weather error");
+    }
+
+    const data =
+      await response.json();
+
+    const current =
+      data.current;
+
+    const info =
+      getWeatherInfo(
+        current.weather_code
+      );
+
+    weather.innerHTML =
+      info.icon +
+      " " +
+      info.text +
+      "<br>" +
+      "<span class='weather-temp'>" +
+      Math.round(
+        current.temperature_2m
+      ) +
+      "°C" +
+      "</span>";
+
+    detail.innerHTML =
+      "体感 " +
+      Math.round(
+        current.apparent_temperature
+      ) +
+      "° · 湿度 " +
+      Math.round(
+        current.relative_humidity_2m
+      ) +
+      "% · 风 " +
+      Math.round(
+        current.wind_speed_10m
+      ) +
+      " km/h";
+
+  }
+  catch(error){
+
+    weather.textContent =
+      "天气暂时无法获取";
+
+    detail.textContent =
+      "请稍后刷新页面";
+
+    console.log(error);
+  }
+}
 
 
-/* =========================
-   每日照片占位
-   以后可以放你的照片
-========================= */
+/* 第一次打开网站立即获取 */
 
-const photo=document.getElementById(
-  "dailyPhoto"
+loadWeather();
+
+
+/* 每 10 分钟自动更新一次 */
+
+setInterval(
+  loadWeather,
+  10 * 60 * 1000
 );
 
-photo.textContent=
-  "YOUR DAILY MEMORY";
+
+/* ================= 根据时间改变星空 ================= */
+
+function updateTimeTheme(){
+
+  const hour =
+    new Date().getHours();
+
+  const hero =
+    document.querySelector(".hero");
+
+  if(hour>=6 && hour<18){
+
+    hero.style.background =
+      "radial-gradient(circle at 50% 45%,#18233f 0%,#0a1022 45%,#040610 100%)";
+
+  }
+  else{
+
+    hero.style.background =
+      "radial-gradient(circle at 50% 45%,#18213d 0%,#090d1d 42%,#03040b 100%)";
+
+  }
+}
+
+updateTimeTheme();
+
+setInterval(
+  updateTimeTheme,
+  60000
+);
 
 </script>
 
