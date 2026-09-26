@@ -12,18 +12,19 @@
   box-sizing:border-box;
 }
 
-body{
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
-  background:#f3f0e9;
-  color:#24231f;
+html{
+  scroll-behavior:smooth;
 }
 
-/* 第一屏 */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background:#f3f0e9;
+  color:#24231f;
+  overflow-x:hidden;
+}
+
+/* ===== 第一屏 ===== */
+
 .hero{
   min-height:100vh;
   position:relative;
@@ -32,21 +33,22 @@ body{
   justify-content:center;
   overflow:hidden;
   background:
-    radial-gradient(circle at 70% 25%, #ffffff 0%, transparent 28%),
+    radial-gradient(circle at 70% 25%,#fff 0%,transparent 28%),
     linear-gradient(135deg,#eeeae1,#dcd6ca);
+  animation:heroIn 1.4s ease both;
 }
 
 .hero::before{
   content:"";
   position:absolute;
-  width:600px;
-  height:600px;
+  width:620px;
+  height:620px;
   border-radius:50%;
   background:#c9bda9;
   opacity:.22;
-  filter:blur(2px);
   right:-180px;
   top:-160px;
+  animation:float 9s ease-in-out infinite;
 }
 
 .hero::after{
@@ -58,12 +60,14 @@ body{
   border-radius:50%;
   left:-160px;
   bottom:-140px;
+  animation:rotateSlow 25s linear infinite;
 }
 
 .content{
   width:min(1100px,88%);
   position:relative;
   z-index:2;
+  animation:contentIn 1.5s .2s ease both;
 }
 
 .small{
@@ -87,6 +91,7 @@ h1{
   height:1px;
   background:#575247;
   margin-bottom:28px;
+  animation:lineIn 1.2s .7s ease both;
 }
 
 .description{
@@ -106,15 +111,15 @@ h1{
   text-decoration:none;
   font-size:12px;
   letter-spacing:3px;
-  transition:.35s;
+  transition:.4s;
 }
 
 .enter:hover{
   background:#292823;
   color:#f3f0e9;
+  transform:translateY(-3px);
 }
 
-/* 装饰数字 */
 .number{
   position:absolute;
   right:8%;
@@ -123,11 +128,39 @@ h1{
   font-size:100px;
   color:rgba(50,47,40,.08);
   z-index:1;
+  animation:numberFloat 6s ease-in-out infinite;
 }
 
-/* 第二屏 */
+/* ===== 实时时间 ===== */
+
+.time{
+  position:absolute;
+  right:8%;
+  top:8%;
+  z-index:5;
+  text-align:right;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+.time-label{
+  display:block;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:4px;
+  color:#817a6e;
+  margin-bottom:6px;
+}
+
+#clock{
+  font-size:22px;
+  letter-spacing:2px;
+  color:#36332d;
+}
+
+/* ===== 第二屏 ===== */
+
 .memory{
-  min-height:80vh;
+  min-height:85vh;
   padding:120px 8%;
   display:flex;
   align-items:center;
@@ -139,6 +172,7 @@ h1{
   max-width:1000px;
   width:100%;
   margin:auto;
+  animation:fadeUp 1.2s ease both;
 }
 
 .label{
@@ -167,7 +201,71 @@ h1{
   color:#aaa398;
 }
 
-/* 手机 */
+/* ===== 动画 ===== */
+
+@keyframes heroIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes contentIn{
+  from{
+    opacity:0;
+    transform:translateY(35px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes lineIn{
+  from{
+    width:0;
+    opacity:0;
+  }
+  to{
+    width:70px;
+    opacity:1;
+  }
+}
+
+@keyframes float{
+  0%,100%{
+    transform:translate(0,0);
+  }
+  50%{
+    transform:translate(-25px,20px);
+  }
+}
+
+@keyframes rotateSlow{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+@keyframes numberFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-12px);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ===== 手机 ===== */
+
 @media(max-width:600px){
 
   .content{
@@ -181,6 +279,15 @@ h1{
 
   .description{
     font-size:14px;
+  }
+
+  .time{
+    right:9%;
+    top:6%;
+  }
+
+  #clock{
+    font-size:18px;
   }
 
   .memory{
@@ -209,6 +316,12 @@ h1{
 <body>
 
 <section class="hero">
+
+  <!-- 实时时间 -->
+  <div class="time">
+    <span class="time-label">LOCAL TIME</span>
+    <span id="clock">--:--:--</span>
+  </div>
 
   <div class="content">
 
@@ -253,6 +366,50 @@ h1{
   </div>
 
 </section>
+
+
+<script>
+function updateClock(){
+
+  const now = new Date();
+
+  const time = new Intl.DateTimeFormat(
+    "zh-CN",
+    {
+      timeZone:"Asia/Shanghai",
+      hour:"2-digit",
+      minute:"2-digit",
+      second:"2-digit",
+      hour12:false
+    }
+  ).format(now);
+
+  document.getElementById("clock").textContent = time;
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* 鼠标轻微视差 */
+
+document.addEventListener("mousemove",(e)=>{
+
+  const x=(e.clientX/window.innerWidth-.5)*12;
+  const y=(e.clientY/window.innerHeight-.5)*12;
+
+  document.querySelector(".hero::before");
+
+  const content=document.querySelector(".content");
+
+  if(window.innerWidth>600){
+    content.style.transform=
+      `translate(${x*.15}px,${y*.15}px)`;
+  }
+
+});
+</script>
 
 </body>
 </html>
