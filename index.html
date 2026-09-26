@@ -14,24 +14,27 @@ scroll-behavior:smooth;
 
 body{
 margin:0;
-background:#050507;
-color:#f5f2ea;
+color:#373341;
 font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+background:
+radial-gradient(circle at 15% 10%,#eee7ff 0,transparent 30%),
+radial-gradient(circle at 85% 20%,#e9e4ff 0,transparent 28%),
+radial-gradient(circle at 50% 90%,#f7e9f4 0,transparent 32%),
+#faf9f7;
 overflow-x:hidden;
 }
 
-/* 背景光 */
+/* 柔和背景光 */
 body:before{
 content:"";
 position:fixed;
-inset:-20%;
+inset:-15%;
 background:
-radial-gradient(circle at 70% 18%,#7e5dff35,transparent 25%),
-radial-gradient(circle at 15% 65%,#3c78ff22,transparent 28%),
-radial-gradient(circle at 50% 100%,#9c5cff12,transparent 35%);
+radial-gradient(circle at 70% 20%,#bca8ff30,transparent 25%),
+radial-gradient(circle at 20% 70%,#d7b7ff25,transparent 28%);
 pointer-events:none;
 z-index:-3;
-animation:bgMove 12s ease-in-out infinite alternate;
+animation:bgMove 14s ease-in-out infinite alternate;
 }
 
 @keyframes bgMove{
@@ -44,22 +47,29 @@ animation:bgMove 12s ease-in-out infinite alternate;
 position:fixed;
 inset:0;
 pointer-events:none;
-z-index:-2;
+z-index:-1;
 }
 
 .star{
 position:absolute;
-width:2px;
-height:2px;
-background:#fff;
+width:4px;
+height:4px;
 border-radius:50%;
-opacity:.35;
+background:#9c86df;
+opacity:.25;
+box-shadow:0 0 10px #a88ce8;
 animation:twinkle 3s ease-in-out infinite;
 }
 
 @keyframes twinkle{
-0%,100%{opacity:.15;transform:scale(.7)}
-50%{opacity:.9;transform:scale(1.5)}
+0%,100%{
+opacity:.15;
+transform:scale(.7);
+}
+50%{
+opacity:.7;
+transform:scale(1.5);
+}
 }
 
 /* 顶部 */
@@ -73,23 +83,31 @@ padding:22px 7vw;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:linear-gradient(#050507e8,transparent);
-backdrop-filter:blur(10px);
+background:rgba(250,249,247,.68);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(130,110,170,.08);
 animation:headerIn 1s ease both;
 }
 
 @keyframes headerIn{
-from{opacity:0;transform:translateY(-15px)}
-to{opacity:1;transform:translateY(0)}
+from{
+opacity:0;
+transform:translateY(-15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .logo{
 letter-spacing:3px;
 font-size:14px;
+color:#554a67;
 }
 
 nav a{
-color:#aaa;
+color:#81788c;
 text-decoration:none;
 margin-left:28px;
 font-size:13px;
@@ -97,8 +115,7 @@ transition:.3s;
 }
 
 nav a:hover{
-color:#fff;
-text-shadow:0 0 15px #a58cff;
+color:#7962ad;
 }
 
 /* 首页 */
@@ -118,7 +135,7 @@ width:min(1100px,100%);
 .eyebrow{
 font-size:11px;
 letter-spacing:7px;
-color:#9b93b9;
+color:#9486aa;
 margin-bottom:28px;
 animation:fadeUp 1s .2s ease both;
 }
@@ -127,28 +144,31 @@ h1{
 font:400 clamp(72px,15vw,170px)/.9 Georgia,serif;
 letter-spacing:-5px;
 margin:0;
-background:linear-gradient(
+background:
+linear-gradient(
 120deg,
-#fff 10%,
-#ddd6ff 45%,
-#8e86ff 70%,
-#fff 90%
+#554c64,
+#9279c5,
+#c29ad8,
+#62547c
 );
 background-size:250% auto;
 -webkit-background-clip:text;
 color:transparent;
 animation:
 fadeUp 1.2s .35s ease both,
-shine 6s linear infinite;
+shine 7s linear infinite;
 }
 
 @keyframes shine{
-to{background-position:250% center}
+to{
+background-position:250% center;
+}
 }
 
 .subtitle{
 margin:34px auto 0;
-color:#aaa;
+color:#827b89;
 line-height:2;
 font-size:15px;
 letter-spacing:2px;
@@ -159,12 +179,14 @@ animation:fadeUp 1s .6s ease both;
 display:inline-block;
 margin-top:42px;
 padding:14px 29px;
-border:1px solid #444;
+border:1px solid #c9bddc;
 border-radius:99px;
-color:#eee;
+color:#645679;
 text-decoration:none;
 font-size:13px;
 letter-spacing:2px;
+background:rgba(255,255,255,.55);
+box-shadow:0 8px 30px rgba(120,90,170,.08);
 position:relative;
 overflow:hidden;
 transition:.4s;
@@ -173,38 +195,19 @@ fadeUp 1s .8s ease both,
 pulse 3s 2s ease-in-out infinite;
 }
 
-.cta:before{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:60%;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-#ffffff25,
-transparent
-);
-transform:skewX(-20deg);
-transition:.6s;
-}
-
 .cta:hover{
-border-color:#9185ff;
-box-shadow:
-0 0 25px #7d6cff30,
-inset 0 0 15px #7d6cff12;
-transform:translateY(-3px);
-}
-
-.cta:hover:before{
-left:140%;
+transform:translateY(-4px);
+border-color:#a991d1;
+box-shadow:0 15px 40px rgba(120,90,170,.16);
 }
 
 @keyframes pulse{
-0%,100%{box-shadow:0 0 0 #806cff00}
-50%{box-shadow:0 0 25px #806cff20}
+0%,100%{
+box-shadow:0 8px 30px rgba(120,90,170,.08);
+}
+50%{
+box-shadow:0 8px 35px rgba(120,90,170,.2);
+}
 }
 
 /* 轨道 */
@@ -212,7 +215,7 @@ left:140%;
 position:absolute;
 width:min(72vw,680px);
 height:min(72vw,680px);
-border:1px solid #ffffff12;
+border:1px solid rgba(128,105,170,.13);
 border-radius:50%;
 z-index:-1;
 animation:orbitFloat 8s ease-in-out infinite;
@@ -223,20 +226,24 @@ content:"✦";
 position:absolute;
 top:-10px;
 left:50%;
-color:#fff;
-text-shadow:
-0 0 8px #fff,
-0 0 20px #8e86ff;
+color:#9b83cf;
+text-shadow:0 0 12px #b59be8;
 animation:starSpin 8s linear infinite;
 }
 
 @keyframes orbitFloat{
-0%,100%{transform:scale(1) rotate(0deg)}
-50%{transform:scale(1.025) rotate(3deg)}
+0%,100%{
+transform:scale(1) rotate(0deg);
+}
+50%{
+transform:scale(1.025) rotate(3deg);
+}
 }
 
 @keyframes starSpin{
-to{transform:rotate(360deg)}
+to{
+transform:rotate(360deg);
+}
 }
 
 /* 通用 */
@@ -261,7 +268,7 @@ padding:110px 0;
 display:flex;
 align-items:end;
 justify-content:space-between;
-border-bottom:1px solid #222;
+border-bottom:1px solid #e4dfe9;
 padding-bottom:18px;
 margin-bottom:34px;
 }
@@ -269,12 +276,13 @@ margin-bottom:34px;
 .section-title h2{
 margin:0;
 font:400 34px Georgia,serif;
+color:#51485c;
 }
 
 .section-title span,
 .num{
 font-size:11px;
-color:#666;
+color:#a29aa9;
 letter-spacing:2px;
 }
 
@@ -282,21 +290,26 @@ letter-spacing:2px;
 .grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:14px;
+gap:16px;
 }
 
 .card{
 min-height:230px;
-border:1px solid #202024;
-border-radius:20px;
+border:1px solid rgba(130,110,160,.13);
+border-radius:24px;
 padding:28px;
 background:
-linear-gradient(145deg,#ffffff0e,#ffffff04);
+linear-gradient(
+145deg,
+rgba(255,255,255,.88),
+rgba(245,240,250,.68)
+);
+box-shadow:
+0 12px 40px rgba(80,60,100,.06);
 transition:
 transform .5s cubic-bezier(.2,.8,.2,1),
 border-color .4s,
-box-shadow .4s,
-background .4s;
+box-shadow .4s;
 position:relative;
 overflow:hidden;
 opacity:0;
@@ -314,8 +327,8 @@ position:absolute;
 width:180px;
 height:180px;
 border-radius:50%;
-background:#8e86ff;
-filter:blur(80px);
+background:#c8b3ef;
+filter:blur(70px);
 opacity:0;
 top:-80px;
 right:-80px;
@@ -324,32 +337,30 @@ transition:.5s;
 
 .card:hover{
 transform:translateY(-9px) scale(1.015);
-border-color:#625a80;
+border-color:#c0acd8;
 box-shadow:
-0 20px 60px #00000080,
-0 0 30px #7569ff10;
-background:
-linear-gradient(145deg,#ffffff12,#ffffff05);
+0 22px 55px rgba(90,70,120,.12);
 }
 
 .card:hover:before{
-opacity:.16;
+opacity:.35;
 }
 
 .card h3{
 font:400 26px Georgia,serif;
 margin:65px 0 12px;
+color:#554b60;
 transition:.35s;
 }
 
 .card:hover h3{
 transform:translateX(5px);
-color:#fff;
+color:#72599c;
 }
 
 .card p{
 margin:0;
-color:#999;
+color:#8b8490;
 line-height:1.8;
 font-size:13px;
 }
@@ -359,7 +370,7 @@ font-size:13px;
 width:min(850px,86vw);
 margin:40px auto 130px;
 text-align:center;
-color:#aaa;
+color:#877d91;
 font:italic 26px/1.8 Georgia,serif;
 opacity:0;
 transform:translateY(25px);
@@ -378,9 +389,9 @@ min-height:auto;
 
 /* footer */
 footer{
-border-top:1px solid #1c1c20;
+border-top:1px solid #e6e1e9;
 padding:35px 7vw;
-color:#666;
+color:#a29aa9;
 font-size:11px;
 letter-spacing:2px;
 display:flex;
@@ -491,7 +502,6 @@ PERSONAL SPACE · 2026
 </a>
 
 </div>
-
 </section>
 
 
@@ -600,26 +610,22 @@ PERSONAL SPACE · 2026
 
 <script>
 
-/* 滚动出现动画 */
-const items = document.querySelectorAll(".card,.quote");
+const items=document.querySelectorAll(".card,.quote");
 
-const observer = new IntersectionObserver(
+const observer=new IntersectionObserver(
 (entries)=>{
-entries.forEach((entry)=>{
+entries.forEach(entry=>{
 if(entry.isIntersecting){
 entry.target.classList.add("show");
 observer.unobserve(entry.target);
 }
 });
 },
-{
-threshold:.15
-}
+{threshold:.15}
 );
 
 items.forEach(item=>observer.observe(item));
 
-/* 卡片依次出现 */
 document.querySelectorAll(".grid").forEach(grid=>{
 const cards=grid.querySelectorAll(".card");
 
