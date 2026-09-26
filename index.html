@@ -3,615 +3,1066 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>圆落星 · Autumn</title>
+<title>圆落星 — Autumn Journal</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-    background:#F7F1E8;
-    color:#4A3731;
-    font-family:-apple-system,BlinkMacSystemFont,
-    "PingFang SC","Microsoft YaHei",sans-serif;
-    overflow-x:hidden;
+    background:#f4eee5;
+    color:#493832;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
 }
 
-/* 柔和秋日光晕 */
-body::before{
-    content:"";
-    position:fixed;
-    width:650px;
-    height:650px;
-    border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(185,130,120,.16),
-        transparent 68%
-    );
-    top:-260px;
-    right:-180px;
-    pointer-events:none;
-}
+/* =========================
+   顶部导航
+========================= */
 
-body::after{
-    content:"";
-    position:fixed;
-    width:520px;
-    height:520px;
-    border-radius:50%;
-    background:radial-gradient(
-        circle,
-        rgba(198,165,107,.12),
-        transparent 70%
-    );
-    bottom:-260px;
-    left:-200px;
-    pointer-events:none;
-}
-
-/* 顶部 */
 header{
+    height:82px;
+    padding:0 6vw;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
     position:fixed;
     top:0;
     left:0;
     right:0;
-    z-index:20;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    z-index:100;
 
-    padding:22px 7vw;
-
-    background:rgba(247,241,232,.78);
+    background:rgba(244,238,229,.82);
     backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(74,55,49,.08);
+    border-bottom:1px solid rgba(73,56,50,.08);
 }
 
 .logo{
-    font-family:Georgia,"Songti SC",serif;
-    font-size:19px;
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:20px;
     letter-spacing:4px;
-    color:#704B45;
+    color:#684a43;
+}
+
+nav{
+    display:flex;
+    gap:32px;
 }
 
 nav a{
-    color:#806960;
     text-decoration:none;
-    margin-left:28px;
-    font-size:13px;
+    color:#806b61;
+    font-size:12px;
+    letter-spacing:1px;
     transition:.3s;
 }
 
 nav a:hover{
-    color:#B98278;
+    color:#a76e63;
 }
 
-/* 首页 */
+
+/* =========================
+   首页
+========================= */
+
 .hero{
     min-height:100vh;
 
-    display:flex;
+    padding:150px 6vw 80px;
+
+    display:grid;
+    grid-template-columns:
+    1.05fr .95fr;
+
+    gap:7vw;
+
     align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:130px 7vw 100px;
-
-    position:relative;
 }
 
-.hero-content{
-    position:relative;
-    z-index:2;
+.hero-left{
+    animation:fadeUp 1s ease both;
 }
 
-.eyebrow{
-    color:#B89578;
+.kicker{
     font-size:11px;
-    letter-spacing:6px;
-    margin-bottom:28px;
+    letter-spacing:5px;
+    color:#a67a68;
+    margin-bottom:30px;
 }
 
-h1{
-    font-family:Georgia,"Songti SC","STSong",serif;
+.hero h1{
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:
+    clamp(80px,12vw,165px);
+
     font-weight:400;
 
-    font-size:clamp(78px,15vw,170px);
+    line-height:.82;
 
-    line-height:.9;
-    letter-spacing:-5px;
+    letter-spacing:-7px;
 
-    color:#704B45;
-
-    text-shadow:
-    2px 3px 0 rgba(185,130,120,.08);
+    color:#684a43;
 }
 
-.subtitle{
-    margin:38px auto 0;
-
-    max-width:600px;
-
-    color:#806960;
-
-    font-size:15px;
-    line-height:2;
-    letter-spacing:2px;
-}
-
-.cta{
-    display:inline-block;
-
+.hero-text{
     margin-top:42px;
 
-    padding:14px 29px;
+    max-width:470px;
 
-    border:1px solid #B89578;
-    border-radius:100px;
+    color:#806b61;
 
-    color:#704B45;
+    font-size:15px;
+
+    line-height:2;
+
+    letter-spacing:1px;
+}
+
+.hero-link{
+    display:inline-flex;
+
+    margin-top:38px;
+
+    color:#684a43;
 
     text-decoration:none;
 
-    font-size:13px;
+    font-size:12px;
+
     letter-spacing:2px;
 
-    transition:.35s;
+    border-bottom:1px solid #b8957c;
+
+    padding-bottom:8px;
 }
 
-.cta:hover{
-    background:#B89578;
-    color:#F7F1E8;
-    transform:translateY(-3px);
-}
 
-/* 环 */
-.autumn-orbit{
-    position:absolute;
+/* =========================
+   首页照片
+========================= */
 
-    width:min(65vw,680px);
-    height:min(65vw,680px);
+.hero-photo{
+    height:620px;
 
-    border:1px solid rgba(112,75,69,.12);
-
-    border-radius:50%;
-
-    animation:rotate 28s linear infinite;
-}
-
-.autumn-orbit::before{
-    content:"✦";
-
-    position:absolute;
-
-    top:11%;
-    right:8%;
-
-    color:#C6A56B;
-
-    font-size:15px;
-
-    text-shadow:0 0 15px rgba(198,165,107,.5);
-}
-
-@keyframes rotate{
-    from{transform:rotate(0deg)}
-    to{transform:rotate(360deg)}
-}
-
-/* 内容 */
-.section{
-    width:min(1050px,86vw);
-    margin:auto;
-    padding:110px 0;
-}
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-
-    border-bottom:1px solid rgba(74,55,49,.13);
-
-    padding-bottom:18px;
-    margin-bottom:35px;
-}
-
-.section-title h2{
-    font-family:Georgia,"Songti SC",serif;
-
-    font-weight:400;
-
-    font-size:36px;
-
-    color:#704B45;
-}
-
-.section-title span{
-    color:#B89578;
-
-    font-size:11px;
-    letter-spacing:2px;
-}
-
-/* 卡片 */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.card{
     position:relative;
 
-    min-height:245px;
+    overflow:hidden;
 
-    padding:28px;
-
-    border-radius:22px;
+    animation:fadeIn 1.3s ease both;
 
     background:
     linear-gradient(
         145deg,
-        rgba(255,255,255,.58),
-        rgba(232,212,190,.25)
+        #d9c3ad,
+        #b98f78
+    );
+}
+
+.hero-photo::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        transparent 50%
     );
 
-    border:1px solid rgba(112,75,69,.10);
+    z-index:2;
+}
 
-    box-shadow:
-    0 18px 45px rgba(74,55,49,.055);
+.photo-placeholder{
+    width:100%;
+    height:100%;
 
-    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+
+    padding:30px;
+
+    color:rgba(255,255,255,.8);
+
+    font-family:Georgia,serif;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(50,32,27,.35),
+        transparent 45%
+    );
+}
+
+.photo-label{
+    position:absolute;
+
+    top:24px;
+    right:24px;
+
+    z-index:3;
+
+    color:#fff;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+}
+
+
+/* =========================
+   横向介绍
+========================= */
+
+.intro{
+    padding:
+    120px 6vw
+    150px;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1.5fr;
+
+    gap:10vw;
+
+    border-top:
+    1px solid rgba(73,56,50,.1);
+}
+
+.intro-number{
+    color:#a67a68;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+}
+
+.intro h2{
+    margin-top:20px;
+
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-weight:400;
+
+    font-size:48px;
+
+    line-height:1.15;
+
+    color:#684a43;
+}
+
+.intro-content{
+    max-width:650px;
+}
+
+.intro-content p{
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:25px;
+
+    line-height:1.8;
+
+    color:#70584f;
+}
+
+.intro-content small{
+    display:block;
+
+    margin-top:30px;
+
+    color:#927c70;
+
+    font-size:13px;
+
+    line-height:2;
+}
+
+
+/* =========================
+   内容目录
+========================= */
+
+.world{
+    padding:
+    0 6vw
+    140px;
+}
+
+.section-head{
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    padding-bottom:22px;
+
+    border-bottom:
+    1px solid rgba(73,56,50,.14);
+
+    margin-bottom:0;
+}
+
+.section-head h2{
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:50px;
+
+    font-weight:400;
+
+    color:#684a43;
+}
+
+.section-head span{
+    color:#a67a68;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+}
+
+
+/* 内容项目 */
+
+.story{
+    display:grid;
+
+    grid-template-columns:
+    90px 1fr 1fr;
+
+    gap:35px;
+
+    align-items:center;
+
+    padding:45px 0;
+
+    border-bottom:
+    1px solid rgba(73,56,50,.1);
 
     transition:.4s;
 }
 
-.card::after{
+.story:hover{
+    padding-left:18px;
+}
+
+.story-num{
+    color:#b8957c;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+.story h3{
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:34px;
+
+    font-weight:400;
+
+    color:#684a43;
+}
+
+.story p{
+    color:#806b61;
+
+    font-size:13px;
+
+    line-height:1.9;
+
+    max-width:420px;
+}
+
+
+/* =========================
+   图片横幅
+========================= */
+
+.visual{
+    margin:
+    0 6vw
+    140px;
+
+    height:420px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        110deg,
+        #b99178,
+        #d8c0aa,
+        #9e7669
+    );
+}
+
+.visual::after{
     content:"";
 
     position:absolute;
 
-    width:150px;
-    height:150px;
+    inset:0;
 
-    border-radius:50%;
-
-    background:rgba(185,130,120,.07);
-
-    right:-65px;
-    bottom:-65px;
+    background:
+    linear-gradient(
+        90deg,
+        rgba(63,43,37,.3),
+        transparent 60%
+    );
 }
 
-.card:hover{
-    transform:translateY(-8px);
+.visual-text{
+    position:absolute;
 
-    box-shadow:
-    0 25px 55px rgba(74,55,49,.11);
+    z-index:2;
 
-    border-color:rgba(185,130,120,.3);
+    left:45px;
+    bottom:38px;
+
+    color:#fff;
 }
 
-.num{
-    color:#B89578;
+.visual-text strong{
+    display:block;
 
-    font-size:11px;
-    letter-spacing:2px;
-}
+    font-family:Georgia,serif;
 
-.card h3{
-    font-family:Georgia,"Songti SC",serif;
+    font-size:38px;
 
     font-weight:400;
 
-    color:#704B45;
-
-    font-size:27px;
-
-    margin-top:65px;
-    margin-bottom:14px;
+    margin-bottom:8px;
 }
 
-.card p{
-    color:#806960;
+.visual-text span{
+    font-size:11px;
 
-    font-size:13px;
-    line-height:1.9;
+    letter-spacing:3px;
+
+    opacity:.8;
 }
 
-/* 引语 */
+
+/* =========================
+   quote
+========================= */
+
 .quote{
-    width:min(850px,86vw);
+    padding:
+    100px 8vw
+    150px;
 
-    margin:40px auto 130px;
-
-    text-align:center;
-
-    font-family:Georgia,"Songti SC",serif;
-
-    font-style:italic;
-
-    font-size:27px;
-
-    line-height:1.8;
-
-    color:#704B45;
-}
-
-/* 联系 */
-.contact-card{
-    padding:50px 30px;
     text-align:center;
 }
 
-.contact-card p{
+.quote p{
+    max-width:900px;
+
+    margin:auto;
+
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:
+    clamp(30px,4vw,54px);
+
+    line-height:1.45;
+
+    font-weight:400;
+
+    color:#684a43;
+}
+
+.quote span{
+    display:block;
+
+    margin-top:30px;
+
+    color:#a67a68;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+}
+
+
+/* =========================
+   联系
+========================= */
+
+.contact{
+    padding:
+    100px 6vw
+    130px;
+
+    background:#e9ddd0;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:8vw;
+}
+
+.contact h2{
+    font-family:
+    Georgia,
+    "Songti SC",
+    serif;
+
+    font-size:58px;
+
+    font-weight:400;
+
+    color:#684a43;
+}
+
+.contact p{
+    color:#806b61;
+
     font-size:14px;
+
+    line-height:2;
 }
 
-/* 页脚 */
-footer{
-    border-top:1px solid rgba(74,55,49,.11);
-
-    padding:32px 7vw;
+.contact-links{
+    margin-top:30px;
 
     display:flex;
+
+    gap:25px;
+}
+
+.contact-links a{
+    color:#684a43;
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    border-bottom:
+    1px solid #b8957c;
+
+    padding-bottom:7px;
+}
+
+
+/* =========================
+   footer
+========================= */
+
+footer{
+    padding:28px 6vw;
+
+    display:flex;
+
     justify-content:space-between;
 
-    color:#A58D7C;
+    color:#a28c80;
 
-    font-size:11px;
+    font-size:10px;
+
     letter-spacing:2px;
+
+    background:#e9ddd0;
 }
 
-/* 秋叶 */
-.leaf{
-    position:fixed;
 
-    top:-30px;
+/* =========================
+   动画
+========================= */
 
-    color:#B98278;
-
-    opacity:.28;
-
-    pointer-events:none;
-
-    animation:fall linear infinite;
-
-    z-index:1;
-}
-
-.leaf:nth-child(1){
-    left:12%;
-    animation-duration:14s;
-}
-
-.leaf:nth-child(2){
-    left:38%;
-    animation-duration:18s;
-    animation-delay:3s;
-}
-
-.leaf:nth-child(3){
-    left:74%;
-    animation-duration:16s;
-    animation-delay:5s;
-}
-
-@keyframes fall{
-    0%{
-        transform:translateY(-50px) rotate(0deg);
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
     }
 
-    100%{
-        transform:translateY(110vh) rotate(360deg);
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
 
-/* 手机 */
-@media(max-width:700px){
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(1.025);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* =========================
+   手机
+========================= */
+
+@media(max-width:750px){
 
     header{
-        padding:18px 5vw;
+        height:70px;
+        padding:0 5vw;
+    }
+
+    nav{
+        gap:15px;
     }
 
     nav a{
-        margin-left:14px;
-        font-size:11px;
+        font-size:10px;
     }
 
     .hero{
-        padding:130px 5vw 90px;
-    }
-
-    h1{
-        font-size:92px;
-        letter-spacing:-4px;
-    }
-
-    .subtitle{
-        font-size:13px;
-    }
-
-    .autumn-orbit{
-        width:90vw;
-        height:90vw;
-    }
-
-    .section{
-        padding:80px 0;
-    }
-
-    .grid{
         grid-template-columns:1fr;
+
+        padding:
+        120px 5vw
+        70px;
+
+        gap:50px;
     }
 
-    .card{
-        min-height:210px;
+    .hero h1{
+        font-size:92px;
+        letter-spacing:-5px;
+    }
+
+    .hero-photo{
+        height:430px;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+
+        padding:
+        90px 5vw
+        110px;
+
+        gap:45px;
+    }
+
+    .intro h2{
+        font-size:40px;
+    }
+
+    .intro-content p{
+        font-size:21px;
+    }
+
+    .world{
+        padding:
+        0 5vw
+        100px;
+    }
+
+    .section-head h2{
+        font-size:40px;
+    }
+
+    .story{
+        grid-template-columns:
+        45px 1fr;
+
+        gap:18px;
+    }
+
+    .story p{
+        grid-column:2;
+    }
+
+    .story h3{
+        font-size:28px;
+    }
+
+    .visual{
+        margin:
+        0 5vw
+        100px;
+
+        height:330px;
+    }
+
+    .visual-text{
+        left:25px;
+        bottom:25px;
+    }
+
+    .visual-text strong{
+        font-size:30px;
     }
 
     .quote{
-        font-size:21px;
-        margin-bottom:90px;
+        padding:
+        70px 6vw
+        110px;
+    }
+
+    .quote p{
+        font-size:30px;
+    }
+
+    .contact{
+        grid-template-columns:1fr;
+
+        padding:
+        80px 5vw
+        100px;
+
+        gap:40px;
+    }
+
+    .contact h2{
+        font-size:48px;
     }
 
     footer{
-        padding:28px 5vw;
+        padding:25px 5vw;
     }
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="leaf">🍂</div>
-<div class="leaf">🍁</div>
-<div class="leaf">🍂</div>
 
 <header>
-    <div class="logo">圆落星</div>
+
+    <div class="logo">
+        圆落星
+    </div>
 
     <nav>
         <a href="#about">关于</a>
-        <a href="#works">作品</a>
+        <a href="#world">世界</a>
         <a href="#contact">联系</a>
     </nav>
+
 </header>
+
+
 
 <main>
 
+
+<!-- 首页 -->
+
 <section class="hero">
 
-    <div class="autumn-orbit"></div>
+    <div class="hero-left">
 
-    <div class="hero-content">
-
-        <div class="eyebrow">
-            AUTUMN · 2026
+        <div class="kicker">
+            AUTUMN JOURNAL · 2026
         </div>
 
-        <h1>圆落星</h1>
+        <h1>
+            圆落星
+        </h1>
 
-        <p class="subtitle">
-            在自己的轨道上生活。<br>
-            记录灵感、审美与正在发生的一切。
+        <p class="hero-text">
+            记录喜欢的事物，
+            收藏正在发生的瞬间，
+            也记录属于自己的生活。
         </p>
 
-        <a class="cta" href="#about">
-            进入我的世界　→
+        <a class="hero-link" href="#about">
+            ENTER MY WORLD　→
         </a>
 
     </div>
 
-</section>
 
-<section class="section" id="about">
+    <div class="hero-photo">
 
-    <div class="section-title">
-        <h2>关于我</h2>
-        <span>01 / ABOUT</span>
-    </div>
+        <div class="photo-label">
+            01 / AUTUMN
+        </div>
 
-    <div class="grid">
-
-        <article class="card">
-            <div class="num">A01</div>
-            <h3>关于</h3>
-            <p>
-                一个属于圆落星的私人空间，
-                留下喜欢的人、事、物。
-            </p>
-        </article>
-
-        <article class="card">
-            <div class="num">A02</div>
-            <h3>审美</h3>
-            <p>
-                喜欢温柔、自然、有一点神秘感的视觉世界。
-            </p>
-        </article>
-
-        <article class="card">
-            <div class="num">A03</div>
-            <h3>生活</h3>
-            <p>
-                慢慢记录，慢慢探索，
-                也慢慢成为自己。
-            </p>
-        </article>
+        <div class="photo-placeholder">
+            YOUR PHOTO · YOUR STORY
+        </div>
 
     </div>
 
 </section>
 
-<section class="section" id="works">
 
-    <div class="section-title">
-        <h2>我的世界</h2>
-        <span>02 / WORLD</span>
-    </div>
 
-    <div class="grid">
+<!-- 关于 -->
 
-        <article class="card">
-            <div class="num">01</div>
-            <h3>AI 创作</h3>
-            <p>
-                图像、视觉实验与各种有趣的创意。
-            </p>
-        </article>
+<section class="intro" id="about">
 
-        <article class="card">
-            <div class="num">02</div>
-            <h3>影像</h3>
-            <p>
-                把值得记住的瞬间，
-                留在自己的时间线上。
-            </p>
-        </article>
+    <div>
 
-        <article class="card">
-            <div class="num">03</div>
-            <h3>灵感</h3>
-            <p>
-                秋天、设计、科技，
-                以及所有让我心动的东西。
-            </p>
-        </article>
+        <div class="intro-number">
+            01 / ABOUT
+        </div>
+
+        <h2>
+            关于<br>
+            圆落星
+        </h2>
 
     </div>
 
-</section>
 
-<div class="quote">
-    “愿你始终有自己的光，也有自己的季节。”
-</div>
+    <div class="intro-content">
 
-<section class="section" id="contact">
-
-    <div class="section-title">
-        <h2>联系</h2>
-        <span>03 / CONTACT</span>
-    </div>
-
-    <div class="card contact-card">
         <p>
-            这里以后可以放你的邮箱、社交账号或其他联系方式。
+            这里不是一个普通的网站。
+            这是一个属于自己的小小空间。
         </p>
+
+        <small>
+            可以放照片、文字、喜欢的东西、
+            AI 创作、旅行记录，
+            以及任何值得留下来的瞬间。
+        </small>
+
     </div>
 
 </section>
+
+
+
+<!-- 世界 -->
+
+<section class="world" id="world">
+
+    <div class="section-head">
+
+        <h2>
+            我的世界
+        </h2>
+
+        <span>
+            SELECTED STORIES
+        </span>
+
+    </div>
+
+
+    <article class="story">
+
+        <div class="story-num">
+            01
+        </div>
+
+        <h3>
+            AI 创作
+        </h3>
+
+        <p>
+            图像、视觉实验，
+            以及那些突然冒出来的灵感。
+        </p>
+
+    </article>
+
+
+    <article class="story">
+
+        <div class="story-num">
+            02
+        </div>
+
+        <h3>
+            影像
+        </h3>
+
+        <p>
+            把喜欢的照片和值得记住的瞬间，
+            留在这里。
+        </p>
+
+    </article>
+
+
+    <article class="story">
+
+        <div class="story-num">
+            03
+        </div>
+
+        <h3>
+            日常
+        </h3>
+
+        <p>
+            一些生活碎片，
+            一些想法，
+            一些只有自己才懂的东西。
+        </p>
+
+    </article>
+
+
+    <article class="story">
+
+        <div class="story-num">
+            04
+        </div>
+
+        <h3>
+            灵感
+        </h3>
+
+        <p>
+            设计、秋天、电影、音乐，
+            还有所有让我心动的东西。
+        </p>
+
+    </article>
+
+</section>
+
+
+
+<!-- 大图 -->
+
+<section class="visual">
+
+    <div class="visual-text">
+
+        <strong>
+            AUTUMN
+        </strong>
+
+        <span>
+            A SEASON TO REMEMBER
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- 引语 -->
+
+<section class="quote">
+
+    <p>
+        “生活不必急着抵达，
+        有些风景，本来就值得慢慢看。”
+    </p>
+
+    <span>
+        YUANLUOXING
+    </span>
+
+</section>
+
+
+
+<!-- 联系 -->
+
+<section class="contact" id="contact">
+
+    <div>
+
+        <h2>
+            联系
+        </h2>
+
+    </div>
+
+
+    <div>
+
+        <p>
+            这里以后可以放你的邮箱、
+            小红书、Instagram，
+            或者任何你想留下的联系方式。
+        </p>
+
+        <div class="contact-links">
+
+            <a href="#">
+                EMAIL
+            </a>
+
+            <a href="#">
+                SOCIAL
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </main>
 
+
+
 <footer>
-    <span>© 2026 YUANLUOXING</span>
-    <span>AUTUMN PERSONAL SPACE</span>
+
+    <span>
+        © 2026 YUANLUOXING
+    </span>
+
+    <span>
+        AUTUMN JOURNAL
+    </span>
+
 </footer>
+
 
 </body>
 </html>
