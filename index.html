@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>圆落星｜私人空间</title>
+<title>圆落星</title>
 
 <style>
 *{
@@ -24,9 +24,7 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   背景光影
-========================= */
+/* ===== 背景光影 ===== */
 
 body::before{
     content:"";
@@ -68,9 +66,7 @@ body::after{
     to{transform:translate(-130px,-80px);}
 }
 
-/* =========================
-   枫叶
-========================= */
+/* ===== 枫叶 ===== */
 
 .leaves{
     position:fixed;
@@ -82,44 +78,10 @@ body::after{
 
 .leaf{
     position:absolute;
-    top:-80px;
-    font-size:28px;
+    top:-70px;
+    font-size:26px;
     opacity:.7;
     animation:fall linear infinite;
-}
-
-.leaf:nth-child(1){
-    left:8%;
-    animation-duration:11s;
-    animation-delay:0s;
-}
-
-.leaf:nth-child(2){
-    left:24%;
-    font-size:20px;
-    animation-duration:14s;
-    animation-delay:3s;
-}
-
-.leaf:nth-child(3){
-    left:46%;
-    font-size:32px;
-    animation-duration:12s;
-    animation-delay:5s;
-}
-
-.leaf:nth-child(4){
-    left:67%;
-    font-size:22px;
-    animation-duration:15s;
-    animation-delay:2s;
-}
-
-.leaf:nth-child(5){
-    left:88%;
-    font-size:30px;
-    animation-duration:13s;
-    animation-delay:7s;
 }
 
 @keyframes fall{
@@ -142,9 +104,7 @@ body::after{
     }
 }
 
-/* =========================
-   页面
-========================= */
+/* ===== 页面 ===== */
 
 .container{
     width:min(1180px,90%);
@@ -165,10 +125,10 @@ header{
     letter-spacing:4px;
 }
 
-.menu{
-    font-size:10px;
+.date{
+    font-size:11px;
     letter-spacing:3px;
-    color:#76645a;
+    color:#77655b;
 }
 
 @keyframes headerIn{
@@ -182,9 +142,7 @@ header{
     }
 }
 
-/* =========================
-   首屏
-========================= */
+/* ===== 首屏 ===== */
 
 .hero{
     min-height:760px;
@@ -247,9 +205,7 @@ h1{
     letter-spacing:7px;
 }
 
-/* =========================
-   人物区域
-========================= */
+/* ===== 人物区域 ===== */
 
 .person{
     height:650px;
@@ -263,11 +219,7 @@ h1{
             #8d6652
         );
     animation:personIn 1.6s .35s cubic-bezier(.22,1,.36,1) both;
-    transition:transform .8s ease;
-}
-
-.person:hover{
-    transform:scale(1.015);
+    transition:transform .5s ease;
 }
 
 @keyframes personIn{
@@ -281,7 +233,6 @@ h1{
     }
 }
 
-/* 光 */
 .person::before{
     content:"";
     position:absolute;
@@ -304,7 +255,6 @@ h1{
     }
 }
 
-/* 人物占位 */
 .person-placeholder{
     position:absolute;
     inset:0;
@@ -324,9 +274,7 @@ h1{
         );
 }
 
-/* =========================
-   分隔
-========================= */
+/* ===== 分隔线 ===== */
 
 .line{
     width:100%;
@@ -334,9 +282,7 @@ h1{
     background:#d0c1b3;
 }
 
-/* =========================
-   内容
-========================= */
+/* ===== 内容 ===== */
 
 .section{
     padding:130px 0;
@@ -384,9 +330,7 @@ h1{
     color:#76645a;
 }
 
-/* =========================
-   视觉区域
-========================= */
+/* ===== 大视觉 ===== */
 
 .visual{
     height:560px;
@@ -439,15 +383,14 @@ h1{
         transform:scale(1);
         opacity:.85;
     }
+
     50%{
         transform:scale(1.04);
         opacity:1;
     }
 }
 
-/* =========================
-   引语
-========================= */
+/* ===== 引语 ===== */
 
 .quote{
     padding:160px 0;
@@ -462,9 +405,7 @@ h1{
     line-height:1.55;
 }
 
-/* =========================
-   联系
-========================= */
+/* ===== 联系 ===== */
 
 .contact{
     padding:100px 0 150px;
@@ -485,9 +426,7 @@ h1{
     color:#77655b;
 }
 
-/* =========================
-   底部
-========================= */
+/* ===== 底部 ===== */
 
 footer{
     border-top:1px solid #d0c1b3;
@@ -499,9 +438,7 @@ footer{
     color:#88756a;
 }
 
-/* =========================
-   滚动出现
-========================= */
+/* ===== 滚动动画 ===== */
 
 .reveal{
     opacity:0;
@@ -516,9 +453,7 @@ footer{
     transform:translateY(0);
 }
 
-/* =========================
-   手机
-========================= */
+/* ===== 手机 ===== */
 
 @media(max-width:800px){
 
@@ -530,8 +465,8 @@ footer{
         padding:22px 0;
     }
 
-    .menu{
-        display:none;
+    .date{
+        font-size:9px;
     }
 
     .hero{
@@ -573,28 +508,28 @@ footer{
     .leaf{
         font-size:20px;
     }
-
 }
 </style>
 </head>
 
+
 <body>
 
 <!-- 动态枫叶 -->
-<div class="leaves">
-    <div class="leaf">🍁</div>
-    <div class="leaf">🍂</div>
-    <div class="leaf">🍁</div>
-    <div class="leaf">🍂</div>
-    <div class="leaf">🍁</div>
-</div>
+<div class="leaves"></div>
 
 
 <div class="container">
 
 <header>
-    <div class="logo">YUAN LUO XING</div>
-    <div class="menu">PRIVATE JOURNAL · 2026</div>
+
+    <div class="logo">
+        YUAN LUO XING
+    </div>
+
+    <!-- 自动日期 -->
+    <div class="date" id="today"></div>
+
 </header>
 
 
@@ -623,7 +558,7 @@ footer{
     </div>
 
 
-    <!-- 以后这里可以放你的人物照片 -->
+    <!-- 以后把人物照片放在这里 -->
 
     <div class="person">
 
@@ -639,7 +574,7 @@ footer{
 <div class="line"></div>
 
 
-<!-- 故事 -->
+<!-- Stories -->
 
 <section class="section reveal" id="stories">
 
@@ -738,8 +673,7 @@ footer{
 
     <div class="contact-info">
         PRIVATE JOURNAL<br>
-        YUAN LUO XING<br>
-        2026
+        YUAN LUO XING
     </div>
 
 </section>
@@ -748,7 +682,7 @@ footer{
 <footer>
 
     <span>
-        © 2026 YUAN LUO XING
+        © YUAN LUO XING
     </span>
 
     <span>
@@ -761,6 +695,67 @@ footer{
 
 
 <script>
+
+/* =========================
+   自动日期
+========================= */
+
+function updateDate(){
+
+    const now = new Date();
+
+    const month =
+        String(now.getMonth()+1).padStart(2,"0");
+
+    const day =
+        String(now.getDate()).padStart(2,"0");
+
+    document.getElementById("today")
+        .textContent = month + "." + day;
+}
+
+updateDate();
+
+
+/* =========================
+   自动生成枫叶
+========================= */
+
+const leaves =
+document.querySelector(".leaves");
+
+const leafSymbols =
+["🍁","🍂","🍁","🍂"];
+
+for(let i=0;i<14;i++){
+
+    const leaf =
+        document.createElement("div");
+
+    leaf.className="leaf";
+
+    leaf.textContent =
+        leafSymbols[
+            Math.floor(
+                Math.random()*leafSymbols.length
+            )
+        ];
+
+    leaf.style.left =
+        Math.random()*100 + "%";
+
+    leaf.style.fontSize =
+        (16 + Math.random()*20) + "px";
+
+    leaf.style.animationDuration =
+        (9 + Math.random()*9) + "s";
+
+    leaf.style.animationDelay =
+        (-Math.random()*15) + "s";
+
+    leaves.appendChild(leaf);
+}
+
 
 /* =========================
    滚动动画
@@ -806,28 +801,29 @@ reveals.forEach(el => {
 const person =
 document.querySelector(".person");
 
-document.addEventListener("mousemove", e => {
+document.addEventListener("mousemove",e=>{
 
     const x =
-        (e.clientX / window.innerWidth - .5);
+        (e.clientX/window.innerWidth-.5);
 
     const y =
-        (e.clientY / window.innerHeight - .5);
+        (e.clientY/window.innerHeight-.5);
 
     person.style.transform =
-        `translate(${x * 12}px, ${y * 8}px)`;
+        `translate(${x*10}px,${y*7}px)`;
 
 });
 
 
 /* =========================
-   点击进入平滑移动
+   平滑跳转
 ========================= */
 
-document.querySelectorAll("a[href^='#']")
-.forEach(link => {
+document.querySelectorAll(
+    "a[href^='#']"
+).forEach(link=>{
 
-    link.addEventListener("click", e => {
+    link.addEventListener("click",e=>{
 
         e.preventDefault();
 
