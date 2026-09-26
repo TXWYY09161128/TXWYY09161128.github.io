@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>圆落星</title>
 
 <style>
@@ -18,8 +17,8 @@ html{
 }
 
 body{
-    background:#171714;
-    color:#eee9df;
+    background:#050711;
+    color:#f5f2ea;
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -30,12 +29,11 @@ body{
 }
 
 /* =========================
-   第一屏
+   星空主屏
 ========================= */
 
 .hero{
-    height:100vh;
-    min-height:650px;
+    min-height:100vh;
     position:relative;
     display:flex;
     align-items:center;
@@ -43,67 +41,134 @@ body{
 
     background:
         radial-gradient(
-            circle at 75% 25%,
-            rgba(255,246,220,.16),
-            transparent 28%
+            circle at 70% 25%,
+            rgba(102,126,190,.20),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 25% 70%,
+            rgba(88,72,130,.16),
+            transparent 30%
         ),
         linear-gradient(
-            135deg,
-            #24231f 0%,
-            #171714 55%,
-            #302d26 100%
+            145deg,
+            #080b18 0%,
+            #050711 55%,
+            #11152a 100%
         );
 }
 
-/* 大圆形光影 */
+/* 星星层 */
 
-.hero::before{
-    content:"";
+.stars,
+.stars2,
+.stars3{
     position:absolute;
-
-    width:650px;
-    height:650px;
-
-    right:-220px;
-    top:-220px;
-
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:50%;
-
-    animation:rotate 30s linear infinite;
+    inset:0;
+    pointer-events:none;
 }
 
-.hero::after{
-    content:"";
+.stars{
+    background-image:
+        radial-gradient(circle,#fff 1px,transparent 1.5px),
+        radial-gradient(circle,rgba(255,255,255,.8) 1px,transparent 1.5px),
+        radial-gradient(circle,rgba(180,200,255,.7) 1px,transparent 1.5px);
 
+    background-size:
+        150px 150px,
+        230px 230px,
+        310px 310px;
+
+    background-position:
+        10px 30px,
+        80px 120px,
+        150px 50px;
+
+    animation:starsMove 35s linear infinite;
+    opacity:.65;
+}
+
+.stars2{
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.9) 1.2px,transparent 2px),
+        radial-gradient(circle,rgba(170,190,255,.7) 1px,transparent 1.7px);
+
+    background-size:
+        270px 270px,
+        390px 390px;
+
+    background-position:
+        40px 100px,
+        180px 20px;
+
+    animation:starsMove 55s linear infinite reverse;
+    opacity:.45;
+}
+
+.stars3{
+    background-image:
+        radial-gradient(circle,rgba(255,244,190,.9) 1.5px,transparent 2.5px);
+
+    background-size:430px 430px;
+    background-position:210px 80px;
+
+    animation:twinkle 4s ease-in-out infinite;
+}
+
+
+/* 月亮 */
+
+.moon{
     position:absolute;
 
-    width:420px;
-    height:420px;
+    width:210px;
+    height:210px;
 
-    left:-180px;
-    bottom:-200px;
+    right:10%;
+    top:15%;
 
     border-radius:50%;
 
     background:
         radial-gradient(
-            circle,
-            rgba(202,170,112,.18),
-            transparent 68%
+            circle at 35% 30%,
+            #fffdf3 0%,
+            #e9e4cf 48%,
+            #aaa68f 100%
         );
 
-    animation:float 9s ease-in-out infinite;
+    box-shadow:
+        0 0 35px rgba(240,235,205,.22),
+        0 0 100px rgba(120,145,220,.13);
+
+    animation:moonFloat 8s ease-in-out infinite;
+}
+
+.moon::after{
+    content:"";
+
+    position:absolute;
+
+    width:210px;
+    height:210px;
+
+    border-radius:50%;
+
+    background:#080b18;
+
+    left:65px;
+    top:-12px;
 }
 
 
 /* =========================
-   顶部日期时间
+   日期时间
 ========================= */
 
 .time{
     position:absolute;
-    top:45px;
+
+    top:42px;
     right:7%;
 
     text-align:right;
@@ -117,12 +182,12 @@ body{
 
     font-family:Georgia,"Times New Roman",serif;
 
-    font-size:14px;
-    letter-spacing:3px;
+    font-size:13px;
+    letter-spacing:4px;
 
-    color:#cfc7b7;
+    color:#aaaec4;
 
-    margin-bottom:7px;
+    margin-bottom:8px;
 }
 
 #clock{
@@ -130,32 +195,33 @@ body{
 
     font-family:Georgia,"Times New Roman",serif;
 
-    font-size:25px;
+    font-size:24px;
     letter-spacing:3px;
 
-    color:#f2eee6;
+    color:#f5f2ea;
 }
 
 
 /* =========================
-   主内容
+   主文字
 ========================= */
 
 .content{
-    width:min(1100px,86%);
-    margin-left:8%;
+    width:min(1000px,86%);
+    margin-left:9%;
 
     position:relative;
     z-index:5;
 
-    animation:fadeUp 1.4s .15s ease both;
+    animation:fadeUp 1.5s .2s ease both;
 }
 
 .small{
-    font-size:11px;
+    font-size:10px;
+
     letter-spacing:7px;
 
-    color:#aaa294;
+    color:#9da4c2;
 
     margin-bottom:35px;
 }
@@ -166,39 +232,42 @@ h1{
         "Times New Roman",
         serif;
 
+    font-size:
+        clamp(80px,13vw,170px);
+
     font-weight:400;
 
-    font-size:
-        clamp(80px,13vw,175px);
+    letter-spacing:-8px;
 
-    letter-spacing:-9px;
+    line-height:.9;
 
-    line-height:.85;
+    margin-bottom:40px;
 
-    margin-bottom:45px;
+    text-shadow:
+        0 0 35px rgba(170,190,255,.12);
 }
 
 .line{
     width:85px;
     height:1px;
 
-    background:#a79d8b;
+    background:#8993bb;
 
     margin-bottom:30px;
 
-    animation:line 1.5s .8s ease both;
+    animation:lineIn 1.5s .8s ease both;
 }
 
 .description{
+    max-width:520px;
+
     font-size:15px;
 
     line-height:2.1;
 
     letter-spacing:1px;
 
-    color:#aaa59b;
-
-    max-width:520px;
+    color:#a8acbd;
 }
 
 .enter{
@@ -208,9 +277,9 @@ h1{
 
     padding:17px 32px;
 
-    border:1px solid rgba(238,233,223,.45);
+    border:1px solid rgba(180,190,220,.45);
 
-    color:#eee9df;
+    color:#eeeef4;
 
     text-decoration:none;
 
@@ -218,17 +287,17 @@ h1{
 
     letter-spacing:4px;
 
-    transition:
-        background .4s,
-        color .4s,
-        transform .4s;
+    transition:.4s;
 }
 
 .enter:hover{
-    background:#eee9df;
-    color:#171714;
+    background:#eeeef4;
+    color:#080b18;
 
     transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 35px rgba(150,170,230,.12);
 }
 
 
@@ -240,12 +309,9 @@ h1{
     position:absolute;
 
     right:7%;
-    bottom:7%;
+    bottom:6%;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    font-family:Georgia,"Times New Roman",serif;
 
     font-size:130px;
 
@@ -253,7 +319,7 @@ h1{
 
     z-index:2;
 
-    animation:floatNumber 7s ease-in-out infinite;
+    animation:numberFloat 7s ease-in-out infinite;
 }
 
 
@@ -264,21 +330,25 @@ h1{
 .memory{
     min-height:90vh;
 
-    padding:130px 8%;
+    padding:130px 9%;
 
     display:flex;
     align-items:center;
 
-    background:#eeeae1;
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(94,109,170,.12),
+            transparent 30%
+        ),
+        #070912;
 
-    color:#25231f;
+    color:#eeeef2;
 }
 
 .memory-inner{
     width:min(1000px,100%);
     margin:auto;
-
-    animation:fadeUp 1.2s ease both;
 }
 
 .label{
@@ -286,7 +356,7 @@ h1{
 
     letter-spacing:6px;
 
-    color:#8b8478;
+    color:#7e86a7;
 
     margin-bottom:42px;
 }
@@ -304,9 +374,10 @@ h1{
 
     line-height:1.35;
 
-    letter-spacing:-1px;
-
     max-width:900px;
+
+    text-shadow:
+        0 0 30px rgba(180,190,230,.08);
 }
 
 .bottom{
@@ -314,7 +385,7 @@ h1{
 
     padding-top:22px;
 
-    border-top:1px solid rgba(40,38,33,.18);
+    border-top:1px solid rgba(255,255,255,.12);
 
     display:flex;
     justify-content:space-between;
@@ -323,7 +394,7 @@ h1{
 
     letter-spacing:4px;
 
-    color:#817a70;
+    color:#6f748b;
 }
 
 
@@ -355,7 +426,7 @@ h1{
     }
 }
 
-@keyframes line{
+@keyframes lineIn{
     from{
         width:0;
         opacity:0;
@@ -367,27 +438,37 @@ h1{
     }
 }
 
-@keyframes rotate{
+@keyframes starsMove{
     from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes float{
-    0%,100%{
         transform:translate(0,0);
     }
 
-    50%{
-        transform:translate(25px,-20px);
+    to{
+        transform:translate(-80px,50px);
     }
 }
 
-@keyframes floatNumber{
+@keyframes twinkle{
+    0%,100%{
+        opacity:.25;
+    }
+
+    50%{
+        opacity:.9;
+    }
+}
+
+@keyframes moonFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+@keyframes numberFloat{
     0%,100%{
         transform:translateY(0);
     }
@@ -405,7 +486,7 @@ h1{
 @media(max-width:600px){
 
     .hero{
-        min-height:700px;
+        min-height:720px;
     }
 
     .content{
@@ -426,13 +507,29 @@ h1{
         font-size:14px;
     }
 
+    .moon{
+        width:130px;
+        height:130px;
+
+        right:-20px;
+        top:17%;
+    }
+
+    .moon::after{
+        width:130px;
+        height:130px;
+
+        left:40px;
+        top:-8px;
+    }
+
     .time{
-        top:30px;
+        top:28px;
         right:8%;
     }
 
     #date{
-        font-size:11px;
+        font-size:10px;
         letter-spacing:2px;
     }
 
@@ -443,7 +540,6 @@ h1{
     .number{
         font-size:80px;
         right:8%;
-        bottom:6%;
     }
 
     .memory{
@@ -462,21 +558,21 @@ h1{
 
         gap:14px;
     }
-}
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     第一屏
-========================= -->
 
 <section class="hero">
 
-    <!-- 自动日期 + 自动时间 -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div class="moon"></div>
+
+
+    <!-- 自动日期和时间 -->
 
     <div class="time">
 
@@ -532,11 +628,6 @@ h1{
 </section>
 
 
-
-<!-- =========================
-     第二屏
-========================= -->
-
 <section
     class="memory"
     id="memory"
@@ -575,44 +666,43 @@ h1{
 </section>
 
 
-
-<!-- =========================
-     自动日期时间
-========================= -->
-
 <script>
+
+/* =========================
+   中国时间
+========================= */
 
 function updateTime(){
 
     const now = new Date();
 
 
-    /* 中国时间 */
+    const date =
+        new Intl.DateTimeFormat(
+            "zh-CN",
+            {
+                timeZone:"Asia/Shanghai",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        )
+        .format(now)
+        .replace(/\//g,".");
 
-    const date = new Intl.DateTimeFormat(
-        "zh-CN",
-        {
-            timeZone:"Asia/Shanghai",
-            year:"numeric",
-            month:"2-digit",
-            day:"2-digit"
-        }
-    )
-    .format(now)
-    .replace(/\//g,".");
 
-
-    const time = new Intl.DateTimeFormat(
-        "zh-CN",
-        {
-            timeZone:"Asia/Shanghai",
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit",
-            hour12:false
-        }
-    )
-    .format(now);
+    const time =
+        new Intl.DateTimeFormat(
+            "zh-CN",
+            {
+                timeZone:"Asia/Shanghai",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hour12:false
+            }
+        )
+        .format(now);
 
 
     document.getElementById("date")
@@ -626,14 +716,12 @@ function updateTime(){
 
 updateTime();
 
-
 setInterval(
     updateTime,
     1000
 );
 
 </script>
-
 
 </body>
 </html>
