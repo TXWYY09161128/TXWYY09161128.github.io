@@ -7,444 +7,576 @@
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --bg:#eee5da;
-    --text:#4a382c;
-    --sub:#806b59;
-    --accent:#b18a5a;
-    --glow:rgba(255,200,130,.35);
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    overflow-x:hidden;
-    background:var(--bg);
-    color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,
-    "Helvetica Neue",Arial,sans-serif;
-    transition:background 2s ease,color 2s ease;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#fffaf2;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",
+  "PingFang SC","Microsoft YaHei",sans-serif;
+  background:#6f5038;
+  transition:background 1.8s ease,color 1.2s ease;
 }
 
-/* 背景光 */
+/* ===== 背景 ===== */
 
-body::before,
-body::after{
-    content:"";
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    filter:blur(90px);
-    z-index:-5;
-    transition:background 2s ease;
+.scene{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 72% 20%,rgba(255,213,145,.45),transparent 25%),
+    linear-gradient(135deg,#9a7550 0%,#63452f 48%,#30231d 100%);
+  transition:all 2s ease;
 }
 
-body::before{
-    width:60vw;
-    height:60vw;
-    top:-20%;
-    right:-15%;
-    background:var(--glow);
-    animation:lightMove 12s ease-in-out infinite alternate;
+.scene::before{
+  content:"";
+  position:absolute;
+  width:70vw;
+  height:70vw;
+  right:-25vw;
+  top:-25vw;
+  border-radius:50%;
+  background:rgba(255,198,113,.22);
+  filter:blur(35px);
+  animation:sunMove 12s ease-in-out infinite alternate;
 }
 
-body::after{
-    width:45vw;
-    height:45vw;
-    bottom:-20%;
-    left:-15%;
-    background:var(--glow);
-    animation:lightMove2 15s ease-in-out infinite alternate;
+.scene::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(115deg,transparent 20%,rgba(255,218,157,.08) 42%,transparent 55%);
+  animation:lightMove 9s ease-in-out infinite alternate;
+}
+
+@keyframes sunMove{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(-8vw,7vh) scale(1.15)}
 }
 
 @keyframes lightMove{
-    from{transform:translate(0,0) scale(1)}
-    to{transform:translate(-60px,80px) scale(1.15)}
+  from{transform:translateX(-8%)}
+  to{transform:translateX(8%)}
 }
 
-@keyframes lightMove2{
-    from{transform:translate(0,0) scale(1)}
-    to{transform:translate(80px,-60px) scale(1.2)}
+/* 胶片颗粒 */
+.grain{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+  opacity:.13;
+  background-image:
+    repeating-radial-gradient(circle at 0 0,
+    rgba(255,255,255,.35) 0 1px,
+    transparent 1px 4px);
+  background-size:5px 5px;
+  mix-blend-mode:soft-light;
 }
 
-/* 顶部 */
+/* ===== 主页面 ===== */
+
+.page{
+  width:min(1280px,92%);
+  margin:auto;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== 顶部 ===== */
 
 header{
-    position:relative;
-    z-index:10;
-    padding:28px 6vw;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    letter-spacing:.15em;
+  padding:38px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  letter-spacing:.18em;
 }
 
 .logo{
-    font-size:12px;
-    font-weight:600;
+  font-size:14px;
+  font-weight:600;
 }
 
-.date{
-    font-size:12px;
-    opacity:.65;
+.season{
+  font-size:11px;
+  opacity:.7;
+  letter-spacing:.25em;
 }
 
-/* 主视觉 */
+/* ===== Hero ===== */
 
 .hero{
-    min-height:78vh;
-    padding:7vh 8vw 10vh;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:60px;
+  min-height:78vh;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;
+  gap:70px;
 }
 
-.hero-text{
-    max-width:620px;
-    animation:heroIn 1.4s ease both;
+.hero-copy{
+  position:relative;
+  z-index:3;
+  transform:translateY(-20px);
 }
 
-@keyframes heroIn{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.small-title{
-    font-size:12px;
-    letter-spacing:.35em;
-    color:var(--accent);
-    margin-bottom:28px;
+.eyebrow{
+  font-size:11px;
+  letter-spacing:.42em;
+  opacity:.62;
+  margin-bottom:25px;
 }
 
 h1{
-    font-size:clamp(70px,12vw,170px);
-    line-height:.85;
-    letter-spacing:-.07em;
-    font-weight:500;
+  font-family:Georgia,"Times New Roman","Songti SC",serif;
+  font-weight:400;
+  font-size:clamp(60px,9vw,128px);
+  line-height:.88;
+  letter-spacing:-.055em;
+  margin-bottom:32px;
+  text-shadow:0 10px 40px rgba(45,25,12,.28);
 }
 
-.description{
-    margin-top:35px;
-    max-width:430px;
-    color:var(--sub);
-    font-size:14px;
-    line-height:2;
+.subtitle{
+  font-size:13px;
+  line-height:2;
+  color:rgba(255,248,235,.78);
+  max-width:390px;
 }
 
 .enter{
-    display:inline-block;
-    margin-top:35px;
-    padding-bottom:9px;
-    border-bottom:1px solid var(--accent);
-    color:var(--accent);
-    font-size:12px;
-    letter-spacing:.25em;
-    text-decoration:none;
-    transition:.4s ease;
+  display:inline-flex;
+  margin-top:42px;
+  align-items:center;
+  gap:18px;
+  color:#fff4dd;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:.24em;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(255,238,204,.55);
+  transition:.4s ease;
 }
 
-.enter:hover{
-    transform:translateX(8px);
+.enter span{
+  transition:.4s ease;
 }
 
-/* 人物图片 */
-
-.person{
-    width:min(38vw,500px);
-    height:min(55vw,650px);
-    min-width:280px;
-    min-height:380px;
-    border-radius:220px 220px 30px 30px;
-    position:relative;
-    overflow:hidden;
-    background:#d9c9b7;
-    box-shadow:0 40px 100px rgba(70,45,30,.16);
-    animation:personFloat 6s ease-in-out infinite;
-    transform-style:preserve-3d;
+.enter:hover span{
+  transform:translateX(8px);
 }
 
-.person img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:saturate(.9) contrast(.96);
-    transition:transform 1s ease,filter 1s ease;
+/* ===== 人物区域 ===== */
+
+.portrait-wrap{
+  position:relative;
+  height:min(68vh,680px);
+  min-height:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.person:hover img{
-    transform:scale(1.04);
+.portrait-glow{
+  position:absolute;
+  width:70%;
+  height:80%;
+  border-radius:50%;
+  background:rgba(255,202,132,.3);
+  filter:blur(55px);
 }
 
-.person::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        120deg,
-        transparent 30%,
-        rgba(255,255,255,.25),
-        transparent 70%
-    );
-    transform:translateX(-100%);
-    animation:shine 8s ease-in-out infinite;
-    pointer-events:none;
+.portrait{
+  position:relative;
+  width:min(430px,80%);
+  height:92%;
+  border-radius:220px 220px 18px 18px;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,#d6a878,#775039 60%,#30231d);
+  box-shadow:
+    0 35px 90px rgba(34,19,10,.42),
+    inset 0 0 60px rgba(255,218,163,.15);
+  transform:translateY(0);
+  transition:transform .2s ease;
 }
 
-@keyframes personFloat{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-@keyframes shine{
-    0%,45%{transform:translateX(-100%)}
-    70%,100%{transform:translateX(100%)}
+/* 没上传照片时的高级占位 */
+.portrait.no-photo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,224,181,.45),transparent 17%),
+    linear-gradient(135deg,#c99b6d,#6f4b35 60%,#2e211b);
 }
 
-/* 今日 */
+.portrait.no-photo::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:28%;
+  width:38%;
+  aspect-ratio:1;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:linear-gradient(145deg,#dfb487,#76513c);
+  box-shadow:0 150px 0 55px rgba(67,42,29,.72);
+}
+
+/* 阳光斑 */
+.sun-dots{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 25%,rgba(255,236,188,.35) 0 2px,transparent 3px),
+    radial-gradient(circle at 75% 35%,rgba(255,236,188,.25) 0 3px,transparent 4px),
+    radial-gradient(circle at 62% 70%,rgba(255,236,188,.2) 0 2px,transparent 3px);
+  filter:blur(.3px);
+}
+
+/* ===== 枫叶 ===== */
+
+.leaves{
+  position:fixed;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.leaf{
+  position:absolute;
+  top:-50px;
+  width:17px;
+  height:14px;
+  border-radius:70% 0 70% 0;
+  background:#b86d32;
+  opacity:.75;
+  filter:drop-shadow(0 4px 6px rgba(40,20,10,.2));
+  animation:fall linear infinite;
+}
+
+.leaf::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-3px;
+  width:1px;
+  height:20px;
+  background:rgba(90,48,25,.55);
+  transform:rotate(35deg);
+}
+
+.leaf:nth-child(1){left:8%;animation-duration:13s;animation-delay:-3s;transform:scale(.7)}
+.leaf:nth-child(2){left:19%;animation-duration:17s;animation-delay:-10s;transform:scale(1.1)}
+.leaf:nth-child(3){left:34%;animation-duration:14s;animation-delay:-6s;transform:scale(.65)}
+.leaf:nth-child(4){left:51%;animation-duration:19s;animation-delay:-14s;transform:scale(.8)}
+.leaf:nth-child(5){left:68%;animation-duration:15s;animation-delay:-8s;transform:scale(1.15)}
+.leaf:nth-child(6){left:82%;animation-duration:18s;animation-delay:-5s;transform:scale(.6)}
+.leaf:nth-child(7){left:92%;animation-duration:12s;animation-delay:-9s;transform:scale(.9)}
+
+@keyframes fall{
+  0%{
+    transform:translate3d(0,-60px,0) rotate(0deg);
+  }
+  45%{
+    transform:translate3d(70px,50vh,0) rotate(150deg);
+  }
+  100%{
+    transform:translate3d(-80px,110vh,0) rotate(360deg);
+  }
+}
+
+/* ===== 今日 ===== */
+
+.today{
+  padding:90px 0 110px;
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:80px;
+  border-top:1px solid rgba(255,240,218,.18);
+}
+
+.today-label{
+  font-size:10px;
+  letter-spacing:.35em;
+  opacity:.55;
+}
+
+.date{
+  margin-top:15px;
+  font-family:Georgia,serif;
+  font-size:28px;
+}
 
 .daily{
-    padding:10vh 8vw;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-    border-top:1px solid rgba(80,60,40,.12);
+  font-family:Georgia,"Songti SC",serif;
+  font-size:clamp(24px,3vw,42px);
+  line-height:1.45;
+  max-width:650px;
+  color:#fff5e5;
 }
 
-.daily-label{
-    font-size:11px;
-    letter-spacing:.3em;
-    color:var(--accent);
-    margin-bottom:25px;
+.mood{
+  margin-top:25px;
+  font-size:11px;
+  letter-spacing:.2em;
+  opacity:.55;
 }
 
-.quote{
-    font-size:clamp(24px,3vw,42px);
-    line-height:1.5;
-    font-weight:400;
+/* ===== 底部 ===== */
+
+footer{
+  margin-top:auto;
+  padding:28px 0;
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  letter-spacing:.22em;
+  opacity:.48;
 }
 
-.info{
-    color:var(--sub);
-    font-size:13px;
-    line-height:2.2;
-}
-
-/* 滚动动画 */
+/* ===== 滚动动画 ===== */
 
 .reveal{
-    opacity:0;
-    transform:translateY(40px);
-    transition:opacity 1s ease,transform 1s ease;
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity 1s ease,transform 1s ease;
 }
 
 .reveal.show{
-    opacity:1;
-    transform:translateY(0);
+  opacity:1;
+  transform:translateY(0);
 }
 
-/* 飘落效果 */
+/* ===== 冬季 ===== */
 
-.effects{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:20;
+body.winter .scene{
+  background:
+    radial-gradient(circle at 70% 20%,rgba(220,235,255,.4),transparent 25%),
+    linear-gradient(135deg,#6f7c86,#3f4a52 55%,#20272c);
 }
 
-.particle{
-    position:absolute;
-    top:-50px;
-    user-select:none;
-    animation:fall linear infinite,sway ease-in-out infinite alternate;
+body.winter .portrait-glow{
+  background:rgba(210,230,255,.2);
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(115vh) rotate(360deg);
-    }
+body.winter .leaf{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 8px rgba(255,255,255,.8);
 }
 
-@keyframes sway{
-    from{margin-left:-30px}
-    to{margin-left:30px}
+body.winter .leaf::after{
+  display:none;
 }
 
-/* 四季 */
+/* ===== 春季 ===== */
 
-body.spring{
-    --bg:#eee9e0;
-    --text:#493f37;
-    --sub:#786e63;
-    --accent:#a47768;
-    --glow:rgba(255,210,220,.4);
+body.spring .scene{
+  background:
+    radial-gradient(circle at 70% 20%,rgba(255,221,226,.45),transparent 25%),
+    linear-gradient(135deg,#b99c8e,#776b63 55%,#403936);
 }
 
-body.summer{
-    --bg:#eee9d8;
-    --text:#493d2c;
-    --sub:#776a55;
-    --accent:#9c7740;
-    --glow:rgba(255,220,130,.45);
+body.spring .leaf{
+  width:11px;
+  height:8px;
+  border-radius:70% 0 70% 0;
+  background:#e5a9ae;
 }
 
-body.autumn{
-    --bg:#eee5da;
-    --text:#4a382c;
-    --sub:#806b59;
-    --accent:#b18a5a;
-    --glow:rgba(255,190,110,.4);
+/* ===== 夏季 ===== */
+
+body.summer .scene{
+  background:
+    radial-gradient(circle at 72% 18%,rgba(255,239,164,.5),transparent 27%),
+    linear-gradient(135deg,#7aa18c,#557c70 50%,#304f49);
 }
 
-body.winter{
-    --bg:#e8edf1;
-    --text:#39434a;
-    --sub:#68747d;
-    --accent:#718b9b;
-    --glow:rgba(210,230,245,.5);
+body.summer .leaf{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#d8c879;
 }
 
-/* 手机 */
+/* ===== 手机 ===== */
 
 @media(max-width:800px){
 
-    header{
-        padding:22px 6vw;
-    }
+  .page{
+    width:88%;
+  }
 
-    .hero{
-        min-height:auto;
-        padding-top:8vh;
-        flex-direction:column;
-        align-items:flex-start;
-    }
+  header{
+    padding:25px 0;
+  }
 
-    h1{
-        font-size:22vw;
-    }
+  .hero{
+    min-height:auto;
+    grid-template-columns:1fr;
+    gap:35px;
+    padding:45px 0 90px;
+  }
 
-    .person{
-        width:82vw;
-        height:110vw;
-        min-width:0;
-        min-height:0;
-        align-self:center;
-        margin-top:20px;
-    }
+  .hero-copy{
+    transform:none;
+  }
 
-    .daily{
-        grid-template-columns:1fr;
-        gap:50px;
-        padding-top:80px;
-    }
+  h1{
+    font-size:clamp(62px,18vw,95px);
+  }
 
-    footer{
-        flex-direction:column;
-        gap:15px;
-    }
+  .subtitle{
+    max-width:330px;
+  }
+
+  .portrait-wrap{
+    height:520px;
+    min-height:0;
+    order:2;
+  }
+
+  .portrait{
+    width:min(360px,88%);
+    height:100%;
+  }
+
+  .today{
+    grid-template-columns:1fr;
+    gap:25px;
+    padding:70px 0 90px;
+  }
+
+  .daily{
+    font-size:28px;
+  }
+
+  footer{
+    padding-bottom:22px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<div class="scene"></div>
+<div class="grain"></div>
+
+<div class="leaves">
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+  <div class="leaf"></div>
+</div>
+
+<div class="page">
+
 <header>
-    <div class="logo">YUAN LUO XING</div>
-    <div class="date" id="today"></div>
+  <div class="logo">YUAN LUO XING</div>
+  <div class="season" id="seasonText">A QUIET PLACE</div>
 </header>
 
 <main>
 
 <section class="hero">
 
-    <div class="hero-text">
+  <div class="hero-copy">
 
-        <div class="small-title" id="seasonTitle">
-            A QUIET PLACE
-        </div>
+    <div class="eyebrow">A PLACE FOR MEMORY</div>
 
-        <h1>圆落星</h1>
+    <h1>圆落星</h1>
 
-        <div class="description">
-            把喜欢的人、事、照片和那些
-            不想忘记的瞬间，慢慢留在这里。
-        </div>
+    <p class="subtitle">
+      把喜欢的人、事、照片和那些<br>
+      不想忘记的瞬间，慢慢留在这里。
+    </p>
 
-        <a href="#daily" class="enter">
-            ENTER MY WORLD →
-        </a>
+    <a href="#today" class="enter">
+      ENTER MY WORLD
+      <span>→</span>
+    </a>
 
+  </div>
+
+  <div class="portrait-wrap">
+
+    <div class="portrait-glow"></div>
+
+    <div class="portrait" id="portrait">
+      <img
+        src="photo.jpg"
+        alt="圆落星"
+        onerror="this.style.display='none';document.getElementById('portrait').classList.add('no-photo')"
+      >
+      <div class="sun-dots"></div>
     </div>
 
-    <div class="person" id="person">
-
-        <!--
-        以后把你的照片命名为 photo.jpg，
-        和 index.html 放在同一个 GitHub 文件夹。
-        -->
-
-        <img src="photo.jpg" alt="圆落星">
-
-    </div>
+  </div>
 
 </section>
 
 
-<section class="daily reveal" id="daily">
+<section class="today reveal" id="today">
 
-    <div>
+  <div>
+    <div class="today-label">TODAY</div>
+    <div class="date" id="date"></div>
+  </div>
 
-        <div class="daily-label">
-            TODAY
-        </div>
-
-        <div class="quote" id="dailyQuote">
-            把喜欢的事物，慢慢留下来。
-        </div>
-
-    </div>
-
-    <div class="info">
-
-        <div>
-            今天也值得记录一点什么。
-        </div>
-
-        <br>
-
-        <div id="timeMood">
-            LIGHT / MEMORY / MOMENT
-        </div>
-
-    </div>
+  <div>
+    <div class="daily" id="dailyText"></div>
+    <div class="mood" id="mood"></div>
+  </div>
 
 </section>
 
 </main>
 
 <footer>
-    <span>YUAN LUO XING</span>
-    <span id="footerDate"></span>
+  <span>YUAN LUO XING</span>
+  <span id="year"></span>
 </footer>
 
-<div class="effects" id="effects"></div>
-
+</div>
 
 <script>
 
@@ -452,252 +584,167 @@ body.winter{
    自动日期
 ========================= */
 
-function updateDate(){
+const now = new Date();
 
-    const now = new Date();
+const months = [
+  "JANUARY","FEBRUARY","MARCH","APRIL",
+  "MAY","JUNE","JULY","AUGUST",
+  "SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"
+];
 
-    const month =
-        String(now.getMonth()+1).padStart(2,"0");
+document.getElementById("date").textContent =
+  `${months[now.getMonth()]} ${now.getDate()}`;
 
-    const day =
-        String(now.getDate()).padStart(2,"0");
-
-    const dateText = month + "." + day;
-
-    document.getElementById("today")
-        .textContent = dateText;
-
-    document.getElementById("footerDate")
-        .textContent = dateText;
-}
-
-updateDate();
+document.getElementById("year").textContent =
+  now.getFullYear();
 
 
 /* =========================
-   自动四季
+   四季自动切换
 ========================= */
 
-function updateSeason(){
+const month = now.getMonth() + 1;
 
-    const month =
-        new Date().getMonth()+1;
+let season;
 
-    let season;
-
-    if(month >= 3 && month <= 5){
-        season = "spring";
-    }
-    else if(month >= 6 && month <= 8){
-        season = "summer";
-    }
-    else if(month >= 9 && month <= 11){
-        season = "autumn";
-    }
-    else{
-        season = "winter";
-    }
-
-    document.body.className = season;
-
-    createSeasonEffects(season);
+if(month >= 3 && month <= 5){
+  season = "spring";
+}
+else if(month >= 6 && month <= 8){
+  season = "summer";
+}
+else if(month >= 9 && month <= 11){
+  season = "fallMood";
+}
+else{
+  season = "winter";
 }
 
-updateSeason();
+if(season === "spring"){
+  document.body.classList.add("spring");
+  document.getElementById("seasonText").textContent =
+    "A SOFT BEGINNING";
+}
 
+else if(season === "summer"){
+  document.body.classList.add("summer");
+  document.getElementById("seasonText").textContent =
+    "A SLOW AFTERNOON";
+}
 
-/* =========================
-   四季效果
-========================= */
+else if(season === "winter"){
+  document.body.classList.add("winter");
+  document.getElementById("seasonText").textContent =
+    "A QUIET NIGHT";
+}
 
-function createSeasonEffects(season){
-
-    const container =
-        document.getElementById("effects");
-
-    container.innerHTML = "";
-
-    let symbols = [];
-    let count = 14;
-
-    if(season === "spring"){
-        symbols = ["🌸","🌸","✿"];
-        count = 12;
-    }
-
-    if(season === "summer"){
-        symbols = ["✦","·","✧"];
-        count = 12;
-    }
-
-    if(season === "autumn"){
-        symbols = ["🍁","🍂","🍁"];
-        count = 15;
-    }
-
-    if(season === "winter"){
-        symbols = ["❄","❅","·"];
-        count = 22;
-    }
-
-    for(let i=0;i<count;i++){
-
-        const p =
-            document.createElement("div");
-
-        p.className = "particle";
-
-        p.textContent =
-            symbols[
-                Math.floor(Math.random()*symbols.length)
-            ];
-
-        p.style.left =
-            Math.random()*100 + "%";
-
-        p.style.fontSize =
-            (10 + Math.random()*18) + "px";
-
-        p.style.opacity =
-            .25 + Math.random()*.6;
-
-        p.style.animationDuration =
-            (7 + Math.random()*9) + "s";
-
-        p.style.animationDelay =
-            (-Math.random()*12) + "s";
-
-        container.appendChild(p);
-    }
+else{
+  document.getElementById("seasonText").textContent =
+    "A WARM MEMORY";
 }
 
 
 /* =========================
-   自动时间氛围
-========================= */
-
-function updateTimeMood(){
-
-    const hour =
-        new Date().getHours();
-
-    let text;
-
-    if(hour >= 5 && hour < 10){
-        text = "SOFT MORNING LIGHT";
-    }
-    else if(hour >= 10 && hour < 17){
-        text = "WARM DAYLIGHT";
-    }
-    else if(hour >= 17 && hour < 21){
-        text = "GOLDEN EVENING";
-    }
-    else{
-        text = "QUIET NIGHT";
-    }
-
-    document.getElementById("timeMood")
-        .textContent = text;
-}
-
-updateTimeMood();
-
-
-/* =========================
-   每天自动换一句话
+   每日文字
 ========================= */
 
 const quotes = [
-
-    "把喜欢的事物，慢慢留下来。",
-
-    "有些瞬间，值得被记住。",
-
-    "今天也可以只做让自己开心的事。",
-
-    "生活不急，慢慢走就好。",
-
-    "把光留给值得的人。",
-
-    "愿每一次记录，都成为以后回看的温柔。",
-
-    "喜欢的东西，就好好珍藏。",
-
-    "普通的一天，也值得拥有一点仪式感。",
-
-    "风吹过的时候，记得抬头看看。",
-
-    "时间会走，但喜欢可以留下。"
-
+  "有些喜欢，不需要说出口。",
+  "把今天留住，也把自己留住。",
+  "慢一点，风景才会留下来。",
+  "那些被记住的瞬间，都会发光。",
+  "生活不必匆忙，喜欢的东西值得慢慢收藏。",
+  "愿每一次回头，都还能看见温柔。",
+  "世界很大，也可以给自己留一个安静的角落。",
+  "有光的时候，就好好看看光。"
 ];
 
-const dayNumber =
-    Math.floor(Date.now()/86400000);
+const daySeed =
+  Math.floor(
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    ).getTime() / 86400000
+  );
 
-document.getElementById("dailyQuote")
-    .textContent =
-    quotes[dayNumber % quotes.length];
+const quote = quotes[
+  Math.abs(daySeed) % quotes.length
+];
+
+document.getElementById("dailyText").textContent = quote;
 
 
 /* =========================
-   鼠标视差
+   时间氛围
 ========================= */
 
-const person =
-    document.getElementById("person");
+const hour = now.getHours();
+
+let moodText;
+
+if(hour >= 5 && hour < 11){
+  moodText = "SOFT MORNING LIGHT";
+}
+else if(hour >= 11 && hour < 17){
+  moodText = "GOLDEN AFTERNOON";
+}
+else if(hour >= 17 && hour < 22){
+  moodText = "WARM EVENING";
+}
+else{
+  moodText = "QUIET NIGHT";
+}
+
+document.getElementById("mood").textContent = moodText;
+
+
+/* =========================
+   鼠标移动：人物轻微视差
+========================= */
+
+const portrait =
+  document.getElementById("portrait");
 
 document.addEventListener("mousemove",(e)=>{
 
-    if(window.innerWidth <= 800) return;
+  if(window.innerWidth < 800) return;
 
-    const x =
-        (e.clientX/window.innerWidth-.5)*12;
+  const x =
+    (e.clientX / window.innerWidth - .5) * 10;
 
-    const y =
-        (e.clientY/window.innerHeight-.5)*12;
+  const y =
+    (e.clientY / window.innerHeight - .5) * 8;
 
-    person.style.marginLeft = x + "px";
-    person.style.marginTop = y + "px";
+  portrait.style.transform =
+    `translate(${x}px,${y}px)`;
 
 });
 
 
 /* =========================
-   滚动动画
+   滚动出现
 ========================= */
 
 const observer =
-    new IntersectionObserver(
-        entries => {
+  new IntersectionObserver(
+    entries => {
 
-            entries.forEach(entry => {
+      entries.forEach(entry => {
 
-                if(entry.isIntersecting){
-                    entry.target.classList.add("show");
-                }
-
-            });
-
-        },
-        {
-            threshold:.15
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
         }
-    );
 
-document.querySelectorAll(".reveal")
-    .forEach(el => observer.observe(el));
+      });
 
+    },
+    {threshold:.15}
+  );
 
-/* =========================
-   自动更新时间
-========================= */
-
-setInterval(()=>{
-
-    updateDate();
-    updateTimeMood();
-
-},60000);
+document
+  .querySelectorAll(".reveal")
+  .forEach(el => observer.observe(el));
 
 </script>
 
