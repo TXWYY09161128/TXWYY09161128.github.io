@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>圆落星</title>
 
 <style>
@@ -18,7 +17,7 @@
     --text:#4a382c;
     --sub:#806b59;
     --accent:#b18a5a;
-    --glow:rgba(255,210,140,.35);
+    --glow:rgba(255,200,130,.35);
 }
 
 html{
@@ -30,76 +29,53 @@ body{
     overflow-x:hidden;
     background:var(--bg);
     color:var(--text);
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-    transition:
-        background 2s ease,
-        color 2s ease;
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Helvetica Neue",Arial,sans-serif;
+    transition:background 2s ease,color 2s ease;
 }
 
-/* =========================
-   背景光
-========================= */
+/* 背景光 */
 
-body::before{
-    content:"";
-    position:fixed;
-    width:60vw;
-    height:60vw;
-    max-width:800px;
-    max-height:800px;
-    border-radius:50%;
-    background:var(--glow);
-    filter:blur(90px);
-    top:-20%;
-    right:-15%;
-    pointer-events:none;
-    animation:lightMove 12s ease-in-out infinite alternate;
-    z-index:-3;
-}
-
+body::before,
 body::after{
     content:"";
     position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    filter:blur(90px);
+    z-index:-5;
+    transition:background 2s ease;
+}
+
+body::before{
+    width:60vw;
+    height:60vw;
+    top:-20%;
+    right:-15%;
+    background:var(--glow);
+    animation:lightMove 12s ease-in-out infinite alternate;
+}
+
+body::after{
     width:45vw;
     height:45vw;
-    max-width:600px;
-    max-height:600px;
-    border-radius:50%;
-    background:var(--glow);
-    filter:blur(100px);
     bottom:-20%;
     left:-15%;
-    pointer-events:none;
+    background:var(--glow);
     animation:lightMove2 15s ease-in-out infinite alternate;
-    z-index:-3;
 }
 
 @keyframes lightMove{
-    from{
-        transform:translate(0,0) scale(1);
-    }
-    to{
-        transform:translate(-60px,80px) scale(1.15);
-    }
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-60px,80px) scale(1.15)}
 }
 
 @keyframes lightMove2{
-    from{
-        transform:translate(0,0) scale(1);
-    }
-    to{
-        transform:translate(80px,-60px) scale(1.2);
-    }
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(80px,-60px) scale(1.2)}
 }
 
-/* =========================
-   顶部
-========================= */
+/* 顶部 */
 
 header{
     position:relative;
@@ -121,9 +97,7 @@ header{
     opacity:.65;
 }
 
-/* =========================
-   主视觉
-========================= */
+/* 主视觉 */
 
 .hero{
     min-height:78vh;
@@ -136,7 +110,18 @@ header{
 
 .hero-text{
     max-width:620px;
-    animation:heroIn 1.5s ease both;
+    animation:heroIn 1.4s ease both;
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .small-title{
@@ -144,7 +129,6 @@ header{
     letter-spacing:.35em;
     color:var(--accent);
     margin-bottom:28px;
-    transition:color 2s ease;
 }
 
 h1{
@@ -156,7 +140,7 @@ h1{
 
 .description{
     margin-top:35px;
-    max-width:420px;
+    max-width:430px;
     color:var(--sub);
     font-size:14px;
     line-height:2;
@@ -165,25 +149,20 @@ h1{
 .enter{
     display:inline-block;
     margin-top:35px;
-    padding-bottom:8px;
+    padding-bottom:9px;
     border-bottom:1px solid var(--accent);
     color:var(--accent);
     font-size:12px;
     letter-spacing:.25em;
     text-decoration:none;
-    transition:
-        transform .4s ease,
-        color .6s ease,
-        border-color .6s ease;
+    transition:.4s ease;
 }
 
 .enter:hover{
     transform:translateX(8px);
 }
 
-/* =========================
-   人物区域
-========================= */
+/* 人物图片 */
 
 .person{
     width:min(38vw,500px);
@@ -193,98 +172,51 @@ h1{
     border-radius:220px 220px 30px 30px;
     position:relative;
     overflow:hidden;
-    background:
-        radial-gradient(
-            circle at 50% 30%,
-            rgba(255,255,255,.8),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            rgba(255,210,150,.6),
-            rgba(130,100,80,.35)
-        );
-    box-shadow:
-        0 40px 100px rgba(70,45,30,.15);
+    background:#d9c9b7;
+    box-shadow:0 40px 100px rgba(70,45,30,.16);
     animation:personFloat 6s ease-in-out infinite;
     transform-style:preserve-3d;
 }
 
-.person::before{
-    content:"";
-    position:absolute;
-    inset:-30%;
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.5),
-            transparent 30%
-        );
-    animation:personLight 8s linear infinite;
+.person img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.9) contrast(.96);
+    transition:transform 1s ease,filter 1s ease;
+}
+
+.person:hover img{
+    transform:scale(1.04);
 }
 
 .person::after{
     content:"";
     position:absolute;
     inset:0;
-    background:
-        linear-gradient(
-            120deg,
-            transparent 35%,
-            rgba(255,255,255,.2),
-            transparent 65%
-        );
+    background:linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,.25),
+        transparent 70%
+    );
     transform:translateX(-100%);
-    animation:shine 7s ease-in-out infinite;
-}
-
-.person span{
-    position:absolute;
-    z-index:2;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    width:80%;
-    font-size:11px;
-    letter-spacing:.25em;
-    line-height:2;
-    opacity:.65;
+    animation:shine 8s ease-in-out infinite;
+    pointer-events:none;
 }
 
 @keyframes personFloat{
-    0%,100%{
-        transform:translateY(0) rotate(0deg);
-    }
-    50%{
-        transform:translateY(-12px) rotate(.5deg);
-    }
-}
-
-@keyframes personLight{
-    0%{
-        transform:translate(-20%,-20%);
-    }
-    50%{
-        transform:translate(20%,20%);
-    }
-    100%{
-        transform:translate(-20%,-20%);
-    }
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
 }
 
 @keyframes shine{
-    0%,45%{
-        transform:translateX(-100%);
-    }
-    70%,100%{
-        transform:translateX(100%);
-    }
+    0%,45%{transform:translateX(-100%)}
+    70%,100%{transform:translateX(100%)}
 }
 
-/* =========================
-   今日
-========================= */
+/* 今日 */
 
 .daily{
     padding:10vh 8vw;
@@ -313,29 +245,12 @@ h1{
     line-height:2.2;
 }
 
-/* =========================
-   页脚
-========================= */
-
-footer{
-    padding:60px 8vw;
-    color:var(--sub);
-    font-size:11px;
-    letter-spacing:.2em;
-    display:flex;
-    justify-content:space-between;
-}
-
-/* =========================
-   滚动动画
-========================= */
+/* 滚动动画 */
 
 .reveal{
     opacity:0;
     transform:translateY(40px);
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+    transition:opacity 1s ease,transform 1s ease;
 }
 
 .reveal.show{
@@ -343,9 +258,7 @@ footer{
     transform:translateY(0);
 }
 
-/* =========================
-   飘落元素
-========================= */
+/* 飘落效果 */
 
 .effects{
     position:fixed;
@@ -359,9 +272,7 @@ footer{
     position:absolute;
     top:-50px;
     user-select:none;
-    animation:
-        fall linear infinite,
-        sway ease-in-out infinite alternate;
+    animation:fall linear infinite,sway ease-in-out infinite alternate;
 }
 
 @keyframes fall{
@@ -371,19 +282,12 @@ footer{
 }
 
 @keyframes sway{
-    from{
-        margin-left:-30px;
-    }
-    to{
-        margin-left:30px;
-    }
+    from{margin-left:-30px}
+    to{margin-left:30px}
 }
 
-/* =========================
-   四季主题
-========================= */
+/* 四季 */
 
-/* 春 */
 body.spring{
     --bg:#eee9e0;
     --text:#493f37;
@@ -392,7 +296,6 @@ body.spring{
     --glow:rgba(255,210,220,.4);
 }
 
-/* 夏 */
 body.summer{
     --bg:#eee9d8;
     --text:#493d2c;
@@ -401,7 +304,6 @@ body.summer{
     --glow:rgba(255,220,130,.45);
 }
 
-/* 秋 */
 body.autumn{
     --bg:#eee5da;
     --text:#4a382c;
@@ -410,7 +312,6 @@ body.autumn{
     --glow:rgba(255,190,110,.4);
 }
 
-/* 冬 */
 body.winter{
     --bg:#e8edf1;
     --text:#39434a;
@@ -419,9 +320,7 @@ body.winter{
     --glow:rgba(210,230,245,.5);
 }
 
-/* =========================
-   手机
-========================= */
+/* 手机 */
 
 @media(max-width:800px){
 
@@ -494,10 +393,14 @@ body.winter{
     </div>
 
     <div class="person" id="person">
-        <span>
-            YOUR PORTRAIT<br>
-            YOUR STORY
-        </span>
+
+        <!--
+        以后把你的照片命名为 photo.jpg，
+        和 index.html 放在同一个 GitHub 文件夹。
+        -->
+
+        <img src="photo.jpg" alt="圆落星">
+
     </div>
 
 </section>
@@ -519,7 +422,7 @@ body.winter{
 
     <div class="info">
 
-        <div id="todayInfo">
+        <div>
             今天也值得记录一点什么。
         </div>
 
@@ -545,9 +448,9 @@ body.winter{
 
 <script>
 
-/* ==================================================
-   1. 自动日期
-================================================== */
+/* =========================
+   自动日期
+========================= */
 
 function updateDate(){
 
@@ -561,23 +464,24 @@ function updateDate(){
 
     const dateText = month + "." + day;
 
-    document.getElementById("today").textContent =
-        dateText;
+    document.getElementById("today")
+        .textContent = dateText;
 
-    document.getElementById("footerDate").textContent =
-        dateText;
+    document.getElementById("footerDate")
+        .textContent = dateText;
 }
 
 updateDate();
 
 
-/* ==================================================
-   2. 自动四季
-================================================== */
+/* =========================
+   自动四季
+========================= */
 
 function updateSeason(){
 
-    const month = new Date().getMonth()+1;
+    const month =
+        new Date().getMonth()+1;
 
     let season;
 
@@ -602,9 +506,9 @@ function updateSeason(){
 updateSeason();
 
 
-/* ==================================================
-   3. 四季飘落 / 光效
-================================================== */
+/* =========================
+   四季效果
+========================= */
 
 function createSeasonEffects(season){
 
@@ -613,26 +517,26 @@ function createSeasonEffects(season){
 
     container.innerHTML = "";
 
-    let symbol = "";
+    let symbols = [];
     let count = 14;
 
     if(season === "spring"){
-        symbol = "🌸";
+        symbols = ["🌸","🌸","✿"];
         count = 12;
     }
 
     if(season === "summer"){
-        symbol = "✦";
-        count = 10;
+        symbols = ["✦","·","✧"];
+        count = 12;
     }
 
     if(season === "autumn"){
-        symbol = Math.random() > .5 ? "🍁" : "🍂";
+        symbols = ["🍁","🍂","🍁"];
         count = 15;
     }
 
     if(season === "winter"){
-        symbol = "❄";
+        symbols = ["❄","❅","·"];
         count = 22;
     }
 
@@ -643,7 +547,10 @@ function createSeasonEffects(season){
 
         p.className = "particle";
 
-        p.textContent = symbol;
+        p.textContent =
+            symbols[
+                Math.floor(Math.random()*symbols.length)
+            ];
 
         p.style.left =
             Math.random()*100 + "%";
@@ -652,7 +559,7 @@ function createSeasonEffects(season){
             (10 + Math.random()*18) + "px";
 
         p.style.opacity =
-            .3 + Math.random()*.6;
+            .25 + Math.random()*.6;
 
         p.style.animationDuration =
             (7 + Math.random()*9) + "s";
@@ -665,31 +572,27 @@ function createSeasonEffects(season){
 }
 
 
-/* ==================================================
-   4. 根据时间改变氛围
-================================================== */
+/* =========================
+   自动时间氛围
+========================= */
 
 function updateTimeMood(){
 
     const hour =
         new Date().getHours();
 
-    let text = "";
+    let text;
 
     if(hour >= 5 && hour < 10){
-
         text = "SOFT MORNING LIGHT";
-
-    }else if(hour >= 10 && hour < 17){
-
+    }
+    else if(hour >= 10 && hour < 17){
         text = "WARM DAYLIGHT";
-
-    }else if(hour >= 17 && hour < 21){
-
+    }
+    else if(hour >= 17 && hour < 21){
         text = "GOLDEN EVENING";
-
-    }else{
-
+    }
+    else{
         text = "QUIET NIGHT";
     }
 
@@ -700,9 +603,9 @@ function updateTimeMood(){
 updateTimeMood();
 
 
-/* ==================================================
-   5. 每天自动换一句话
-================================================== */
+/* =========================
+   每天自动换一句话
+========================= */
 
 const quotes = [
 
@@ -731,21 +634,21 @@ const quotes = [
 const dayNumber =
     Math.floor(Date.now()/86400000);
 
-const quote =
+document.getElementById("dailyQuote")
+    .textContent =
     quotes[dayNumber % quotes.length];
 
-document.getElementById("dailyQuote")
-    .textContent = quote;
 
-
-/* ==================================================
-   6. 鼠标视差
-================================================== */
+/* =========================
+   鼠标视差
+========================= */
 
 const person =
     document.getElementById("person");
 
 document.addEventListener("mousemove",(e)=>{
+
+    if(window.innerWidth <= 800) return;
 
     const x =
         (e.clientX/window.innerWidth-.5)*12;
@@ -753,15 +656,15 @@ document.addEventListener("mousemove",(e)=>{
     const y =
         (e.clientY/window.innerHeight-.5)*12;
 
-    person.style.transform =
-        `translate(${x}px,${y}px)`;
+    person.style.marginLeft = x + "px";
+    person.style.marginTop = y + "px";
 
 });
 
 
-/* ==================================================
-   7. 滚动出现动画
-================================================== */
+/* =========================
+   滚动动画
+========================= */
 
 const observer =
     new IntersectionObserver(
@@ -770,9 +673,7 @@ const observer =
             entries.forEach(entry => {
 
                 if(entry.isIntersecting){
-
                     entry.target.classList.add("show");
-
                 }
 
             });
@@ -787,9 +688,9 @@ document.querySelectorAll(".reveal")
     .forEach(el => observer.observe(el));
 
 
-/* ==================================================
-   8. 每天自动刷新一次页面状态
-================================================== */
+/* =========================
+   自动更新时间
+========================= */
 
 setInterval(()=>{
 
