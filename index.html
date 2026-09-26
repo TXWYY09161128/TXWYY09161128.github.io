@@ -2,27 +2,24 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YUAN LUO XING</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>圆落星</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;
-  background:#17130f;
-  color:white;
+  font-family:Georgia,"Times New Roman","PingFang SC",serif;
+  color:#fff;
+  background:#7d674f;
+  overflow-x:hidden;
 }
 
-/* ===== 背景 ===== */
+/* =========================
+   整个自然庭院
+========================= */
 
 .hero{
   min-height:100vh;
@@ -31,299 +28,499 @@ body{
 
   background:
     linear-gradient(
-      180deg,
-      rgba(25,20,16,.15),
-      rgba(25,18,13,.35)
+      to bottom,
+      rgba(168,186,177,.15) 0%,
+      rgba(214,194,156,.05) 38%,
+      rgba(76,68,48,.20) 100%
     ),
-    url("photo.jpg") center/cover no-repeat;
-
-  display:flex;
-  align-items:flex-end;
-  padding:7vw;
+    linear-gradient(
+      to bottom,
+      #aebdb2 0%,
+      #c9b991 43%,
+      #78905c 44%,
+      #64774c 100%
+    );
 }
 
-/* 没照片时的背景 */
-.hero::before{
-  content:"";
+/* 天空 */
+.sky{
   position:absolute;
-  inset:0;
+  inset:0 0 48% 0;
+
+  background:
+    radial-gradient(
+      ellipse at 68% 32%,
+      rgba(255,224,166,.65),
+      transparent 28%
+    ),
+    linear-gradient(
+      #aebeb9,
+      #d8c9a9
+    );
+
   z-index:0;
-
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(238,190,119,.5),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #9b603d,
-      #49382d 48%,
-      #191512
-    );
 }
 
-/* 柔光 */
-.hero::after{
+/* 远处树林 */
+.tree-line{
+  position:absolute;
+  left:-5%;
+  right:-5%;
+  bottom:43%;
+  height:24%;
+
+  background:
+    radial-gradient(ellipse at 10% 70%,#76563e 0 9%,transparent 10%),
+    radial-gradient(ellipse at 23% 65%,#8d633f 0 11%,transparent 12%),
+    radial-gradient(ellipse at 39% 72%,#6d513c 0 10%,transparent 11%),
+    radial-gradient(ellipse at 55% 66%,#8a5c3c 0 12%,transparent 13%),
+    radial-gradient(ellipse at 71% 70%,#725039 0 10%,transparent 11%),
+    radial-gradient(ellipse at 88% 64%,#956743 0 12%,transparent 13%);
+
+  opacity:.9;
+  filter:blur(1px);
+  z-index:1;
+}
+
+/* 大房子 */
+.house{
+  position:absolute;
+  z-index:2;
+
+  width:260px;
+  height:125px;
+
+  left:50%;
+  bottom:48%;
+
+  transform:translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      #d8cbb5,
+      #eee5d3
+    );
+
+  box-shadow:
+    0 18px 25px rgba(49,39,28,.18);
+}
+
+/* 房顶 */
+.house:before{
   content:"";
   position:absolute;
-  inset:0;
-  z-index:1;
+
+  left:-25px;
+  top:-60px;
+
+  border-left:155px solid transparent;
+  border-right:155px solid transparent;
+  border-bottom:75px solid #6b5545;
+}
+
+/* 房子窗户 */
+.house:after{
+  content:"";
+  position:absolute;
+
+  width:46px;
+  height:46px;
+
+  left:32px;
+  top:35px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 47%,
+      #65594c 48% 52%,
+      transparent 53%
+    ),
+    linear-gradient(
+      transparent 47%,
+      #65594c 48% 52%,
+      transparent 53%
+    ),
+    #a7b6b1;
+
+  border:5px solid #e9dfcd;
+}
+
+/* 大草地 */
+.lawn{
+  position:absolute;
+  z-index:3;
+
+  left:-5%;
+  right:-5%;
+  bottom:-5%;
+
+  height:58%;
 
   background:
     radial-gradient(
-      circle at 72% 25%,
-      rgba(255,215,154,.28),
-      transparent 25%
+      ellipse at 50% 0%,
+      rgba(203,179,119,.42),
+      transparent 38%
     ),
     linear-gradient(
-      to top,
-      rgba(0,0,0,.72),
-      transparent 55%
+      to bottom,
+      #738b58,
+      #526842 68%,
+      #3e5135
     );
+
+  transform:perspective(700px) rotateX(4deg);
+  transform-origin:bottom;
 }
 
-/* ===== 顶部 ===== */
+/* 草地光线 */
+.lawn-light{
+  position:absolute;
+  z-index:4;
+
+  left:20%;
+  bottom:-10%;
+
+  width:60%;
+  height:80%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(238,211,158,.27),
+      transparent 65%
+    );
+
+  filter:blur(15px);
+}
+
+/* =========================
+   落叶
+========================= */
+
+.leaves{
+  position:absolute;
+  inset:43% 0 0;
+  z-index:6;
+  pointer-events:none;
+}
+
+.leaf{
+  position:absolute;
+
+  width:24px;
+  height:18px;
+
+  background:#b76532;
+
+  clip-path:polygon(
+    50% 0,
+    62% 28%,
+    90% 13%,
+    77% 42%,
+    100% 55%,
+    68% 61%,
+    73% 100%,
+    50% 75%,
+    27% 100%,
+    32% 62%,
+    0 55%,
+    23% 42%,
+    10% 13%,
+    39% 28%
+  );
+
+  opacity:.88;
+}
+
+/* 地上不同位置的叶子 */
+
+.l1{left:8%;bottom:24%;transform:rotate(18deg) scale(.8)}
+.l2{left:16%;bottom:12%;background:#d08a3d;transform:rotate(-25deg)}
+.l3{left:27%;bottom:31%;background:#93472d;transform:rotate(45deg) scale(.7)}
+.l4{left:36%;bottom:18%;background:#c97632;transform:rotate(-15deg)}
+.l5{left:47%;bottom:10%;background:#a74b2c;transform:rotate(30deg) scale(.8)}
+.l6{left:56%;bottom:25%;background:#d69a45;transform:rotate(-30deg)}
+.l7{left:66%;bottom:14%;background:#a84c2c;transform:rotate(12deg)}
+.l8{left:76%;bottom:31%;background:#c87832;transform:rotate(-40deg) scale(.75)}
+.l9{left:88%;bottom:18%;background:#93452c;transform:rotate(25deg)}
+.l10{left:93%;bottom:35%;background:#d49a45;transform:rotate(-15deg) scale(.7)}
+
+.l11{left:20%;bottom:43%;background:#b9582e;transform:rotate(35deg) scale(.6)}
+.l12{left:72%;bottom:45%;background:#d18b39;transform:rotate(-20deg) scale(.65)}
+.l13{left:43%;bottom:38%;background:#91432b;transform:rotate(60deg) scale(.55)}
+.l14{left:58%;bottom:43%;background:#c36b32;transform:rotate(-45deg) scale(.7)}
+
+/* =========================
+   微风
+========================= */
+
+.breeze{
+  position:absolute;
+  inset:0;
+  z-index:8;
+  pointer-events:none;
+}
+
+.wind{
+  position:absolute;
+
+  width:150px;
+  height:1px;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.3),
+    transparent
+  );
+
+  opacity:0;
+
+  animation:wind 8s linear infinite;
+}
+
+.w1{top:42%;left:-160px}
+.w2{top:54%;left:-250px;animation-delay:3s}
+.w3{top:62%;left:-180px;animation-delay:5s}
+
+@keyframes wind{
+  0%{
+    transform:translateX(0) rotate(-8deg);
+    opacity:0;
+  }
+
+  15%{opacity:.6}
+
+  85%{opacity:.2}
+
+  100%{
+    transform:translateX(125vw) rotate(-8deg);
+    opacity:0;
+  }
+}
+
+/* 被风带起来的少量叶子 */
+
+.flying{
+  position:absolute;
+  z-index:9;
+
+  width:20px;
+  height:15px;
+
+  background:#bd6934;
+
+  clip-path:polygon(
+    50% 0,62% 28%,90% 13%,77% 42%,
+    100% 55%,68% 61%,73% 100%,
+    50% 75%,27% 100%,32% 62%,
+    0 55%,23% 42%,10% 13%,39% 28%
+  );
+
+  animation:fly 9s linear infinite;
+}
+
+.f1{top:54%;left:12%}
+.f2{top:62%;left:36%;animation-delay:4s;background:#d18a3c}
+.f3{top:48%;left:68%;animation-delay:2s;background:#98462c}
+
+@keyframes fly{
+  0%{
+    transform:translate(0,0) rotate(0);
+    opacity:0;
+  }
+
+  15%{opacity:.8}
+
+  50%{
+    transform:translate(180px,60px) rotate(180deg);
+  }
+
+  100%{
+    transform:translate(430px,100px) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* =========================
+   文字
+========================= */
 
 .nav{
   position:absolute;
+  z-index:20;
+
   top:30px;
-  left:7vw;
-  right:7vw;
-  z-index:5;
+  left:6vw;
+  right:6vw;
 
   display:flex;
   justify-content:space-between;
-  align-items:center;
 
-  font-size:11px;
+  font-size:10px;
   letter-spacing:4px;
-  color:rgba(255,255,255,.8);
-}
 
-/* ===== 文字 ===== */
+  color:rgba(255,255,255,.85);
+}
 
 .content{
-  position:relative;
-  z-index:5;
-  max-width:850px;
+  position:absolute;
+  z-index:20;
+
+  left:7vw;
+  bottom:9vh;
+
+  max-width:600px;
+
+  text-shadow:
+    0 2px 18px rgba(35,30,22,.45);
 }
 
-.kicker{
-  font-size:11px;
+.small{
+  font-size:10px;
   letter-spacing:6px;
-  margin-bottom:22px;
-  opacity:.75;
+  margin-bottom:20px;
 }
 
 h1{
-  font-size:clamp(55px,10vw,130px);
-  font-weight:300;
+  font-size:clamp(52px,9vw,110px);
+  font-weight:400;
+  letter-spacing:5px;
   line-height:.9;
-  letter-spacing:-3px;
 }
 
-.chinese{
-  margin-top:24px;
-  font-size:clamp(20px,3vw,34px);
-  letter-spacing:14px;
-  font-weight:300;
+.zh{
+  margin-top:22px;
+
+  font-size:28px;
+  letter-spacing:12px;
 }
 
 .desc{
-  margin-top:25px;
-  max-width:480px;
+  margin-top:20px;
 
   font-size:14px;
   line-height:2;
 
-  color:rgba(255,255,255,.78);
+  color:rgba(255,255,255,.88);
 }
 
-/* ===== 按钮 ===== */
-
 .enter{
-  display:inline-flex;
-  margin-top:35px;
+  display:inline-block;
 
-  padding:14px 22px;
+  margin-top:28px;
+  padding:13px 22px;
 
-  border:1px solid rgba(255,255,255,.4);
-  border-radius:100px;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:40px;
 
-  color:white;
+  color:#fff;
   text-decoration:none;
 
   font-size:10px;
   letter-spacing:3px;
 
   background:rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-
-  transition:.4s;
+  backdrop-filter:blur(10px);
 }
 
-.enter:hover{
-  background:rgba(255,255,255,.2);
-  transform:translateY(-3px);
-}
+/* =========================
+   第二屏
+========================= */
 
-/* ===== 第二屏 ===== */
-
-.memory{
-  min-height:100vh;
+.today{
+  min-height:80vh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:12vw 7vw;
+  background:#ded1b9;
 
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      #5d4332,
-      #211914 65%
-    );
-}
+  color:#463b30;
 
-.memory-inner{
-  width:min(900px,100%);
   text-align:center;
 }
 
-.memory-label{
+.today-inner{
+  width:min(650px,88%);
+}
+
+.today-label{
   font-size:10px;
   letter-spacing:6px;
   opacity:.55;
 }
 
-.memory h2{
+.today h2{
   margin:25px 0;
 
-  font-size:clamp(35px,6vw,75px);
-  font-weight:300;
+  font-size:clamp(38px,6vw,70px);
+  font-weight:400;
 }
 
-.memory p{
-  max-width:600px;
-  margin:auto;
-
+.today p{
   line-height:2.2;
-  font-size:15px;
-
-  color:rgba(255,255,255,.65);
+  font-size:16px;
 }
-
-/* ===== 日期 ===== */
-
-.date{
-  margin-top:55px;
-
-  display:flex;
-  justify-content:center;
-  gap:30px;
-
-  font-size:11px;
-  letter-spacing:4px;
-  opacity:.55;
-}
-
-/* ===== 底部 ===== */
 
 footer{
-  padding:50px 7vw;
+  padding:35px;
 
-  display:flex;
-  justify-content:space-between;
+  text-align:center;
 
-  background:#120f0c;
+  background:#30291f;
 
-  font-size:9px;
-  letter-spacing:4px;
+  font-size:10px;
+  letter-spacing:5px;
 
-  color:rgba(255,255,255,.4);
+  color:rgba(255,255,255,.55);
 }
 
-/* ===== 风 ===== */
-
-.breeze{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.breeze span{
-  position:absolute;
-
-  width:130px;
-  height:1px;
-
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.25),
-    transparent
-  );
-
-  transform:rotate(-12deg);
-
-  animation:breeze 8s linear infinite;
-}
-
-.breeze span:nth-child(1){
-  top:35%;
-  left:-150px;
-}
-
-.breeze span:nth-child(2){
-  top:50%;
-  left:-300px;
-  animation-delay:3s;
-}
-
-.breeze span:nth-child(3){
-  top:65%;
-  left:-250px;
-  animation-delay:5s;
-}
-
-@keyframes breeze{
-
-  0%{
-    transform:translateX(0) rotate(-12deg);
-    opacity:0;
-  }
-
-  20%{
-    opacity:.7;
-  }
-
-  100%{
-    transform:translateX(130vw) rotate(-12deg);
-    opacity:0;
-  }
-}
-
-/* ===== 手机 ===== */
+/* =========================
+   手机
+========================= */
 
 @media(max-width:600px){
 
-  .hero{
-    padding:12vw 7vw;
+  .house{
+    width:170px;
+    height:90px;
+    bottom:48%;
   }
 
-  .nav{
-    top:22px;
+  .house:before{
+    left:-18px;
+    top:-42px;
+
+    border-left-width:103px;
+    border-right-width:103px;
+    border-bottom-width:52px;
+  }
+
+  .house:after{
+    width:34px;
+    height:34px;
+    left:22px;
+    top:25px;
+  }
+
+  .content{
+    left:7vw;
+    right:7vw;
+    bottom:8vh;
   }
 
   h1{
-    letter-spacing:-2px;
+    font-size:47px;
+    letter-spacing:2px;
   }
 
-  .chinese{
+  .zh{
+    font-size:22px;
     letter-spacing:8px;
   }
 
@@ -331,9 +528,8 @@ footer{
     font-size:13px;
   }
 
-  footer{
-    flex-direction:column;
-    gap:15px;
+  .leaf{
+    transform:scale(.7);
   }
 }
 </style>
@@ -343,38 +539,65 @@ footer{
 
 <section class="hero">
 
+  <div class="sky"></div>
+
+  <div class="tree-line"></div>
+
+  <div class="house"></div>
+
+  <div class="lawn"></div>
+
+  <div class="lawn-light"></div>
+
+  <!-- 地面枫叶 -->
+  <div class="leaves">
+    <span class="leaf l1"></span>
+    <span class="leaf l2"></span>
+    <span class="leaf l3"></span>
+    <span class="leaf l4"></span>
+    <span class="leaf l5"></span>
+    <span class="leaf l6"></span>
+    <span class="leaf l7"></span>
+    <span class="leaf l8"></span>
+    <span class="leaf l9"></span>
+    <span class="leaf l10"></span>
+    <span class="leaf l11"></span>
+    <span class="leaf l12"></span>
+    <span class="leaf l13"></span>
+    <span class="leaf l14"></span>
+  </div>
+
+  <!-- 凉风 -->
+  <div class="breeze">
+    <span class="wind w1"></span>
+    <span class="wind w2"></span>
+    <span class="wind w3"></span>
+  </div>
+
+  <!-- 少量被风吹起的叶子 -->
+  <span class="flying f1"></span>
+  <span class="flying f2"></span>
+  <span class="flying f3"></span>
+
   <div class="nav">
     <span>YUAN LUO XING</span>
     <span id="date"></span>
   </div>
 
-  <div class="breeze">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
   <div class="content">
 
-    <div class="kicker">
-      A QUIET PLACE
-    </div>
+    <div class="small">A QUIET PLACE</div>
 
-    <h1>
-      YUAN<br>
-      LUO XING
-    </h1>
+    <h1>YUAN<br>LUO XING</h1>
 
-    <div class="chinese">
-      圆落星
-    </div>
+    <div class="zh">圆落星</div>
 
     <p class="desc">
       把喜欢的人、事、照片和那些<br>
       不想忘记的瞬间，慢慢留在这里。
     </p>
 
-    <a class="enter" href="#memory">
+    <a class="enter" href="#today">
       ENTER MY WORLD →
     </a>
 
@@ -383,27 +606,15 @@ footer{
 </section>
 
 
-<section class="memory" id="memory">
+<section class="today" id="today">
 
-  <div class="memory-inner">
+  <div class="today-inner">
 
-    <div class="memory-label">
-      A PLACE FOR MEMORY
-    </div>
+    <div class="today-label">A PLACE FOR MEMORY</div>
 
-    <h2>
-      把喜欢的留下。
-    </h2>
+    <h2 id="todayDate"></h2>
 
-    <p>
-      有些风景只经过一次，<br>
-      有些人却会在记忆里停留很久。
-    </p>
-
-    <div class="date">
-      <span>TODAY</span>
-      <span id="today"></span>
-    </div>
+    <p id="quote"></p>
 
   </div>
 
@@ -411,11 +622,7 @@ footer{
 
 
 <footer>
-
-  <span>YUAN LUO XING</span>
-
-  <span>© <span id="year"></span></span>
-
+  YUAN LUO XING
 </footer>
 
 
@@ -430,11 +637,24 @@ const day = String(now.getDate()).padStart(2,"0");
 document.getElementById("date").textContent =
   `${year}.${month}.${day}`;
 
-document.getElementById("today").textContent =
+document.getElementById("todayDate").textContent =
   `${year}.${month}.${day}`;
 
-document.getElementById("year").textContent =
-  year;
+const quotes = [
+  "有些喜欢，不需要说出来，也会一直留在那里。",
+  "慢一点，很多美好的东西都来得及。",
+  "今天也值得被好好记住。",
+  "风吹过的时候，时间也变得很轻。",
+  "有些瞬间很短，却值得记很久。",
+  "愿喜欢的，都慢慢留下来。",
+  "生活不必急着抵达，沿途也很好。"
+];
+
+const dayNumber =
+  Math.floor(now.getTime()/86400000);
+
+document.getElementById("quote").textContent =
+  quotes[dayNumber % quotes.length];
 
 </script>
 
