@@ -3,413 +3,637 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>圆落星</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-  background:#f3f0e9;
-  color:#24231f;
-  overflow-x:hidden;
+    background:#171714;
+    color:#eee9df;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    overflow-x:hidden;
 }
 
-/* ===== 第一屏 ===== */
+/* =========================
+   第一屏
+========================= */
 
 .hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 70% 25%,#fff 0%,transparent 28%),
-    linear-gradient(135deg,#eeeae1,#dcd6ca);
-  animation:heroIn 1.4s ease both;
+    height:100vh;
+    min-height:650px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 75% 25%,
+            rgba(255,246,220,.16),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #24231f 0%,
+            #171714 55%,
+            #302d26 100%
+        );
 }
 
+/* 大圆形光影 */
+
 .hero::before{
-  content:"";
-  position:absolute;
-  width:620px;
-  height:620px;
-  border-radius:50%;
-  background:#c9bda9;
-  opacity:.22;
-  right:-180px;
-  top:-160px;
-  animation:float 9s ease-in-out infinite;
+    content:"";
+    position:absolute;
+
+    width:650px;
+    height:650px;
+
+    right:-220px;
+    top:-220px;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:50%;
+
+    animation:rotate 30s linear infinite;
 }
 
 .hero::after{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  border:1px solid rgba(60,55,45,.18);
-  border-radius:50%;
-  left:-160px;
-  bottom:-140px;
-  animation:rotateSlow 25s linear infinite;
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    left:-180px;
+    bottom:-200px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(202,170,112,.18),
+            transparent 68%
+        );
+
+    animation:float 9s ease-in-out infinite;
 }
 
-.content{
-  width:min(1100px,88%);
-  position:relative;
-  z-index:2;
-  animation:contentIn 1.5s .2s ease both;
-}
 
-.small{
-  font-size:12px;
-  letter-spacing:5px;
-  color:#777064;
-  margin-bottom:28px;
-}
-
-h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(64px,11vw,150px);
-  font-weight:400;
-  letter-spacing:-7px;
-  line-height:.9;
-  margin-bottom:32px;
-}
-
-.line{
-  width:70px;
-  height:1px;
-  background:#575247;
-  margin-bottom:28px;
-  animation:lineIn 1.2s .7s ease both;
-}
-
-.description{
-  max-width:500px;
-  font-size:16px;
-  line-height:2;
-  color:#625e55;
-  letter-spacing:1px;
-}
-
-.enter{
-  display:inline-block;
-  margin-top:45px;
-  padding:16px 30px;
-  border:1px solid #716b60;
-  color:#302e29;
-  text-decoration:none;
-  font-size:12px;
-  letter-spacing:3px;
-  transition:.4s;
-}
-
-.enter:hover{
-  background:#292823;
-  color:#f3f0e9;
-  transform:translateY(-3px);
-}
-
-.number{
-  position:absolute;
-  right:8%;
-  bottom:8%;
-  font-family:Georgia,serif;
-  font-size:100px;
-  color:rgba(50,47,40,.08);
-  z-index:1;
-  animation:numberFloat 6s ease-in-out infinite;
-}
-
-/* ===== 实时时间 ===== */
+/* =========================
+   顶部日期时间
+========================= */
 
 .time{
-  position:absolute;
-  right:8%;
-  top:8%;
-  z-index:5;
-  text-align:right;
-  font-family:Georgia,"Times New Roman",serif;
+    position:absolute;
+    top:45px;
+    right:7%;
+
+    text-align:right;
+    z-index:10;
+
+    animation:fadeDown 1.2s ease both;
 }
 
-.time-label{
-  display:block;
-  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-  font-size:9px;
-  letter-spacing:4px;
-  color:#817a6e;
-  margin-bottom:6px;
+#date{
+    display:block;
+
+    font-family:Georgia,"Times New Roman",serif;
+
+    font-size:14px;
+    letter-spacing:3px;
+
+    color:#cfc7b7;
+
+    margin-bottom:7px;
 }
 
 #clock{
-  font-size:22px;
-  letter-spacing:2px;
-  color:#36332d;
+    display:block;
+
+    font-family:Georgia,"Times New Roman",serif;
+
+    font-size:25px;
+    letter-spacing:3px;
+
+    color:#f2eee6;
 }
 
-/* ===== 第二屏 ===== */
+
+/* =========================
+   主内容
+========================= */
+
+.content{
+    width:min(1100px,86%);
+    margin-left:8%;
+
+    position:relative;
+    z-index:5;
+
+    animation:fadeUp 1.4s .15s ease both;
+}
+
+.small{
+    font-size:11px;
+    letter-spacing:7px;
+
+    color:#aaa294;
+
+    margin-bottom:35px;
+}
+
+h1{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:400;
+
+    font-size:
+        clamp(80px,13vw,175px);
+
+    letter-spacing:-9px;
+
+    line-height:.85;
+
+    margin-bottom:45px;
+}
+
+.line{
+    width:85px;
+    height:1px;
+
+    background:#a79d8b;
+
+    margin-bottom:30px;
+
+    animation:line 1.5s .8s ease both;
+}
+
+.description{
+    font-size:15px;
+
+    line-height:2.1;
+
+    letter-spacing:1px;
+
+    color:#aaa59b;
+
+    max-width:520px;
+}
+
+.enter{
+    display:inline-block;
+
+    margin-top:48px;
+
+    padding:17px 32px;
+
+    border:1px solid rgba(238,233,223,.45);
+
+    color:#eee9df;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    transition:
+        background .4s,
+        color .4s,
+        transform .4s;
+}
+
+.enter:hover{
+    background:#eee9df;
+    color:#171714;
+
+    transform:translateY(-4px);
+}
+
+
+/* =========================
+   装饰数字
+========================= */
+
+.number{
+    position:absolute;
+
+    right:7%;
+    bottom:7%;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:130px;
+
+    color:rgba(255,255,255,.035);
+
+    z-index:2;
+
+    animation:floatNumber 7s ease-in-out infinite;
+}
+
+
+/* =========================
+   第二屏
+========================= */
 
 .memory{
-  min-height:85vh;
-  padding:120px 8%;
-  display:flex;
-  align-items:center;
-  background:#24231f;
-  color:#eeeae1;
+    min-height:90vh;
+
+    padding:130px 8%;
+
+    display:flex;
+    align-items:center;
+
+    background:#eeeae1;
+
+    color:#25231f;
 }
 
 .memory-inner{
-  max-width:1000px;
-  width:100%;
-  margin:auto;
-  animation:fadeUp 1.2s ease both;
+    width:min(1000px,100%);
+    margin:auto;
+
+    animation:fadeUp 1.2s ease both;
 }
 
 .label{
-  font-size:11px;
-  letter-spacing:5px;
-  color:#aaa398;
-  margin-bottom:35px;
+    font-size:10px;
+
+    letter-spacing:6px;
+
+    color:#8b8478;
+
+    margin-bottom:42px;
 }
 
 .quote{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(32px,5vw,65px);
-  font-weight:400;
-  line-height:1.35;
-  max-width:850px;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(36px,5vw,70px);
+
+    font-weight:400;
+
+    line-height:1.35;
+
+    letter-spacing:-1px;
+
+    max-width:900px;
 }
 
 .bottom{
-  margin-top:80px;
-  display:flex;
-  justify-content:space-between;
-  border-top:1px solid rgba(255,255,255,.18);
-  padding-top:20px;
-  font-size:11px;
-  letter-spacing:3px;
-  color:#aaa398;
+    margin-top:100px;
+
+    padding-top:22px;
+
+    border-top:1px solid rgba(40,38,33,.18);
+
+    display:flex;
+    justify-content:space-between;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#817a70;
 }
 
-/* ===== 动画 ===== */
 
-@keyframes heroIn{
-  from{opacity:0;}
-  to{opacity:1;}
+/* =========================
+   动画
+========================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(45px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-@keyframes contentIn{
-  from{
-    opacity:0;
-    transform:translateY(35px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-@keyframes lineIn{
-  from{
-    width:0;
-    opacity:0;
-  }
-  to{
-    width:70px;
-    opacity:1;
-  }
+@keyframes line{
+    from{
+        width:0;
+        opacity:0;
+    }
+
+    to{
+        width:85px;
+        opacity:1;
+    }
+}
+
+@keyframes rotate{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 @keyframes float{
-  0%,100%{
-    transform:translate(0,0);
-  }
-  50%{
-    transform:translate(-25px,20px);
-  }
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(25px,-20px);
+    }
 }
 
-@keyframes rotateSlow{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+@keyframes floatNumber{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
 }
 
-@keyframes numberFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-12px);
-  }
-}
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* ===== 手机 ===== */
+/* =========================
+   手机
+========================= */
 
 @media(max-width:600px){
 
-  .content{
-    width:82%;
-  }
+    .hero{
+        min-height:700px;
+    }
 
-  h1{
-    font-size:72px;
-    letter-spacing:-4px;
-  }
+    .content{
+        width:82%;
+        margin-left:9%;
+    }
 
-  .description{
-    font-size:14px;
-  }
+    h1{
+        font-size:78px;
+        letter-spacing:-5px;
+    }
 
-  .time{
-    right:9%;
-    top:6%;
-  }
+    .small{
+        letter-spacing:5px;
+    }
 
-  #clock{
-    font-size:18px;
-  }
+    .description{
+        font-size:14px;
+    }
 
-  .memory{
-    min-height:75vh;
-    padding:90px 10%;
-  }
+    .time{
+        top:30px;
+        right:8%;
+    }
 
-  .quote{
-    font-size:32px;
-  }
+    #date{
+        font-size:11px;
+        letter-spacing:2px;
+    }
 
-  .bottom{
-    margin-top:60px;
-    flex-direction:column;
-    gap:12px;
-  }
+    #clock{
+        font-size:19px;
+    }
 
-  .number{
-    font-size:70px;
-    right:7%;
-  }
+    .number{
+        font-size:80px;
+        right:8%;
+        bottom:6%;
+    }
+
+    .memory{
+        min-height:80vh;
+        padding:100px 10%;
+    }
+
+    .quote{
+        font-size:34px;
+    }
+
+    .bottom{
+        margin-top:70px;
+
+        flex-direction:column;
+
+        gap:14px;
+    }
 }
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     第一屏
+========================= -->
 
 <section class="hero">
 
-  <!-- 实时时间 -->
-  <div class="time">
-    <span class="time-label">LOCAL TIME</span>
-    <span id="clock">--:--:--</span>
-  </div>
+    <!-- 自动日期 + 自动时间 -->
 
-  <div class="content">
+    <div class="time">
 
-    <div class="small">A QUIET PLACE</div>
+        <span id="date">
+            2026.09.26
+        </span>
 
-    <h1>圆落星</h1>
+        <span id="clock">
+            00:00:00
+        </span>
 
-    <div class="line"></div>
-
-    <div class="description">
-      把喜欢的人、事、照片和那些<br>
-      不想忘记的瞬间，慢慢留在这里。
     </div>
 
-    <a href="#memory" class="enter">
-      ENTER MY WORLD →
-    </a>
 
-  </div>
+    <div class="content">
 
-  <div class="number">01</div>
+        <div class="small">
+            A QUIET PLACE
+        </div>
+
+
+        <h1>
+            圆落星
+        </h1>
+
+
+        <div class="line"></div>
+
+
+        <div class="description">
+
+            把喜欢的人、事、照片和那些<br>
+
+            不想忘记的瞬间，慢慢留在这里。
+
+        </div>
+
+
+        <a
+            href="#memory"
+            class="enter"
+        >
+            ENTER MY WORLD →
+        </a>
+
+    </div>
+
+
+    <div class="number">
+        01
+    </div>
 
 </section>
 
 
-<section class="memory" id="memory">
 
-  <div class="memory-inner">
+<!-- =========================
+     第二屏
+========================= -->
 
-    <div class="label">TODAY</div>
+<section
+    class="memory"
+    id="memory"
+>
 
-    <div class="quote">
-      “有些瞬间不需要被解释，<br>
-      只需要被好好留下。”
+    <div class="memory-inner">
+
+        <div class="label">
+            TODAY
+        </div>
+
+
+        <div class="quote">
+
+            “有些瞬间不需要被解释，<br>
+
+            只需要被好好留下。”
+
+        </div>
+
+
+        <div class="bottom">
+
+            <span>
+                A PLACE FOR MEMORY
+            </span>
+
+            <span>
+                2026
+            </span>
+
+        </div>
+
     </div>
-
-    <div class="bottom">
-      <span>A PLACE FOR MEMORY</span>
-      <span>2026</span>
-    </div>
-
-  </div>
 
 </section>
 
+
+
+<!-- =========================
+     自动日期时间
+========================= -->
 
 <script>
-function updateClock(){
 
-  const now = new Date();
+function updateTime(){
 
-  const time = new Intl.DateTimeFormat(
-    "zh-CN",
-    {
-      timeZone:"Asia/Shanghai",
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit",
-      hour12:false
-    }
-  ).format(now);
+    const now = new Date();
 
-  document.getElementById("clock").textContent = time;
+
+    /* 中国时间 */
+
+    const date = new Intl.DateTimeFormat(
+        "zh-CN",
+        {
+            timeZone:"Asia/Shanghai",
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit"
+        }
+    )
+    .format(now)
+    .replace(/\//g,".");
+
+
+    const time = new Intl.DateTimeFormat(
+        "zh-CN",
+        {
+            timeZone:"Asia/Shanghai",
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit",
+            hour12:false
+        }
+    )
+    .format(now);
+
+
+    document.getElementById("date")
+        .textContent = date;
+
+    document.getElementById("clock")
+        .textContent = time;
+
 }
 
-updateClock();
 
-setInterval(updateClock,1000);
+updateTime();
 
 
-/* 鼠标轻微视差 */
+setInterval(
+    updateTime,
+    1000
+);
 
-document.addEventListener("mousemove",(e)=>{
-
-  const x=(e.clientX/window.innerWidth-.5)*12;
-  const y=(e.clientY/window.innerHeight-.5)*12;
-
-  document.querySelector(".hero::before");
-
-  const content=document.querySelector(".content");
-
-  if(window.innerWidth>600){
-    content.style.transform=
-      `translate(${x*.15}px,${y*.15}px)`;
-  }
-
-});
 </script>
+
 
 </body>
 </html>
