@@ -950,43 +950,28 @@ document.getElementById("moonPhase").textContent =
     getMoonPhase();
 
 
-/* =========================
-   自动季节
-   ========================= */
 
-function updateSeason(){
+function updateSeason() {
+    const month = new Date().getMonth() + 1;
 
-    const now = new Date();
+    let season;
 
-    const month = Number(
-        new Intl.DateTimeFormat("zh-CN", {
-            timeZone: "Asia/Shanghai",
-            month: "numeric"
-        }).format(now)
-    );
-
-    let season = "";
-
-    if(month === 12 || month === 1 || month === 2){
-        season = "❄️ 冬天";
-    } 
-    else if(month >= 3 && month <= 5){
+    if (month >= 3 && month <= 5) {
         season = "🌱 春天";
-    } 
-    else if(month >= 6 && month <= 8){
+    } else if (month >= 6 && month <= 8) {
         season = "☀️ 夏天";
-    } 
-    else if(month >= 9 && month <= 11){
+    } else if (month >= 9 && month <= 11) {
         season = "🍂 秋天";
+    } else {
+        season = "❄️ 冬天";
     }
 
     document.getElementById("season").textContent = season;
 }
 
 updateSeason();
-
-/* 每分钟自动检查一次 */
 setInterval(updateSeason, 60000);
+
 
 
 /* =========================
