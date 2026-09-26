@@ -29,10 +29,6 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   全局细节
-   ========================= */
-
 body::before{
     content:"";
     position:fixed;
@@ -63,8 +59,6 @@ a{
     padding:50px 25px;
 }
 
-/* 顶部信息 */
-
 .top-left{
     position:absolute;
     left:5%;
@@ -85,8 +79,6 @@ a{
     letter-spacing:2px;
     color:#aaa5af;
 }
-
-/* 中间标题 */
 
 .hero-center{
     width:100%;
@@ -148,8 +140,6 @@ a{
     opacity:0;
     animation:archIn 1.8s .25s cubic-bezier(.2,.8,.2,1) forwards;
 }
-
-/* 拱门里的柔光 */
 
 .arch::after{
     content:"";
@@ -655,10 +645,6 @@ a{
 
 <body>
 
-<!-- =========================
-     首页
-     ========================= -->
-
 <header class="hero">
 
     <div class="top-left">
@@ -699,7 +685,6 @@ a{
             ENTER MY WORLD →
         </a>
 
-        <!-- 自动时间日期：位置保持不变 -->
         <div class="datetime" id="datetime">
             正在读取时间…
         </div>
@@ -710,10 +695,6 @@ a{
 
 </header>
 
-
-<!-- =========================
-     TODAY
-     ========================= -->
 
 <section class="section" id="today">
 
@@ -779,10 +760,6 @@ a{
 </section>
 
 
-<!-- =========================
-     我的照片
-     ========================= -->
-
 <section class="section photo-section">
 
     <div class="inner">
@@ -821,10 +798,6 @@ a{
     A PLACE FOR MEMORY · 2026
 </footer>
 
-
-<!-- =========================
-     图片放大
-     ========================= -->
 
 <div class="lightbox" id="lightbox">
 
@@ -950,28 +923,282 @@ document.getElementById("moonPhase").textContent =
     getMoonPhase();
 
 
+/* =========================
+   中国节气季节
+   根据太阳黄经计算
+   立春 315°
+   立夏 45°
+   立秋 135°
+   立冬 225°
+   ========================= */
 
-function updateSeason() {
-    const month = new Date().getMonth() + 1;
+function solarLongitude(date){
 
-    let season;
+    const JD =
+        date.getTime() / 86400000 +
+        2440587.5;
 
-    if (month >= 3 && month <= 5) {
-        season = "🌱 春天";
-    } else if (month >= 6 && month <= 8) {
-        season = "☀️ 夏天";
-    } else if (month >= 9 && month <= 11) {
-        season = "🍂 秋天";
-    } else {
-        season = "❄️ 冬天";
-    }
+    const T =
+        (JD - 2451545.0) / 36525;
 
-    document.getElementById("season").textContent = season;
+    const rad =
+        Math.PI / 180;
+
+    let L0 =
+        280.46646 +
+        36000.76983 * T +
+        0.0003032 * T * T;
+
+    L0 =
+        ((L0 % 360) + 360) % 360;
+
+    const M =
+        357.52911 +
+        35999.05029 * T -
+        0.0001537 * T * T;
+
+    const Mrad =
+        M * rad;
+
+    const C =
+        Math.sin(Mrad) *
+        (
+            1.914602 -
+            0.004817 * T -
+            0.000014 * T * T
+        )
+        +
+        Math.sin(2 * Mrad) *
+        (
+            0.019993 -
+            0.000101 * T
+        )
+        +
+        Math.sin(3 * Mrad) *
+        0.000289;
+
+    const trueLongitude =
+        L0 + C;
+
+    const omega =
+        (125.04 - 1934.136 * T) * rad;
+
+    const apparentLongitude =
+        trueLongitude -
+        0.00569 -
+        0.00478 *
+        Math.sin(omega);
+
+    return (
+        (apparentLongitude % 360) +
+        360
+    ) % 360;
 }
 
-updateSeason();
-setInterval(updateSeason, 60000);
 
+function angleDifference(a,b){
+
+    let d =
+        a - b;
+
+    while(d > 180)
+        d -= 360;
+
+    while(d < -180)
+        d += 360;
+
+    return d;
+}
+
+
+function findSolarTerm(
+    year,
+    targetAngle,
+    approxMonth,
+    approxDay
+){
+
+    const start =
+        new Date(
+            `${year}-${String(approxMonth).padStart(2,"0")}-${String(approxDay).padStart(2,"0")}T00:00:00+08:00`
+        );
+
+    let left =
+        new Date(
+            start.getTime() -
+            3 * 86400000
+        );
+
+    let right =
+        new Date(
+            start.getTime() +
+            3 * 86400000
+        );
+
+    for(let i = 0; i < 45; i++){
+
+        const middle =
+            new Date(
+                (
+                    left.getTime() +
+                    right.getTime()
+                ) / 2
+            );
+
+        const diff =
+            angleDifference(
+                solarLongitude(middle),
+                targetAngle
+            );
+
+        if(diff > 0){
+
+            right = middle;
+
+        }else{
+
+            left = middle;
+
+        }
+    }
+
+    return new Date(
+        (
+            left.getTime() +
+            right.getTime()
+        ) / 2
+    );
+}
+
+
+function getFourSeasons(year){
+
+    return {
+
+        lichun:
+            findSolarTerm(
+                year,
+                315,
+                2,
+                4
+            ),
+
+        lixia:
+            findSolarTerm(
+                year,
+                45,
+                5,
+                5
+            ),
+
+        liqiu:
+            findSolarTerm(
+                year,
+                135,
+                8,
+                7
+            ),
+
+        lidong:
+            findSolarTerm(
+                year,
+                225,
+                11,
+                7
+            ),
+
+        nextLichun:
+            findSolarTerm(
+                year + 1,
+                315,
+                2,
+                4
+            )
+    };
+}
+
+
+function getChinaSeason(){
+
+    const now =
+        new Date();
+
+    const chinaYear =
+        Number(
+            new Intl.DateTimeFormat(
+                "zh-CN",
+                {
+                    timeZone:
+                        "Asia/Shanghai",
+
+                    year:
+                        "numeric"
+                }
+            ).format(now)
+        );
+
+    const seasons =
+        getFourSeasons(
+            chinaYear
+        );
+
+
+    if(
+        now >= seasons.lichun &&
+        now < seasons.lixia
+    ){
+
+        return "🌱 春天";
+
+    }
+
+
+    if(
+        now >= seasons.lixia &&
+        now < seasons.liqiu
+    ){
+
+        return "☀️ 夏天";
+
+    }
+
+
+    if(
+        now >= seasons.liqiu &&
+        now < seasons.lidong
+    ){
+
+        return "🍂 秋天";
+
+    }
+
+
+    return "❄️ 冬天";
+}
+
+
+function updateSeason(){
+
+    const season =
+        document.getElementById(
+            "season"
+        );
+
+    if(season){
+
+        season.textContent =
+            getChinaSeason();
+
+    }
+}
+
+
+updateSeason();
+
+setInterval(
+    updateSeason,
+    3600000
+);
 
 
 /* =========================
@@ -1030,33 +1257,47 @@ async function loadWeather(){
         };
 
         const description =
-            weatherMap[current.weather_code] ||
+            weatherMap[
+                current.weather_code
+            ] ||
             "天气变化中";
 
         weatherBox.innerHTML =
             description +
             "<br>" +
-            Math.round(current.temperature_2m) +
+            Math.round(
+                current.temperature_2m
+            ) +
             "°C · 体感 " +
-            Math.round(current.apparent_temperature) +
+            Math.round(
+                current.apparent_temperature
+            ) +
             "°C" +
             "<br>" +
             "湿度 " +
-            Math.round(current.relative_humidity_2m) +
+            Math.round(
+                current.relative_humidity_2m
+            ) +
             "% · 风速 " +
-            Math.round(current.wind_speed_10m) +
+            Math.round(
+                current.wind_speed_10m
+            ) +
             " km/h";
 
     }catch(error){
 
         weatherBox.textContent =
             "天气暂时无法读取，请稍后刷新";
+
     }
 }
 
 loadWeather();
 
-setInterval(loadWeather,600000);
+setInterval(
+    loadWeather,
+    600000
+);
 
 
 /* =========================
@@ -1066,13 +1307,16 @@ setInterval(loadWeather,600000);
 async function loadPhotos(){
 
     const track =
-        document.getElementById("photoTrack");
+        document.getElementById(
+            "photoTrack"
+        );
 
     try{
 
         const response =
             await fetch(
-                "photos.json?v=" + Date.now(),
+                "photos.json?v=" +
+                Date.now(),
                 {
                     cache:"no-store"
                 }
@@ -1084,8 +1328,10 @@ async function loadPhotos(){
         const photos =
             await response.json();
 
-        if(!Array.isArray(photos) ||
-           photos.length === 0){
+        if(
+            !Array.isArray(photos) ||
+            photos.length === 0
+        ){
 
             track.innerHTML =
                 '<div class="photo-message">' +
@@ -1095,64 +1341,65 @@ async function loadPhotos(){
             return;
         }
 
-        /*
-          全部照片复制一份。
-          第一组 + 第二组 = 无限循环。
-        */
-
         const allPhotos =
             photos.concat(photos);
 
         track.innerHTML = "";
 
-        allPhotos.forEach(function(path){
+        allPhotos.forEach(
+            function(path){
 
-            const card =
-                document.createElement("div");
+                const card =
+                    document.createElement(
+                        "div"
+                    );
 
-            card.className =
-                "photo-card";
+                card.className =
+                    "photo-card";
 
-            const img =
-                document.createElement("img");
+                const img =
+                    document.createElement(
+                        "img"
+                    );
 
-            img.src =
-                path + "?v=" + Date.now();
+                img.src =
+                    path +
+                    "?v=" +
+                    Date.now();
 
-            img.alt =
-                "Memory";
+                img.alt =
+                    "Memory";
 
-            img.loading =
-                "lazy";
+                img.loading =
+                    "lazy";
 
-            img.draggable =
-                false;
+                img.draggable =
+                    false;
 
-            /*
-              点击只打开大图，
-              不停止背景照片循环。
-            */
+                card.addEventListener(
+                    "click",
+                    function(){
 
-            card.addEventListener(
-                "click",
-                function(){
+                        document.getElementById(
+                            "lightboxImg"
+                        ).src =
+                            img.src;
 
-                    document.getElementById(
-                        "lightboxImg"
-                    ).src = img.src;
+                        document.getElementById(
+                            "lightbox"
+                        ).classList.add(
+                            "active"
+                        );
 
-                    document.getElementById(
-                        "lightbox"
-                    ).classList.add("active");
+                    }
+                );
 
-                }
-            );
+                card.appendChild(img);
 
-            card.appendChild(img);
+                track.appendChild(card);
 
-            track.appendChild(card);
-
-        });
+            }
+        );
 
     }catch(error){
 
@@ -1160,12 +1407,16 @@ async function loadPhotos(){
             '<div class="photo-message">' +
             '照片暂时无法读取，请稍后刷新' +
             '</div>';
+
     }
 }
 
 loadPhotos();
 
-setInterval(loadPhotos,300000);
+setInterval(
+    loadPhotos,
+    300000
+);
 
 
 /* =========================
@@ -1180,7 +1431,9 @@ document.getElementById(
 
         document.getElementById(
             "lightbox"
-        ).classList.remove("active");
+        ).classList.remove(
+            "active"
+        );
 
     }
 );
@@ -1212,19 +1465,28 @@ document.addEventListener(
     "contextmenu",
     function(e){
 
-        if(e.target.tagName === "IMG"){
+        if(
+            e.target.tagName === "IMG"
+        ){
+
             e.preventDefault();
+
         }
 
     }
 );
 
+
 document.addEventListener(
     "dragstart",
     function(e){
 
-        if(e.target.tagName === "IMG"){
+        if(
+            e.target.tagName === "IMG"
+        ){
+
             e.preventDefault();
+
         }
 
     }
@@ -1247,7 +1509,9 @@ const observer =
             entries.forEach(
                 function(entry){
 
-                    if(entry.isIntersecting){
+                    if(
+                        entry.isIntersecting
+                    ){
 
                         entry.target.classList.add(
                             "show"
@@ -1266,7 +1530,9 @@ const observer =
 
 cards.forEach(
     function(card){
+
         observer.observe(card);
+
     }
 );
 
