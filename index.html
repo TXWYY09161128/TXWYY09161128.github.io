@@ -6,423 +6,421 @@
 <title>YUAN LUO XING</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-    font-family:Georgia,"Times New Roman",serif;
-    background:#efe9df;
-    color:#342d28;
-    overflow-x:hidden;
+  font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#17130f;
+  color:white;
 }
 
-/* 主视觉 */
-.scene{
-    position:fixed;
-    inset:0;
-    z-index:-5;
-    background:
-      linear-gradient(
-        180deg,
-        rgba(224,210,190,.25),
-        rgba(91,67,48,.18) 55%,
-        rgba(46,35,28,.48)
-      ),
-      linear-gradient(
-        115deg,
-        #d9c8ae 0%,
-        #b68a62 43%,
-        #71513c 72%,
-        #3d3029 100%
-      );
-}
+/* ===== 背景 ===== */
 
-/* 地面枫叶层 */
-.ground{
-    position:fixed;
-    left:-5%;
-    right:-5%;
-    bottom:-5%;
-    height:52%;
-    z-index:-2;
-    background:
-      radial-gradient(ellipse at 50% 20%,
-        rgba(247,219,157,.5) 0%,
-        rgba(158,93,46,.38) 34%,
-        rgba(67,45,32,.72) 100%
-      );
-    transform:perspective(700px) rotateX(12deg);
-    transform-origin:bottom;
-}
-
-/* 枫叶铺成的小路 */
-.path{
-    position:fixed;
-    left:50%;
-    bottom:-8%;
-    width:58%;
-    height:72%;
-    transform:translateX(-50%);
-    z-index:-1;
-    background:
-      radial-gradient(ellipse at 50% 100%,
-        rgba(92,49,28,.8) 0%,
-        rgba(136,76,38,.78) 22%,
-        rgba(180,105,48,.68) 48%,
-        rgba(190,128,68,.3) 72%,
-        transparent 100%
-      );
-    filter:blur(1px);
-    opacity:.9;
-}
-
-/* 远处树影 */
-.trees{
-    position:fixed;
-    inset:0;
-    z-index:-3;
-    background:
-      linear-gradient(90deg,
-        rgba(48,38,31,.55) 0%,
-        transparent 13%,
-        transparent 87%,
-        rgba(48,38,31,.55) 100%
-      );
-}
-
-/* 胶片颗粒 */
-.grain{
-    position:fixed;
-    inset:0;
-    z-index:20;
-    pointer-events:none;
-    opacity:.13;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-}
-
-/* 风 */
-.wind{
-    position:fixed;
-    inset:0;
-    z-index:4;
-    pointer-events:none;
-    overflow:hidden;
-}
-
-.wind span{
-    position:absolute;
-    width:1px;
-    height:90px;
-    background:linear-gradient(
-        transparent,
-        rgba(255,255,255,.18),
-        transparent
-    );
-    opacity:0;
-    animation:wind 7s linear infinite;
-}
-
-.wind span:nth-child(1){left:12%;top:35%;animation-delay:1s}
-.wind span:nth-child(2){left:28%;top:22%;animation-delay:4s}
-.wind span:nth-child(3){left:64%;top:30%;animation-delay:2s}
-.wind span:nth-child(4){left:81%;top:18%;animation-delay:5s}
-
-@keyframes wind{
-    0%{transform:translate(-30px,0) rotate(25deg);opacity:0}
-    25%{opacity:.7}
-    100%{transform:translate(190px,80px) rotate(25deg);opacity:0}
-}
-
-/* 页面 */
-main{
-    min-height:100vh;
-    padding:7vh 7vw 10vh;
-}
-
-/* 顶部 */
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:rgba(255,250,240,.82);
-    font-size:12px;
-    letter-spacing:4px;
-}
-
-/* 中央 */
 .hero{
-    min-height:78vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:#fffaf2;
-    text-shadow:0 2px 18px rgba(38,25,17,.35);
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(25,20,16,.15),
+      rgba(25,18,13,.35)
+    ),
+    url("photo.jpg") center/cover no-repeat;
+
+  display:flex;
+  align-items:flex-end;
+  padding:7vw;
 }
 
-.small{
-    font-size:12px;
-    letter-spacing:7px;
-    margin-bottom:20px;
-    opacity:.85;
+/* 没照片时的背景 */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(238,190,119,.5),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #9b603d,
+      #49382d 48%,
+      #191512
+    );
+}
+
+/* 柔光 */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+
+  background:
+    radial-gradient(
+      circle at 72% 25%,
+      rgba(255,215,154,.28),
+      transparent 25%
+    ),
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.72),
+      transparent 55%
+    );
+}
+
+/* ===== 顶部 ===== */
+
+.nav{
+  position:absolute;
+  top:30px;
+  left:7vw;
+  right:7vw;
+  z-index:5;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:11px;
+  letter-spacing:4px;
+  color:rgba(255,255,255,.8);
+}
+
+/* ===== 文字 ===== */
+
+.content{
+  position:relative;
+  z-index:5;
+  max-width:850px;
+}
+
+.kicker{
+  font-size:11px;
+  letter-spacing:6px;
+  margin-bottom:22px;
+  opacity:.75;
 }
 
 h1{
-    font-size:clamp(50px,10vw,118px);
-    font-weight:400;
-    letter-spacing:8px;
-    line-height:.95;
+  font-size:clamp(55px,10vw,130px);
+  font-weight:300;
+  line-height:.9;
+  letter-spacing:-3px;
 }
 
-.zh{
-    margin-top:22px;
-    font-size:clamp(22px,4vw,38px);
-    letter-spacing:10px;
+.chinese{
+  margin-top:24px;
+  font-size:clamp(20px,3vw,34px);
+  letter-spacing:14px;
+  font-weight:300;
 }
 
 .desc{
-    max-width:520px;
-    margin-top:25px;
-    line-height:2.1;
-    font-size:15px;
-    opacity:.9;
+  margin-top:25px;
+  max-width:480px;
+
+  font-size:14px;
+  line-height:2;
+
+  color:rgba(255,255,255,.78);
 }
 
+/* ===== 按钮 ===== */
+
 .enter{
-    margin-top:34px;
-    padding:14px 25px;
-    border:1px solid rgba(255,255,255,.55);
-    border-radius:40px;
-    color:white;
-    text-decoration:none;
-    letter-spacing:3px;
-    font-size:11px;
-    backdrop-filter:blur(8px);
-    background:rgba(255,255,255,.08);
-    transition:.35s;
+  display:inline-flex;
+  margin-top:35px;
+
+  padding:14px 22px;
+
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:100px;
+
+  color:white;
+  text-decoration:none;
+
+  font-size:10px;
+  letter-spacing:3px;
+
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+
+  transition:.4s;
 }
 
 .enter:hover{
-    background:rgba(255,255,255,.2);
-    transform:translateY(-2px);
+  background:rgba(255,255,255,.2);
+  transform:translateY(-3px);
 }
 
-/* 今日 */
-.today{
-    min-height:60vh;
-    padding:12vh 0;
-    color:#44372d;
-    text-align:center;
-}
+/* ===== 第二屏 ===== */
 
-.today small{
-    letter-spacing:5px;
-    font-size:11px;
-}
+.memory{
+  min-height:100vh;
 
-.today h2{
-    margin:20px 0;
-    font-size:clamp(32px,6vw,65px);
-    font-weight:400;
-}
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-.quote{
-    max-width:650px;
-    margin:0 auto;
-    line-height:2;
-    font-size:18px;
-}
+  padding:12vw 7vw;
 
-.mood{
-    margin-top:30px;
-    font-size:12px;
-    letter-spacing:3px;
-    opacity:.65;
-}
-
-/* 底部 */
-footer{
-    padding:50px 0 20px;
-    text-align:center;
-    color:rgba(255,248,237,.72);
-    letter-spacing:5px;
-    font-size:10px;
-}
-
-/* 枫叶 */
-.leaf{
-    position:fixed;
-    z-index:5;
-    width:28px;
-    height:24px;
-    background:#b75d32;
-    clip-path:polygon(
-      50% 0%, 61% 28%, 88% 15%,
-      76% 43%, 100% 55%, 68% 62%,
-      73% 100%, 50% 75%, 28% 100%,
-      32% 62%, 0% 55%, 24% 43%,
-      12% 15%, 39% 28%
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      #5d4332,
+      #211914 65%
     );
-    opacity:.82;
-    animation:fall linear infinite;
 }
 
-.leaf:nth-child(1){
-    left:8%;top:-5%;animation-duration:11s;
-    animation-delay:1s;
-    transform:scale(.8) rotate(15deg);
+.memory-inner{
+  width:min(900px,100%);
+  text-align:center;
 }
 
-.leaf:nth-child(2){
-    left:25%;top:-10%;animation-duration:14s;
-    animation-delay:4s;
-    background:#d58a35;
-    transform:scale(.65);
+.memory-label{
+  font-size:10px;
+  letter-spacing:6px;
+  opacity:.55;
 }
 
-.leaf:nth-child(3){
-    left:72%;top:-8%;animation-duration:12s;
-    animation-delay:2s;
-    background:#a8452d;
+.memory h2{
+  margin:25px 0;
+
+  font-size:clamp(35px,6vw,75px);
+  font-weight:300;
 }
 
-.leaf:nth-child(4){
-    left:88%;top:-5%;animation-duration:15s;
-    animation-delay:6s;
-    background:#d09a42;
-    transform:scale(.7);
+.memory p{
+  max-width:600px;
+  margin:auto;
+
+  line-height:2.2;
+  font-size:15px;
+
+  color:rgba(255,255,255,.65);
 }
 
-@keyframes fall{
-    0%{
-        transform:translate(0,-20px) rotate(0deg);
-        opacity:0;
-    }
-    12%{opacity:.85}
-    50%{
-        transform:translate(80px,55vh) rotate(170deg);
-    }
-    100%{
-        transform:translate(-40px,115vh) rotate(340deg);
-        opacity:0;
-    }
+/* ===== 日期 ===== */
+
+.date{
+  margin-top:55px;
+
+  display:flex;
+  justify-content:center;
+  gap:30px;
+
+  font-size:11px;
+  letter-spacing:4px;
+  opacity:.55;
 }
 
-/* 手机 */
+/* ===== 底部 ===== */
+
+footer{
+  padding:50px 7vw;
+
+  display:flex;
+  justify-content:space-between;
+
+  background:#120f0c;
+
+  font-size:9px;
+  letter-spacing:4px;
+
+  color:rgba(255,255,255,.4);
+}
+
+/* ===== 风 ===== */
+
+.breeze{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.breeze span{
+  position:absolute;
+
+  width:130px;
+  height:1px;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.25),
+    transparent
+  );
+
+  transform:rotate(-12deg);
+
+  animation:breeze 8s linear infinite;
+}
+
+.breeze span:nth-child(1){
+  top:35%;
+  left:-150px;
+}
+
+.breeze span:nth-child(2){
+  top:50%;
+  left:-300px;
+  animation-delay:3s;
+}
+
+.breeze span:nth-child(3){
+  top:65%;
+  left:-250px;
+  animation-delay:5s;
+}
+
+@keyframes breeze{
+
+  0%{
+    transform:translateX(0) rotate(-12deg);
+    opacity:0;
+  }
+
+  20%{
+    opacity:.7;
+  }
+
+  100%{
+    transform:translateX(130vw) rotate(-12deg);
+    opacity:0;
+  }
+}
+
+/* ===== 手机 ===== */
+
 @media(max-width:600px){
 
-    main{
-        padding:5vh 6vw 8vh;
-    }
+  .hero{
+    padding:12vw 7vw;
+  }
 
-    .top{
-        font-size:9px;
-        letter-spacing:3px;
-    }
+  .nav{
+    top:22px;
+  }
 
-    .hero{
-        min-height:82vh;
-    }
+  h1{
+    letter-spacing:-2px;
+  }
 
-    h1{
-        font-size:45px;
-        letter-spacing:5px;
-    }
+  .chinese{
+    letter-spacing:8px;
+  }
 
-    .zh{
-        font-size:22px;
-        letter-spacing:7px;
-    }
+  .desc{
+    font-size:13px;
+  }
 
-    .desc{
-        font-size:13px;
-        line-height:2;
-        max-width:320px;
-    }
-
-    .path{
-        width:100%;
-    }
-
-    .quote{
-        padding:0 20px;
-        font-size:16px;
-    }
+  footer{
+    flex-direction:column;
+    gap:15px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="scene"></div>
-<div class="trees"></div>
-<div class="ground"></div>
-<div class="path"></div>
-<div class="grain"></div>
+<section class="hero">
 
-<!-- 微风 -->
-<div class="wind">
+  <div class="nav">
+    <span>YUAN LUO XING</span>
+    <span id="date"></span>
+  </div>
+
+  <div class="breeze">
     <span></span>
     <span></span>
     <span></span>
-    <span></span>
-</div>
+  </div>
 
-<!-- 少量被风吹起的枫叶 -->
-<div class="leaf"></div>
-<div class="leaf"></div>
-<div class="leaf"></div>
-<div class="leaf"></div>
+  <div class="content">
 
-<main>
-
-    <div class="top">
-        <div>YUAN LUO XING</div>
-        <div id="date"></div>
+    <div class="kicker">
+      A QUIET PLACE
     </div>
 
-    <section class="hero">
+    <h1>
+      YUAN<br>
+      LUO XING
+    </h1>
 
-        <div class="small">A QUIET PLACE</div>
+    <div class="chinese">
+      圆落星
+    </div>
 
-        <h1>YUAN LUO XING</h1>
+    <p class="desc">
+      把喜欢的人、事、照片和那些<br>
+      不想忘记的瞬间，慢慢留在这里。
+    </p>
 
-        <div class="zh">圆落星</div>
+    <a class="enter" href="#memory">
+      ENTER MY WORLD →
+    </a>
 
-        <p class="desc">
-            把喜欢的人、事、照片和那些<br>
-            不想忘记的瞬间，慢慢留在这里。
-        </p>
+  </div>
 
-        <a class="enter" href="#today">
-            ENTER MY WORLD →
-        </a>
+</section>
 
-    </section>
 
-    <section class="today" id="today">
+<section class="memory" id="memory">
 
-        <small>TODAY</small>
+  <div class="memory-inner">
 
-        <h2 id="todayDate"></h2>
+    <div class="memory-label">
+      A PLACE FOR MEMORY
+    </div>
 
-        <div class="quote" id="quote"></div>
+    <h2>
+      把喜欢的留下。
+    </h2>
 
-        <div class="mood" id="mood"></div>
+    <p>
+      有些风景只经过一次，<br>
+      有些人却会在记忆里停留很久。
+    </p>
 
-    </section>
+    <div class="date">
+      <span>TODAY</span>
+      <span id="today"></span>
+    </div>
 
-    <footer>
-        YUAN LUO XING
-    </footer>
+  </div>
 
-</main>
+</section>
+
+
+<footer>
+
+  <span>YUAN LUO XING</span>
+
+  <span>© <span id="year"></span></span>
+
+</footer>
+
 
 <script>
 
-/* 自动日期 */
 const now = new Date();
 
 const year = now.getFullYear();
@@ -430,77 +428,13 @@ const month = String(now.getMonth()+1).padStart(2,"0");
 const day = String(now.getDate()).padStart(2,"0");
 
 document.getElementById("date").textContent =
-    `${year}.${month}.${day}`;
+  `${year}.${month}.${day}`;
 
-document.getElementById("todayDate").textContent =
-    `${year}.${month}.${day}`;
+document.getElementById("today").textContent =
+  `${year}.${month}.${day}`;
 
-
-/* 每天自动换一句话 */
-const quotes = [
-    "有些喜欢，不需要说出来，也会一直留在那里。",
-    "慢一点，很多美好的东西都来得及。",
-    "今天也值得被好好记住。",
-    "风吹过的时候，时间也变得很轻。",
-    "有些瞬间很短，却值得记很久。",
-    "愿喜欢的，都慢慢留下来。",
-    "生活不必急着抵达，沿途也很好。"
-];
-
-const index =
-    Math.floor(
-        new Date(year, now.getMonth(), day).getTime()
-        / 86400000
-    ) % quotes.length;
-
-document.getElementById("quote").textContent =
-    quotes[index];
-
-
-/* 根据时间自动改变一句状态 */
-const hour = now.getHours();
-
-let mood = "";
-
-if(hour < 6){
-    mood = "THE WORLD IS QUIET";
-}else if(hour < 11){
-    mood = "A SOFT MORNING";
-}else if(hour < 17){
-    mood = "A COOL BREEZE";
-}else if(hour < 21){
-    mood = "GOLDEN LIGHT";
-}else{
-    mood = "A QUIET NIGHT";
-}
-
-document.getElementById("mood").textContent = mood;
-
-
-/* 轻微视差 */
-document.addEventListener("mousemove", e => {
-
-    const x =
-        (e.clientX / window.innerWidth - .5) * 10;
-
-    const y =
-        (e.clientY / window.innerHeight - .5) * 8;
-
-    document.querySelector(".path").style.transform =
-        `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
-
-});
-
-
-/* 滚动一点点视差 */
-window.addEventListener("scroll", () => {
-
-    const scrollY = window.scrollY;
-
-    document.querySelector(".ground").style.transform =
-        `perspective(700px) rotateX(12deg) translateY(${scrollY * .05}px)`;
-
-});
+document.getElementById("year").textContent =
+  year;
 
 </script>
 
