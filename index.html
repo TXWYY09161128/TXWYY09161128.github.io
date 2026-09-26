@@ -6,185 +6,174 @@
 <title>圆落星</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   min-height:100vh;
   overflow-x:hidden;
-  color:#fffaf2;
+  color:#fff8ed;
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",
   "PingFang SC","Microsoft YaHei",sans-serif;
-  background:#6f5038;
-  transition:background 1.8s ease,color 1.2s ease;
+  background:#65452f;
+  transition:background 1.5s ease;
 }
 
-/* ===== 背景 ===== */
-
+/* 背景 */
 .scene{
   position:fixed;
   inset:0;
   z-index:-5;
   overflow:hidden;
   background:
-    radial-gradient(circle at 72% 20%,rgba(255,213,145,.45),transparent 25%),
-    linear-gradient(135deg,#9a7550 0%,#63452f 48%,#30231d 100%);
-  transition:all 2s ease;
+    radial-gradient(circle at 72% 20%,rgba(255,213,145,.45),transparent 26%),
+    linear-gradient(135deg,#a77b50,#68472f 52%,#2d211b);
+  transition:background 2s ease;
 }
 
-.scene::before{
+.scene:before{
   content:"";
   position:absolute;
   width:70vw;
   height:70vw;
   right:-25vw;
-  top:-25vw;
+  top:-28vw;
   border-radius:50%;
-  background:rgba(255,198,113,.22);
-  filter:blur(35px);
-  animation:sunMove 12s ease-in-out infinite alternate;
+  background:rgba(255,202,125,.22);
+  filter:blur(40px);
+  animation:sun 12s ease-in-out infinite alternate;
 }
 
-.scene::after{
+.scene:after{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(115deg,transparent 20%,rgba(255,218,157,.08) 42%,transparent 55%);
-  animation:lightMove 9s ease-in-out infinite alternate;
+  background:linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255,220,165,.10) 46%,
+    transparent 58%
+  );
+  animation:light 9s ease-in-out infinite alternate;
 }
 
-@keyframes sunMove{
+@keyframes sun{
   from{transform:translate(0,0) scale(1)}
-  to{transform:translate(-8vw,7vh) scale(1.15)}
+  to{transform:translate(-8vw,7vh) scale(1.12)}
 }
 
-@keyframes lightMove{
-  from{transform:translateX(-8%)}
-  to{transform:translateX(8%)}
+@keyframes light{
+  from{transform:translateX(-7%)}
+  to{transform:translateX(7%)}
 }
 
 /* 胶片颗粒 */
 .grain{
   position:fixed;
   inset:0;
-  z-index:10;
+  z-index:20;
   pointer-events:none;
-  opacity:.13;
+  opacity:.10;
   background-image:
-    repeating-radial-gradient(circle at 0 0,
-    rgba(255,255,255,.35) 0 1px,
-    transparent 1px 4px);
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(255,255,255,.35) 0 1px,
+      transparent 1px 4px
+    );
   background-size:5px 5px;
-  mix-blend-mode:soft-light;
 }
 
-/* ===== 主页面 ===== */
-
+/* 页面 */
 .page{
-  width:min(1280px,92%);
-  margin:auto;
+  width:min(1200px,90%);
   min-height:100vh;
+  margin:auto;
   display:flex;
   flex-direction:column;
 }
 
-/* ===== 顶部 ===== */
-
 header{
-  padding:38px 0;
+  padding:35px 0;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  letter-spacing:.18em;
 }
 
 .logo{
-  font-size:14px;
-  font-weight:600;
+  font-size:13px;
+  letter-spacing:.2em;
 }
 
 .season{
-  font-size:11px;
-  opacity:.7;
-  letter-spacing:.25em;
+  font-size:10px;
+  letter-spacing:.28em;
+  opacity:.58;
 }
 
-/* ===== Hero ===== */
-
+/* 主视觉 */
 .hero{
   min-height:78vh;
   display:grid;
-  grid-template-columns:1.05fr .95fr;
+  grid-template-columns:1fr 1fr;
   align-items:center;
   gap:70px;
 }
 
 .hero-copy{
   position:relative;
-  z-index:3;
-  transform:translateY(-20px);
+  z-index:5;
 }
 
 .eyebrow{
-  font-size:11px;
+  font-size:10px;
   letter-spacing:.42em;
-  opacity:.62;
+  opacity:.58;
   margin-bottom:25px;
 }
 
 h1{
   font-family:Georgia,"Times New Roman","Songti SC",serif;
+  font-size:clamp(65px,9vw,125px);
   font-weight:400;
-  font-size:clamp(60px,9vw,128px);
-  line-height:.88;
-  letter-spacing:-.055em;
+  line-height:.9;
+  letter-spacing:-.06em;
   margin-bottom:32px;
-  text-shadow:0 10px 40px rgba(45,25,12,.28);
+  text-shadow:0 12px 45px rgba(40,20,8,.3);
 }
 
 .subtitle{
+  max-width:390px;
+  color:rgba(255,248,235,.78);
   font-size:13px;
   line-height:2;
-  color:rgba(255,248,235,.78);
-  max-width:390px;
 }
 
 .enter{
   display:inline-flex;
-  margin-top:42px;
-  align-items:center;
   gap:18px;
-  color:#fff4dd;
-  text-decoration:none;
-  font-size:11px;
-  letter-spacing:.24em;
+  margin-top:42px;
   padding-bottom:10px;
-  border-bottom:1px solid rgba(255,238,204,.55);
-  transition:.4s ease;
+  color:#fff2d9;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,235,200,.5);
+  font-size:10px;
+  letter-spacing:.25em;
 }
 
 .enter span{
-  transition:.4s ease;
+  transition:.4s;
 }
 
 .enter:hover span{
   transform:translateX(8px);
 }
 
-/* ===== 人物区域 ===== */
-
+/* 人物 */
 .portrait-wrap{
   position:relative;
   height:min(68vh,680px);
-  min-height:480px;
+  min-height:470px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -192,72 +181,70 @@ h1{
 
 .portrait-glow{
   position:absolute;
-  width:70%;
+  width:75%;
   height:80%;
   border-radius:50%;
-  background:rgba(255,202,132,.3);
-  filter:blur(55px);
+  background:rgba(255,205,140,.28);
+  filter:blur(60px);
 }
 
 .portrait{
   position:relative;
-  width:min(430px,80%);
-  height:92%;
-  border-radius:220px 220px 18px 18px;
+  width:min(430px,82%);
+  height:94%;
   overflow:hidden;
-  background:
-    linear-gradient(145deg,#d6a878,#775039 60%,#30231d);
+  border-radius:220px 220px 20px 20px;
+  background:linear-gradient(145deg,#d6aa78,#765039 65%,#2e211a);
   box-shadow:
-    0 35px 90px rgba(34,19,10,.42),
-    inset 0 0 60px rgba(255,218,163,.15);
-  transform:translateY(0);
+    0 35px 90px rgba(35,18,8,.45),
+    inset 0 0 60px rgba(255,220,170,.15);
   transition:transform .2s ease;
 }
 
 .portrait img{
+  display:block;
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
 
-/* 没上传照片时的高级占位 */
-.portrait.no-photo::before{
+.portrait.no-photo:before{
   content:"";
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 50% 35%,rgba(255,224,181,.45),transparent 17%),
-    linear-gradient(135deg,#c99b6d,#6f4b35 60%,#2e211b);
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(255,225,185,.45),
+      transparent 18%
+    ),
+    linear-gradient(135deg,#c99b6d,#704b34 60%,#2c201a);
 }
 
-.portrait.no-photo::after{
+.portrait.no-photo:after{
   content:"";
   position:absolute;
   left:50%;
-  top:28%;
+  top:27%;
   width:38%;
   aspect-ratio:1;
   transform:translateX(-50%);
   border-radius:50%;
   background:linear-gradient(145deg,#dfb487,#76513c);
-  box-shadow:0 150px 0 55px rgba(67,42,29,.72);
+  box-shadow:0 150px 0 55px rgba(64,39,27,.75);
 }
 
-/* 阳光斑 */
 .sun-dots{
   position:absolute;
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 20% 25%,rgba(255,236,188,.35) 0 2px,transparent 3px),
-    radial-gradient(circle at 75% 35%,rgba(255,236,188,.25) 0 3px,transparent 4px),
-    radial-gradient(circle at 62% 70%,rgba(255,236,188,.2) 0 2px,transparent 3px);
-  filter:blur(.3px);
+    radial-gradient(circle at 20% 25%,rgba(255,238,190,.35) 0 2px,transparent 3px),
+    radial-gradient(circle at 75% 35%,rgba(255,238,190,.25) 0 3px,transparent 4px),
+    radial-gradient(circle at 62% 70%,rgba(255,238,190,.20) 0 2px,transparent 3px);
 }
 
-/* ===== 枫叶 ===== */
-
+/* 飘落元素 */
 .leaves{
   position:fixed;
   inset:0;
@@ -272,51 +259,44 @@ h1{
   width:17px;
   height:14px;
   border-radius:70% 0 70% 0;
-  background:#b86d32;
-  opacity:.75;
+  background:#b86c32;
+  opacity:.72;
   filter:drop-shadow(0 4px 6px rgba(40,20,10,.2));
   animation:fall linear infinite;
 }
 
-.leaf::after{
+.leaf:after{
   content:"";
   position:absolute;
   left:50%;
   top:-3px;
   width:1px;
   height:20px;
-  background:rgba(90,48,25,.55);
+  background:rgba(90,48,25,.5);
   transform:rotate(35deg);
 }
 
 .leaf:nth-child(1){left:8%;animation-duration:13s;animation-delay:-3s;transform:scale(.7)}
-.leaf:nth-child(2){left:19%;animation-duration:17s;animation-delay:-10s;transform:scale(1.1)}
-.leaf:nth-child(3){left:34%;animation-duration:14s;animation-delay:-6s;transform:scale(.65)}
-.leaf:nth-child(4){left:51%;animation-duration:19s;animation-delay:-14s;transform:scale(.8)}
+.leaf:nth-child(2){left:20%;animation-duration:17s;animation-delay:-10s;transform:scale(1.1)}
+.leaf:nth-child(3){left:36%;animation-duration:14s;animation-delay:-6s;transform:scale(.65)}
+.leaf:nth-child(4){left:52%;animation-duration:19s;animation-delay:-14s;transform:scale(.8)}
 .leaf:nth-child(5){left:68%;animation-duration:15s;animation-delay:-8s;transform:scale(1.15)}
 .leaf:nth-child(6){left:82%;animation-duration:18s;animation-delay:-5s;transform:scale(.6)}
-.leaf:nth-child(7){left:92%;animation-duration:12s;animation-delay:-9s;transform:scale(.9)}
+.leaf:nth-child(7){left:93%;animation-duration:12s;animation-delay:-9s;transform:scale(.9)}
 
 @keyframes fall{
-  0%{
-    transform:translate3d(0,-60px,0) rotate(0deg);
-  }
-  45%{
-    transform:translate3d(70px,50vh,0) rotate(150deg);
-  }
-  100%{
-    transform:translate3d(-80px,110vh,0) rotate(360deg);
-  }
+  0%{transform:translate3d(0,-60px,0) rotate(0)}
+  45%{transform:translate3d(70px,50vh,0) rotate(150deg)}
+  100%{transform:translate3d(-80px,110vh,0) rotate(360deg)}
 }
 
-/* ===== 今日 ===== */
-
+/* 今日 */
 .today{
   padding:90px 0 110px;
   display:grid;
   grid-template-columns:.7fr 1.3fr;
   gap:80px;
-  border-top:1px solid rgba(255,240,218,.18);
+  border-top:1px solid rgba(255,240,218,.17);
 }
 
 .today-label{
@@ -332,22 +312,20 @@ h1{
 }
 
 .daily{
+  max-width:650px;
   font-family:Georgia,"Songti SC",serif;
   font-size:clamp(24px,3vw,42px);
   line-height:1.45;
-  max-width:650px;
-  color:#fff5e5;
 }
 
 .mood{
   margin-top:25px;
-  font-size:11px;
+  font-size:10px;
   letter-spacing:.2em;
-  opacity:.55;
+  opacity:.52;
 }
 
-/* ===== 底部 ===== */
-
+/* 底部 */
 footer{
   margin-top:auto;
   padding:28px 0;
@@ -355,11 +333,10 @@ footer{
   justify-content:space-between;
   font-size:9px;
   letter-spacing:.22em;
-  opacity:.48;
+  opacity:.45;
 }
 
-/* ===== 滚动动画 ===== */
-
+/* 滚动 */
 .reveal{
   opacity:0;
   transform:translateY(35px);
@@ -371,12 +348,11 @@ footer{
   transform:translateY(0);
 }
 
-/* ===== 冬季 ===== */
-
+/* 冬季 */
 body.winter .scene{
   background:
-    radial-gradient(circle at 70% 20%,rgba(220,235,255,.4),transparent 25%),
-    linear-gradient(135deg,#6f7c86,#3f4a52 55%,#20272c);
+    radial-gradient(circle at 70% 20%,rgba(220,235,255,.4),transparent 26%),
+    linear-gradient(135deg,#71808a,#414c53 55%,#20272c);
 }
 
 body.winter .portrait-glow{
@@ -391,27 +367,24 @@ body.winter .leaf{
   box-shadow:0 0 8px rgba(255,255,255,.8);
 }
 
-body.winter .leaf::after{
+body.winter .leaf:after{
   display:none;
 }
 
-/* ===== 春季 ===== */
-
+/* 春季 */
 body.spring .scene{
   background:
-    radial-gradient(circle at 70% 20%,rgba(255,221,226,.45),transparent 25%),
+    radial-gradient(circle at 70% 20%,rgba(255,221,226,.45),transparent 26%),
     linear-gradient(135deg,#b99c8e,#776b63 55%,#403936);
 }
 
 body.spring .leaf{
   width:11px;
   height:8px;
-  border-radius:70% 0 70% 0;
   background:#e5a9ae;
 }
 
-/* ===== 夏季 ===== */
-
+/* 夏季 */
 body.summer .scene{
   background:
     radial-gradient(circle at 72% 18%,rgba(255,239,164,.5),transparent 27%),
@@ -425,17 +398,12 @@ body.summer .leaf{
   background:#d8c879;
 }
 
-/* ===== 手机 ===== */
-
+/* 手机 */
 @media(max-width:800px){
 
-  .page{
-    width:88%;
-  }
+  .page{width:88%}
 
-  header{
-    padding:25px 0;
-  }
+  header{padding:25px 0}
 
   .hero{
     min-height:auto;
@@ -444,22 +412,13 @@ body.summer .leaf{
     padding:45px 0 90px;
   }
 
-  .hero-copy{
-    transform:none;
-  }
-
   h1{
     font-size:clamp(62px,18vw,95px);
-  }
-
-  .subtitle{
-    max-width:330px;
   }
 
   .portrait-wrap{
     height:520px;
     min-height:0;
-    order:2;
   }
 
   .portrait{
@@ -473,21 +432,13 @@ body.summer .leaf{
     padding:70px 0 90px;
   }
 
-  .daily{
-    font-size:28px;
-  }
-
-  footer{
-    padding-bottom:22px;
-  }
+  .daily{font-size:28px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation:none !important;
-    transition:none !important;
+  *,*:before,*:after{
+    animation:none!important;
+    transition:none!important;
   }
 }
 </style>
@@ -512,7 +463,7 @@ body.summer .leaf{
 
 <header>
   <div class="logo">YUAN LUO XING</div>
-  <div class="season" id="seasonText">A QUIET PLACE</div>
+  <div class="season" id="seasonText">A WARM MEMORY</div>
 </header>
 
 <main>
@@ -554,7 +505,6 @@ body.summer .leaf{
 
 </section>
 
-
 <section class="today reveal" id="today">
 
   <div>
@@ -580,9 +530,7 @@ body.summer .leaf{
 
 <script>
 
-/* =========================
-   自动日期
-========================= */
+/* 自动日期 */
 
 const now = new Date();
 
@@ -599,54 +547,43 @@ document.getElementById("year").textContent =
   now.getFullYear();
 
 
-/* =========================
-   四季自动切换
-========================= */
+/* 四季自动切换 */
 
 const month = now.getMonth() + 1;
 
-let season;
-
 if(month >= 3 && month <= 5){
-  season = "spring";
-}
-else if(month >= 6 && month <= 8){
-  season = "summer";
-}
-else if(month >= 9 && month <= 11){
-  season = "fallMood";
-}
-else{
-  season = "winter";
-}
 
-if(season === "spring"){
   document.body.classList.add("spring");
+
   document.getElementById("seasonText").textContent =
     "A SOFT BEGINNING";
-}
 
-else if(season === "summer"){
+}
+else if(month >= 6 && month <= 8){
+
   document.body.classList.add("summer");
+
   document.getElementById("seasonText").textContent =
     "A SLOW AFTERNOON";
-}
 
-else if(season === "winter"){
-  document.body.classList.add("winter");
-  document.getElementById("seasonText").textContent =
-    "A QUIET NIGHT";
 }
+else if(month >= 9 && month <= 11){
 
-else{
   document.getElementById("seasonText").textContent =
     "A WARM MEMORY";
+
+}
+else{
+
+  document.body.classList.add("winter");
+
+  document.getElementById("seasonText").textContent =
+    "A QUIET NIGHT";
+
 }
 
 
-/* =========================
-   每日文字
-========================= */
+/* 每日文字 */
 
 const quotes = [
   "有些喜欢，不需要说出口。",
@@ -659,25 +596,19 @@ const quotes = [
   "有光的时候，就好好看看光。"
 ];
 
-const daySeed =
-  Math.floor(
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    ).getTime() / 86400000
-  );
+const daySeed = Math.floor(
+  new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  ).getTime() / 86400000
+);
 
-const quote = quotes[
-  Math.abs(daySeed) % quotes.length
-];
-
-document.getElementById("dailyText").textContent = quote;
+document.getElementById("dailyText").textContent =
+  quotes[Math.abs(daySeed) % quotes.length];
 
 
-/* =========================
-   时间氛围
-========================= */
+/* 时间氛围 */
 
 const hour = now.getHours();
 
@@ -699,12 +630,9 @@ else{
 document.getElementById("mood").textContent = moodText;
 
 
-/* =========================
-   鼠标移动：人物轻微视差
-========================= */
+/* 鼠标轻微视差 */
 
-const portrait =
-  document.getElementById("portrait");
+const portrait = document.getElementById("portrait");
 
 document.addEventListener("mousemove",(e)=>{
 
@@ -722,25 +650,22 @@ document.addEventListener("mousemove",(e)=>{
 });
 
 
-/* =========================
-   滚动出现
-========================= */
+/* 滚动出现 */
 
-const observer =
-  new IntersectionObserver(
-    entries => {
+const observer = new IntersectionObserver(
+  entries => {
 
-      entries.forEach(entry => {
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
-          entry.target.classList.add("show");
-        }
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
 
-      });
+    });
 
-    },
-    {threshold:.15}
-  );
+  },
+  {threshold:.15}
+);
 
 document
   .querySelectorAll(".reveal")
