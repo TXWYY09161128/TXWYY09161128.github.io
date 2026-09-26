@@ -515,30 +515,23 @@ async function loadWeather(){
         const weatherMap = {
 
             0:"晴天 ☀️",
-
             1:"基本晴朗 🌤️",
             2:"局部多云 ⛅",
             3:"阴天 ☁️",
-
             45:"雾 🌫️",
             48:"雾 🌫️",
-
             51:"小毛毛雨 🌦️",
             53:"毛毛雨 🌦️",
             55:"毛毛雨 🌦️",
-
             61:"小雨 🌧️",
             63:"中雨 🌧️",
             65:"大雨 🌧️",
-
             71:"小雪 ❄️",
             73:"中雪 ❄️",
             75:"大雪 ❄️",
-
             80:"阵雨 🌦️",
             81:"阵雨 🌦️",
             82:"强阵雨 🌧️",
-
             95:"雷雨 ⛈️",
             96:"雷雨 ⛈️",
             99:"强雷雨 ⛈️"
@@ -574,62 +567,57 @@ setInterval(loadWeather,600000);
 
 
 /* =========================
-   自动读取 photos 文件夹
+   照片
+   直接读取 photos 文件夹
 ========================= */
 
-async function loadPhotos(){
+function loadPhotos(){
 
     const grid =
         document.getElementById("photoGrid");
 
-    try{
+    grid.innerHTML = "";
 
-        const api =
-        "https://api.github.com/repos/TXWYY09161128/TXWYY09161128/contents/photos";
+    /*
+      支持：
 
-        const response =
-            await fetch(api,{
-                headers:{
-                    "Accept":
-                    "application/vnd.github+json"
-                },
-                cache:"no-store"
-            });
+      photos/1.jpg
+      photos/2.jpg
+      ...
+      photos/15.jpg
 
-        if(!response.ok)
-            throw new Error();
+      也支持 png / jpeg / webp
+    */
 
-        const files =
-            await response.json();
+    const extensions = [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "gif"
+    ];
 
-        const photos =
-            files
-            .filter(file =>
-                file.type === "file" &&
-                /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
-            )
-            .sort((a,b) =>
-                a.name.localeCompare(
-                    b.name,
-                    undefined,
-                    {
-                        numeric:true,
-                        sensitivity:"base"
-                    }
-                )
-            );
+    let loaded = 0;
+    let finished = 0;
 
-        if(photos.length === 0){
+    const total = 100;
 
-            grid.innerHTML =
-                '<div class="photo-message">photos 文件夹里暂时没有可读取的照片</div>';
+    for(let i = 1; i <= total; i++){
 
-            return;
-        }
+        extensions.forEach(ext => {
 
-        grid.innerHTML = "";
+            const img =
+                document.createElement("img");
 
-        photos.forEach(file => {
+            img.src =
+                "photos/" + i + "." + ext +
+                "?v=" + Date.now();
+
+            img.alt =
+                "Memory " + i;
+
+            img.loading =
+                "lazy";
 
             const card =
                 document.createElement("div");
@@ -637,41 +625,68 @@ async function loadPhotos(){
             card.className =
                 "photo-card";
 
-            const img =
-                document.createElement("img");
+            card.appendChild(img);
 
-            img.src =
-                file.download_url;
+            img.onload = function(){
 
-            img.alt =
-                file.name;
+                loaded++;
 
-            img.loading =
-                "lazy";
+                /*
+                  同一个编号如果同时存在
+                  jpg 和 png，只保留先加载成功的。
+                */
+
+                const sameNumber =
+                    grid.querySelectorAll(
+                        '[data-number="' + i + '"]'
+                    );
+
+                if(sameNumber.length === 0){
+
+                    card.dataset.number = i;
+
+                    grid.appendChild(card);
+
+                }else{
+
+                    card.remove();
+
+                }
+
+                finished++;
+            };
 
             img.onerror = function(){
+
+                finished++;
 
                 card.remove();
 
             };
 
-            card.appendChild(img);
-
-            grid.appendChild(card);
-
         });
 
-    }catch(error){
-
-        grid.innerHTML =
-            '<div class="photo-message">照片暂时无法读取，请稍后刷新</div>';
     }
+
+    /*
+      如果没有找到任何照片
+    */
+
+    setTimeout(function(){
+
+        if(loaded === 0){
+
+            grid.innerHTML =
+                '<div class="photo-message">' +
+                '暂时没有读取到照片' +
+                '</div>';
+
+        }
+
+    },5000);
 }
 
 loadPhotos();
-
-/* 每5分钟重新检查一次照片 */
-setInterval(loadPhotos,300000);
 
 </script>
 
