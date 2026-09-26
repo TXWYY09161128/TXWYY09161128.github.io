@@ -3,33 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>圆落星 · Autumn</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    background:#F3E8D5;
-    color:#3E2922;
-    font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "PingFang SC",
-    "Microsoft YaHei",
-    sans-serif;
+    background:#F7F1E8;
+    color:#4A3731;
+    font-family:-apple-system,BlinkMacSystemFont,
+    "PingFang SC","Microsoft YaHei",sans-serif;
     overflow-x:hidden;
 }
 
-/* 秋日光晕 */
+/* 柔和秋日光晕 */
 body::before{
     content:"";
     position:fixed;
@@ -38,10 +27,10 @@ body::before{
     border-radius:50%;
     background:radial-gradient(
         circle,
-        rgba(200,107,60,.16),
+        rgba(185,130,120,.16),
         transparent 68%
     );
-    top:-250px;
+    top:-260px;
     right:-180px;
     pointer-events:none;
 }
@@ -49,21 +38,20 @@ body::before{
 body::after{
     content:"";
     position:fixed;
-    width:500px;
-    height:500px;
+    width:520px;
+    height:520px;
     border-radius:50%;
     background:radial-gradient(
         circle,
-        rgba(166,106,63,.12),
+        rgba(198,165,107,.12),
         transparent 70%
     );
-    bottom:-250px;
-    left:-180px;
+    bottom:-260px;
+    left:-200px;
     pointer-events:none;
 }
 
-
-/* 导航 */
+/* 顶部 */
 header{
     position:fixed;
     top:0;
@@ -77,20 +65,21 @@ header{
 
     padding:22px 7vw;
 
-    background:rgba(243,232,213,.78);
-    backdrop-filter:blur(16px);
+    background:rgba(247,241,232,.78);
+    backdrop-filter:blur(18px);
 
-    border-bottom:1px solid rgba(62,41,34,.08);
+    border-bottom:1px solid rgba(74,55,49,.08);
 }
 
 .logo{
     font-family:Georgia,"Songti SC",serif;
     font-size:19px;
     letter-spacing:4px;
+    color:#704B45;
 }
 
 nav a{
-    color:#6D5142;
+    color:#806960;
     text-decoration:none;
     margin-left:28px;
     font-size:13px;
@@ -98,11 +87,10 @@ nav a{
 }
 
 nav a:hover{
-    color:#C86B3C;
+    color:#B98278;
 }
 
-
-/* 主视觉 */
+/* 首页 */
 .hero{
     min-height:100vh;
 
@@ -117,36 +105,98 @@ nav a:hover{
     position:relative;
 }
 
+.hero-content{
+    position:relative;
+    z-index:2;
+}
 
-/* 装饰圆 */
+.eyebrow{
+    color:#B89578;
+    font-size:11px;
+    letter-spacing:6px;
+    margin-bottom:28px;
+}
+
+h1{
+    font-family:Georgia,"Songti SC","STSong",serif;
+    font-weight:400;
+
+    font-size:clamp(78px,15vw,170px);
+
+    line-height:.9;
+    letter-spacing:-5px;
+
+    color:#704B45;
+
+    text-shadow:
+    2px 3px 0 rgba(185,130,120,.08);
+}
+
+.subtitle{
+    margin:38px auto 0;
+
+    max-width:600px;
+
+    color:#806960;
+
+    font-size:15px;
+    line-height:2;
+    letter-spacing:2px;
+}
+
+.cta{
+    display:inline-block;
+
+    margin-top:42px;
+
+    padding:14px 29px;
+
+    border:1px solid #B89578;
+    border-radius:100px;
+
+    color:#704B45;
+
+    text-decoration:none;
+
+    font-size:13px;
+    letter-spacing:2px;
+
+    transition:.35s;
+}
+
+.cta:hover{
+    background:#B89578;
+    color:#F7F1E8;
+    transform:translateY(-3px);
+}
+
+/* 环 */
 .autumn-orbit{
     position:absolute;
 
     width:min(65vw,680px);
     height:min(65vw,680px);
 
-    border:1px solid rgba(125,63,63,.14);
+    border:1px solid rgba(112,75,69,.12);
 
     border-radius:50%;
 
-    animation:rotate 25s linear infinite;
+    animation:rotate 28s linear infinite;
 }
 
 .autumn-orbit::before{
-    content:"";
+    content:"✦";
+
     position:absolute;
 
-    width:9px;
-    height:9px;
-
-    background:#C86B3C;
-    border-radius:50%;
-
-    top:13%;
+    top:11%;
     right:8%;
 
-    box-shadow:
-    0 0 20px rgba(200,107,60,.5);
+    color:#C6A56B;
+
+    font-size:15px;
+
+    text-shadow:0 0 15px rgba(198,165,107,.5);
 }
 
 @keyframes rotate{
@@ -154,109 +204,21 @@ nav a:hover{
     to{transform:rotate(360deg)}
 }
 
-
-.hero-content{
-    position:relative;
-    z-index:2;
-}
-
-
-/* 小标题 */
-.eyebrow{
-    color:#A66A3F;
-    font-size:11px;
-    letter-spacing:6px;
-    margin-bottom:28px;
-}
-
-
-/* 主标题 */
-h1{
-    font-family:
-    Georgia,
-    "Songti SC",
-    "STSong",
-    serif;
-
-    font-weight:400;
-
-    font-size:clamp(78px,15vw,170px);
-
-    line-height:.9;
-
-    letter-spacing:-5px;
-
-    color:#7D3F3F;
-
-    text-shadow:
-    2px 3px 0 rgba(166,106,63,.08);
-}
-
-
-/* 副标题 */
-.subtitle{
-    margin:38px auto 0;
-
-    max-width:600px;
-
-    color:#765C4B;
-
-    font-size:15px;
-
-    line-height:2;
-
-    letter-spacing:2px;
-}
-
-
-/* 按钮 */
-.cta{
-    display:inline-block;
-
-    margin-top:42px;
-
-    padding:14px 28px;
-
-    border:1px solid #A66A3F;
-
-    border-radius:100px;
-
-    color:#7D3F3F;
-
-    text-decoration:none;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    transition:.35s;
-}
-
-.cta:hover{
-    background:#A66A3F;
-    color:#F3E8D5;
-    transform:translateY(-3px);
-}
-
-
-/* 内容区域 */
+/* 内容 */
 .section{
     width:min(1050px,86vw);
     margin:auto;
     padding:110px 0;
 }
 
-
-/* 标题 */
 .section-title{
     display:flex;
     justify-content:space-between;
     align-items:end;
 
-    border-bottom:1px solid rgba(62,41,34,.15);
+    border-bottom:1px solid rgba(74,55,49,.13);
 
     padding-bottom:18px;
-
     margin-bottom:35px;
 }
 
@@ -267,25 +229,20 @@ h1{
 
     font-size:36px;
 
-    color:#7D3F3F;
+    color:#704B45;
 }
 
 .section-title span{
-    color:#A66A3F;
+    color:#B89578;
 
     font-size:11px;
-
     letter-spacing:2px;
 }
-
 
 /* 卡片 */
 .grid{
     display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:18px;
 }
 
@@ -301,14 +258,14 @@ h1{
     background:
     linear-gradient(
         145deg,
-        rgba(255,255,255,.48),
-        rgba(255,255,255,.18)
+        rgba(255,255,255,.58),
+        rgba(232,212,190,.25)
     );
 
-    border:1px solid rgba(125,63,63,.12);
+    border:1px solid rgba(112,75,69,.10);
 
     box-shadow:
-    0 15px 45px rgba(91,57,40,.06);
+    0 18px 45px rgba(74,55,49,.055);
 
     overflow:hidden;
 
@@ -320,61 +277,54 @@ h1{
 
     position:absolute;
 
-    width:130px;
-    height:130px;
+    width:150px;
+    height:150px;
 
     border-radius:50%;
 
-    background:rgba(200,107,60,.08);
+    background:rgba(185,130,120,.07);
 
-    right:-50px;
-    bottom:-50px;
+    right:-65px;
+    bottom:-65px;
 }
 
 .card:hover{
     transform:translateY(-8px);
 
     box-shadow:
-    0 25px 55px rgba(91,57,40,.12);
+    0 25px 55px rgba(74,55,49,.11);
 
-    border-color:rgba(200,107,60,.35);
+    border-color:rgba(185,130,120,.3);
 }
 
 .num{
-    color:#A66A3F;
+    color:#B89578;
 
     font-size:11px;
-
     letter-spacing:2px;
 }
 
 .card h3{
-    font-family:
-    Georgia,
-    "Songti SC",
-    serif;
+    font-family:Georgia,"Songti SC",serif;
 
     font-weight:400;
 
-    color:#7D3F3F;
+    color:#704B45;
 
     font-size:27px;
 
     margin-top:65px;
-
     margin-bottom:14px;
 }
 
 .card p{
-    color:#765C4B;
+    color:#806960;
 
     font-size:13px;
-
     line-height:1.9;
 }
 
-
-/* 秋日引语 */
+/* 引语 */
 .quote{
     width:min(850px,86vw);
 
@@ -382,10 +332,7 @@ h1{
 
     text-align:center;
 
-    font-family:
-    Georgia,
-    "Songti SC",
-    serif;
+    font-family:Georgia,"Songti SC",serif;
 
     font-style:italic;
 
@@ -393,14 +340,12 @@ h1{
 
     line-height:1.8;
 
-    color:#7D3F3F;
+    color:#704B45;
 }
 
-
-/* 联系区域 */
+/* 联系 */
 .contact-card{
     padding:50px 30px;
-
     text-align:center;
 }
 
@@ -408,33 +353,30 @@ h1{
     font-size:14px;
 }
 
-
 /* 页脚 */
 footer{
-    border-top:1px solid rgba(62,41,34,.12);
+    border-top:1px solid rgba(74,55,49,.11);
 
     padding:32px 7vw;
 
     display:flex;
     justify-content:space-between;
 
-    color:#947966;
+    color:#A58D7C;
 
     font-size:11px;
-
     letter-spacing:2px;
 }
 
-
-/* 落叶 */
+/* 秋叶 */
 .leaf{
     position:fixed;
 
     top:-30px;
 
-    color:#C86B3C;
+    color:#B98278;
 
-    opacity:.35;
+    opacity:.28;
 
     pointer-events:none;
 
@@ -445,35 +387,30 @@ footer{
 
 .leaf:nth-child(1){
     left:12%;
-    animation-duration:12s;
+    animation-duration:14s;
 }
 
 .leaf:nth-child(2){
-    left:37%;
-    animation-duration:16s;
+    left:38%;
+    animation-duration:18s;
     animation-delay:3s;
 }
 
 .leaf:nth-child(3){
-    left:72%;
-    animation-duration:14s;
+    left:74%;
+    animation-duration:16s;
     animation-delay:5s;
 }
 
 @keyframes fall{
     0%{
-        transform:
-        translateY(-50px)
-        rotate(0deg);
+        transform:translateY(-50px) rotate(0deg);
     }
 
     100%{
-        transform:
-        translateY(110vh)
-        rotate(360deg);
+        transform:translateY(110vh) rotate(360deg);
     }
 }
-
 
 /* 手机 */
 @media(max-width:700px){
@@ -488,9 +425,7 @@ footer{
     }
 
     .hero{
-        padding:
-        130px 5vw
-        90px;
+        padding:130px 5vw 90px;
     }
 
     h1{
@@ -531,280 +466,152 @@ footer{
 </style>
 </head>
 
-
 <body>
 
-<!-- 秋叶 -->
 <div class="leaf">🍂</div>
 <div class="leaf">🍁</div>
 <div class="leaf">🍂</div>
 
-
 <header>
+    <div class="logo">圆落星</div>
 
-<div class="logo">
-圆落星
-</div>
-
-<nav>
-<a href="#about">关于</a>
-<a href="#works">作品</a>
-<a href="#contact">联系</a>
-</nav>
-
+    <nav>
+        <a href="#about">关于</a>
+        <a href="#works">作品</a>
+        <a href="#contact">联系</a>
+    </nav>
 </header>
-
 
 <main>
 
-
-<!-- 首页 -->
-
 <section class="hero">
 
-<div class="autumn-orbit"></div>
+    <div class="autumn-orbit"></div>
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<div class="eyebrow">
-AUTUMN · 2026
-</div>
+        <div class="eyebrow">
+            AUTUMN · 2026
+        </div>
 
-<h1>
-圆落星
-</h1>
+        <h1>圆落星</h1>
 
-<p class="subtitle">
+        <p class="subtitle">
+            在自己的轨道上生活。<br>
+            记录灵感、审美与正在发生的一切。
+        </p>
 
-在自己的轨道上生活。<br>
+        <a class="cta" href="#about">
+            进入我的世界　→
+        </a>
 
-记录灵感、审美与正在发生的一切。
-
-</p>
-
-<a class="cta" href="#about">
-进入我的世界　→
-</a>
-
-</div>
+    </div>
 
 </section>
-
-
-
-<!-- 关于 -->
 
 <section class="section" id="about">
 
-<div class="section-title">
+    <div class="section-title">
+        <h2>关于我</h2>
+        <span>01 / ABOUT</span>
+    </div>
 
-<h2>
-关于我
-</h2>
+    <div class="grid">
 
-<span>
-01 / ABOUT
-</span>
+        <article class="card">
+            <div class="num">A01</div>
+            <h3>关于</h3>
+            <p>
+                一个属于圆落星的私人空间，
+                留下喜欢的人、事、物。
+            </p>
+        </article>
 
-</div>
+        <article class="card">
+            <div class="num">A02</div>
+            <h3>审美</h3>
+            <p>
+                喜欢温柔、自然、有一点神秘感的视觉世界。
+            </p>
+        </article>
 
+        <article class="card">
+            <div class="num">A03</div>
+            <h3>生活</h3>
+            <p>
+                慢慢记录，慢慢探索，
+                也慢慢成为自己。
+            </p>
+        </article>
 
-<div class="grid">
-
-
-<article class="card">
-
-<div class="num">
-A01
-</div>
-
-<h3>
-关于
-</h3>
-
-<p>
-一个属于圆落星的私人空间，
-留下喜欢的人、事、物。
-</p>
-
-</article>
-
-
-
-<article class="card">
-
-<div class="num">
-A02
-</div>
-
-<h3>
-审美
-</h3>
-
-<p>
-喜欢温暖、自然、有一点神秘感的视觉世界。
-</p>
-
-</article>
-
-
-
-<article class="card">
-
-<div class="num">
-A03
-</div>
-
-<h3>
-生活
-</h3>
-
-<p>
-慢慢记录，慢慢探索，
-也慢慢成为自己。
-</p>
-
-</article>
-
-
-</div>
+    </div>
 
 </section>
-
-
-
-<!-- 我的世界 -->
 
 <section class="section" id="works">
 
-<div class="section-title">
+    <div class="section-title">
+        <h2>我的世界</h2>
+        <span>02 / WORLD</span>
+    </div>
 
-<h2>
-我的世界
-</h2>
+    <div class="grid">
 
-<span>
-02 / WORLD
-</span>
+        <article class="card">
+            <div class="num">01</div>
+            <h3>AI 创作</h3>
+            <p>
+                图像、视觉实验与各种有趣的创意。
+            </p>
+        </article>
 
-</div>
+        <article class="card">
+            <div class="num">02</div>
+            <h3>影像</h3>
+            <p>
+                把值得记住的瞬间，
+                留在自己的时间线上。
+            </p>
+        </article>
 
+        <article class="card">
+            <div class="num">03</div>
+            <h3>灵感</h3>
+            <p>
+                秋天、设计、科技，
+                以及所有让我心动的东西。
+            </p>
+        </article>
 
-<div class="grid">
-
-
-<article class="card">
-
-<div class="num">
-01
-</div>
-
-<h3>
-AI 创作
-</h3>
-
-<p>
-图像、视觉实验与各种有趣的创意。
-</p>
-
-</article>
-
-
-<article class="card">
-
-<div class="num">
-02
-</div>
-
-<h3>
-影像
-</h3>
-
-<p>
-把值得记住的瞬间，
-留在自己的时间线上。
-</p>
-
-</article>
-
-
-<article class="card">
-
-<div class="num">
-03
-</div>
-
-<h3>
-灵感
-</h3>
-
-<p>
-秋天、设计、科技，
-以及所有让我心动的东西。
-</p>
-
-</article>
-
-
-</div>
+    </div>
 
 </section>
 
-
-
 <div class="quote">
-
-“愿你始终有自己的光，
-也有自己的季节。”
-
+    “愿你始终有自己的光，也有自己的季节。”
 </div>
-
-
-
-<!-- 联系 -->
 
 <section class="section" id="contact">
 
-<div class="section-title">
+    <div class="section-title">
+        <h2>联系</h2>
+        <span>03 / CONTACT</span>
+    </div>
 
-<h2>
-联系
-</h2>
-
-<span>
-03 / CONTACT
-</span>
-
-</div>
-
-
-<div class="card contact-card">
-
-<p>
-这里以后可以放你的邮箱、社交账号或其他联系方式。
-</p>
-
-</div>
+    <div class="card contact-card">
+        <p>
+            这里以后可以放你的邮箱、社交账号或其他联系方式。
+        </p>
+    </div>
 
 </section>
 
-
 </main>
 
-
-
 <footer>
-
-<span>
-© 2026 YUANLUOXING
-</span>
-
-<span>
-AUTUMN PERSONAL SPACE
-</span>
-
+    <span>© 2026 YUANLUOXING</span>
+    <span>AUTUMN PERSONAL SPACE</span>
 </footer>
-
 
 </body>
 </html>
