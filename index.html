@@ -19,8 +19,8 @@ html{
 }
 
 body{
-    background:#081522;
-    color:#f5f1e8;
+    background:#f4f1ec;
+    color:#403c45;
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -30,20 +30,6 @@ body{
     overflow-x:hidden;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:50;
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(255,255,255,.05),
-            transparent 35%
-        );
-}
-
 /* =========================
    首页
    ========================= */
@@ -51,48 +37,71 @@ body::before{
 .hero{
     min-height:100vh;
     position:relative;
+    overflow:hidden;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    overflow:hidden;
 
-    background-image:
-        linear-gradient(
-            rgba(4,13,23,.18),
-            rgba(4,13,23,.30)
-        ),
-        url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90");
+    background:#181c2b;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
 
     background-size:cover;
     background-position:center;
+
+    transition:
+        opacity 1.2s ease,
+        transform 8s ease;
+
+    transform:scale(1.03);
 }
 
 .hero::after{
     content:"";
     position:absolute;
     inset:0;
+    z-index:1;
 
     background:
         linear-gradient(
             to bottom,
-            rgba(4,13,23,.05),
-            rgba(4,13,23,.18) 55%,
-            #081522 100%
+            rgba(8,12,24,.18),
+            rgba(8,12,24,.08) 45%,
+            rgba(8,12,24,.48) 100%
         );
+}
 
-    pointer-events:none;
+.hero-center{
+    width:90%;
+    max-width:900px;
+
+    position:relative;
+    z-index:5;
+
+    text-align:center;
+
+    color:#fff;
+
+    text-shadow:
+        0 3px 25px rgba(0,0,0,.45);
 }
 
 .top-left,
 .top-right{
     position:absolute;
-    z-index:5;
-    top:35px;
+    top:38px;
+    z-index:6;
 
     font-size:9px;
     line-height:1.9;
     letter-spacing:3px;
-    color:rgba(255,255,255,.8);
+
+    color:rgba(255,255,255,.82);
 }
 
 .top-left{
@@ -104,150 +113,187 @@ body::before{
     text-align:right;
 }
 
-.hero-center{
-    position:relative;
-    z-index:5;
-
-    width:90%;
-    max-width:850px;
-
-    text-align:center;
-
-    text-shadow:
-        0 3px 20px rgba(0,0,0,.4);
-}
-
 .kicker{
     font-size:10px;
     letter-spacing:8px;
+
     margin-bottom:20px;
 
     opacity:0;
-    animation:fadeUp 1.2s .2s forwards;
+    animation:
+        fadeUp 1.2s .15s forwards;
 }
 
 .hero-title{
-    font-size:clamp(58px,9vw,105px);
+    font-size:
+        clamp(
+            58px,
+            9vw,
+            105px
+        );
+
     font-weight:300;
-    letter-spacing:14px;
+
+    letter-spacing:13px;
 
     opacity:0;
-    animation:fadeUp 1.3s .35s forwards;
+    animation:
+        fadeUp 1.3s .3s forwards;
 }
 
 .hero-sub{
-    margin-top:13px;
+    margin-top:15px;
 
     font-size:10px;
     letter-spacing:6px;
 
     opacity:0;
-    animation:fadeUp 1.2s .5s forwards;
+    animation:
+        fadeUp 1.2s .45s forwards;
 }
 
 .enter{
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
 
-    margin-top:42px;
+    margin-top:45px;
 
-    padding:14px 30px;
+    padding:
+        14px
+        30px;
 
-    border:1px solid rgba(255,255,255,.55);
+    border:
+        1px solid
+        rgba(255,255,255,.65);
+
     border-radius:50px;
 
     color:#fff;
-    background:rgba(0,0,0,.16);
+
+    background:
+        rgba(255,255,255,.10);
+
+    backdrop-filter:blur(8px);
 
     text-decoration:none;
 
     font-size:10px;
     letter-spacing:3px;
 
-    backdrop-filter:blur(8px);
-
     transition:
-        background .4s,
-        transform .4s,
-        border-color .4s;
+        .4s;
 
     opacity:0;
-    animation:fadeUp 1.2s .7s forwards;
+
+    animation:
+        fadeUp 1.2s .65s forwards;
 }
 
 .enter:hover{
-    background:rgba(255,255,255,.16);
-    border-color:#fff;
-    transform:translateY(-3px);
+    background:
+        rgba(255,255,255,.2);
+
+    transform:
+        translateY(-3px);
 }
 
 .datetime{
-    margin-top:48px;
+    margin-top:40px;
 
     font-size:11px;
     letter-spacing:2px;
 
-    color:rgba(255,255,255,.9);
+    color:
+        rgba(255,255,255,.92);
 }
 
 .day-counter{
-    margin-top:10px;
+    margin-top:9px;
 
     font-size:10px;
     letter-spacing:2px;
 
-    color:rgba(255,255,255,.7);
+    color:
+        rgba(255,255,255,.72);
+}
+
+/* 每日城市标签 */
+
+.place-tag{
+    position:absolute;
+
+    left:50%;
+    bottom:34px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:6;
+
+    padding:
+        8px 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.28);
+
+    border-radius:30px;
+
+    background:
+        rgba(0,0,0,.18);
+
+    backdrop-filter:blur(8px);
+
+    color:
+        rgba(255,255,255,.85);
+
+    font-size:8px;
+    letter-spacing:3px;
+
+    white-space:nowrap;
 }
 
 /* =========================
-   主体
+   内容
    ========================= */
 
 .section{
-    padding:110px 25px;
-    background:#081522;
+    padding:
+        120px
+        25px;
+
+    background:#f4f1ec;
 }
 
 .inner{
-    width:100%;
-    max-width:1120px;
+    max-width:1100px;
     margin:auto;
 }
 
 .section-head{
     text-align:center;
-    margin-bottom:48px;
+
+    margin-bottom:55px;
 }
 
 .section-small{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:22px;
-
     font-size:9px;
     letter-spacing:5px;
-    color:#aab5c1;
-}
 
-.section-small::before,
-.section-small::after{
-    content:"";
-    width:60px;
-    height:1px;
+    color:#aaa4a9;
 
-    background:rgba(255,255,255,.35);
+    margin-bottom:15px;
 }
 
 .section-title{
-    margin-top:15px;
-
     font-size:30px;
     font-weight:300;
-    letter-spacing:7px;
 
-    color:#f5f1e8;
+    letter-spacing:6px;
+
+    color:#47424d;
 }
 
 /* =========================
@@ -256,6 +302,7 @@ body::before{
 
 .info-grid{
     display:grid;
+
     grid-template-columns:
         repeat(3,1fr);
 
@@ -263,83 +310,56 @@ body::before{
 }
 
 .info-card{
-    min-height:190px;
+    min-height:185px;
 
-    padding:30px;
+    padding:32px 25px;
 
-    position:relative;
-    overflow:hidden;
+    text-align:center;
+
+    background:
+        rgba(255,255,255,.7);
 
     border:
         1px solid
-        rgba(255,255,255,.16);
+        rgba(80,70,90,.09);
 
-    border-radius:12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(34,59,86,.88),
-            rgba(11,27,43,.92)
-        );
+    border-radius:10px;
 
     box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.25);
+        0 20px 60px
+        rgba(70,60,80,.07);
 
     opacity:0;
-    transform:translateY(30px);
+
+    transform:
+        translateY(35px);
 
     transition:
         opacity .9s,
         transform .9s;
 }
 
-.info-card::after{
-    content:"";
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    right:-50px;
-    top:-50px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.08),
-            transparent 70%
-        );
-}
-
 .info-card.show{
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+        translateY(0);
 }
 
 .info-label{
-    position:relative;
-    z-index:2;
-
     font-size:9px;
-    letter-spacing:4px;
+    letter-spacing:3px;
 
-    color:#c1cad3;
+    color:#aaa5af;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .info-value{
-    position:relative;
-    z-index:2;
-
-    font-size:17px;
+    font-size:15px;
     line-height:2;
 
-    color:#fff;
+    color:#5b5662;
 }
 
 /* =========================
@@ -348,18 +368,18 @@ body::before{
 
 .photo-section{
     padding-top:50px;
-    padding-bottom:140px;
+    padding-bottom:170px;
 }
 
 .photo-window{
     width:100%;
     overflow:hidden;
-    position:relative;
 }
 
 .photo-track{
     display:flex;
-    gap:14px;
+
+    gap:20px;
 
     width:max-content;
 
@@ -377,8 +397,8 @@ body::before{
 }
 
 .photo-card{
-    width:170px;
-    height:125px;
+    width:235px;
+    height:310px;
 
     flex:none;
 
@@ -388,15 +408,13 @@ body::before{
 
     cursor:pointer;
 
-    border-radius:7px;
+    background:#eeeae4;
 
-    border:
-        1px solid
-        rgba(255,255,255,.12);
+    border-radius:4px;
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.35);
+        0 20px 55px
+        rgba(60,52,72,.12);
 }
 
 .photo-card img{
@@ -408,7 +426,9 @@ body::before{
     object-fit:cover;
 
     user-select:none;
+
     -webkit-user-select:none;
+
     -webkit-user-drag:none;
 
     transition:
@@ -416,34 +436,39 @@ body::before{
 }
 
 .photo-card:hover img{
-    transform:scale(1.06);
+    transform:
+        scale(1.04);
 }
 
 @keyframes photoLoop{
 
     from{
-        transform:translateX(0);
+        transform:
+            translateX(0);
     }
 
     to{
         transform:
             translateX(
-                calc(-50% - 7px)
+                calc(
+                    -50% - 10px
+                )
             );
     }
 }
 
 .photo-message{
     width:100%;
+
     padding:60px;
 
     text-align:center;
 
-    color:#8997a5;
+    color:#aaa5af;
 }
 
 /* =========================
-   图片放大
+   图片查看
    ========================= */
 
 .lightbox{
@@ -453,15 +478,17 @@ body::before{
     z-index:100;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     padding:30px;
 
     background:
-        rgba(2,8,15,.92);
+        rgba(25,22,32,.9);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:
+        blur(15px);
 
     opacity:0;
     visibility:hidden;
@@ -482,10 +509,12 @@ body::before{
 
     box-shadow:
         0 30px 100px
-        rgba(0,0,0,.6);
+        rgba(0,0,0,.45);
 
     user-select:none;
+
     -webkit-user-select:none;
+
     -webkit-user-drag:none;
 }
 
@@ -500,11 +529,12 @@ body::before{
 
     border:
         1px solid
-        rgba(255,255,255,.45);
+        rgba(255,255,255,.4);
 
     border-radius:50%;
 
     color:#fff;
+
     background:transparent;
 
     font-size:22px;
@@ -517,16 +547,19 @@ body::before{
    ========================= */
 
 .footer{
-    padding:55px 25px 80px;
+    padding:
+        80px
+        25px
+        110px;
 
     text-align:center;
 
     font-size:9px;
     letter-spacing:5px;
 
-    color:#7e8c99;
+    color:#aaa5af;
 
-    background:#081522;
+    background:#f4f1ec;
 }
 
 /* =========================
@@ -537,12 +570,14 @@ body::before{
 
     from{
         opacity:0;
-        transform:translateY(25px);
+        transform:
+            translateY(25px);
     }
 
     to{
         opacity:1;
-        transform:translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
@@ -554,22 +589,19 @@ body::before{
 
     .hero{
         min-height:100svh;
-
-        background-position:
-            62% center;
     }
 
     .top-left,
     .top-right{
-        top:24px;
+        top:25px;
 
         font-size:7px;
         letter-spacing:2px;
     }
 
     .hero-title{
-        font-size:55px;
-        letter-spacing:8px;
+        font-size:54px;
+        letter-spacing:7px;
     }
 
     .hero-sub{
@@ -578,7 +610,6 @@ body::before{
     }
 
     .datetime{
-        margin-top:38px;
         font-size:10px;
     }
 
@@ -588,68 +619,91 @@ body::before{
 
     .section{
         padding:
-            90px
-            18px;
-    }
-
-    .section-title{
-        font-size:25px;
-        letter-spacing:5px;
+            100px
+            20px;
     }
 
     .photo-card{
-        width:155px;
-        height:115px;
+        width:180px;
+        height:240px;
     }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
-     首页
-     英国照片
-     ========================= -->
 
 <header class="hero">
 
-    <div class="top-left">
-        2026<br>
-        ✦ LIGHT · NIGHT
+    <!-- 每日自动更换的英国 / 美国照片 -->
+    <div
+        class="hero-bg"
+        id="heroBg">
     </div>
 
-    <div class="top-right">
-        SHINING<br>
-        IN SILENCE
+
+    <div class="top-left">
+
+        2026<br>
+
+        ✦ LIGHT · NIGHT
+
     </div>
+
+
+    <div class="top-right">
+
+        SHINING<br>
+
+        IN SILENCE
+
+    </div>
+
 
     <div class="hero-center">
 
         <div class="kicker">
+
             A QUIET PLACE
+
         </div>
+
 
         <div class="hero-title">
+
             圆落星
+
         </div>
 
+
         <div class="hero-sub">
+
             A PLACE FOR MEMORY
+
         </div>
+
 
         <a
             href="#today"
             class="enter">
+
             ENTER MY WORLD →
+
         </a>
+
 
         <div
             class="datetime"
             id="datetime">
+
             正在读取时间…
+
         </div>
+
 
         <div
             class="day-counter"
@@ -658,12 +712,17 @@ body::before{
 
     </div>
 
+
+    <div
+        class="place-tag"
+        id="placeTag">
+
+        正在读取地点…
+
+    </div>
+
 </header>
 
-
-<!-- =========================
-     今天
-     ========================= -->
 
 <section
     class="section"
@@ -671,14 +730,20 @@ body::before{
 
     <div class="inner">
 
+
         <div class="section-head">
 
             <div class="section-small">
+
                 TODAY
+
             </div>
 
+
             <div class="section-title">
+
                 今天的世界
+
             </div>
 
         </div>
@@ -690,13 +755,18 @@ body::before{
             <div class="info-card">
 
                 <div class="info-label">
+
                     MOON · 月相
+
                 </div>
+
 
                 <div
                     class="info-value"
                     id="moonPhase">
+
                     正在读取…
+
                 </div>
 
             </div>
@@ -705,13 +775,18 @@ body::before{
             <div class="info-card">
 
                 <div class="info-label">
+
                     SEASON · 季节
+
                 </div>
+
 
                 <div
                     class="info-value"
                     id="season">
+
                     正在读取…
+
                 </div>
 
             </div>
@@ -720,16 +795,22 @@ body::before{
             <div class="info-card">
 
                 <div class="info-label">
+
                     WEATHER · 上海
+
                 </div>
+
 
                 <div
                     class="info-value"
                     id="weather">
+
                     正在读取天气…
+
                 </div>
 
             </div>
+
 
         </div>
 
@@ -738,23 +819,25 @@ body::before{
 </section>
 
 
-<!-- =========================
-     我的照片
-     ========================= -->
-
 <section
     class="section photo-section">
 
     <div class="inner">
 
+
         <div class="section-head">
 
             <div class="section-small">
+
                 MY MEMORIES
+
             </div>
 
+
             <div class="section-title">
+
                 我的照片
+
             </div>
 
         </div>
@@ -767,7 +850,9 @@ body::before{
                 id="photoTrack">
 
                 <div class="photo-message">
+
                     正在读取照片…
+
                 </div>
 
             </div>
@@ -780,33 +865,153 @@ body::before{
 
 
 <footer class="footer">
+
     A PLACE FOR MEMORY · 2026
+
 </footer>
 
-
-<!-- =========================
-     图片查看
-     ========================= -->
 
 <div
     class="lightbox"
     id="lightbox">
 
+
     <button
         class="close-lightbox"
         id="closeLightbox"
         aria-label="关闭">
+
         ×
+
     </button>
+
 
     <img
         id="lightboxImg"
         alt="Memory">
 
+
 </div>
 
 
 <script>
+
+
+/* =========================
+   英国 + 美国每日自动换图
+   ========================= */
+
+const heroImages = [
+
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+
+        url:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    {
+        country:"🇺🇸 NEW YORK · UNITED STATES",
+
+        url:
+        "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+
+        url:
+        "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    {
+        country:"🇺🇸 NEW YORK · UNITED STATES",
+
+        url:
+        "https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+
+        url:
+        "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    {
+        country:"🇺🇸 UNITED STATES",
+
+        url:
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2200&q=90"
+    }
+
+];
+
+
+/*
+   根据上海日期决定当天照片。
+
+   同一天：
+   不会因为刷新网页而改变。
+
+   第二天：
+   自动换下一张。
+*/
+
+function setDailyHero(){
+
+    const now =
+        new Date();
+
+    const chinaDate =
+        new Intl.DateTimeFormat(
+            "en-CA",
+            {
+                timeZone:
+                    "Asia/Shanghai",
+
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        ).format(now);
+
+    const dateNumber =
+        Number(
+            chinaDate.replaceAll(
+                "-",
+                ""
+            )
+        );
+
+    const index =
+        dateNumber %
+        heroImages.length;
+
+    const item =
+        heroImages[index];
+
+    const hero =
+        document.getElementById(
+            "heroBg"
+        );
+
+    const tag =
+        document.getElementById(
+            "placeTag"
+        );
+
+    hero.style.backgroundImage =
+        "url('" +
+        item.url +
+        "')";
+
+    tag.textContent =
+        item.country;
+}
+
+setDailyHero();
+
 
 /* =========================
    上海时间
@@ -822,17 +1027,23 @@ function updateDateTime(){
                     "Asia/Shanghai",
 
                 year:"numeric",
+
                 month:"long",
+
                 day:"numeric",
+
                 weekday:"long",
 
                 hour:"2-digit",
+
                 minute:"2-digit",
+
                 second:"2-digit",
 
                 hour12:false
             }
         );
+
 
     document.getElementById(
         "datetime"
@@ -840,9 +1051,11 @@ function updateDateTime(){
         formatter.format(
             new Date()
         );
+
 }
 
 updateDateTime();
+
 
 setInterval(
     updateDateTime,
@@ -867,7 +1080,8 @@ function updateDayCounter(){
     const diff =
         Math.floor(
             (
-                now - start
+                now -
+                start
             ) /
             (
                 1000 *
@@ -877,15 +1091,20 @@ function updateDayCounter(){
             )
         ) + 1;
 
+
     document.getElementById(
         "dayCounter"
     ).textContent =
+
         "2026 · 第 " +
         diff +
         " 天";
+
 }
 
+
 updateDayCounter();
+
 
 setInterval(
     updateDayCounter,
@@ -911,7 +1130,8 @@ function getMoonPhase(){
         (
             now -
             knownNewMoon
-        ) / 86400000;
+        ) /
+        86400000;
 
     const cycle =
         29.530588853;
@@ -926,32 +1146,58 @@ function getMoonPhase(){
         ) %
         cycle;
 
-    if(phase < 1.84566)
+
+    if(
+        phase < 1.84566
+    )
         return "🌑 新月";
 
-    if(phase < 5.53699)
+
+    if(
+        phase < 5.53699
+    )
         return "🌒 娥眉月";
 
-    if(phase < 9.22831)
+
+    if(
+        phase < 9.22831
+    )
         return "🌓 上弦月";
 
-    if(phase < 12.91963)
+
+    if(
+        phase < 12.91963
+    )
         return "🌔 盈凸月";
 
-    if(phase < 16.61096)
+
+    if(
+        phase < 16.61096
+    )
         return "🌕 满月";
 
-    if(phase < 20.30228)
+
+    if(
+        phase < 20.30228
+    )
         return "🌖 亏凸月";
 
-    if(phase < 23.99361)
+
+    if(
+        phase < 23.99361
+    )
         return "🌗 下弦月";
 
-    if(phase < 27.68493)
+
+    if(
+        phase < 27.68493
+    )
         return "🌘 残月";
+
 
     return "🌑 新月";
 }
+
 
 document.getElementById(
     "moonPhase"
@@ -960,7 +1206,7 @@ document.getElementById(
 
 
 /* =========================
-   中国节气季节
+   节气季节
    ========================= */
 
 function solarLongitude(date){
@@ -970,33 +1216,46 @@ function solarLongitude(date){
         / 86400000
         + 2440587.5;
 
+
     const T =
         (
             JD -
             2451545.0
-        ) / 36525;
+        ) /
+        36525;
+
 
     const rad =
-        Math.PI / 180;
+        Math.PI /
+        180;
+
 
     let L0 =
         280.46646 +
         36000.76983 * T +
         0.0003032 * T * T;
 
+
     L0 =
         (
-            (L0 % 360)
-            + 360
-        ) % 360;
+            (
+                L0 %
+                360
+            ) +
+            360
+        ) %
+        360;
+
 
     const M =
         357.52911 +
         35999.05029 * T -
         0.0001537 * T * T;
 
+
     const Mrad =
         M * rad;
+
 
     const C =
         Math.sin(Mrad) *
@@ -1005,24 +1264,36 @@ function solarLongitude(date){
             0.004817 * T -
             0.000014 * T * T
         )
+
         +
-        Math.sin(2 * Mrad) *
+
+        Math.sin(
+            2 * Mrad
+        ) *
         (
             0.019993 -
             0.000101 * T
         )
+
         +
-        Math.sin(3 * Mrad)
-        * 0.000289;
+
+        Math.sin(
+            3 * Mrad
+        ) *
+        0.000289;
+
 
     const trueLongitude =
         L0 + C;
+
 
     const omega =
         (
             125.04 -
             1934.136 * T
-        ) * rad;
+        ) *
+        rad;
+
 
     const apparentLongitude =
         trueLongitude -
@@ -1030,12 +1301,15 @@ function solarLongitude(date){
         0.00478 *
         Math.sin(omega);
 
+
     return (
         (
-            apparentLongitude
-            % 360
-        ) + 360
+            apparentLongitude %
+            360
+        ) +
+        360
     ) % 360;
+
 }
 
 
@@ -1046,26 +1320,37 @@ function getChinaSeason(){
             new Date()
         );
 
+
     if(
         longitude >= 315 ||
         longitude < 45
     ){
+
         return "🌱 春天";
+
     }
+
 
     if(
         longitude < 135
     ){
+
         return "☀️ 夏天";
+
     }
+
 
     if(
         longitude < 225
     ){
+
         return "🍂 秋天";
+
     }
 
+
     return "❄️ 冬天";
+
 }
 
 
@@ -1076,15 +1361,19 @@ function updateSeason(){
             "season"
         );
 
+
     if(season){
 
         season.textContent =
             getChinaSeason();
 
     }
+
 }
 
+
 updateSeason();
+
 
 setInterval(
     updateSeason,
@@ -1103,56 +1392,95 @@ async function loadWeather(){
             "weather"
         );
 
+
     try{
 
         const url =
             "https://api.open-meteo.com/v1/forecast" +
+
             "?latitude=31.2304" +
+
             "&longitude=121.4737" +
+
             "&current=" +
+
             "temperature_2m," +
+
             "relative_humidity_2m," +
+
             "apparent_temperature," +
+
             "weather_code," +
+
             "wind_speed_10m" +
+
             "&timezone=Asia%2FShanghai";
+
 
         const response =
             await fetch(url);
 
-        if(!response.ok)
+
+        if(
+            !response.ok
+        )
             throw new Error();
+
 
         const data =
             await response.json();
 
+
         const current =
             data.current;
+
 
         const weatherMap = {
 
             0:"晴天 ☀️",
+
             1:"基本晴朗 🌤️",
+
             2:"局部多云 ⛅",
+
             3:"阴天 ☁️",
+
             45:"雾 🌫️",
+
             48:"雾 🌫️",
+
             51:"小毛毛雨 🌦️",
+
             53:"毛毛雨 🌦️",
+
             55:"毛毛雨 🌦️",
+
             61:"小雨 🌧️",
+
             63:"中雨 🌧️",
+
             65:"大雨 🌧️",
+
             71:"小雪 ❄️",
+
             73:"中雪 ❄️",
+
             75:"大雪 ❄️",
+
             80:"阵雨 🌦️",
+
             81:"阵雨 🌦️",
+
             82:"强阵雨 🌧️",
+
             95:"雷雨 ⛈️",
+
             96:"雷雨 ⛈️",
+
             99:"强雷雨 ⛈️"
+
         };
+
 
         const description =
             weatherMap[
@@ -1160,27 +1488,41 @@ async function loadWeather(){
             ] ||
             "天气变化中";
 
+
         weatherBox.innerHTML =
+
             description +
+
             "<br>" +
+
             Math.round(
                 current.temperature_2m
             ) +
+
             "°C · 体感 " +
+
             Math.round(
                 current.apparent_temperature
             ) +
+
             "°C" +
+
             "<br>" +
+
             "湿度 " +
+
             Math.round(
                 current.relative_humidity_2m
             ) +
+
             "% · 风速 " +
+
             Math.round(
                 current.wind_speed_10m
             ) +
+
             " km/h";
+
 
     }catch(error){
 
@@ -1188,9 +1530,12 @@ async function loadWeather(){
             "天气暂时无法读取，请稍后刷新";
 
     }
+
 }
 
+
 loadWeather();
+
 
 setInterval(
     loadWeather,
@@ -1209,6 +1554,7 @@ async function loadPhotos(){
             "photoTrack"
         );
 
+
     try{
 
         const response =
@@ -1220,14 +1566,21 @@ async function loadPhotos(){
                 }
             );
 
-        if(!response.ok)
+
+        if(
+            !response.ok
+        )
             throw new Error();
+
 
         const photos =
             await response.json();
 
+
         if(
-            !Array.isArray(photos) ||
+            !Array.isArray(
+                photos
+            ) ||
             photos.length === 0
         ){
 
@@ -1237,14 +1590,20 @@ async function loadPhotos(){
                 '</div>';
 
             return;
+
         }
+
+
+        /* 保留原来的无限滚动 */
 
         const allPhotos =
             photos.concat(
                 photos
             );
 
+
         track.innerHTML = "";
+
 
         allPhotos.forEach(
             function(path){
@@ -1254,27 +1613,34 @@ async function loadPhotos(){
                         "div"
                     );
 
+
                 card.className =
                     "photo-card";
+
 
                 const img =
                     document.createElement(
                         "img"
                     );
 
+
                 img.src =
                     path +
                     "?v=" +
                     Date.now();
 
+
                 img.alt =
                     "Memory";
+
 
                 img.loading =
                     "lazy";
 
+
                 img.draggable =
                     false;
+
 
                 card.addEventListener(
                     "click",
@@ -1285,6 +1651,7 @@ async function loadPhotos(){
                         ).src =
                             img.src;
 
+
                         document.getElementById(
                             "lightbox"
                         ).classList.add(
@@ -1294,12 +1661,19 @@ async function loadPhotos(){
                     }
                 );
 
-                card.appendChild(img);
 
-                track.appendChild(card);
+                card.appendChild(
+                    img
+                );
+
+
+                track.appendChild(
+                    card
+                );
 
             }
         );
+
 
     }catch(error){
 
@@ -1309,9 +1683,12 @@ async function loadPhotos(){
             '</div>';
 
     }
+
 }
 
+
 loadPhotos();
+
 
 setInterval(
     loadPhotos,
@@ -1338,6 +1715,7 @@ document.getElementById(
     }
 );
 
+
 document.getElementById(
     "lightbox"
 ).addEventListener(
@@ -1359,7 +1737,7 @@ document.getElementById(
 
 
 /* =========================
-   图片右键 / 拖拽
+   禁止照片普通右键 / 拖拽
    ========================= */
 
 document.addEventListener(
@@ -1376,6 +1754,7 @@ document.addEventListener(
 
     }
 );
+
 
 document.addEventListener(
     "dragstart",
@@ -1394,13 +1773,14 @@ document.addEventListener(
 
 
 /* =========================
-   信息卡滚动动画
+   滚动出现动画
    ========================= */
 
 const cards =
     document.querySelectorAll(
         ".info-card"
     );
+
 
 const observer =
     new IntersectionObserver(
@@ -1428,10 +1808,13 @@ const observer =
         }
     );
 
+
 cards.forEach(
     function(card){
 
-        observer.observe(card);
+        observer.observe(
+            card
+        );
 
     }
 );
