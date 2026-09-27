@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>个人页面 · 圆落星</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#f8f7f2;
+    color:#3d3a46;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+}
+
+.back{
+    display:inline-block;
+    margin:25px;
+    color:#6d5b8c;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.hero{
+    max-width:1100px;
+    margin:40px auto 80px;
+    padding:0 25px;
+}
+
+.title{
+    font-size:clamp(42px,8vw,90px);
+    font-weight:500;
+    letter-spacing:-3px;
+}
+
+.sub{
+    margin-top:15px;
+    color:#88818f;
+    letter-spacing:3px;
+    font-size:12px;
+}
+
+.gallery{
+    max-width:1100px;
+    margin:auto;
+    padding:0 25px 100px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.gallery img{
+    width:100%;
+    display:block;
+    border-radius:4px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.02);
+}
+
+@media(max-width:700px){
+    .gallery{
+        grid-template-columns:1fr;
+    }
+}
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(20,18,25,.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:99;
+    padding:20px;
+}
+
+.lightbox img{
+    max-width:95%;
+    max-height:90%;
+}
+
+.lightbox.show{
+    display:flex;
+}
+</style>
+</head>
+
+<body>
+
+<a class="back" href="index.html">← 返回首页</a>
+
+<section class="hero">
+    <div class="title">PERSON 01</div>
+    <div class="sub">A QUIET MEMORY · 个人相册</div>
+</section>
+
+<section class="gallery">
+
+    <!-- 把下面的照片文件名换成这个人的照片 -->
+    <img src="photos/照片1.jpg">
+    <img src="photos/照片2.jpg">
+    <img src="photos/照片3.jpg">
+    <img src="photos/照片4.jpg">
+
+</section>
+
+<div class="lightbox" id="lightbox">
+    <img id="bigImage">
+</div>
+
+<script>
+const images = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const bigImage = document.getElementById("bigImage");
+
+images.forEach(img=>{
+    img.addEventListener("click",()=>{
+        bigImage.src = img.src;
+        lightbox.classList.add("show");
+    });
+});
+
+lightbox.addEventListener("click",()=>{
+    lightbox.classList.remove("show");
+});
+</script>
+
+</body>
+</html>
