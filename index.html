@@ -18,42 +18,48 @@ html{
 }
 
 body{
-    background:#09090c;
-    color:#f4f1ea;
+    background:#f7f4ef;
+    color:#55515a;
     font-family:
         -apple-system,
         BlinkMacSystemFont,
         "PingFang SC",
         "Microsoft YaHei",
         sans-serif;
-    overflow-x:hidden;
 }
 
-/* 星空背景 */
+/* 背景 */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
-    z-index:-3;
+    z-index:-2;
     background:
-        radial-gradient(circle at 20% 20%,rgba(130,110,180,.12),transparent 30%),
-        radial-gradient(circle at 80% 70%,rgba(90,110,160,.10),transparent 30%),
-        #09090c;
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(190,177,218,.28),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(170,196,205,.25),
+            transparent 30%
+        ),
+        #f7f4ef;
 }
 
 .stars{
     position:fixed;
     inset:0;
-    z-index:-2;
+    z-index:-1;
     pointer-events:none;
+    opacity:.35;
     background-image:
-        radial-gradient(circle,#fff 1px,transparent 1px),
-        radial-gradient(circle,#fff 1px,transparent 1px),
-        radial-gradient(circle,#fff 1px,transparent 1px);
-    background-size:190px 190px,270px 270px,350px 350px;
-    background-position:20px 40px,80px 120px,150px 70px;
-    opacity:.22;
+        radial-gradient(circle,#aaa 1px,transparent 1px),
+        radial-gradient(circle,#aaa 1px,transparent 1px);
+    background-size:180px 180px,280px 280px;
+    background-position:30px 40px,120px 90px;
 }
 
 /* 导航 */
@@ -63,38 +69,35 @@ nav{
     top:0;
     left:0;
     width:100%;
-    padding:28px 7vw;
+    padding:25px 7vw;
     display:flex;
     justify-content:space-between;
     align-items:center;
     z-index:20;
-    backdrop-filter:blur(12px);
+    background:rgba(247,244,239,.72);
+    backdrop-filter:blur(15px);
 }
 
 .logo{
-    font-size:14px;
-    letter-spacing:5px;
-    color:#ddd8cf;
+    font-family:serif;
+    font-size:17px;
+    letter-spacing:4px;
+    color:#625d68;
 }
 
 .nav-right{
     display:flex;
-    gap:30px;
-    font-size:11px;
-    letter-spacing:3px;
+    gap:28px;
 }
 
 .nav-right a{
-    color:#aaa5a0;
     text-decoration:none;
-    transition:.3s;
+    color:#96919a;
+    font-size:10px;
+    letter-spacing:3px;
 }
 
-.nav-right a:hover{
-    color:white;
-}
-
-/* 首屏 */
+/* 首页 */
 
 .hero{
     min-height:100vh;
@@ -105,152 +108,141 @@ nav{
     overflow:hidden;
 }
 
-.hero-ring{
-    position:absolute;
-    width:min(650px,75vw);
-    height:min(650px,75vw);
-    border:1px solid rgba(255,255,255,.09);
-    border-radius:50%;
-}
-
-.hero-ring::before{
-    content:"";
-    position:absolute;
-    inset:70px;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:50%;
-}
-
-.moon{
-    position:absolute;
-    width:210px;
-    height:210px;
-    border-radius:50%;
-    background:
-        radial-gradient(circle at 35% 30%,#fff,#d8d3c9 50%,#8e8a85);
-    box-shadow:
-        0 0 80px rgba(255,255,255,.12);
-    opacity:.9;
-}
-
 .hero-content{
     position:relative;
     z-index:3;
     text-align:center;
 }
 
-.small-title{
-    font-size:11px;
-    letter-spacing:8px;
-    color:#aaa5a0;
-    margin-bottom:30px;
+.eyebrow{
+    font-size:10px;
+    letter-spacing:7px;
+    color:#9b95a0;
+    margin-bottom:28px;
 }
 
 .main-title{
     font-family:serif;
-    font-size:clamp(65px,12vw,150px);
+    font-size:clamp(65px,12vw,145px);
     font-weight:300;
-    letter-spacing:18px;
-    margin-right:-18px;
-    line-height:1;
+    letter-spacing:15px;
+    color:#5c5862;
 }
 
-.cross{
-    margin:30px 0;
-    color:#888;
-    font-size:20px;
+.symbol{
+    margin:24px 0;
+    font-size:22px;
+    color:#aaa2b6;
 }
 
-.subtitle{
-    font-size:11px;
+.sub-title{
+    font-size:12px;
     letter-spacing:6px;
-    color:#8d8984;
+    color:#96919a;
+}
+
+/* 月亮 */
+
+.moon{
+    position:absolute;
+    width:clamp(280px,32vw,430px);
+    height:clamp(280px,32vw,430px);
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #fff,
+            #e8e3eb 48%,
+            #d1c9d9
+        );
+    box-shadow:
+        0 25px 90px rgba(145,130,160,.18);
+    opacity:.7;
+}
+
+.ring{
+    position:absolute;
+    width:70vw;
+    max-width:900px;
+    aspect-ratio:1;
+    border:1px solid rgba(130,120,140,.13);
+    border-radius:50%;
 }
 
 .scroll{
     position:absolute;
-    bottom:35px;
+    bottom:30px;
     font-size:9px;
     letter-spacing:4px;
-    color:#777;
+    color:#aaa4aa;
 }
 
-/* 双人区域 */
+/* 两个人 */
 
 .people{
-    padding:160px 7vw;
-    position:relative;
+    padding:140px 7vw;
 }
 
 .section-label{
     text-align:center;
-    font-size:10px;
+    font-size:9px;
     letter-spacing:6px;
-    color:#777;
-    margin-bottom:70px;
+    color:#aaa4aa;
+    margin-bottom:65px;
 }
 
 .people-grid{
-    max-width:1250px;
+    max-width:1200px;
     margin:auto;
     display:grid;
-    grid-template-columns:1fr 1px 1fr;
-    gap:70px;
-    align-items:center;
-}
-
-.divider{
-    height:420px;
-    background:linear-gradient(
-        transparent,
-        rgba(255,255,255,.25),
-        transparent
-    );
+    grid-template-columns:1fr 1fr;
+    gap:30px;
 }
 
 .person{
-    position:relative;
-    min-height:480px;
+    min-height:520px;
     padding:50px;
+    border-radius:28px;
+    position:relative;
+    overflow:hidden;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.08);
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.05),
-            rgba(255,255,255,.01)
-        );
     transition:.5s;
 }
 
 .person:hover{
     transform:translateY(-8px);
-    border-color:rgba(255,255,255,.2);
+}
+
+.person.one{
+    background:
+        linear-gradient(
+            145deg,
+            #e9e2f2,
+            #ddd4e9
+        );
+}
+
+.person.two{
+    background:
+        linear-gradient(
+            145deg,
+            #e1ebea,
+            #d5e2e0
+        );
 }
 
 .person::before{
     content:"";
     position:absolute;
-    width:260px;
-    height:260px;
+    width:280px;
+    height:280px;
     border-radius:50%;
-    filter:blur(60px);
-    opacity:.22;
-}
-
-.person.one::before{
-    background:#8f78b7;
-    top:-80px;
-    right:-70px;
-}
-
-.person.two::before{
-    background:#7696ad;
-    top:-80px;
-    right:-70px;
+    background:rgba(255,255,255,.45);
+    top:-100px;
+    right:-80px;
+    filter:blur(25px);
 }
 
 .number{
@@ -258,170 +250,162 @@ nav{
     top:35px;
     left:40px;
     font-size:10px;
-    letter-spacing:4px;
-    color:#666;
+    letter-spacing:3px;
+    color:rgba(80,75,85,.4);
 }
 
 .person-name{
-    font-family:serif;
-    font-size:clamp(42px,5vw,75px);
-    font-weight:300;
-    letter-spacing:9px;
     position:relative;
+    font-family:serif;
+    font-size:clamp(48px,6vw,82px);
+    font-weight:300;
+    letter-spacing:10px;
+    color:#625d68;
 }
 
 .person-en{
+    position:relative;
     margin-top:12px;
     font-size:9px;
-    letter-spacing:5px;
-    color:#777;
-    position:relative;
+    letter-spacing:4px;
+    color:#8e8892;
 }
 
 .person-line{
-    width:40px;
+    position:relative;
+    width:42px;
     height:1px;
-    background:#777;
-    margin:28px 0;
+    background:rgba(90,85,95,.35);
+    margin:25px 0;
 }
 
 .person-desc{
+    position:relative;
+    max-width:280px;
     font-size:12px;
     line-height:2;
-    color:#999;
-    max-width:280px;
-    position:relative;
+    color:#817b84;
 }
 
-/* 关于两个人 */
+/* 故事 */
 
 .story{
-    min-height:80vh;
-    padding:150px 10vw;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.story-inner{
-    max-width:800px;
+    padding:160px 8vw;
     text-align:center;
 }
 
 .story-title{
     font-family:serif;
-    font-size:clamp(38px,6vw,75px);
     font-weight:300;
+    font-size:clamp(40px,6vw,76px);
     letter-spacing:8px;
+    color:#625d68;
 }
 
 .story-text{
-    margin-top:40px;
-    color:#8d8984;
-    line-height:2.4;
+    max-width:620px;
+    margin:40px auto 0;
     font-size:13px;
+    line-height:2.5;
+    color:#918b92;
 }
 
-/* 时间轴 */
+/* 照片 */
 
-.memory{
-    padding:130px 7vw;
+.gallery{
+    padding:100px 7vw 160px;
 }
 
-.memory-list{
-    max-width:850px;
-    margin:auto;
-}
-
-.memory-item{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    gap:40px;
-    padding:40px 0;
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.memory-date{
-    font-size:10px;
-    letter-spacing:3px;
-    color:#666;
-}
-
-.memory-content h3{
+.gallery-title{
+    text-align:center;
     font-family:serif;
-    font-size:25px;
+    font-size:45px;
     font-weight:300;
-    margin-bottom:10px;
+    letter-spacing:7px;
+    color:#625d68;
+    margin-bottom:60px;
 }
 
-.memory-content p{
-    color:#777;
-    font-size:12px;
-    line-height:2;
+.gallery-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.photo{
+    aspect-ratio:3/4;
+    border-radius:18px;
+    background:
+        linear-gradient(
+            145deg,
+            #e9e3eb,
+            #dce5e5
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#aaa4aa;
+    font-size:9px;
+    letter-spacing:3px;
 }
 
 /* 页尾 */
 
 footer{
-    padding:100px 7vw 50px;
+    padding:100px 7vw 45px;
     text-align:center;
 }
 
-.footer-title{
+.footer-name{
     font-family:serif;
-    font-size:40px;
-    letter-spacing:8px;
+    font-size:35px;
+    letter-spacing:7px;
+    color:#706a74;
 }
 
 .footer-small{
-    margin-top:25px;
-    color:#555;
+    margin-top:20px;
     font-size:9px;
     letter-spacing:4px;
+    color:#aaa4aa;
 }
 
 @media(max-width:700px){
 
     nav{
-        padding:22px 5vw;
+        padding:20px 5vw;
     }
 
     .nav-right{
-        gap:12px;
-        font-size:8px;
-    }
-
-    .moon{
-        width:145px;
-        height:145px;
-    }
-
-    .main-title{
-        letter-spacing:9px;
-        margin-right:-9px;
+        gap:13px;
     }
 
     .people{
-        padding:110px 5vw;
+        padding:100px 5vw;
     }
 
     .people-grid{
         grid-template-columns:1fr;
-        gap:30px;
-    }
-
-    .divider{
-        display:none;
     }
 
     .person{
-        min-height:400px;
+        min-height:420px;
         padding:35px;
     }
 
-    .memory-item{
-        grid-template-columns:1fr;
-        gap:15px;
+    .gallery{
+        padding:80px 5vw 120px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+
+    .story{
+        padding:120px 8vw;
     }
 }
 </style>
@@ -432,49 +416,47 @@ footer{
 <div class="stars"></div>
 
 <nav>
-    <div class="logo">YLX × YM</div>
+    <div class="logo">圆落星 × 榆木</div>
 
     <div class="nav-right">
         <a href="#people">TWO</a>
         <a href="#story">STORY</a>
-        <a href="#memory">MEMORY</a>
+        <a href="#gallery">PHOTO</a>
     </div>
 </nav>
 
-<!-- HERO -->
-
 <section class="hero">
 
-    <div class="hero-ring"></div>
+    <div class="ring"></div>
 
     <div class="moon"></div>
 
     <div class="hero-content">
-        <div class="small-title">
+
+        <div class="eyebrow">
             TWO PEOPLE · ONE WORLD
         </div>
 
-        <h1 class="main-title">
+        <div class="main-title">
             圆落星
-        </h1>
+        </div>
 
-        <div class="cross">
+        <div class="symbol">
             ×
         </div>
 
-        <div class="subtitle">
+        <div class="sub-title">
             榆木
         </div>
+
     </div>
 
     <div class="scroll">
-        SCROLL TO DISCOVER
+        SCROLL ↓
     </div>
 
 </section>
 
-
-<!-- 两个人 -->
 
 <section class="people" id="people">
 
@@ -501,15 +483,13 @@ footer{
             <div class="person-line"></div>
 
             <div class="person-desc">
-                一个属于夜晚的人。
-                喜欢星光、安静和那些
-                不需要解释的瞬间。
+                一个属于星光和安静的角落。
+                <br>
+                这里记录圆落星的照片、
+                故事，以及那些值得留下的瞬间。
             </div>
 
         </div>
-
-
-        <div class="divider"></div>
 
 
         <div class="person two">
@@ -529,9 +509,10 @@ footer{
             <div class="person-line"></div>
 
             <div class="person-desc">
-                像一棵安静生长的树。
-                不急着表达，却一直
-                留在属于自己的地方。
+                一棵安静生长的树。
+                <br>
+                这里属于榆木，
+                也属于那些慢慢发生的故事。
             </div>
 
         </div>
@@ -540,94 +521,45 @@ footer{
 
 </section>
 
-
-<!-- 故事 -->
 
 <section class="story" id="story">
 
-    <div class="story-inner">
+    <div class="section-label">
+        OUR LITTLE WORLD
+    </div>
 
-        <div class="section-label">
-            A SMALL STORY
-        </div>
+    <div class="story-title">
+        两个人，刚刚好。
+    </div>
 
-        <div class="story-title">
-            两个人的世界
-        </div>
-
-        <div class="story-text">
-            世界很大，人与人的相遇却很奇妙。<br>
-            有些人只是路过，有些人会留下名字。<br>
-            圆落星与榆木，便是这样的一段故事。
-            <br><br>
-            不需要太多解释。<br>
-            有光的时候一起看光，安静的时候一起安静。
-        </div>
-
+    <div class="story-text">
+        世界很大，故事很多。<br>
+        但总有一些人，会让一个普通的瞬间变得特别。<br><br>
+        圆落星 × 榆木<br>
+        这里，是属于两个人的小小世界。
     </div>
 
 </section>
 
 
-<!-- MEMORY -->
-
-<section class="memory" id="memory">
+<section class="gallery" id="gallery">
 
     <div class="section-label">
-        MEMORY · 01
+        MOMENTS
     </div>
 
-    <div class="memory-list">
+    <div class="gallery-title">
+        留下一些光
+    </div>
 
-        <div class="memory-item">
+    <div class="gallery-grid">
 
-            <div class="memory-date">
-                DAY 001
-            </div>
-
-            <div class="memory-content">
-                <h3>第一次出现</h3>
-                <p>
-                    有些故事并没有特别的开始，
-                    只是某一天，两个人刚好出现在彼此的世界。
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="memory-item">
-
-            <div class="memory-date">
-                DAY 032
-            </div>
-
-            <div class="memory-content">
-                <h3>慢慢熟悉</h3>
-                <p>
-                    从陌生到熟悉，
-                    原来时间真的可以把距离变得很小。
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="memory-item">
-
-            <div class="memory-date">
-                DAY 100
-            </div>
-
-            <div class="memory-content">
-                <h3>仍然在这里</h3>
-                <p>
-                    故事没有结束。
-                    所以这一页，也不会是最后一页。
-                </p>
-            </div>
-
-        </div>
+        <div class="photo">PHOTO 01</div>
+        <div class="photo">PHOTO 02</div>
+        <div class="photo">PHOTO 03</div>
+        <div class="photo">PHOTO 04</div>
+        <div class="photo">PHOTO 05</div>
+        <div class="photo">PHOTO 06</div>
 
     </div>
 
@@ -636,12 +568,12 @@ footer{
 
 <footer>
 
-    <div class="footer-title">
+    <div class="footer-name">
         圆落星 × 榆木
     </div>
 
     <div class="footer-small">
-        A QUIET PLACE FOR TWO
+        A LITTLE WORLD FOR TWO
     </div>
 
 </footer>
