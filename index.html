@@ -30,10 +30,6 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   首页
-   ========================= */
-
 .hero{
     min-height:100vh;
     position:relative;
@@ -182,8 +178,7 @@ body{
     font-size:10px;
     letter-spacing:3px;
 
-    transition:
-        .4s;
+    transition:.4s;
 
     opacity:0;
 
@@ -219,8 +214,6 @@ body{
         rgba(255,255,255,.72);
 }
 
-/* 每日城市标签 */
-
 .place-tag{
     position:absolute;
 
@@ -255,10 +248,6 @@ body{
     white-space:nowrap;
 }
 
-/* =========================
-   内容
-   ========================= */
-
 .section{
     padding:
         120px
@@ -274,7 +263,6 @@ body{
 
 .section-head{
     text-align:center;
-
     margin-bottom:55px;
 }
 
@@ -295,10 +283,6 @@ body{
 
     color:#47424d;
 }
-
-/* =========================
-   信息卡
-   ========================= */
 
 .info-grid{
     display:grid;
@@ -361,10 +345,6 @@ body{
 
     color:#5b5662;
 }
-
-/* =========================
-   照片
-   ========================= */
 
 .photo-section{
     padding-top:50px;
@@ -467,10 +447,6 @@ body{
     color:#aaa5af;
 }
 
-/* =========================
-   图片查看
-   ========================= */
-
 .lightbox{
     position:fixed;
     inset:0;
@@ -542,10 +518,6 @@ body{
     cursor:pointer;
 }
 
-/* =========================
-   页脚
-   ========================= */
-
 .footer{
     padding:
         80px
@@ -562,10 +534,6 @@ body{
     background:#f4f1ec;
 }
 
-/* =========================
-   动画
-   ========================= */
-
 @keyframes fadeUp{
 
     from{
@@ -580,10 +548,6 @@ body{
             translateY(0);
     }
 }
-
-/* =========================
-   手机
-   ========================= */
 
 @media(max-width:700px){
 
@@ -633,18 +597,14 @@ body{
 </style>
 </head>
 
-
 <body>
-
 
 <header class="hero">
 
-    <!-- 每日自动更换的英国 / 美国照片 -->
     <div
         class="hero-bg"
         id="heroBg">
     </div>
-
 
     <div class="top-left">
 
@@ -654,7 +614,6 @@ body{
 
     </div>
 
-
     <div class="top-right">
 
         SHINING<br>
@@ -662,7 +621,6 @@ body{
         IN SILENCE
 
     </div>
-
 
     <div class="hero-center">
 
@@ -672,20 +630,17 @@ body{
 
         </div>
 
-
         <div class="hero-title">
 
             圆落星
 
         </div>
 
-
         <div class="hero-sub">
 
             A PLACE FOR MEMORY
 
         </div>
-
 
         <a
             href="#today"
@@ -695,7 +650,6 @@ body{
 
         </a>
 
-
         <div
             class="datetime"
             id="datetime">
@@ -704,14 +658,12 @@ body{
 
         </div>
 
-
         <div
             class="day-counter"
             id="dayCounter">
         </div>
 
     </div>
-
 
     <div
         class="place-tag"
@@ -723,13 +675,11 @@ body{
 
 </header>
 
-
 <section
     class="section"
     id="today">
 
     <div class="inner">
-
 
         <div class="section-head">
 
@@ -739,7 +689,6 @@ body{
 
             </div>
 
-
             <div class="section-title">
 
                 今天的世界
@@ -748,9 +697,7 @@ body{
 
         </div>
 
-
         <div class="info-grid">
-
 
             <div class="info-card">
 
@@ -759,7 +706,6 @@ body{
                     MOON · 月相
 
                 </div>
-
 
                 <div
                     class="info-value"
@@ -771,7 +717,6 @@ body{
 
             </div>
 
-
             <div class="info-card">
 
                 <div class="info-label">
@@ -779,7 +724,6 @@ body{
                     SEASON · 季节
 
                 </div>
-
 
                 <div
                     class="info-value"
@@ -791,7 +735,6 @@ body{
 
             </div>
 
-
             <div class="info-card">
 
                 <div class="info-label">
@@ -799,7 +742,6 @@ body{
                     WEATHER · 上海
 
                 </div>
-
 
                 <div
                     class="info-value"
@@ -811,19 +753,16 @@ body{
 
             </div>
 
-
         </div>
 
     </div>
 
 </section>
 
-
 <section
     class="section photo-section">
 
     <div class="inner">
-
 
         <div class="section-head">
 
@@ -833,7 +772,6 @@ body{
 
             </div>
 
-
             <div class="section-title">
 
                 我的照片
@@ -841,7 +779,6 @@ body{
             </div>
 
         </div>
-
 
         <div class="photo-window">
 
@@ -863,18 +800,15 @@ body{
 
 </section>
 
-
 <footer class="footer">
 
     A PLACE FOR MEMORY · 2026
 
 </footer>
 
-
 <div
     class="lightbox"
     id="lightbox">
-
 
     <button
         class="close-lightbox"
@@ -885,78 +819,355 @@ body{
 
     </button>
 
-
     <img
         id="lightboxImg"
         alt="Memory">
 
-
 </div>
-
 
 <script>
 
+/* =====================================================
+   60天自动换图
+   =====================================================
 
-/* =========================
-   英国 + 美国每日自动换图
-   ========================= */
+   01-15  🇬🇧 英国城市
+   16-30  🇺🇸 美国城市
+   31-45  🇬🇧 英国乡村
+   46-60  🌾 欧美乡村
+
+   60张图片循环
+   第61天重新开始
+
+===================================================== */
 
 const heroImages = [
 
+    /* ===============================
+       🇬🇧 英国城市 01-15
+    =============================== */
+
     {
         country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/london,england?lock=1001"
+    },
 
-        url:
-        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90"
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/london,england?lock=1002"
+    },
+
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/london,england?lock=1003"
+    },
+
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/london,england?lock=1004"
+    },
+
+    {
+        country:"🇬🇧 EDINBURGH · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/edinburgh,scotland?lock=1005"
+    },
+
+    {
+        country:"🇬🇧 EDINBURGH · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/edinburgh,scotland?lock=1006"
+    },
+
+    {
+        country:"🇬🇧 OXFORD · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/oxford,england?lock=1007"
+    },
+
+    {
+        country:"🇬🇧 CAMBRIDGE · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/cambridge,england?lock=1008"
+    },
+
+    {
+        country:"🇬🇧 BATH · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/bath,england?lock=1009"
+    },
+
+    {
+        country:"🇬🇧 YORK · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/york,england?lock=1010"
+    },
+
+    {
+        country:"🇬🇧 LIVERPOOL · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/liverpool,england?lock=1011"
+    },
+
+    {
+        country:"🇬🇧 MANCHESTER · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/manchester,england?lock=1012"
+    },
+
+    {
+        country:"🇬🇧 BRISTOL · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/bristol,england?lock=1013"
+    },
+
+    {
+        country:"🇬🇧 BRIGHTON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/brighton,england?lock=1014"
+    },
+
+    {
+        country:"🇬🇧 NOTTINGHAM · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/nottingham,england?lock=1015"
+    },
+
+
+    /* ===============================
+       🇺🇸 美国城市 16-30
+    =============================== */
+
+    {
+        country:"🇺🇸 NEW YORK · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1016"
     },
 
     {
         country:"🇺🇸 NEW YORK · UNITED STATES",
-
-        url:
-        "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2200&q=90"
-    },
-
-    {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-
-        url:
-        "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=2200&q=90"
+        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1017"
     },
 
     {
         country:"🇺🇸 NEW YORK · UNITED STATES",
-
-        url:
-        "https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=2200&q=90"
+        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1018"
     },
 
     {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-
-        url:
-        "https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=2200&q=90"
+        country:"🇺🇸 SAN FRANCISCO · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/sanfrancisco,usa?lock=1019"
     },
 
     {
-        country:"🇺🇸 UNITED STATES",
+        country:"🇺🇸 SAN FRANCISCO · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/sanfrancisco,usa?lock=1020"
+    },
 
-        url:
-        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2200&q=90"
+    {
+        country:"🇺🇸 LOS ANGELES · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/losangeles,usa?lock=1021"
+    },
+
+    {
+        country:"🇺🇸 LOS ANGELES · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/losangeles,usa?lock=1022"
+    },
+
+    {
+        country:"🇺🇸 CHICAGO · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/chicago,usa?lock=1023"
+    },
+
+    {
+        country:"🇺🇸 CHICAGO · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/chicago,usa?lock=1024"
+    },
+
+    {
+        country:"🇺🇸 SEATTLE · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/seattle,usa?lock=1025"
+    },
+
+    {
+        country:"🇺🇸 BOSTON · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/boston,usa?lock=1026"
+    },
+
+    {
+        country:"🇺🇸 PORTLAND · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/portland,usa?lock=1027"
+    },
+
+    {
+        country:"🇺🇸 MIAMI · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/miami,usa?lock=1028"
+    },
+
+    {
+        country:"🇺🇸 NASHVILLE · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/nashville,usa?lock=1029"
+    },
+
+    {
+        country:"🇺🇸 SAN DIEGO · UNITED STATES",
+        url:"https://loremflickr.com/2400/1400/sandiego,usa?lock=1030"
+    },
+
+
+    /* ===============================
+       🇬🇧 英国乡村 31-45
+    =============================== */
+
+    {
+        country:"🇬🇧 COTSWOLDS · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/cotswolds,england?lock=1031"
+    },
+
+    {
+        country:"🇬🇧 COTSWOLDS · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/cotswolds,england?lock=1032"
+    },
+
+    {
+        country:"🇬🇧 YORKSHIRE · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/yorkshire,england?lock=1033"
+    },
+
+    {
+        country:"🇬🇧 YORKSHIRE · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/yorkshire,england?lock=1034"
+    },
+
+    {
+        country:"🇬🇧 LAKE DISTRICT · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/lakedistrict,england?lock=1035"
+    },
+
+    {
+        country:"🇬🇧 LAKE DISTRICT · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/lakedistrict,england?lock=1036"
+    },
+
+    {
+        country:"🇬🇧 DEVON · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/devon,england?lock=1037"
+    },
+
+    {
+        country:"🇬🇧 CORNWALL · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/cornwall,england?lock=1038"
+    },
+
+    {
+        country:"🇬🇧 CORNWALL · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/cornwall,england?lock=1039"
+    },
+
+    {
+        country:"🇬🇧 PEAK DISTRICT · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/peakdistrict,england?lock=1040"
+    },
+
+    {
+        country:"🇬🇧 PEAK DISTRICT · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/peakdistrict,england?lock=1041"
+    },
+
+    {
+        country:"🇬🇧 SCOTTISH HIGHLANDS · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/scotland,highlands?lock=1042"
+    },
+
+    {
+        country:"🇬🇧 WALES · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/wales,countryside?lock=1043"
+    },
+
+    {
+        country:"🇬🇧 ENGLISH COUNTRYSIDE · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/england,countryside?lock=1044"
+    },
+
+    {
+        country:"🇬🇧 BRITISH VILLAGE · UNITED KINGDOM",
+        url:"https://loremflickr.com/2400/1400/english,village?lock=1045"
+    },
+
+
+    /* ===============================
+       🌾 欧美乡村 46-60
+    =============================== */
+
+    {
+        country:"🇫🇷 FRENCH COUNTRYSIDE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/french,countryside?lock=1046"
+    },
+
+    {
+        country:"🇫🇷 FRENCH VILLAGE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/french,village?lock=1047"
+    },
+
+    {
+        country:"🇮🇹 ITALIAN COUNTRYSIDE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/italy,countryside?lock=1048"
+    },
+
+    {
+        country:"🇮🇹 ITALIAN VILLAGE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/italy,village?lock=1049"
+    },
+
+    {
+        country:"🇮🇹 TUSCANY · ITALY",
+        url:"https://loremflickr.com/2400/1400/tuscany,italy?lock=1050"
+    },
+
+    {
+        country:"🇨🇭 SWISS COUNTRYSIDE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/switzerland,countryside?lock=1051"
+    },
+
+    {
+        country:"🇦🇹 AUSTRIA · EUROPE",
+        url:"https://loremflickr.com/2400/1400/austria,countryside?lock=1052"
+    },
+
+    {
+        country:"🇩🇪 GERMAN COUNTRYSIDE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/germany,countryside?lock=1053"
+    },
+
+    {
+        country:"🇳🇱 NETHERLANDS · EUROPE",
+        url:"https://loremflickr.com/2400/1400/netherlands,countryside?lock=1054"
+    },
+
+    {
+        country:"🇮🇪 IRELAND · EUROPE",
+        url:"https://loremflickr.com/2400/1400/ireland,countryside?lock=1055"
+    },
+
+    {
+        country:"🇮🇪 IRISH VILLAGE · EUROPE",
+        url:"https://loremflickr.com/2400/1400/ireland,village?lock=1056"
+    },
+
+    {
+        country:"🇳🇴 NORWAY · EUROPE",
+        url:"https://loremflickr.com/2400/1400/norway,countryside?lock=1057"
+    },
+
+    {
+        country:"🇪🇸 SPAIN · EUROPE",
+        url:"https://loremflickr.com/2400/1400/spain,countryside?lock=1058"
+    },
+
+    {
+        country:"🇵🇹 PORTUGAL · EUROPE",
+        url:"https://loremflickr.com/2400/1400/portugal,countryside?lock=1059"
+    },
+
+    {
+        country:"🇺🇸 AMERICAN COUNTRYSIDE · USA",
+        url:"https://loremflickr.com/2400/1400/american,countryside?lock=1060"
     }
 
 ];
 
 
-/*
-   根据上海日期决定当天照片。
-
-   同一天：
-   不会因为刷新网页而改变。
-
-   第二天：
-   自动换下一张。
-*/
+/* =====================================================
+   每日背景图
+===================================================== */
 
 function setDailyHero(){
 
@@ -1013,9 +1224,9 @@ function setDailyHero(){
 setDailyHero();
 
 
-/* =========================
+/* =====================================================
    上海时间
-   ========================= */
+===================================================== */
 
 function updateDateTime(){
 
@@ -1044,7 +1255,6 @@ function updateDateTime(){
             }
         );
 
-
     document.getElementById(
         "datetime"
     ).textContent =
@@ -1056,16 +1266,15 @@ function updateDateTime(){
 
 updateDateTime();
 
-
 setInterval(
     updateDateTime,
     1000
 );
 
 
-/* =========================
+/* =====================================================
    第几天
-   ========================= */
+===================================================== */
 
 function updateDayCounter(){
 
@@ -1091,7 +1300,6 @@ function updateDayCounter(){
             )
         ) + 1;
 
-
     document.getElementById(
         "dayCounter"
     ).textContent =
@@ -1102,9 +1310,7 @@ function updateDayCounter(){
 
 }
 
-
 updateDayCounter();
-
 
 setInterval(
     updateDayCounter,
@@ -1112,9 +1318,9 @@ setInterval(
 );
 
 
-/* =========================
+/* =====================================================
    月相
-   ========================= */
+===================================================== */
 
 function getMoonPhase(){
 
@@ -1146,58 +1352,48 @@ function getMoonPhase(){
         ) %
         cycle;
 
-
     if(
         phase < 1.84566
     )
         return "🌑 新月";
-
 
     if(
         phase < 5.53699
     )
         return "🌒 娥眉月";
 
-
     if(
         phase < 9.22831
     )
         return "🌓 上弦月";
-
 
     if(
         phase < 12.91963
     )
         return "🌔 盈凸月";
 
-
     if(
         phase < 16.61096
     )
         return "🌕 满月";
-
 
     if(
         phase < 20.30228
     )
         return "🌖 亏凸月";
 
-
     if(
         phase < 23.99361
     )
         return "🌗 下弦月";
-
 
     if(
         phase < 27.68493
     )
         return "🌘 残月";
 
-
     return "🌑 新月";
 }
-
 
 document.getElementById(
     "moonPhase"
@@ -1205,9 +1401,9 @@ document.getElementById(
     getMoonPhase();
 
 
-/* =========================
-   节气季节
-   ========================= */
+/* =====================================================
+   季节
+===================================================== */
 
 function solarLongitude(date){
 
@@ -1216,7 +1412,6 @@ function solarLongitude(date){
         / 86400000
         + 2440587.5;
 
-
     const T =
         (
             JD -
@@ -1224,17 +1419,14 @@ function solarLongitude(date){
         ) /
         36525;
 
-
     const rad =
         Math.PI /
         180;
-
 
     let L0 =
         280.46646 +
         36000.76983 * T +
         0.0003032 * T * T;
-
 
     L0 =
         (
@@ -1246,16 +1438,13 @@ function solarLongitude(date){
         ) %
         360;
 
-
     const M =
         357.52911 +
         35999.05029 * T -
         0.0001537 * T * T;
 
-
     const Mrad =
         M * rad;
-
 
     const C =
         Math.sin(Mrad) *
@@ -1282,10 +1471,8 @@ function solarLongitude(date){
         ) *
         0.000289;
 
-
     const trueLongitude =
         L0 + C;
-
 
     const omega =
         (
@@ -1294,13 +1481,11 @@ function solarLongitude(date){
         ) *
         rad;
 
-
     const apparentLongitude =
         trueLongitude -
         0.00569 -
         0.00478 *
         Math.sin(omega);
-
 
     return (
         (
@@ -1312,14 +1497,12 @@ function solarLongitude(date){
 
 }
 
-
 function getChinaSeason(){
 
     const longitude =
         solarLongitude(
             new Date()
         );
-
 
     if(
         longitude >= 315 ||
@@ -1330,7 +1513,6 @@ function getChinaSeason(){
 
     }
 
-
     if(
         longitude < 135
     ){
@@ -1338,7 +1520,6 @@ function getChinaSeason(){
         return "☀️ 夏天";
 
     }
-
 
     if(
         longitude < 225
@@ -1348,11 +1529,9 @@ function getChinaSeason(){
 
     }
 
-
     return "❄️ 冬天";
 
 }
-
 
 function updateSeason(){
 
@@ -1360,7 +1539,6 @@ function updateSeason(){
         document.getElementById(
             "season"
         );
-
 
     if(season){
 
@@ -1371,9 +1549,7 @@ function updateSeason(){
 
 }
 
-
 updateSeason();
-
 
 setInterval(
     updateSeason,
@@ -1381,9 +1557,9 @@ setInterval(
 );
 
 
-/* =========================
+/* =====================================================
    上海天气
-   ========================= */
+===================================================== */
 
 async function loadWeather(){
 
@@ -1391,7 +1567,6 @@ async function loadWeather(){
         document.getElementById(
             "weather"
         );
-
 
     try{
 
@@ -1416,24 +1591,19 @@ async function loadWeather(){
 
             "&timezone=Asia%2FShanghai";
 
-
         const response =
             await fetch(url);
-
 
         if(
             !response.ok
         )
             throw new Error();
 
-
         const data =
             await response.json();
 
-
         const current =
             data.current;
-
 
         const weatherMap = {
 
@@ -1481,13 +1651,11 @@ async function loadWeather(){
 
         };
 
-
         const description =
             weatherMap[
                 current.weather_code
             ] ||
             "天气变化中";
-
 
         weatherBox.innerHTML =
 
@@ -1523,7 +1691,6 @@ async function loadWeather(){
 
             " km/h";
 
-
     }catch(error){
 
         weatherBox.textContent =
@@ -1533,9 +1700,7 @@ async function loadWeather(){
 
 }
 
-
 loadWeather();
-
 
 setInterval(
     loadWeather,
@@ -1543,9 +1708,9 @@ setInterval(
 );
 
 
-/* =========================
+/* =====================================================
    我的照片
-   ========================= */
+===================================================== */
 
 async function loadPhotos(){
 
@@ -1553,7 +1718,6 @@ async function loadPhotos(){
         document.getElementById(
             "photoTrack"
         );
-
 
     try{
 
@@ -1566,16 +1730,13 @@ async function loadPhotos(){
                 }
             );
 
-
         if(
             !response.ok
         )
             throw new Error();
 
-
         const photos =
             await response.json();
-
 
         if(
             !Array.isArray(
@@ -1593,17 +1754,12 @@ async function loadPhotos(){
 
         }
 
-
-        /* 保留原来的无限滚动 */
-
         const allPhotos =
             photos.concat(
                 photos
             );
 
-
         track.innerHTML = "";
-
 
         allPhotos.forEach(
             function(path){
@@ -1613,34 +1769,27 @@ async function loadPhotos(){
                         "div"
                     );
 
-
                 card.className =
                     "photo-card";
-
 
                 const img =
                     document.createElement(
                         "img"
                     );
 
-
                 img.src =
                     path +
                     "?v=" +
                     Date.now();
 
-
                 img.alt =
                     "Memory";
-
 
                 img.loading =
                     "lazy";
 
-
                 img.draggable =
                     false;
-
 
                 card.addEventListener(
                     "click",
@@ -1651,7 +1800,6 @@ async function loadPhotos(){
                         ).src =
                             img.src;
 
-
                         document.getElementById(
                             "lightbox"
                         ).classList.add(
@@ -1661,11 +1809,9 @@ async function loadPhotos(){
                     }
                 );
 
-
                 card.appendChild(
                     img
                 );
-
 
                 track.appendChild(
                     card
@@ -1673,7 +1819,6 @@ async function loadPhotos(){
 
             }
         );
-
 
     }catch(error){
 
@@ -1686,9 +1831,7 @@ async function loadPhotos(){
 
 }
 
-
 loadPhotos();
-
 
 setInterval(
     loadPhotos,
@@ -1696,9 +1839,9 @@ setInterval(
 );
 
 
-/* =========================
-   图片关闭
-   ========================= */
+/* =====================================================
+   图片查看
+===================================================== */
 
 document.getElementById(
     "closeLightbox"
@@ -1714,7 +1857,6 @@ document.getElementById(
 
     }
 );
-
 
 document.getElementById(
     "lightbox"
@@ -1736,9 +1878,9 @@ document.getElementById(
 );
 
 
-/* =========================
-   禁止照片普通右键 / 拖拽
-   ========================= */
+/* =====================================================
+   禁止图片拖拽
+===================================================== */
 
 document.addEventListener(
     "contextmenu",
@@ -1754,7 +1896,6 @@ document.addEventListener(
 
     }
 );
-
 
 document.addEventListener(
     "dragstart",
@@ -1772,15 +1913,14 @@ document.addEventListener(
 );
 
 
-/* =========================
-   滚动出现动画
-   ========================= */
+/* =====================================================
+   卡片动画
+===================================================== */
 
 const cards =
     document.querySelectorAll(
         ".info-card"
     );
-
 
 const observer =
     new IntersectionObserver(
@@ -1807,7 +1947,6 @@ const observer =
             threshold:.18
         }
     );
-
 
 cards.forEach(
     function(card){
