@@ -18,8 +18,8 @@ html{
 }
 
 body{
-    background:#f7f4ef;
-    color:#55515a;
+    background:#f6f3ed;
+    color:#514d55;
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -28,7 +28,7 @@ body{
         sans-serif;
 }
 
-/* 背景 */
+/* ===== 背景 ===== */
 
 body::before{
     content:"";
@@ -37,67 +37,64 @@ body::before{
     z-index:-2;
     background:
         radial-gradient(
-            circle at 15% 20%,
-            rgba(190,177,218,.28),
+            circle at 15% 15%,
+            rgba(190,174,218,.28),
             transparent 30%
         ),
         radial-gradient(
-            circle at 85% 70%,
-            rgba(170,196,205,.25),
-            transparent 30%
+            circle at 85% 75%,
+            rgba(165,194,202,.24),
+            transparent 32%
         ),
-        #f7f4ef;
+        #f6f3ed;
 }
 
-.stars{
+.noise{
     position:fixed;
     inset:0;
-    z-index:-1;
+    z-index:30;
     pointer-events:none;
-    opacity:.35;
-    background-image:
-        radial-gradient(circle,#aaa 1px,transparent 1px),
-        radial-gradient(circle,#aaa 1px,transparent 1px);
-    background-size:180px 180px,280px 280px;
-    background-position:30px 40px,120px 90px;
+    opacity:.025;
+    background-image:url(
+        "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"
+    );
 }
 
-/* 导航 */
+/* ===== 导航 ===== */
 
 nav{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    padding:25px 7vw;
+    padding:24px 6vw;
     display:flex;
     justify-content:space-between;
     align-items:center;
     z-index:20;
-    background:rgba(247,244,239,.72);
-    backdrop-filter:blur(15px);
+    background:rgba(246,243,237,.68);
+    backdrop-filter:blur(16px);
 }
 
 .logo{
     font-family:serif;
     font-size:17px;
     letter-spacing:4px;
-    color:#625d68;
 }
 
-.nav-right{
+.nav-links{
     display:flex;
-    gap:28px;
+    gap:30px;
 }
 
-.nav-right a{
+.nav-links a{
+    color:#8e8990;
     text-decoration:none;
-    color:#96919a;
-    font-size:10px;
+    font-size:9px;
     letter-spacing:3px;
 }
 
-/* 首页 */
+/* ===== HERO ===== */
 
 .hero{
     min-height:100vh;
@@ -108,6 +105,39 @@ nav{
     overflow:hidden;
 }
 
+.hero-orbit{
+    position:absolute;
+    width:min(72vw,850px);
+    aspect-ratio:1;
+    border:1px solid rgba(92,84,101,.10);
+    border-radius:50%;
+}
+
+.hero-orbit::before{
+    content:"";
+    position:absolute;
+    inset:80px;
+    border:1px solid rgba(92,84,101,.07);
+    border-radius:50%;
+}
+
+.moon{
+    position:absolute;
+    width:clamp(250px,30vw,400px);
+    aspect-ratio:1;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #e9e4e8 48%,
+            #d0c8d4
+        );
+    box-shadow:
+        0 30px 100px rgba(125,111,140,.18);
+    opacity:.65;
+}
+
 .hero-content{
     position:relative;
     z-index:3;
@@ -115,143 +145,147 @@ nav{
 }
 
 .eyebrow{
-    font-size:10px;
+    font-size:9px;
     letter-spacing:7px;
-    color:#9b95a0;
-    margin-bottom:28px;
+    color:#aaa4aa;
+    margin-bottom:30px;
 }
 
-.main-title{
+.hero-title{
     font-family:serif;
-    font-size:clamp(65px,12vw,145px);
+    font-size:clamp(68px,13vw,155px);
     font-weight:300;
     letter-spacing:15px;
-    color:#5c5862;
+    color:#5b5660;
 }
 
-.symbol{
-    margin:24px 0;
-    font-size:22px;
-    color:#aaa2b6;
+.cross{
+    margin:25px 0;
+    color:#a69caf;
+    font-size:20px;
 }
 
-.sub-title{
-    font-size:12px;
-    letter-spacing:6px;
-    color:#96919a;
+.hero-name-two{
+    font-family:serif;
+    font-size:clamp(38px,6vw,70px);
+    font-weight:300;
+    letter-spacing:10px;
+    color:#77717b;
 }
 
-/* 月亮 */
-
-.moon{
-    position:absolute;
-    width:clamp(280px,32vw,430px);
-    height:clamp(280px,32vw,430px);
-    border-radius:50%;
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #fff,
-            #e8e3eb 48%,
-            #d1c9d9
-        );
-    box-shadow:
-        0 25px 90px rgba(145,130,160,.18);
-    opacity:.7;
-}
-
-.ring{
-    position:absolute;
-    width:70vw;
-    max-width:900px;
-    aspect-ratio:1;
-    border:1px solid rgba(130,120,140,.13);
-    border-radius:50%;
+.hero-sub{
+    margin-top:35px;
+    font-size:9px;
+    letter-spacing:5px;
+    color:#aaa4aa;
 }
 
 .scroll{
     position:absolute;
-    bottom:30px;
-    font-size:9px;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:8px;
     letter-spacing:4px;
     color:#aaa4aa;
 }
 
-/* 两个人 */
+/* ===== 两个人 ===== */
 
 .people{
-    padding:140px 7vw;
+    padding:150px 6vw;
 }
 
-.section-label{
+.section-top{
     text-align:center;
+    margin-bottom:70px;
+}
+
+.section-number{
     font-size:9px;
-    letter-spacing:6px;
+    letter-spacing:5px;
     color:#aaa4aa;
-    margin-bottom:65px;
+    margin-bottom:18px;
+}
+
+.section-title{
+    font-family:serif;
+    font-size:clamp(40px,6vw,72px);
+    font-weight:300;
+    letter-spacing:7px;
 }
 
 .people-grid{
-    max-width:1200px;
+    max-width:1180px;
     margin:auto;
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:30px;
+    gap:25px;
 }
 
 .person{
-    min-height:520px;
-    padding:50px;
-    border-radius:28px;
+    min-height:590px;
     position:relative;
     overflow:hidden;
+    border-radius:26px;
+    padding:45px;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-    transition:.5s;
+    transition:.5s ease;
 }
 
 .person:hover{
     transform:translateY(-8px);
 }
 
-.person.one{
+.person-star{
     background:
         linear-gradient(
             145deg,
-            #e9e2f2,
-            #ddd4e9
+            #e9e0f1,
+            #d9cfe5
         );
 }
 
-.person.two{
+.person-tree{
     background:
         linear-gradient(
             145deg,
-            #e1ebea,
-            #d5e2e0
+            #e1ece9,
+            #d2e1dd
         );
 }
 
 .person::before{
     content:"";
     position:absolute;
-    width:280px;
-    height:280px;
+    width:330px;
+    height:330px;
     border-radius:50%;
-    background:rgba(255,255,255,.45);
-    top:-100px;
-    right:-80px;
-    filter:blur(25px);
+    top:-130px;
+    right:-100px;
+    background:rgba(255,255,255,.42);
+    filter:blur(30px);
 }
 
-.number{
+.person-number{
     position:absolute;
     top:35px;
     left:40px;
-    font-size:10px;
-    letter-spacing:3px;
-    color:rgba(80,75,85,.4);
+    font-size:9px;
+    letter-spacing:4px;
+    color:rgba(70,65,75,.38);
+}
+
+.person-symbol{
+    position:absolute;
+    top:32px;
+    right:38px;
+    font-family:serif;
+    font-size:50px;
+    font-weight:300;
+    color:rgba(255,255,255,.6);
 }
 
 .person-name{
@@ -259,115 +293,145 @@ nav{
     font-family:serif;
     font-size:clamp(48px,6vw,82px);
     font-weight:300;
-    letter-spacing:10px;
-    color:#625d68;
+    letter-spacing:9px;
+    color:#625d66;
 }
 
 .person-en{
     position:relative;
-    margin-top:12px;
-    font-size:9px;
+    margin-top:10px;
+    font-size:8px;
     letter-spacing:4px;
-    color:#8e8892;
+    color:#8d8790;
 }
 
 .person-line{
     position:relative;
     width:42px;
     height:1px;
-    background:rgba(90,85,95,.35);
     margin:25px 0;
+    background:rgba(80,75,85,.3);
 }
 
-.person-desc{
+.person-text{
     position:relative;
-    max-width:280px;
+    max-width:300px;
     font-size:12px;
-    line-height:2;
+    line-height:2.1;
     color:#817b84;
 }
 
-/* 故事 */
+/* ===== 故事 ===== */
 
 .story{
-    padding:160px 8vw;
+    padding:180px 8vw;
     text-align:center;
+}
+
+.story-label{
+    font-size:9px;
+    letter-spacing:5px;
+    color:#aaa4aa;
+    margin-bottom:30px;
 }
 
 .story-title{
     font-family:serif;
+    font-size:clamp(42px,7vw,82px);
     font-weight:300;
-    font-size:clamp(40px,6vw,76px);
     letter-spacing:8px;
-    color:#625d68;
 }
 
 .story-text{
     max-width:620px;
-    margin:40px auto 0;
+    margin:45px auto 0;
     font-size:13px;
     line-height:2.5;
-    color:#918b92;
+    color:#928c93;
 }
 
-/* 照片 */
+/* ===== 照片 ===== */
 
 .gallery{
-    padding:100px 7vw 160px;
+    padding:100px 6vw 160px;
+}
+
+.gallery-head{
+    max-width:1180px;
+    margin:auto auto 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
 }
 
 .gallery-title{
-    text-align:center;
     font-family:serif;
-    font-size:45px;
+    font-size:55px;
     font-weight:300;
     letter-spacing:7px;
-    color:#625d68;
-    margin-bottom:60px;
+}
+
+.gallery-note{
+    font-size:9px;
+    letter-spacing:3px;
+    color:#aaa4aa;
 }
 
 .gallery-grid{
-    max-width:1100px;
+    max-width:1180px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1.2fr .8fr .8fr;
     gap:18px;
 }
 
 .photo{
-    aspect-ratio:3/4;
-    border-radius:18px;
+    min-height:430px;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
     background:
         linear-gradient(
             145deg,
-            #e9e3eb,
-            #dce5e5
+            #e6dfeb,
+            #dce6e5
         );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#aaa4aa;
-    font-size:9px;
-    letter-spacing:3px;
 }
 
-/* 页尾 */
+.photo:nth-child(2),
+.photo:nth-child(3){
+    min-height:300px;
+    margin-top:80px;
+}
+
+.photo::after{
+    content:"YOUR PHOTO";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:8px;
+    letter-spacing:4px;
+    color:#aaa4aa;
+}
+
+/* ===== 页尾 ===== */
 
 footer{
-    padding:100px 7vw 45px;
+    padding:120px 6vw 45px;
     text-align:center;
 }
 
-.footer-name{
+.footer-main{
     font-family:serif;
-    font-size:35px;
+    font-size:38px;
+    font-weight:300;
     letter-spacing:7px;
-    color:#706a74;
 }
 
-.footer-small{
+.footer-sub{
     margin-top:20px;
-    font-size:9px;
+    font-size:8px;
     letter-spacing:4px;
     color:#aaa4aa;
 }
@@ -378,12 +442,24 @@ footer{
         padding:20px 5vw;
     }
 
-    .nav-right{
-        gap:13px;
+    .nav-links{
+        gap:14px;
+    }
+
+    .nav-links a{
+        font-size:7px;
+    }
+
+    .hero-title{
+        letter-spacing:8px;
+    }
+
+    .hero-name-two{
+        letter-spacing:6px;
     }
 
     .people{
-        padding:100px 5vw;
+        padding:110px 5vw;
     }
 
     .people-grid{
@@ -391,21 +467,42 @@ footer{
     }
 
     .person{
-        min-height:420px;
+        min-height:460px;
         padding:35px;
+    }
+
+    .story{
+        padding:120px 8vw;
     }
 
     .gallery{
         padding:80px 5vw 120px;
     }
 
-    .gallery-grid{
-        grid-template-columns:1fr 1fr;
-        gap:12px;
+    .gallery-head{
+        display:block;
     }
 
-    .story{
-        padding:120px 8vw;
+    .gallery-note{
+        margin-top:15px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .photo{
+        min-height:330px;
+    }
+
+    .photo:nth-child(2),
+    .photo:nth-child(3){
+        margin-top:40px;
+        min-height:240px;
+    }
+
+    .photo:first-child{
+        grid-column:1 / -1;
     }
 }
 </style>
@@ -413,40 +510,53 @@ footer{
 
 <body>
 
-<div class="stars"></div>
+<div class="noise"></div>
+
+<!-- 导航 -->
 
 <nav>
-    <div class="logo">圆落星 × 榆木</div>
 
-    <div class="nav-right">
+    <div class="logo">
+        圆落星 × 榆木
+    </div>
+
+    <div class="nav-links">
         <a href="#people">TWO</a>
         <a href="#story">STORY</a>
         <a href="#gallery">PHOTO</a>
     </div>
+
 </nav>
+
+
+<!-- 首页 -->
 
 <section class="hero">
 
-    <div class="ring"></div>
+    <div class="hero-orbit"></div>
 
     <div class="moon"></div>
 
     <div class="hero-content">
 
         <div class="eyebrow">
-            TWO PEOPLE · ONE WORLD
+            A LITTLE WORLD FOR TWO
         </div>
 
-        <div class="main-title">
+        <div class="hero-title">
             圆落星
         </div>
 
-        <div class="symbol">
+        <div class="cross">
             ×
         </div>
 
-        <div class="sub-title">
+        <div class="hero-name-two">
             榆木
+        </div>
+
+        <div class="hero-sub">
+            TWO PEOPLE · ONE STORY
         </div>
 
     </div>
@@ -458,18 +568,33 @@ footer{
 </section>
 
 
+<!-- 两个人 -->
+
 <section class="people" id="people">
 
-    <div class="section-label">
-        TWO DIFFERENT WORLDS
+    <div class="section-top">
+
+        <div class="section-number">
+            01 · TWO
+        </div>
+
+        <div class="section-title">
+            两个人
+        </div>
+
     </div>
+
 
     <div class="people-grid">
 
-        <div class="person one">
+        <div class="person person-star">
 
-            <div class="number">
+            <div class="person-number">
                 01
+            </div>
+
+            <div class="person-symbol">
+                ✦
             </div>
 
             <div class="person-name">
@@ -482,20 +607,24 @@ footer{
 
             <div class="person-line"></div>
 
-            <div class="person-desc">
-                一个属于星光和安静的角落。
+            <div class="person-text">
+                喜欢星光，也喜欢安静。
                 <br>
-                这里记录圆落星的照片、
-                故事，以及那些值得留下的瞬间。
+                这里记录属于圆落星的
+                小小世界。
             </div>
 
         </div>
 
 
-        <div class="person two">
+        <div class="person person-tree">
 
-            <div class="number">
+            <div class="person-number">
                 02
+            </div>
+
+            <div class="person-symbol">
+                ○
             </div>
 
             <div class="person-name">
@@ -508,11 +637,11 @@ footer{
 
             <div class="person-line"></div>
 
-            <div class="person-desc">
-                一棵安静生长的树。
+            <div class="person-text">
+                像一棵安静的树。
                 <br>
-                这里属于榆木，
-                也属于那些慢慢发生的故事。
+                不急着说什么，
+                只是一直在那里。
             </div>
 
         </div>
@@ -522,10 +651,12 @@ footer{
 </section>
 
 
+<!-- 故事 -->
+
 <section class="story" id="story">
 
-    <div class="section-label">
-        OUR LITTLE WORLD
+    <div class="story-label">
+        02 · STORY
     </div>
 
     <div class="story-title">
@@ -533,46 +664,59 @@ footer{
     </div>
 
     <div class="story-text">
-        世界很大，故事很多。<br>
-        但总有一些人，会让一个普通的瞬间变得特别。<br><br>
-        圆落星 × 榆木<br>
-        这里，是属于两个人的小小世界。
+        世界很大，人与人的相遇却很奇妙。
+        <br>
+        有些人只是路过，
+        有些人会慢慢成为故事。
+        <br><br>
+        圆落星 × 榆木
+        <br>
+        这是属于两个人的一小块地方。
     </div>
 
 </section>
 
+
+<!-- 照片 -->
 
 <section class="gallery" id="gallery">
 
-    <div class="section-label">
-        MOMENTS
+    <div class="gallery-head">
+
+        <div class="gallery-title">
+            照片
+        </div>
+
+        <div class="gallery-note">
+            MOMENTS · 01—06
+        </div>
+
     </div>
 
-    <div class="gallery-title">
-        留下一些光
-    </div>
 
     <div class="gallery-grid">
 
-        <div class="photo">PHOTO 01</div>
-        <div class="photo">PHOTO 02</div>
-        <div class="photo">PHOTO 03</div>
-        <div class="photo">PHOTO 04</div>
-        <div class="photo">PHOTO 05</div>
-        <div class="photo">PHOTO 06</div>
+        <div class="photo"></div>
+        <div class="photo"></div>
+        <div class="photo"></div>
+        <div class="photo"></div>
+        <div class="photo"></div>
+        <div class="photo"></div>
 
     </div>
 
 </section>
 
 
+<!-- 页尾 -->
+
 <footer>
 
-    <div class="footer-name">
+    <div class="footer-main">
         圆落星 × 榆木
     </div>
 
-    <div class="footer-small">
+    <div class="footer-sub">
         A LITTLE WORLD FOR TWO
     </div>
 
