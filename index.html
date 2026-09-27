@@ -9,1953 +9,1732 @@
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:#f4f1ec;
-    color:#403c45;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "PingFang SC",
-        "Microsoft YaHei",
-        sans-serif;
-    overflow-x:hidden;
+  background:#f4f1ec;
+  color:#403c45;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
 }
 
+/* =========================
+   HERO
+========================= */
+
 .hero{
-    min-height:100vh;
-    position:relative;
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#181c2b;
+  position:relative;
+  min-height:100vh;
+  height:100vh;
+  overflow:hidden;
+  background:#111;
+  color:#fff;
 }
 
 .hero-bg{
-    position:absolute;
-    inset:0;
-    z-index:0;
+  position:absolute;
+  inset:-3%;
 
-    background-size:cover;
-    background-position:center;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
 
-    transition:
-        opacity 1.2s ease,
-        transform 8s ease;
+  opacity:.9;
 
-    transform:scale(1.03);
+  transform:scale(1.03);
+
+  transition:
+    opacity 1.2s ease,
+    transform 8s ease;
 }
 
-.hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    z-index:1;
+.hero:hover .hero-bg{
+  transform:scale(1.06);
+}
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(8,12,24,.18),
-            rgba(8,12,24,.08) 45%,
-            rgba(8,12,24,.48) 100%
-        );
+.hero-overlay{
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.42),
+      rgba(0,0,0,.08) 35%,
+      rgba(0,0,0,.18) 65%,
+      rgba(0,0,0,.62)
+    );
+}
+
+.hero-top-left{
+  position:absolute;
+  top:34px;
+  left:42px;
+
+  z-index:2;
+
+  font-size:12px;
+  letter-spacing:4px;
+
+  opacity:.9;
+}
+
+.hero-top-right{
+  position:absolute;
+  top:34px;
+  right:42px;
+
+  z-index:2;
+
+  font-size:11px;
+  letter-spacing:4px;
+
+  opacity:.8;
 }
 
 .hero-center{
-    width:90%;
-    max-width:900px;
+  position:absolute;
 
-    position:relative;
-    z-index:5;
+  z-index:2;
 
-    text-align:center;
+  top:50%;
+  left:50%;
 
-    color:#fff;
+  transform:translate(-50%,-50%);
 
-    text-shadow:
-        0 3px 25px rgba(0,0,0,.45);
+  text-align:center;
+
+  width:90%;
 }
 
-.top-left,
-.top-right{
-    position:absolute;
-    top:38px;
-    z-index:6;
+.hero-kicker{
+  font-size:12px;
+  letter-spacing:7px;
 
-    font-size:9px;
-    line-height:1.9;
-    letter-spacing:3px;
+  margin-bottom:24px;
 
-    color:rgba(255,255,255,.82);
-}
-
-.top-left{
-    left:5%;
-}
-
-.top-right{
-    right:5%;
-    text-align:right;
-}
-
-.kicker{
-    font-size:10px;
-    letter-spacing:8px;
-
-    margin-bottom:20px;
-
-    opacity:0;
-    animation:
-        fadeUp 1.2s .15s forwards;
+  opacity:.82;
 }
 
 .hero-title{
-    font-size:
-        clamp(
-            58px,
-            9vw,
-            105px
-        );
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-    font-weight:300;
+  font-size:clamp(46px,8vw,108px);
 
-    letter-spacing:13px;
+  font-weight:400;
 
-    opacity:0;
-    animation:
-        fadeUp 1.3s .3s forwards;
+  letter-spacing:5px;
+
+  line-height:1;
+}
+
+.hero-cn{
+  margin-top:25px;
+
+  font-family:
+    "Songti SC",
+    "STSong",
+    "SimSun",
+    serif;
+
+  font-size:clamp(22px,3vw,36px);
+
+  letter-spacing:12px;
 }
 
 .hero-sub{
-    margin-top:15px;
+  margin-top:20px;
 
-    font-size:10px;
-    letter-spacing:6px;
+  font-size:10px;
 
-    opacity:0;
-    animation:
-        fadeUp 1.2s .45s forwards;
+  letter-spacing:6px;
+
+  opacity:.7;
 }
 
-.enter{
-    display:inline-flex;
+.hero-enter{
+  margin-top:48px;
 
-    align-items:center;
-    justify-content:center;
+  display:inline-block;
 
-    margin-top:45px;
+  color:#fff;
 
-    padding:
-        14px
-        30px;
+  text-decoration:none;
 
-    border:
-        1px solid
-        rgba(255,255,255,.65);
+  font-size:11px;
 
-    border-radius:50px;
+  letter-spacing:4px;
 
-    color:#fff;
+  border-bottom:
+    1px solid rgba(255,255,255,.6);
 
-    background:
-        rgba(255,255,255,.10);
+  padding-bottom:9px;
 
-    backdrop-filter:blur(8px);
-
-    text-decoration:none;
-
-    font-size:10px;
-    letter-spacing:3px;
-
-    transition:.4s;
-
-    opacity:0;
-
-    animation:
-        fadeUp 1.2s .65s forwards;
+  transition:.3s;
 }
 
-.enter:hover{
-    background:
-        rgba(255,255,255,.2);
-
-    transform:
-        translateY(-3px);
+.hero-enter:hover{
+  letter-spacing:6px;
+  opacity:.7;
 }
 
 .datetime{
-    margin-top:40px;
+  margin-top:28px;
 
-    font-size:11px;
-    letter-spacing:2px;
+  font-size:12px;
 
-    color:
-        rgba(255,255,255,.92);
+  letter-spacing:3px;
+
+  opacity:.82;
 }
 
 .day-counter{
-    margin-top:9px;
+  margin-top:10px;
 
-    font-size:10px;
-    letter-spacing:2px;
+  font-size:10px;
 
-    color:
-        rgba(255,255,255,.72);
+  letter-spacing:3px;
+
+  opacity:.58;
 }
 
 .place-tag{
-    position:absolute;
+  position:absolute;
 
-    left:50%;
-    bottom:34px;
+  z-index:2;
 
-    transform:
-        translateX(-50%);
+  bottom:35px;
 
-    z-index:6;
+  left:50%;
 
-    padding:
-        8px 16px;
+  transform:translateX(-50%);
 
-    border:
-        1px solid
-        rgba(255,255,255,.28);
+  font-size:10px;
 
-    border-radius:30px;
+  letter-spacing:4px;
 
-    background:
-        rgba(0,0,0,.18);
+  opacity:.72;
 
-    backdrop-filter:blur(8px);
-
-    color:
-        rgba(255,255,255,.85);
-
-    font-size:8px;
-    letter-spacing:3px;
-
-    white-space:nowrap;
+  white-space:nowrap;
 }
+
+
+/* =========================
+   CONTENT
+========================= */
 
 .section{
-    padding:
-        120px
-        25px;
-
-    background:#f4f1ec;
-}
-
-.inner{
-    max-width:1100px;
-    margin:auto;
-}
-
-.section-head{
-    text-align:center;
-    margin-bottom:55px;
-}
-
-.section-small{
-    font-size:9px;
-    letter-spacing:5px;
-
-    color:#aaa4a9;
-
-    margin-bottom:15px;
+  padding:100px 7vw;
 }
 
 .section-title{
-    font-size:30px;
-    font-weight:300;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-    letter-spacing:6px;
+  font-size:38px;
 
-    color:#47424d;
+  font-weight:400;
+
+  margin-bottom:14px;
 }
 
-.info-grid{
-    display:grid;
+.section-sub{
+  font-size:11px;
 
-    grid-template-columns:
-        repeat(3,1fr);
+  letter-spacing:3px;
 
-    gap:20px;
+  opacity:.5;
+
+  margin-bottom:45px;
 }
 
-.info-card{
-    min-height:185px;
+.cards{
+  display:grid;
 
-    padding:32px 25px;
+  grid-template-columns:
+    repeat(3,1fr);
 
-    text-align:center;
-
-    background:
-        rgba(255,255,255,.7);
-
-    border:
-        1px solid
-        rgba(80,70,90,.09);
-
-    border-radius:10px;
-
-    box-shadow:
-        0 20px 60px
-        rgba(70,60,80,.07);
-
-    opacity:0;
-
-    transform:
-        translateY(35px);
-
-    transition:
-        opacity .9s,
-        transform .9s;
+  gap:20px;
 }
 
-.info-card.show{
-    opacity:1;
+.card{
+  background:
+    rgba(255,255,255,.55);
 
-    transform:
-        translateY(0);
+  border:
+    1px solid rgba(64,60,69,.08);
+
+  padding:35px;
+
+  min-height:170px;
+
+  transition:.35s;
 }
 
-.info-label{
-    font-size:9px;
-    letter-spacing:3px;
+.card:hover{
+  transform:translateY(-5px);
 
-    color:#aaa5af;
-
-    margin-bottom:25px;
+  background:
+    rgba(255,255,255,.8);
 }
 
-.info-value{
-    font-size:15px;
-    line-height:2;
+.card-label{
+  font-size:10px;
 
-    color:#5b5662;
+  letter-spacing:3px;
+
+  opacity:.45;
+
+  margin-bottom:25px;
 }
 
-.photo-section{
-    padding-top:50px;
-    padding-bottom:170px;
+.card-value{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:27px;
 }
 
-.photo-window{
-    width:100%;
-    overflow:hidden;
+.card-small{
+  margin-top:10px;
+
+  font-size:12px;
+
+  opacity:.55;
+}
+
+
+/* =========================
+   PHOTO WALL
+========================= */
+
+.photos-section{
+  overflow:hidden;
 }
 
 .photo-track{
-    display:flex;
+  display:flex;
 
-    gap:20px;
+  width:max-content;
 
-    width:max-content;
+  gap:18px;
 
-    animation:
-        photoLoop
-        70s
-        linear
-        infinite;
-
-    will-change:transform;
+  animation:
+    photoMove 45s linear infinite;
 }
 
 .photo-track:hover{
-    animation-play-state:running;
+  animation-play-state:paused;
 }
 
-.photo-card{
-    width:235px;
-    height:310px;
+.photo-item{
+  width:280px;
+  height:370px;
 
-    flex:none;
+  flex:none;
 
-    overflow:hidden;
+  overflow:hidden;
 
-    position:relative;
+  cursor:pointer;
 
-    cursor:pointer;
-
-    background:#eeeae4;
-
-    border-radius:4px;
-
-    box-shadow:
-        0 20px 55px
-        rgba(60,52,72,.12);
+  background:#ddd;
 }
 
-.photo-card img{
-    width:100%;
-    height:100%;
+.photo-item img{
+  width:100%;
+  height:100%;
 
-    display:block;
+  object-fit:cover;
 
-    object-fit:cover;
+  display:block;
 
-    user-select:none;
-
-    -webkit-user-select:none;
-
-    -webkit-user-drag:none;
-
-    transition:
-        transform .8s ease;
+  transition:
+    transform .8s ease;
 }
 
-.photo-card:hover img{
-    transform:
-        scale(1.04);
+.photo-item:hover img{
+  transform:scale(1.05);
 }
 
-@keyframes photoLoop{
+@keyframes photoMove{
 
-    from{
-        transform:
-            translateX(0);
-    }
+  from{
+    transform:translateX(0);
+  }
 
-    to{
-        transform:
-            translateX(
-                calc(
-                    -50% - 10px
-                )
-            );
-    }
+  to{
+    transform:translateX(-50%);
+  }
+
 }
 
-.photo-message{
-    width:100%;
 
-    padding:60px;
-
-    text-align:center;
-
-    color:#aaa5af;
-}
+/* =========================
+   LIGHTBOX
+========================= */
 
 .lightbox{
-    position:fixed;
-    inset:0;
+  position:fixed;
 
-    z-index:100;
+  inset:0;
 
-    display:flex;
+  z-index:9999;
 
-    align-items:center;
-    justify-content:center;
+  background:
+    rgba(0,0,0,.92);
 
-    padding:30px;
+  display:none;
 
-    background:
-        rgba(25,22,32,.9);
+  align-items:center;
 
-    backdrop-filter:
-        blur(15px);
+  justify-content:center;
 
-    opacity:0;
-    visibility:hidden;
-
-    transition:.35s;
+  padding:30px;
 }
 
 .lightbox.active{
-    opacity:1;
-    visibility:visible;
+  display:flex;
 }
 
 .lightbox img{
-    max-width:90vw;
-    max-height:88vh;
+  max-width:94vw;
+  max-height:92vh;
 
-    object-fit:contain;
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.45);
-
-    user-select:none;
-
-    -webkit-user-select:none;
-
-    -webkit-user-drag:none;
+  object-fit:contain;
 }
 
-.close-lightbox{
-    position:absolute;
+.lightbox-close{
+  position:absolute;
 
-    right:30px;
-    top:25px;
+  top:25px;
+  right:30px;
 
-    width:42px;
-    height:42px;
+  color:#fff;
 
-    border:
-        1px solid
-        rgba(255,255,255,.4);
+  font-size:30px;
 
-    border-radius:50%;
+  cursor:pointer;
 
-    color:#fff;
-
-    background:transparent;
-
-    font-size:22px;
-
-    cursor:pointer;
+  opacity:.8;
 }
 
-.footer{
-    padding:
-        80px
-        25px
-        110px;
 
-    text-align:center;
+/* =========================
+   FOOTER
+========================= */
 
-    font-size:9px;
-    letter-spacing:5px;
+footer{
+  padding:70px 20px;
 
-    color:#aaa5af;
+  text-align:center;
 
-    background:#f4f1ec;
+  font-size:10px;
+
+  letter-spacing:4px;
+
+  opacity:.45;
 }
 
-@keyframes fadeUp{
 
-    from{
-        opacity:0;
-        transform:
-            translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0);
-    }
-}
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
-    .hero{
-        min-height:100svh;
-    }
+  .hero-top-left{
+    top:24px;
+    left:22px;
 
-    .top-left,
-    .top-right{
-        top:25px;
+    font-size:9px;
 
-        font-size:7px;
-        letter-spacing:2px;
-    }
+    letter-spacing:3px;
+  }
 
-    .hero-title{
-        font-size:54px;
-        letter-spacing:7px;
-    }
+  .hero-top-right{
+    top:24px;
+    right:22px;
 
-    .hero-sub{
-        font-size:8px;
-        letter-spacing:4px;
-    }
+    font-size:8px;
 
-    .datetime{
-        font-size:10px;
-    }
+    letter-spacing:2px;
+  }
 
-    .info-grid{
-        grid-template-columns:1fr;
-    }
+  .hero-title{
+    font-size:43px;
+    letter-spacing:2px;
+  }
 
-    .section{
-        padding:
-            100px
-            20px;
-    }
+  .hero-cn{
+    font-size:22px;
+    letter-spacing:8px;
+  }
 
-    .photo-card{
-        width:180px;
-        height:240px;
-    }
+  .hero-kicker{
+    font-size:9px;
+    letter-spacing:4px;
+  }
+
+  .hero-sub{
+    font-size:8px;
+    letter-spacing:3px;
+  }
+
+  .section{
+    padding:70px 20px;
+  }
+
+  .section-title{
+    font-size:31px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    min-height:145px;
+  }
+
+  .photo-item{
+    width:220px;
+    height:300px;
+  }
+
+  .place-tag{
+    bottom:25px;
+
+    font-size:8px;
+  }
 
 }
 
 </style>
 </head>
 
+
 <body>
 
-<header class="hero">
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div
+    class="hero-bg"
+    id="heroBg">
+  </div>
+
+  <div class="hero-overlay"></div>
+
+
+  <div class="hero-top-left">
+    2026 / ✦ LIGHT · NIGHT
+  </div>
+
+
+  <div class="hero-top-right">
+    SHINING / IN SILENCE
+  </div>
+
+
+  <div class="hero-center">
+
+    <div class="hero-kicker">
+      A PERSONAL ARCHIVE
+    </div>
+
+
+    <h1 class="hero-title">
+      A QUIET PLACE
+    </h1>
+
+
+    <div class="hero-cn">
+      圆落星
+    </div>
+
+
+    <div class="hero-sub">
+      A PLACE FOR MEMORY
+    </div>
+
+
+    <a
+      href="#world"
+      class="hero-enter">
+
+      ENTER MY WORLD →
+
+    </a>
+
 
     <div
-        class="hero-bg"
-        id="heroBg">
-    </div>
+      class="datetime"
+      id="datetime">
 
-    <div class="top-left">
-
-        2026<br>
-
-        ✦ LIGHT · NIGHT
+      Shanghai · Loading...
 
     </div>
 
-    <div class="top-right">
-
-        SHINING<br>
-
-        IN SILENCE
-
-    </div>
-
-    <div class="hero-center">
-
-        <div class="kicker">
-
-            A QUIET PLACE
-
-        </div>
-
-        <div class="hero-title">
-
-            圆落星
-
-        </div>
-
-        <div class="hero-sub">
-
-            A PLACE FOR MEMORY
-
-        </div>
-
-        <a
-            href="#today"
-            class="enter">
-
-            ENTER MY WORLD →
-
-        </a>
-
-        <div
-            class="datetime"
-            id="datetime">
-
-            正在读取时间…
-
-        </div>
-
-        <div
-            class="day-counter"
-            id="dayCounter">
-        </div>
-
-    </div>
 
     <div
-        class="place-tag"
-        id="placeTag">
+      class="day-counter"
+      id="dayCounter">
 
-        正在读取地点…
-
-    </div>
-
-</header>
-
-<section
-    class="section"
-    id="today">
-
-    <div class="inner">
-
-        <div class="section-head">
-
-            <div class="section-small">
-
-                TODAY
-
-            </div>
-
-            <div class="section-title">
-
-                今天的世界
-
-            </div>
-
-        </div>
-
-        <div class="info-grid">
-
-            <div class="info-card">
-
-                <div class="info-label">
-
-                    MOON · 月相
-
-                </div>
-
-                <div
-                    class="info-value"
-                    id="moonPhase">
-
-                    正在读取…
-
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-label">
-
-                    SEASON · 季节
-
-                </div>
-
-                <div
-                    class="info-value"
-                    id="season">
-
-                    正在读取…
-
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-label">
-
-                    WEATHER · 上海
-
-                </div>
-
-                <div
-                    class="info-value"
-                    id="weather">
-
-                    正在读取天气…
-
-                </div>
-
-            </div>
-
-        </div>
+      DAY 001 / 2026
 
     </div>
+
+  </div>
+
+
+  <div
+    class="place-tag"
+    id="placeTag">
+
+    SHANGHAI · CHINA
+
+  </div>
 
 </section>
 
+
+
+<!-- =========================
+     TODAY'S WORLD
+========================= -->
+
 <section
-    class="section photo-section">
+  class="section"
+  id="world">
 
-    <div class="inner">
+  <div class="section-title">
+    今天的世界
+  </div>
 
-        <div class="section-head">
 
-            <div class="section-small">
+  <div class="section-sub">
+    TODAY · THE WORLD AROUND ME
+  </div>
 
-                MY MEMORIES
 
-            </div>
+  <div class="cards">
 
-            <div class="section-title">
 
-                我的照片
+    <div class="card">
 
-            </div>
+      <div class="card-label">
+        MOON
+      </div>
 
-        </div>
+      <div
+        class="card-value"
+        id="moonPhase">
 
-        <div class="photo-window">
+        Loading...
 
-            <div
-                class="photo-track"
-                id="photoTrack">
+      </div>
 
-                <div class="photo-message">
-
-                    正在读取照片…
-
-                </div>
-
-            </div>
-
-        </div>
+      <div class="card-small">
+        上海 · 月相
+      </div>
 
     </div>
 
+
+
+    <div class="card">
+
+      <div class="card-label">
+        SEASON
+      </div>
+
+      <div
+        class="card-value"
+        id="season">
+
+        Loading...
+
+      </div>
+
+      <div class="card-small">
+        上海 · 季节
+      </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+      <div class="card-label">
+        WEATHER
+      </div>
+
+      <div
+        class="card-value"
+        id="weather">
+
+        Loading...
+
+      </div>
+
+      <div class="card-small">
+        Shanghai · Weather
+      </div>
+
+    </div>
+
+
+  </div>
+
 </section>
 
-<footer class="footer">
 
-    A PLACE FOR MEMORY · 2026
 
+<!-- =========================
+     MY PHOTOS
+========================= -->
+
+<section
+  class="section photos-section">
+
+  <div class="section-title">
+    我的照片
+  </div>
+
+
+  <div class="section-sub">
+    MOMENTS · MEMORIES · FRAGMENTS
+  </div>
+
+
+  <div
+    class="photo-track"
+    id="photoTrack">
+  </div>
+
+</section>
+
+
+
+<footer>
+  © 2026 · 圆落星 · A QUIET PLACE
 </footer>
 
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
 <div
-    class="lightbox"
-    id="lightbox">
+  class="lightbox"
+  id="lightbox">
 
-    <button
-        class="close-lightbox"
-        id="closeLightbox"
-        aria-label="关闭">
+  <div
+    class="lightbox-close"
+    id="lightboxClose">
 
-        ×
+    ×
 
-    </button>
+  </div>
 
-    <img
-        id="lightboxImg"
-        alt="Memory">
+
+  <img
+    id="lightboxImg"
+    src=""
+    alt="">
 
 </div>
 
+
+
 <script>
 
-/* =====================================================
-   60天自动换图
-   =====================================================
-
-   01-15  🇬🇧 英国城市
-   16-30  🇺🇸 美国城市
-   31-45  🇬🇧 英国乡村
-   46-60  🌾 欧美乡村
-
-   60张图片循环
-   第61天重新开始
-
-===================================================== */
-
-const heroImages = [
-
-    /* ===============================
-       🇬🇧 英国城市 01-15
-    =============================== */
-
-    {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/london,england?lock=1001"
-    },
-
-    {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/london,england?lock=1002"
-    },
-
-    {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/london,england?lock=1003"
-    },
-
-    {
-        country:"🇬🇧 LONDON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/london,england?lock=1004"
-    },
-
-    {
-        country:"🇬🇧 EDINBURGH · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/edinburgh,scotland?lock=1005"
-    },
-
-    {
-        country:"🇬🇧 EDINBURGH · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/edinburgh,scotland?lock=1006"
-    },
-
-    {
-        country:"🇬🇧 OXFORD · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/oxford,england?lock=1007"
-    },
-
-    {
-        country:"🇬🇧 CAMBRIDGE · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/cambridge,england?lock=1008"
-    },
-
-    {
-        country:"🇬🇧 BATH · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/bath,england?lock=1009"
-    },
-
-    {
-        country:"🇬🇧 YORK · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/york,england?lock=1010"
-    },
-
-    {
-        country:"🇬🇧 LIVERPOOL · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/liverpool,england?lock=1011"
-    },
-
-    {
-        country:"🇬🇧 MANCHESTER · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/manchester,england?lock=1012"
-    },
-
-    {
-        country:"🇬🇧 BRISTOL · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/bristol,england?lock=1013"
-    },
-
-    {
-        country:"🇬🇧 BRIGHTON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/brighton,england?lock=1014"
-    },
-
-    {
-        country:"🇬🇧 NOTTINGHAM · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/nottingham,england?lock=1015"
-    },
-
-
-    /* ===============================
-       🇺🇸 美国城市 16-30
-    =============================== */
-
-    {
-        country:"🇺🇸 NEW YORK · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1016"
-    },
-
-    {
-        country:"🇺🇸 NEW YORK · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1017"
-    },
-
-    {
-        country:"🇺🇸 NEW YORK · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/newyork,usa?lock=1018"
-    },
-
-    {
-        country:"🇺🇸 SAN FRANCISCO · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/sanfrancisco,usa?lock=1019"
-    },
-
-    {
-        country:"🇺🇸 SAN FRANCISCO · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/sanfrancisco,usa?lock=1020"
-    },
-
-    {
-        country:"🇺🇸 LOS ANGELES · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/losangeles,usa?lock=1021"
-    },
-
-    {
-        country:"🇺🇸 LOS ANGELES · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/losangeles,usa?lock=1022"
-    },
-
-    {
-        country:"🇺🇸 CHICAGO · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/chicago,usa?lock=1023"
-    },
-
-    {
-        country:"🇺🇸 CHICAGO · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/chicago,usa?lock=1024"
-    },
-
-    {
-        country:"🇺🇸 SEATTLE · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/seattle,usa?lock=1025"
-    },
-
-    {
-        country:"🇺🇸 BOSTON · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/boston,usa?lock=1026"
-    },
-
-    {
-        country:"🇺🇸 PORTLAND · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/portland,usa?lock=1027"
-    },
-
-    {
-        country:"🇺🇸 MIAMI · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/miami,usa?lock=1028"
-    },
-
-    {
-        country:"🇺🇸 NASHVILLE · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/nashville,usa?lock=1029"
-    },
-
-    {
-        country:"🇺🇸 SAN DIEGO · UNITED STATES",
-        url:"https://loremflickr.com/2400/1400/sandiego,usa?lock=1030"
-    },
-
-
-    /* ===============================
-       🇬🇧 英国乡村 31-45
-    =============================== */
-
-    {
-        country:"🇬🇧 COTSWOLDS · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/cotswolds,england?lock=1031"
-    },
-
-    {
-        country:"🇬🇧 COTSWOLDS · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/cotswolds,england?lock=1032"
-    },
-
-    {
-        country:"🇬🇧 YORKSHIRE · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/yorkshire,england?lock=1033"
-    },
-
-    {
-        country:"🇬🇧 YORKSHIRE · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/yorkshire,england?lock=1034"
-    },
-
-    {
-        country:"🇬🇧 LAKE DISTRICT · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/lakedistrict,england?lock=1035"
-    },
-
-    {
-        country:"🇬🇧 LAKE DISTRICT · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/lakedistrict,england?lock=1036"
-    },
-
-    {
-        country:"🇬🇧 DEVON · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/devon,england?lock=1037"
-    },
-
-    {
-        country:"🇬🇧 CORNWALL · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/cornwall,england?lock=1038"
-    },
-
-    {
-        country:"🇬🇧 CORNWALL · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/cornwall,england?lock=1039"
-    },
-
-    {
-        country:"🇬🇧 PEAK DISTRICT · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/peakdistrict,england?lock=1040"
-    },
-
-    {
-        country:"🇬🇧 PEAK DISTRICT · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/peakdistrict,england?lock=1041"
-    },
-
-    {
-        country:"🇬🇧 SCOTTISH HIGHLANDS · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/scotland,highlands?lock=1042"
-    },
-
-    {
-        country:"🇬🇧 WALES · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/wales,countryside?lock=1043"
-    },
-
-    {
-        country:"🇬🇧 ENGLISH COUNTRYSIDE · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/england,countryside?lock=1044"
-    },
-
-    {
-        country:"🇬🇧 BRITISH VILLAGE · UNITED KINGDOM",
-        url:"https://loremflickr.com/2400/1400/english,village?lock=1045"
-    },
-
-
-    /* ===============================
-       🌾 欧美乡村 46-60
-    =============================== */
-
-    {
-        country:"🇫🇷 FRENCH COUNTRYSIDE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/french,countryside?lock=1046"
-    },
-
-    {
-        country:"🇫🇷 FRENCH VILLAGE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/french,village?lock=1047"
-    },
-
-    {
-        country:"🇮🇹 ITALIAN COUNTRYSIDE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/italy,countryside?lock=1048"
-    },
-
-    {
-        country:"🇮🇹 ITALIAN VILLAGE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/italy,village?lock=1049"
-    },
-
-    {
-        country:"🇮🇹 TUSCANY · ITALY",
-        url:"https://loremflickr.com/2400/1400/tuscany,italy?lock=1050"
-    },
-
-    {
-        country:"🇨🇭 SWISS COUNTRYSIDE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/switzerland,countryside?lock=1051"
-    },
-
-    {
-        country:"🇦🇹 AUSTRIA · EUROPE",
-        url:"https://loremflickr.com/2400/1400/austria,countryside?lock=1052"
-    },
-
-    {
-        country:"🇩🇪 GERMAN COUNTRYSIDE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/germany,countryside?lock=1053"
-    },
-
-    {
-        country:"🇳🇱 NETHERLANDS · EUROPE",
-        url:"https://loremflickr.com/2400/1400/netherlands,countryside?lock=1054"
-    },
-
-    {
-        country:"🇮🇪 IRELAND · EUROPE",
-        url:"https://loremflickr.com/2400/1400/ireland,countryside?lock=1055"
-    },
-
-    {
-        country:"🇮🇪 IRISH VILLAGE · EUROPE",
-        url:"https://loremflickr.com/2400/1400/ireland,village?lock=1056"
-    },
-
-    {
-        country:"🇳🇴 NORWAY · EUROPE",
-        url:"https://loremflickr.com/2400/1400/norway,countryside?lock=1057"
-    },
-
-    {
-        country:"🇪🇸 SPAIN · EUROPE",
-        url:"https://loremflickr.com/2400/1400/spain,countryside?lock=1058"
-    },
-
-    {
-        country:"🇵🇹 PORTUGAL · EUROPE",
-        url:"https://loremflickr.com/2400/1400/portugal,countryside?lock=1059"
-    },
-
-    {
-        country:"🇺🇸 AMERICAN COUNTRYSIDE · USA",
-        url:"https://loremflickr.com/2400/1400/american,countryside?lock=1060"
-    }
+/* =========================================================
+   🌍 每小时自动生成新背景图
+   =========================================================
+
+   不再使用固定60张。
+
+   图片编号：
+
+   第1小时
+   第2小时
+   第3小时
+   ...
+   第60小时
+   第61小时
+   第62小时
+   第63小时
+   ...
+
+   一直往后。
+
+   四种类型循环：
+
+   1 英国城市
+   2 美国城市
+   3 英国乡村
+   4 欧美乡村
+
+   ========================================================= */
+
+
+/* ---------- 四种图片类型 ---------- */
+
+const imageTypes = [
+
+  {
+    name:"UNITED KINGDOM CITY",
+    tag:"UNITED KINGDOM",
+    keywords:[
+      "London England city cinematic",
+      "Edinburgh Scotland city cinematic",
+      "Bath England city cinematic",
+      "York England city cinematic",
+      "Oxford England city cinematic",
+      "Cambridge England city cinematic",
+      "Bristol England city cinematic",
+      "Liverpool England city cinematic"
+    ]
+  },
+
+
+  {
+    name:"UNITED STATES CITY",
+    tag:"UNITED STATES",
+    keywords:[
+      "New York city cinematic",
+      "San Francisco city cinematic",
+      "Chicago city cinematic",
+      "Seattle city cinematic",
+      "Boston city cinematic",
+      "Los Angeles city cinematic",
+      "Washington DC cinematic",
+      "Portland Oregon city cinematic"
+    ]
+  },
+
+
+  {
+    name:"UNITED KINGDOM COUNTRYSIDE",
+    tag:"UK COUNTRYSIDE",
+    keywords:[
+      "Cotswolds England countryside cinematic",
+      "Lake District England countryside cinematic",
+      "Scottish Highlands countryside cinematic",
+      "Yorkshire England countryside cinematic",
+      "Wales countryside cinematic",
+      "Cornwall England countryside cinematic",
+      "Dorset England countryside cinematic",
+      "English countryside road cinematic"
+    ]
+  },
+
+
+  {
+    name:"EUROPEAN AMERICAN COUNTRYSIDE",
+    tag:"EUROPE · AMERICA",
+    keywords:[
+      "Tuscany Italy countryside cinematic",
+      "French countryside cinematic",
+      "Swiss countryside cinematic",
+      "Austria countryside cinematic",
+      "Ireland countryside cinematic",
+      "American countryside cinematic",
+      "Montana countryside cinematic",
+      "European village countryside cinematic"
+    ]
+  }
 
 ];
 
 
-/* =====================================================
-   每日背景图
-===================================================== */
 
-function setDailyHero(){
+/* =========================================================
+   根据上海时间计算“第几个小时”
+========================================================= */
 
-    const now =
-        new Date();
+function getHourNumber(){
 
-    const chinaDate =
-        new Intl.DateTimeFormat(
-            "en-CA",
-            {
-                timeZone:
-                    "Asia/Shanghai",
+  const now = new Date();
 
-                year:"numeric",
-                month:"2-digit",
-                day:"2-digit"
-            }
-        ).format(now);
 
-    const dateNumber =
-        Number(
-            chinaDate.replaceAll(
-                "-",
-                ""
-            )
-        );
+  const parts =
+    new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone:"Asia/Shanghai",
 
-    const index =
-        dateNumber %
-        heroImages.length;
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit",
 
-    const item =
-        heroImages[index];
+        hour:"2-digit",
 
-    const hero =
-        document.getElementById(
-            "heroBg"
-        );
+        hourCycle:"h23"
+      }
+    ).formatToParts(now);
 
-    const tag =
-        document.getElementById(
-            "placeTag"
-        );
 
-    hero.style.backgroundImage =
-        "url('" +
-        item.url +
-        "')";
+  const data = {};
 
-    tag.textContent =
-        item.country;
+
+  parts.forEach(
+    item => {
+
+      if(item.type !== "literal"){
+
+        data[item.type] =
+          item.value;
+
+      }
+
+    }
+  );
+
+
+  const year =
+    Number(data.year);
+
+  const month =
+    Number(data.month);
+
+  const day =
+    Number(data.day);
+
+  const hour =
+    Number(data.hour);
+
+
+  const current =
+    new Date(
+      `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}T${String(hour).padStart(2,"0")}:00:00+08:00`
+    );
+
+
+  const start =
+    new Date(
+      "2026-01-01T00:00:00+08:00"
+    );
+
+
+  return Math.floor(
+    (current - start) / 3600000
+  );
+
 }
 
-setDailyHero();
 
 
-/* =====================================================
-   上海时间
-===================================================== */
+/* =========================================================
+   根据小时生成图片
+========================================================= */
 
-function updateDateTime(){
+function getHeroImage(){
 
-    const formatter =
-        new Intl.DateTimeFormat(
-            "zh-CN",
-            {
-                timeZone:
-                    "Asia/Shanghai",
+  const hourNumber =
+    getHourNumber();
 
-                year:"numeric",
 
-                month:"long",
+  /*
+    四种类型交替
+  */
 
-                day:"numeric",
+  const typeIndex =
+    hourNumber % 4;
 
-                weekday:"long",
 
-                hour:"2-digit",
+  const type =
+    imageTypes[typeIndex];
 
-                minute:"2-digit",
 
-                second:"2-digit",
+  /*
+    每过4小时，
+    同一种类型换一个关键词。
+  */
 
-                hour12:false
-            }
-        );
+  const keywordIndex =
+    Math.floor(hourNumber / 4)
+    % type.keywords.length;
 
+
+  const keyword =
+    type.keywords[keywordIndex];
+
+
+  /*
+    使用小时编号作为 lock。
+
+    这样第61小时不会重新回到第1小时。
+  */
+
+  const lock =
+    10000 + hourNumber;
+
+
+  const url =
+    "https://loremflickr.com/2400/1400/" +
+    encodeURIComponent(keyword) +
+    "?lock=" +
+    lock;
+
+
+  return {
+    url:url,
+    tag:type.tag,
+    number:hourNumber + 1
+  };
+
+}
+
+
+
+/* =========================================================
+   加载背景图
+========================================================= */
+
+function setHourlyHero(){
+
+  const heroBg =
     document.getElementById(
-        "datetime"
-    ).textContent =
-        formatter.format(
-            new Date()
-        );
+      "heroBg"
+    );
+
+
+  const placeTag =
+    document.getElementById(
+      "placeTag"
+    );
+
+
+  if(!heroBg) return;
+
+
+  const image =
+    getHeroImage();
+
+
+  /*
+    先预加载。
+    图片加载成功以后再替换，
+    避免页面突然黑掉。
+  */
+
+  const preload =
+    new Image();
+
+
+  preload.onload =
+    function(){
+
+      heroBg.style.opacity =
+        "0";
+
+
+      setTimeout(
+        function(){
+
+          heroBg.style.backgroundImage =
+            `url("${image.url}")`;
+
+
+          heroBg.style.opacity =
+            ".9";
+
+
+          if(placeTag){
+
+            placeTag.textContent =
+              image.tag +
+              " · HOUR " +
+              String(image.number)
+                .padStart(3,"0");
+
+          }
+
+        },
+        500
+      );
+
+    };
+
+
+  preload.onerror =
+    function(){
+
+      /*
+        如果图片服务偶尔返回失败，
+        不让页面变黑。
+
+        保留当前背景。
+      */
+
+      heroBg.style.opacity =
+        ".9";
+
+    };
+
+
+  preload.src =
+    image.url;
 
 }
 
-updateDateTime();
+
+
+/* =========================================================
+   页面打开
+========================================================= */
+
+setHourlyHero();
+
+
+
+/* =========================================================
+   每分钟检查一次
+
+   到新的小时以后，
+   自动换新图。
+
+========================================================= */
+
+let lastHour =
+  getHourNumber();
+
 
 setInterval(
-    updateDateTime,
-    1000
+  function(){
+
+    const currentHour =
+      getHourNumber();
+
+
+    if(currentHour !== lastHour){
+
+      lastHour =
+        currentHour;
+
+
+      setHourlyHero();
+
+    }
+
+  },
+  60000
 );
 
 
-/* =====================================================
-   第几天
-===================================================== */
+
+/* =========================================================
+   上海时间
+========================================================= */
+
+function updateShanghaiTime(){
+
+  const el =
+    document.getElementById(
+      "datetime"
+    );
+
+
+  if(!el) return;
+
+
+  const now =
+    new Date();
+
+
+  const text =
+    new Intl.DateTimeFormat(
+      "zh-CN",
+      {
+        timeZone:"Asia/Shanghai",
+
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit",
+
+        weekday:"short",
+
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit",
+
+        hourCycle:"h23"
+      }
+    ).format(now);
+
+
+  el.textContent =
+    "Shanghai · " +
+    text;
+
+}
+
+
+updateShanghaiTime();
+
+
+setInterval(
+  updateShanghaiTime,
+  1000
+);
+
+
+
+/* =========================================================
+   2026 DAY COUNTER
+========================================================= */
 
 function updateDayCounter(){
 
-    const start =
-        new Date(
-            "2026-01-01T00:00:00+08:00"
-        );
-
-    const now =
-        new Date();
-
-    const diff =
-        Math.floor(
-            (
-                now -
-                start
-            ) /
-            (
-                1000 *
-                60 *
-                60 *
-                24
-            )
-        ) + 1;
-
+  const el =
     document.getElementById(
-        "dayCounter"
-    ).textContent =
+      "dayCounter"
+    );
 
-        "2026 · 第 " +
-        diff +
-        " 天";
+
+  const start =
+    new Date(
+      "2026-01-01T00:00:00+08:00"
+    );
+
+
+  const now =
+    new Date();
+
+
+  const diff =
+    Math.floor(
+      (now - start) /
+      86400000
+    );
+
+
+  const day =
+    Math.max(
+      1,
+      diff + 1
+    );
+
+
+  el.textContent =
+    "DAY " +
+    String(day).padStart(3,"0") +
+    " / 2026";
 
 }
+
 
 updateDayCounter();
 
+
 setInterval(
-    updateDayCounter,
-    60000
+  updateDayCounter,
+  60000
 );
 
 
-/* =====================================================
+
+/* =========================================================
    月相
-===================================================== */
+========================================================= */
 
 function getMoonPhase(){
 
-    const knownNewMoon =
-        new Date(
-            "2000-01-06T18:14:00Z"
-        );
+  const now =
+    new Date();
 
-    const now =
-        new Date();
 
-    const days =
-        (
-            now -
-            knownNewMoon
-        ) /
-        86400000;
+  const knownNewMoon =
+    new Date(
+      "2000-01-06T18:14:00Z"
+    );
 
-    const cycle =
-        29.530588853;
 
-    const phase =
-        (
-            (
-                days %
-                cycle
-            ) +
-            cycle
-        ) %
-        cycle;
+  const synodicMonth =
+    29.530588853;
 
-    if(
-        phase < 1.84566
-    )
-        return "🌑 新月";
 
-    if(
-        phase < 5.53699
-    )
-        return "🌒 娥眉月";
+  const days =
+    (now - knownNewMoon) /
+    86400000;
 
-    if(
-        phase < 9.22831
-    )
-        return "🌓 上弦月";
 
-    if(
-        phase < 12.91963
-    )
-        return "🌔 盈凸月";
+  const phase =
+    (
+      (
+        days %
+        synodicMonth
+      ) +
+      synodicMonth
+    ) %
+    synodicMonth;
 
-    if(
-        phase < 16.61096
-    )
-        return "🌕 满月";
 
-    if(
-        phase < 20.30228
-    )
-        return "🌖 亏凸月";
+  const index =
+    Math.floor(
+      phase /
+      synodicMonth *
+      8
+    );
 
-    if(
-        phase < 23.99361
-    )
-        return "🌗 下弦月";
 
-    if(
-        phase < 27.68493
-    )
-        return "🌘 残月";
+  const phases = [
 
-    return "🌑 新月";
+    "🌑 新月",
+    "🌒 娥眉月",
+    "🌓 上弦月",
+    "🌔 盈凸月",
+    "🌕 满月",
+    "🌖 亏凸月",
+    "🌗 下弦月",
+    "🌘 残月"
+
+  ];
+
+
+  return phases[index];
+
 }
 
-document.getElementById(
-    "moonPhase"
-).textContent =
-    getMoonPhase();
+
+document
+  .getElementById("moonPhase")
+  .textContent =
+  getMoonPhase();
 
 
-/* =====================================================
+
+/* =========================================================
    季节
-===================================================== */
-
-function solarLongitude(date){
-
-    const JD =
-        date.getTime()
-        / 86400000
-        + 2440587.5;
-
-    const T =
-        (
-            JD -
-            2451545.0
-        ) /
-        36525;
-
-    const rad =
-        Math.PI /
-        180;
-
-    let L0 =
-        280.46646 +
-        36000.76983 * T +
-        0.0003032 * T * T;
-
-    L0 =
-        (
-            (
-                L0 %
-                360
-            ) +
-            360
-        ) %
-        360;
-
-    const M =
-        357.52911 +
-        35999.05029 * T -
-        0.0001537 * T * T;
-
-    const Mrad =
-        M * rad;
-
-    const C =
-        Math.sin(Mrad) *
-        (
-            1.914602 -
-            0.004817 * T -
-            0.000014 * T * T
-        )
-
-        +
-
-        Math.sin(
-            2 * Mrad
-        ) *
-        (
-            0.019993 -
-            0.000101 * T
-        )
-
-        +
-
-        Math.sin(
-            3 * Mrad
-        ) *
-        0.000289;
-
-    const trueLongitude =
-        L0 + C;
-
-    const omega =
-        (
-            125.04 -
-            1934.136 * T
-        ) *
-        rad;
-
-    const apparentLongitude =
-        trueLongitude -
-        0.00569 -
-        0.00478 *
-        Math.sin(omega);
-
-    return (
-        (
-            apparentLongitude %
-            360
-        ) +
-        360
-    ) % 360;
-
-}
-
-function getChinaSeason(){
-
-    const longitude =
-        solarLongitude(
-            new Date()
-        );
-
-    if(
-        longitude >= 315 ||
-        longitude < 45
-    ){
-
-        return "🌱 春天";
-
-    }
-
-    if(
-        longitude < 135
-    ){
-
-        return "☀️ 夏天";
-
-    }
-
-    if(
-        longitude < 225
-    ){
-
-        return "🍂 秋天";
-
-    }
-
-    return "❄️ 冬天";
-
-}
+========================================================= */
 
 function updateSeason(){
 
-    const season =
-        document.getElementById(
-            "season"
-        );
+  const month =
+    Number(
+      new Intl.DateTimeFormat(
+        "en-US",
+        {
+          timeZone:"Asia/Shanghai",
+          month:"numeric"
+        }
+      ).format(
+        new Date()
+      )
+    );
 
-    if(season){
 
-        season.textContent =
-            getChinaSeason();
+  let season;
 
-    }
+
+  if(
+    month >= 3 &&
+    month <= 5
+  ){
+
+    season =
+      "春 · SPRING";
+
+  }
+
+  else if(
+    month >= 6 &&
+    month <= 8
+  ){
+
+    season =
+      "夏 · SUMMER";
+
+  }
+
+  else if(
+    month >= 9 &&
+    month <= 11
+  ){
+
+    season =
+      "秋 · AUTUMN";
+
+  }
+
+  else{
+
+    season =
+      "冬 · WINTER";
+
+  }
+
+
+  document
+    .getElementById("season")
+    .textContent =
+    season;
 
 }
+
 
 updateSeason();
 
-setInterval(
-    updateSeason,
-    3600000
-);
 
 
-/* =====================================================
+/* =========================================================
    上海天气
-===================================================== */
+========================================================= */
 
-async function loadWeather(){
+async function updateWeather(){
 
-    const weatherBox =
-        document.getElementById(
-            "weather"
-        );
+  const el =
+    document.getElementById(
+      "weather"
+    );
 
-    try{
 
-        const url =
-            "https://api.open-meteo.com/v1/forecast" +
+  try{
 
-            "?latitude=31.2304" +
+    const url =
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=31.2304" +
+      "&longitude=121.4737" +
+      "&current=temperature_2m,weather_code" +
+      "&timezone=Asia%2FShanghai";
 
-            "&longitude=121.4737" +
 
-            "&current=" +
+    const response =
+      await fetch(url);
 
-            "temperature_2m," +
 
-            "relative_humidity_2m," +
+    const data =
+      await response.json();
 
-            "apparent_temperature," +
 
-            "weather_code," +
+    const temp =
+      Math.round(
+        data.current
+          .temperature_2m
+      );
 
-            "wind_speed_10m" +
 
-            "&timezone=Asia%2FShanghai";
+    const code =
+      data.current
+        .weather_code;
 
-        const response =
-            await fetch(url);
 
-        if(
-            !response.ok
-        )
-            throw new Error();
+    const weatherText = {
 
-        const data =
-            await response.json();
+      0:"晴朗",
 
-        const current =
-            data.current;
+      1:"大致晴朗",
+      2:"局部多云",
+      3:"阴天",
 
-        const weatherMap = {
+      45:"雾",
+      48:"雾",
 
-            0:"晴天 ☀️",
+      51:"小毛毛雨",
+      53:"毛毛雨",
+      55:"毛毛雨",
 
-            1:"基本晴朗 🌤️",
+      61:"小雨",
+      63:"中雨",
+      65:"大雨",
 
-            2:"局部多云 ⛅",
+      71:"小雪",
+      73:"中雪",
+      75:"大雪",
 
-            3:"阴天 ☁️",
+      80:"阵雨",
+      81:"阵雨",
+      82:"强阵雨",
 
-            45:"雾 🌫️",
+      95:"雷雨",
+      96:"雷雨",
+      99:"雷雨"
 
-            48:"雾 🌫️",
+    };
 
-            51:"小毛毛雨 🌦️",
 
-            53:"毛毛雨 🌦️",
+    el.textContent =
+      temp +
+      "°C · " +
+      (
+        weatherText[code] ||
+        "天气"
+      );
 
-            55:"毛毛雨 🌦️",
+  }
 
-            61:"小雨 🌧️",
+  catch(error){
 
-            63:"中雨 🌧️",
+    el.textContent =
+      "天气暂不可用";
 
-            65:"大雨 🌧️",
-
-            71:"小雪 ❄️",
-
-            73:"中雪 ❄️",
-
-            75:"大雪 ❄️",
-
-            80:"阵雨 🌦️",
-
-            81:"阵雨 🌦️",
-
-            82:"强阵雨 🌧️",
-
-            95:"雷雨 ⛈️",
-
-            96:"雷雨 ⛈️",
-
-            99:"强雷雨 ⛈️"
-
-        };
-
-        const description =
-            weatherMap[
-                current.weather_code
-            ] ||
-            "天气变化中";
-
-        weatherBox.innerHTML =
-
-            description +
-
-            "<br>" +
-
-            Math.round(
-                current.temperature_2m
-            ) +
-
-            "°C · 体感 " +
-
-            Math.round(
-                current.apparent_temperature
-            ) +
-
-            "°C" +
-
-            "<br>" +
-
-            "湿度 " +
-
-            Math.round(
-                current.relative_humidity_2m
-            ) +
-
-            "% · 风速 " +
-
-            Math.round(
-                current.wind_speed_10m
-            ) +
-
-            " km/h";
-
-    }catch(error){
-
-        weatherBox.textContent =
-            "天气暂时无法读取，请稍后刷新";
-
-    }
+  }
 
 }
 
-loadWeather();
+
+updateWeather();
+
 
 setInterval(
-    loadWeather,
-    600000
+  updateWeather,
+  1800000
 );
 
 
-/* =====================================================
-   我的照片
-===================================================== */
+
+/* =========================================================
+   照片墙
+========================================================= */
 
 async function loadPhotos(){
 
-    const track =
-        document.getElementById(
-            "photoTrack"
-        );
+  const track =
+    document.getElementById(
+      "photoTrack"
+    );
 
-    try{
 
-        const response =
-            await fetch(
-                "photos.json?v=" +
-                Date.now(),
-                {
-                    cache:"no-store"
-                }
-            );
+  try{
 
-        if(
-            !response.ok
-        )
-            throw new Error();
+    const response =
+      await fetch(
+        "photos.json"
+      );
 
-        const photos =
-            await response.json();
 
-        if(
-            !Array.isArray(
-                photos
-            ) ||
-            photos.length === 0
-        ){
+    const photos =
+      await response.json();
 
-            track.innerHTML =
-                '<div class="photo-message">' +
-                'photos 文件夹里暂时没有照片' +
-                '</div>';
 
-            return;
+    if(
+      !Array.isArray(photos) ||
+      photos.length === 0
+    ){
 
-        }
+      track.innerHTML =
+        "<div style='padding:30px;opacity:.5'>" +
+        "暂无照片" +
+        "</div>";
 
-        const allPhotos =
-            photos.concat(
-                photos
-            );
-
-        track.innerHTML = "";
-
-        allPhotos.forEach(
-            function(path){
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "photo-card";
-
-                const img =
-                    document.createElement(
-                        "img"
-                    );
-
-                img.src =
-                    path +
-                    "?v=" +
-                    Date.now();
-
-                img.alt =
-                    "Memory";
-
-                img.loading =
-                    "lazy";
-
-                img.draggable =
-                    false;
-
-                card.addEventListener(
-                    "click",
-                    function(){
-
-                        document.getElementById(
-                            "lightboxImg"
-                        ).src =
-                            img.src;
-
-                        document.getElementById(
-                            "lightbox"
-                        ).classList.add(
-                            "active"
-                        );
-
-                    }
-                );
-
-                card.appendChild(
-                    img
-                );
-
-                track.appendChild(
-                    card
-                );
-
-            }
-        );
-
-    }catch(error){
-
-        track.innerHTML =
-            '<div class="photo-message">' +
-            '照片暂时无法读取，请稍后刷新' +
-            '</div>';
+      return;
 
     }
+
+
+    const allPhotos =
+      [
+        ...photos,
+        ...photos
+      ];
+
+
+    track.innerHTML =
+      allPhotos
+        .map(
+          (src,index)=>`
+
+            <div
+              class="photo-item"
+              data-src="${src}"
+            >
+
+              <img
+                src="${src}"
+                loading="lazy"
+                alt="我的照片 ${index + 1}"
+              >
+
+            </div>
+
+          `
+        )
+        .join("");
+
+
+    document
+      .querySelectorAll(
+        ".photo-item"
+      )
+      .forEach(
+        item=>{
+
+          item.addEventListener(
+            "click",
+            ()=>{
+
+              openLightbox(
+                item.dataset.src
+              );
+
+            }
+          );
+
+        }
+      );
+
+  }
+
+  catch(error){
+
+    track.innerHTML =
+      "<div style='padding:30px;opacity:.5'>" +
+      "请添加 photos.json" +
+      "</div>";
+
+  }
 
 }
 
+
 loadPhotos();
 
-setInterval(
-    loadPhotos,
-    300000
-);
 
 
-/* =====================================================
-   图片查看
-===================================================== */
+/* =========================================================
+   LIGHTBOX
+========================================================= */
 
-document.getElementById(
-    "closeLightbox"
-).addEventListener(
+function openLightbox(src){
+
+  const box =
+    document.getElementById(
+      "lightbox"
+    );
+
+
+  const img =
+    document.getElementById(
+      "lightboxImg"
+    );
+
+
+  img.src =
+    src;
+
+
+  box.classList.add(
+    "active"
+  );
+
+}
+
+
+function closeLightbox(){
+
+  const box =
+    document.getElementById(
+      "lightbox"
+    );
+
+
+  box.classList.remove(
+    "active"
+  );
+
+
+  document
+    .getElementById(
+      "lightboxImg"
+    )
+    .src = "";
+
+}
+
+
+document
+  .getElementById(
+    "lightboxClose"
+  )
+  .addEventListener(
     "click",
-    function(){
+    closeLightbox
+  );
 
-        document.getElementById(
-            "lightbox"
-        ).classList.remove(
-            "active"
-        );
 
-    }
-);
-
-document.getElementById(
+document
+  .getElementById(
     "lightbox"
-).addEventListener(
+  )
+  .addEventListener(
     "click",
     function(e){
 
-        if(
-            e.target === this
-        ){
+      if(
+        e.target === this
+      ){
 
-            this.classList.remove(
-                "active"
-            );
+        closeLightbox();
 
-        }
+      }
 
     }
-);
+  );
 
 
-/* =====================================================
-   禁止图片拖拽
-===================================================== */
+
+/* =========================================================
+   防止图片拖拽 / 右键
+========================================================= */
 
 document.addEventListener(
-    "contextmenu",
-    function(e){
+  "contextmenu",
+  function(e){
 
-        if(
-            e.target.tagName === "IMG"
-        ){
+    if(
+      e.target.tagName ===
+      "IMG"
+    ){
 
-            e.preventDefault();
-
-        }
+      e.preventDefault();
 
     }
+
+  }
 );
+
 
 document.addEventListener(
-    "dragstart",
-    function(e){
+  "dragstart",
+  function(e){
 
-        if(
-            e.target.tagName === "IMG"
-        ){
+    if(
+      e.target.tagName ===
+      "IMG"
+    ){
 
-            e.preventDefault();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   卡片动画
-===================================================== */
-
-const cards =
-    document.querySelectorAll(
-        ".info-card"
-    );
-
-const observer =
-    new IntersectionObserver(
-        function(entries){
-
-            entries.forEach(
-                function(entry){
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        entry.target.classList.add(
-                            "show"
-                        );
-
-                    }
-
-                }
-            );
-
-        },
-        {
-            threshold:.18
-        }
-    );
-
-cards.forEach(
-    function(card){
-
-        observer.observe(
-            card
-        );
+      e.preventDefault();
 
     }
+
+  }
 );
 
 </script>
