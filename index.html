@@ -19,35 +19,21 @@ html{
 
 body{
     background:#f8f7f2;
-    color:#3d3a46;
+    color:#3f3b45;
     font-family:
-        -apple-system,
-        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
         "PingFang SC",
+        "Hiragino Sans GB",
         "Microsoft YaHei",
         sans-serif;
     overflow-x:hidden;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:20;
-    background:
-        radial-gradient(circle at 50% 20%,
-        rgba(188,174,226,.10),
-        transparent 30%);
-}
-
-a{
-    color:inherit;
-}
-
 /* =========================
-   首页
-   ========================= */
+   HERO
+========================= */
 
 .hero{
     min-height:100vh;
@@ -59,142 +45,137 @@ a{
     padding:50px 25px;
 }
 
+/* 左上 */
+
 .top-left{
     position:absolute;
-    left:5%;
-    top:45px;
-    font-size:10px;
+    left:35px;
+    top:30px;
+    font-size:9px;
     line-height:1.8;
-    letter-spacing:2px;
+    letter-spacing:3px;
     color:#aaa5af;
+    z-index:10;
 }
+
+/* 右上 */
 
 .top-right{
     position:absolute;
-    right:5%;
-    top:45px;
-    text-align:right;
-    font-size:10px;
+    right:35px;
+    top:30px;
+    font-size:9px;
     line-height:1.8;
-    letter-spacing:2px;
+    letter-spacing:3px;
     color:#aaa5af;
-}
-
-.hero-center{
-    width:100%;
-    max-width:900px;
-    text-align:center;
-    position:relative;
-    z-index:3;
-}
-
-.kicker{
-    font-size:10px;
-    letter-spacing:7px;
-    color:#aaa5af;
-    margin-bottom:28px;
-    opacity:0;
-    animation:fadeUp 1.2s .1s forwards;
+    text-align:right;
+    z-index:10;
 }
 
 /* =========================
-   第三张照片
-   ========================= */
+   原来的轨道
+========================= */
 
-.hero-photo{
+.orbit{
+    width:500px;
+    height:500px;
+    border:1px solid rgba(120,110,130,.09);
+    border-radius:50%;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) rotate(-15deg);
+    z-index:0;
+}
+
+/* =========================
+   原来的拱门
+   只把紫色换成第三张照片
+========================= */
+
+.arch{
     width:min(390px,62vw);
     height:min(510px,65vh);
     min-height:330px;
-    margin:0 auto;
-    display:block;
-    object-fit:cover;
-    border-radius:2px;
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-45%);
+
+    z-index:2;
+
+    overflow:hidden;
+
+    border-radius:220px 220px 0 0;
+
     box-shadow:
         0 35px 80px rgba(60,52,72,.16);
+
     opacity:0;
+
     animation:
-        photoIn 1.8s .25s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
+        archIn 1.8s .25s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-/* =========================
-   照片外文字
-   ========================= */
+/* 第三张照片 */
 
-.hero-sub{
-    margin-top:25px;
-    font-size:11px;
-    letter-spacing:5px;
-    color:#aaa5af;
-    opacity:0;
-    animation:fadeUp 1.2s .45s forwards;
+.arch img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+    object-position:center;
 }
 
-.enter{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    margin-top:30px;
-    padding:14px 28px;
-    border:1px solid rgba(72,67,81,.25);
-    border-radius:50px;
-    text-decoration:none;
-    font-size:10px;
-    letter-spacing:3px;
-    color:#514c58;
-    background:rgba(255,255,255,.25);
-    transition:
-        background .4s,
-        transform .4s,
-        border-color .4s;
-    opacity:0;
-    animation:fadeUp 1.2s .7s forwards;
-}
+/* 拱门上的轻微光感 */
 
-.enter:hover{
-    background:#fff;
-    border-color:rgba(72,67,81,.45);
-    transform:translateY(-3px);
-}
+.arch::after{
+    content:"";
 
-/* =========================
-   时间
-   ========================= */
+    position:absolute;
+    inset:0;
 
-.hero-time{
-    margin-top:20px;
-}
+    border-radius:inherit;
 
-.datetime{
-    font-size:12px;
-    letter-spacing:1px;
-    color:#8f8995;
-}
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,255,255,.12),
+            transparent 45%
+        );
 
-.day-counter{
-    margin-top:8px;
-    font-size:10px;
-    letter-spacing:2px;
-    color:#b0abb2;
+    pointer-events:none;
 }
 
 /* =========================
    月亮
-   ========================= */
+========================= */
 
 .moon{
     position:absolute;
+
     width:72px;
     height:72px;
+
     border-radius:50%;
+
     background:#f7e7a9;
+
     box-shadow:
         0 0 30px rgba(247,231,169,.55);
+
     right:calc(50% - 245px);
     top:calc(50% - 230px);
+
     z-index:5;
+
     opacity:0;
+
     animation:
         moonIn 1.3s .9s forwards,
         moonFloat 5s 2.2s ease-in-out infinite;
@@ -202,249 +183,404 @@ a{
 
 .moon::after{
     content:"";
+
     position:absolute;
+
     width:72px;
     height:72px;
+
     border-radius:50%;
+
     background:#b0a2d4;
+
     left:20px;
     top:-7px;
 }
 
 /* =========================
-   小星星
-   ========================= */
+   星星
+========================= */
 
 .star{
     position:absolute;
+    color:#aaa1bd;
     z-index:6;
-    color:#d5a9c7;
-    font-size:15px;
     opacity:0;
 }
 
-.star.s1{
-    left:calc(50% - 210px);
-    top:32%;
-    animation:
-        starIn 1s 1s forwards,
-        twinkle 3s 2s infinite;
+.s1{
+    left:calc(50% - 250px);
+    top:calc(50% - 180px);
+    font-size:16px;
+    animation:starIn 1s 1.2s forwards;
 }
 
-.star.s2{
-    left:calc(50% + 190px);
-    top:43%;
-    font-size:10px;
-    animation:
-        starIn 1s 1.3s forwards,
-        twinkle 2.5s 2.2s infinite;
+.s2{
+    right:calc(50% - 270px);
+    top:calc(50% + 100px);
+    font-size:20px;
+    animation:starIn 1s 1.5s forwards;
 }
 
-.star.s3{
-    left:calc(50% - 150px);
-    top:57%;
-    font-size:8px;
-    animation:
-        starIn 1s 1.6s forwards,
-        twinkle 4s 2.5s infinite;
+.s3{
+    left:calc(50% + 210px);
+    top:calc(50% - 80px);
+    font-size:25px;
+    animation:starIn 1s 1.7s forwards;
 }
 
 /* =========================
-   装饰轨迹
-   ========================= */
+   HERO 文字
+   全部放到拱门外
+========================= */
 
-.orbit{
-    position:absolute;
-    width:500px;
-    height:240px;
-    border:1px solid rgba(132,118,157,.22);
-    border-radius:50%;
-    left:50%;
-    top:50%;
-    transform:
-        translate(-50%,-50%)
-        rotate(-18deg);
-    z-index:0;
-    opacity:0;
-    animation:
-        orbitIn 2s 1s forwards;
-}
+.hero-center{
+    width:100%;
+    max-width:900px;
 
-.orbit::before{
-    content:"";
-    position:absolute;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#d9b5cf;
-    left:12%;
-    top:22%;
-}
-
-/* =========================
-   分区
-   ========================= */
-
-.section{
-    padding:150px 25px;
-}
-
-.inner{
-    max-width:1100px;
-    margin:auto;
-}
-
-.section-head{
     text-align:center;
-    margin-bottom:65px;
+
+    position:absolute;
+
+    left:50%;
+    top:calc(50% + min(285px,36vh));
+
+    transform:translateX(-50%);
+
+    z-index:7;
 }
 
-.section-small{
-    font-size:9px;
+/* A QUIET PLACE */
+
+.kicker{
+    font-size:10px;
+    letter-spacing:7px;
+    color:#aaa5af;
+
+    margin-bottom:18px;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1.2s .1s forwards;
+}
+
+/* 删除原来的「圆落星」 */
+
+.hero-sub{
+    margin-top:0;
+
+    font-size:11px;
     letter-spacing:5px;
     color:#aaa5af;
-    margin-bottom:16px;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1.2s .4s forwards;
 }
 
-.section-title{
-    font-size:30px;
-    font-weight:300;
-    letter-spacing:5px;
-    color:#4a4653;
+/* ENTER */
+
+.enter{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-top:25px;
+
+    padding:14px 28px;
+
+    border:1px solid rgba(72,67,81,.25);
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-size:10px;
+    letter-spacing:3px;
+
+    color:#514c58;
+
+    background:rgba(255,255,255,.25);
+
+    transition:
+        background .4s,
+        transform .4s,
+        border-color .4s;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1.2s .7s forwards;
+}
+
+.enter:hover{
+    background:rgba(255,255,255,.7);
+    transform:translateY(-2px);
+    border-color:rgba(72,67,81,.45);
+}
+
+/* 时间 */
+
+.datetime{
+    margin-top:16px;
+
+    font-size:12px;
+    letter-spacing:1px;
+
+    color:#8f8995;
+}
+
+.day-counter{
+    margin-top:8px;
+
+    font-size:10px;
+    letter-spacing:2px;
+
+    color:#b0abb2;
 }
 
 /* =========================
-   信息卡
-   ========================= */
+   动画
+========================= */
 
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
+@keyframes archIn{
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%) scale(.88);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-45%) scale(1);
+    }
 }
 
-.info-card{
-    min-height:180px;
-    padding:35px 25px;
-    background:rgba(255,255,255,.6);
-    border:1px solid rgba(90,82,105,.08);
-    border-radius:2px;
-    text-align:center;
-    box-shadow:0 18px 60px rgba(70,60,90,.05);
-    opacity:0;
-    transform:translateY(35px);
-    transition:
-        opacity .9s,
-        transform .9s;
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.info-card.show{
-    opacity:1;
-    transform:translateY(0);
+@keyframes moonIn{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
-.info-label{
-    font-size:9px;
-    letter-spacing:3px;
+@keyframes moonFloat{
+    0%,100%{
+        margin-top:0;
+    }
+
+    50%{
+        margin-top:-8px;
+    }
+}
+
+@keyframes starIn{
+    from{
+        opacity:0;
+        transform:scale(.5);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   TODAY
+========================= */
+
+.section{
+    min-height:100vh;
+    padding:120px 25px;
+    position:relative;
+}
+
+.section-inner{
+    max-width:1000px;
+    margin:0 auto;
+}
+
+.section-label{
+    font-size:10px;
+    letter-spacing:5px;
     color:#aaa5af;
     margin-bottom:25px;
 }
 
-.info-value{
-    font-size:15px;
-    line-height:2;
-    color:#5b5662;
+.section-title{
+    font-size:42px;
+    font-weight:300;
+    letter-spacing:3px;
+    color:#4a4653;
 }
 
-/* =========================
-   照片
-   ========================= */
+.today-grid{
+    margin-top:70px;
 
-.photo-section{
-    padding-bottom:180px;
-}
+    display:grid;
 
-.photo-window{
-    width:100%;
-    overflow:hidden;
-    position:relative;
-}
+    grid-template-columns:
+        repeat(3,1fr);
 
-.photo-track{
-    display:flex;
     gap:20px;
-    width:max-content;
-    animation:
-        photoLoop 70s linear infinite;
-    will-change:transform;
 }
 
-.photo-track:hover{
-    animation-play-state:running;
+.today-card{
+    min-height:220px;
+
+    padding:35px;
+
+    background:
+        rgba(255,255,255,.55);
+
+    border:1px solid rgba(80,70,90,.08);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
-.photo-card{
-    width:235px;
-    height:310px;
-    flex:none;
-    overflow:hidden;
-    background:#eeeae4;
-    position:relative;
-    cursor:pointer;
-    border-radius:2px;
-    box-shadow:
-        0 20px 55px rgba(60,52,72,.12);
-}
-
-.photo-card img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    user-select:none;
-    -webkit-user-select:none;
-    -webkit-user-drag:none;
-    transition:transform .8s ease;
-}
-
-.photo-card:hover img{
-    transform:scale(1.04);
-}
-
-@keyframes photoLoop{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:
-            translateX(calc(-50% - 10px));
-    }
-}
-
-.photo-message{
-    width:100%;
-    padding:60px;
-    text-align:center;
+.today-card-label{
+    font-size:9px;
+    letter-spacing:4px;
     color:#aaa5af;
 }
 
+.today-card-main{
+    font-size:25px;
+    font-weight:300;
+    color:#514c58;
+}
+
+.today-card-sub{
+    font-size:11px;
+    letter-spacing:1px;
+    color:#99929f;
+}
+
 /* =========================
-   图片查看
-   ========================= */
+   PHOTO
+========================= */
+
+.photo-section{
+    min-height:100vh;
+    padding:120px 0;
+    overflow:hidden;
+}
+
+.photo-title{
+    max-width:1000px;
+    margin:0 auto 55px;
+
+    padding:0 25px;
+}
+
+.photo-title-label{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#aaa5af;
+    margin-bottom:20px;
+}
+
+.photo-title-main{
+    font-size:42px;
+    font-weight:300;
+    letter-spacing:3px;
+    color:#4a4653;
+}
+
+/* 横向照片 */
+
+.photo-track{
+    display:flex;
+    width:max-content;
+
+    animation:
+        photoScroll 45s linear infinite;
+}
+
+.photo-item{
+    width:300px;
+    height:400px;
+
+    margin-right:20px;
+
+    flex-shrink:0;
+
+    overflow:hidden;
+}
+
+.photo-item img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:
+        transform .7s ease;
+}
+
+.photo-item:hover img{
+    transform:scale(1.04);
+}
+
+@keyframes photoScroll{
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
 
 .lightbox{
     position:fixed;
+
     inset:0;
-    z-index:100;
-    background:rgba(30,27,38,.88);
-    backdrop-filter:blur(15px);
+
+    background:rgba(25,22,30,.92);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     padding:30px;
+
     opacity:0;
     visibility:hidden;
-    transition:.35s;
+
+    transition:
+        opacity .4s,
+        visibility .4s;
+
+    z-index:100;
 }
 
 .lightbox.active{
@@ -454,193 +590,139 @@ a{
 
 .lightbox img{
     max-width:90vw;
-    max-height:88vh;
+    max-height:90vh;
+
     object-fit:contain;
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.4);
-    user-select:none;
-    -webkit-user-select:none;
-    -webkit-user-drag:none;
 }
 
-.close-lightbox{
+.lightbox-close{
     position:absolute;
+
     right:30px;
     top:25px;
-    width:42px;
-    height:42px;
-    border:1px solid rgba(255,255,255,.35);
-    border-radius:50%;
-    color:#fff;
-    background:transparent;
-    font-size:22px;
+
+    color:white;
+
+    font-size:25px;
+
     cursor:pointer;
 }
 
 /* =========================
-   页脚
-   ========================= */
+   FOOTER
+========================= */
 
-.footer{
-    padding:80px 25px 110px;
+footer{
+    padding:70px 25px;
+
     text-align:center;
+
     font-size:9px;
-    letter-spacing:5px;
+
+    letter-spacing:4px;
+
     color:#aaa5af;
 }
 
 /* =========================
-   动画
-   ========================= */
+   SCROLL 动画
+========================= */
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.reveal{
+    opacity:0;
+    transform:translateY(30px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
-@keyframes photoIn{
-    from{
-        opacity:0;
-        transform:
-            translateY(20px)
-            scale(.96);
-    }
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-@keyframes moonIn{
-    from{
-        opacity:0;
-        transform:
-            scale(.5)
-            rotate(-30deg);
-    }
-    to{
-        opacity:1;
-        transform:
-            scale(1)
-            rotate(0);
-    }
-}
-
-@keyframes moonFloat{
-    0%,100%{
-        margin-top:0;
-    }
-    50%{
-        margin-top:-12px;
-    }
-}
-
-@keyframes starIn{
-    from{
-        opacity:0;
-        transform:scale(0);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-@keyframes twinkle{
-    0%,100%{
-        opacity:.35;
-    }
-    50%{
-        opacity:1;
-    }
-}
-
-@keyframes orbitIn{
-    from{
-        opacity:0;
-        transform:
-            translate(-50%,-50%)
-            rotate(-18deg)
-            scale(.7);
-    }
-    to{
-        opacity:1;
-        transform:
-            translate(-50%,-50%)
-            rotate(-18deg)
-            scale(1);
-    }
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* =========================
    手机
-   ========================= */
+========================= */
 
 @media(max-width:700px){
 
-    .top-left,
-    .top-right{
-        top:25px;
-        font-size:8px;
+    .hero{
+        min-height:100vh;
+        padding:40px 20px;
     }
 
-    .hero-photo{
+    .top-left{
+        left:20px;
+        top:20px;
+    }
+
+    .top-right{
+        right:20px;
+        top:20px;
+    }
+
+    .arch{
         width:68vw;
         height:55vh;
     }
 
-    .moon{
-        width:48px;
-        height:48px;
-        right:17%;
-        top:27%;
-    }
-
-    .moon::after{
-        width:48px;
-        height:48px;
-        left:13px;
-        top:-5px;
-    }
-
     .orbit{
-        width:85vw;
-        height:180px;
+        width:380px;
+        height:380px;
     }
 
-    .star.s1{
-        left:18%;
+    .hero-center{
+        top:calc(50% + min(255px,31vh));
     }
 
-    .star.s2{
-        left:78%;
-    }
-
-    .info-grid{
+    .today-grid{
         grid-template-columns:1fr;
     }
 
-    .section{
-        padding:110px 20px;
+    .section-title,
+    .photo-title-main{
+        font-size:34px;
     }
 
-    .photo-card{
-        width:180px;
-        height:240px;
+    .photo-item{
+        width:240px;
+        height:320px;
+    }
+
+    .moon{
+        right:calc(50% - 155px);
+        top:calc(50% - 190px);
+        width:55px;
+        height:55px;
+    }
+
+    .moon::after{
+        width:55px;
+        height:55px;
+    }
+
+    .s1{
+        left:18%;
+    }
+
+    .s2{
+        right:15%;
+    }
+
+    .s3{
+        left:75%;
     }
 }
 </style>
 </head>
 
 <body>
+
+<!-- =========================
+     HERO
+========================= -->
 
 <header class="hero">
 
@@ -656,12 +738,10 @@ a{
 
     <div class="orbit"></div>
 
-    <!-- 第三张照片：这里没有任何文字 -->
-    <img
-        class="hero-photo"
-        src="photos/IMG_5778.jpeg"
-        alt="Memory"
-    >
+    <!-- 第三张照片，完全放在原来的拱门位置 -->
+    <div class="arch">
+        <img src="photos/IMG_5778.jpeg" alt="Memory">
+    </div>
 
     <div class="moon"></div>
 
@@ -669,9 +749,9 @@ a{
     <div class="star s2">✧</div>
     <div class="star s3">·</div>
 
+    <!-- 所有文字都在拱门外 -->
     <div class="hero-center">
 
-        <!-- 原来拱门里的英文全部移到照片外 -->
         <div class="kicker">
             A QUIET PLACE
         </div>
@@ -684,104 +764,79 @@ a{
             ENTER MY WORLD →
         </a>
 
-        <div class="hero-time">
-
-            <div class="datetime" id="datetime">
-                正在读取时间…
-            </div>
-
-            <div class="day-counter" id="dayCounter"></div>
-
+        <div class="datetime" id="datetime">
+            正在读取时间…
         </div>
+
+        <div class="day-counter" id="dayCounter"></div>
 
     </div>
 
 </header>
 
 
+<!-- =========================
+     TODAY
+========================= -->
+
 <section class="section" id="today">
 
-    <div class="inner">
+    <div class="section-inner">
 
-        <div class="section-head">
-
-            <div class="section-small">
-                TODAY
-            </div>
-
-            <div class="section-title">
-                今天的世界
-            </div>
-
+        <div class="section-label">
+            TODAY
         </div>
 
-        <div class="info-grid">
-
-            <div class="info-card">
-
-                <div class="info-label">
-                    MOON · 月相
-                </div>
-
-                <div class="info-value" id="moonPhase">
-                    正在读取…
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-label">
-                    SEASON · 季节
-                </div>
-
-                <div class="info-value" id="season">
-                    正在读取…
-                </div>
-
-            </div>
-
-            <div class="info-card">
-
-                <div class="info-label">
-                    WEATHER · 上海
-                </div>
-
-                <div class="info-value" id="weather">
-                    正在读取天气…
-                </div>
-
-            </div>
-
+        <div class="section-title">
+            A QUIET DAY
         </div>
 
-    </div>
+        <div class="today-grid">
 
-</section>
+            <div class="today-card reveal">
 
+                <div class="today-card-label">
+                    MOON
+                </div>
 
-<section class="section photo-section">
+                <div class="today-card-main">
+                    月相
+                </div>
 
-    <div class="inner">
+                <div class="today-card-sub">
+                    今夜的月亮
+                </div>
 
-        <div class="section-head">
-
-            <div class="section-small">
-                MY MEMORIES
             </div>
 
-            <div class="section-title">
-                我的照片
+            <div class="today-card reveal">
+
+                <div class="today-card-label">
+                    SEASON
+                </div>
+
+                <div class="today-card-main">
+                    秋
+                </div>
+
+                <div class="today-card-sub">
+                    一年四季
+                </div>
+
             </div>
 
-        </div>
+            <div class="today-card reveal">
 
-        <div class="photo-window">
+                <div class="today-card-label">
+                    SHANGHAI
+                </div>
 
-            <div class="photo-track" id="photoTrack">
+                <div class="today-card-main">
+                    上海
+                </div>
 
-                <div class="photo-message">
-                    正在读取照片…
+                <div class="today-card-sub">
+                    WEATHER
                 </div>
 
             </div>
@@ -793,48 +848,90 @@ a{
 </section>
 
 
-<footer class="footer">
-    A PLACE FOR MEMORY · 2026
-</footer>
+<!-- =========================
+     PHOTO
+========================= -->
 
+<section class="photo-section">
+
+    <div class="photo-title">
+
+        <div class="photo-title-label">
+            MEMORIES
+        </div>
+
+        <div class="photo-title-main">
+            LITTLE MOMENTS
+        </div>
+
+    </div>
+
+    <div class="photo-track" id="photoTrack"></div>
+
+</section>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
 
 <div class="lightbox" id="lightbox">
 
-    <button
-        class="close-lightbox"
-        id="closeLightbox"
-        aria-label="关闭">
+    <div class="lightbox-close" id="lightboxClose">
         ×
-    </button>
+    </div>
 
-    <img id="lightboxImg" alt="Memory">
+    <img id="lightboxImg" src="" alt="">
 
 </div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+    A QUIET PLACE · 圆落星
+</footer>
 
 
 <script>
 
 /* =========================
-   自动日期 + 时间
-   ========================= */
+   时间
+========================= */
 
 function updateDateTime(){
 
-    const formatter =
-        new Intl.DateTimeFormat("zh-CN",{
-            timeZone:"Asia/Shanghai",
-            year:"numeric",
-            month:"long",
-            day:"numeric",
-            weekday:"long",
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit",
-            hour12:false
-        });
+    const now = new Date();
 
-    document.getElementById("datetime").textContent =
-        formatter.format(new Date());
+    const year = now.getFullYear();
+
+    const month =
+        String(now.getMonth()+1).padStart(2,"0");
+
+    const day =
+        String(now.getDate()).padStart(2,"0");
+
+    const hour =
+        String(now.getHours()).padStart(2,"0");
+
+    const minute =
+        String(now.getMinutes()).padStart(2,"0");
+
+    const second =
+        String(now.getSeconds()).padStart(2,"0");
+
+    const el =
+        document.getElementById("datetime");
+
+    if(el){
+
+        el.textContent =
+            `${year}.${month}.${day} · ${hour}:${minute}:${second}`;
+
+    }
+
 }
 
 updateDateTime();
@@ -844,686 +941,180 @@ setInterval(updateDateTime,1000);
 
 /* =========================
    天数
-   ========================= */
+========================= */
+
+const startDate =
+    new Date("2026-01-01T00:00:00");
 
 function updateDayCounter(){
 
-    const start =
-        new Date("2026-01-01T00:00:00+08:00");
-
-    const now =
-        new Date();
+    const now = new Date();
 
     const diff =
+        now - startDate;
+
+    const days =
         Math.floor(
-            (now - start) /
-            (1000 * 60 * 60 * 24)
+            diff / (1000*60*60*24)
         ) + 1;
 
-    document.getElementById("dayCounter").textContent =
-        "2026 · 第 " + diff + " 天";
+    const el =
+        document.getElementById("dayCounter");
+
+    if(el){
+
+        el.textContent =
+            `DAY ${days} OF 2026`;
+
+    }
+
 }
 
 updateDayCounter();
 
-setInterval(updateDayCounter,60000);
-
-
-/* =========================
-   月相
-   ========================= */
-
-function getMoonPhase(){
-
-    const knownNewMoon =
-        new Date("2000-01-06T18:14:00Z");
-
-    const now =
-        new Date();
-
-    const days =
-        (now - knownNewMoon) /
-        86400000;
-
-    const cycle =
-        29.530588853;
-
-    const phase =
-        ((days % cycle) + cycle) % cycle;
-
-    if(phase < 1.84566)
-        return "🌑 新月";
-
-    if(phase < 5.53699)
-        return "🌒 娥眉月";
-
-    if(phase < 9.22831)
-        return "🌓 上弦月";
-
-    if(phase < 12.91963)
-        return "🌔 盈凸月";
-
-    if(phase < 16.61096)
-        return "🌕 满月";
-
-    if(phase < 20.30228)
-        return "🌖 亏凸月";
-
-    if(phase < 23.99361)
-        return "🌗 下弦月";
-
-    if(phase < 27.68493)
-        return "🌘 残月";
-
-    return "🌑 新月";
-}
-
-document.getElementById("moonPhase").textContent =
-    getMoonPhase();
-
-
-/* =========================
-   中国节气季节
-   ========================= */
-
-function solarLongitude(date){
-
-    const JD =
-        date.getTime() / 86400000 +
-        2440587.5;
-
-    const T =
-        (JD - 2451545.0) / 36525;
-
-    const rad =
-        Math.PI / 180;
-
-    let L0 =
-        280.46646 +
-        36000.76983 * T +
-        0.0003032 * T * T;
-
-    L0 =
-        ((L0 % 360) + 360) % 360;
-
-    const M =
-        357.52911 +
-        35999.05029 * T -
-        0.0001537 * T * T;
-
-    const Mrad =
-        M * rad;
-
-    const C =
-        Math.sin(Mrad) *
-        (
-            1.914602 -
-            0.004817 * T -
-            0.000014 * T * T
-        )
-        +
-        Math.sin(2 * Mrad) *
-        (
-            0.019993 -
-            0.000101 * T
-        )
-        +
-        Math.sin(3 * Mrad) *
-        0.000289;
-
-    const trueLongitude =
-        L0 + C;
-
-    const omega =
-        (125.04 - 1934.136 * T) * rad;
-
-    const apparentLongitude =
-        trueLongitude -
-        0.00569 -
-        0.00478 *
-        Math.sin(omega);
-
-    return (
-        (apparentLongitude % 360) +
-        360
-    ) % 360;
-}
-
-
-function angleDifference(a,b){
-
-    let d =
-        a - b;
-
-    while(d > 180)
-        d -= 360;
-
-    while(d < -180)
-        d += 360;
-
-    return d;
-}
-
-
-function findSolarTerm(
-    year,
-    targetAngle,
-    approxMonth,
-    approxDay
-){
-
-    const start =
-        new Date(
-            `${year}-${String(approxMonth).padStart(2,"0")}-${String(approxDay).padStart(2,"0")}T00:00:00+08:00`
-        );
-
-    let left =
-        new Date(
-            start.getTime() -
-            3 * 86400000
-        );
-
-    let right =
-        new Date(
-            start.getTime() +
-            3 * 86400000
-        );
-
-    for(let i = 0; i < 45; i++){
-
-        const middle =
-            new Date(
-                (
-                    left.getTime() +
-                    right.getTime()
-                ) / 2
-            );
-
-        const diff =
-            angleDifference(
-                solarLongitude(middle),
-                targetAngle
-            );
-
-        if(diff > 0){
-
-            right = middle;
-
-        }else{
-
-            left = middle;
-
-        }
-    }
-
-    return new Date(
-        (
-            left.getTime() +
-            right.getTime()
-        ) / 2
-    );
-}
-
-
-function getFourSeasons(year){
-
-    return {
-
-        lichun:
-            findSolarTerm(
-                year,
-                315,
-                2,
-                4
-            ),
-
-        lixia:
-            findSolarTerm(
-                year,
-                45,
-                5,
-                5
-            ),
-
-        liqiu:
-            findSolarTerm(
-                year,
-                135,
-                8,
-                7
-            ),
-
-        lidong:
-            findSolarTerm(
-                year,
-                225,
-                11,
-                7
-            ),
-
-        nextLichun:
-            findSolarTerm(
-                year + 1,
-                315,
-                2,
-                4
-            )
-    };
-}
-
-
-function getChinaSeason(){
-
-    const now =
-        new Date();
-
-    const chinaYear =
-        Number(
-            new Intl.DateTimeFormat(
-                "zh-CN",
-                {
-                    timeZone:
-                        "Asia/Shanghai",
-
-                    year:
-                        "numeric"
-                }
-            ).format(now)
-        );
-
-    const seasons =
-        getFourSeasons(
-            chinaYear
-        );
-
-    if(
-        now >= seasons.lichun &&
-        now < seasons.lixia
-    ){
-
-        return "🌱 春天";
-
-    }
-
-    if(
-        now >= seasons.lixia &&
-        now < seasons.liqiu
-    ){
-
-        return "☀️ 夏天";
-
-    }
-
-    if(
-        now >= seasons.liqiu &&
-        now < seasons.lidong
-    ){
-
-        return "🍂 秋天";
-
-    }
-
-    return "❄️ 冬天";
-}
-
-
-function updateSeason(){
-
-    const season =
-        document.getElementById(
-            "season"
-        );
-
-    if(season){
-
-        season.textContent =
-            getChinaSeason();
-
-    }
-}
-
-
-updateSeason();
-
-setInterval(
-    updateSeason,
-    3600000
-);
-
-
-/* =========================
-   上海天气
-   ========================= */
-
-async function loadWeather(){
-
-    const weatherBox =
-        document.getElementById("weather");
-
-    try{
-
-        const url =
-            "https://api.open-meteo.com/v1/forecast" +
-            "?latitude=31.2304" +
-            "&longitude=121.4737" +
-            "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m" +
-            "&timezone=Asia%2FShanghai";
-
-        const response =
-            await fetch(url);
-
-        if(!response.ok)
-            throw new Error();
-
-        const data =
-            await response.json();
-
-        const current =
-            data.current;
-
-        const weatherMap = {
-
-            0:"晴天 ☀️",
-            1:"基本晴朗 🌤️",
-            2:"局部多云 ⛅",
-            3:"阴天 ☁️",
-            45:"雾 🌫️",
-            48:"雾 🌫️",
-            51:"小毛毛雨 🌦️",
-            53:"毛毛雨 🌦️",
-            55:"毛毛雨 🌦️",
-            61:"小雨 🌧️",
-            63:"中雨 🌧️",
-            65:"大雨 🌧️",
-            71:"小雪 ❄️",
-            73:"中雪 ❄️",
-            75:"大雪 ❄️",
-            80:"阵雨 🌦️",
-            81:"阵雨 🌦️",
-            82:"强阵雨 🌧️",
-            95:"雷雨 ⛈️",
-            96:"雷雨 ⛈️",
-            99:"强雷雨 ⛈️"
-        };
-
-        const description =
-            weatherMap[
-                current.weather_code
-            ] ||
-            "天气变化中";
-
-        weatherBox.innerHTML =
-            description +
-            "<br>" +
-            Math.round(
-                current.temperature_2m
-            ) +
-            "°C · 体感 " +
-            Math.round(
-                current.apparent_temperature
-            ) +
-            "°C" +
-            "<br>" +
-            "湿度 " +
-            Math.round(
-                current.relative_humidity_2m
-            ) +
-            "% · 风速 " +
-            Math.round(
-                current.wind_speed_10m
-            ) +
-            " km/h";
-
-    }catch(error){
-
-        weatherBox.textContent =
-            "天气暂时无法读取，请稍后刷新";
-
-    }
-}
-
-loadWeather();
-
-setInterval(
-    loadWeather,
-    600000
-);
-
 
 /* =========================
    照片
-   ========================= */
+========================= */
 
-async function loadPhotos(){
+const photoTrack =
+    document.getElementById("photoTrack");
 
-    const track =
-        document.getElementById(
-            "photoTrack"
-        );
+fetch("photos.json?v=" + Date.now())
 
-    try{
+    .then(response => response.json())
 
-        const response =
-            await fetch(
-                "photos.json?v=" +
-                Date.now(),
-                {
-                    cache:"no-store"
-                }
-            );
-
-        if(!response.ok)
-            throw new Error();
-
-        const photos =
-            await response.json();
-
-        if(
-            !Array.isArray(photos) ||
-            photos.length === 0
-        ){
-
-            track.innerHTML =
-                '<div class="photo-message">' +
-                'photos 文件夹里暂时没有照片' +
-                '</div>';
-
-            return;
-        }
+    .then(photos => {
 
         const allPhotos =
             photos.concat(photos);
 
-        track.innerHTML = "";
+        allPhotos.forEach(src => {
 
-        allPhotos.forEach(
-            function(path){
+            const item =
+                document.createElement("div");
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            item.className =
+                "photo-item";
 
-                card.className =
-                    "photo-card";
+            const img =
+                document.createElement("img");
 
-                const img =
-                    document.createElement(
-                        "img"
-                    );
+            img.src = src;
 
-                img.src =
-                    path +
-                    "?v=" +
-                    Date.now();
+            img.loading = "lazy";
 
-                img.alt =
-                    "Memory";
+            item.appendChild(img);
 
-                img.loading =
-                    "lazy";
-
-                img.draggable =
-                    false;
-
-                card.addEventListener(
-                    "click",
-                    function(){
-
-                        document.getElementById(
-                            "lightboxImg"
-                        ).src =
-                            img.src;
-
-                        document.getElementById(
-                            "lightbox"
-                        ).classList.add(
-                            "active"
-                        );
-
-                    }
-                );
-
-                card.appendChild(img);
-
-                track.appendChild(card);
-
-            }
-        );
-
-    }catch(error){
-
-        track.innerHTML =
-            '<div class="photo-message">' +
-            '照片暂时无法读取，请稍后刷新' +
-            '</div>';
-
-    }
-}
-
-loadPhotos();
-
-setInterval(
-    loadPhotos,
-    300000
-);
-
-
-/* =========================
-   图片关闭
-   ========================= */
-
-document.getElementById(
-    "closeLightbox"
-).addEventListener(
-    "click",
-    function(){
-
-        document.getElementById(
-            "lightbox"
-        ).classList.remove(
-            "active"
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "lightbox"
-).addEventListener(
-    "click",
-    function(e){
-
-        if(e.target === this){
-
-            this.classList.remove(
-                "active"
+            item.addEventListener(
+                "click",
+                () => openLightbox(src)
             );
 
-        }
+            photoTrack.appendChild(item);
 
-    }
-);
+        });
 
+    })
 
-/* =========================
-   禁止照片普通右键/拖拽
-   ========================= */
+    .catch(error => {
 
-document.addEventListener(
-    "contextmenu",
-    function(e){
+        console.error(
+            "照片读取失败:",
+            error
+        );
 
-        if(
-            e.target.tagName === "IMG"
-        ){
-
-            e.preventDefault();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "dragstart",
-    function(e){
-
-        if(
-            e.target.tagName === "IMG"
-        ){
-
-            e.preventDefault();
-
-        }
-
-    }
-);
+    });
 
 
 /* =========================
-   滚动出现动画
-   ========================= */
+   LIGHTBOX
+========================= */
 
-const cards =
-    document.querySelectorAll(
-        ".info-card"
+const lightbox =
+    document.getElementById("lightbox");
+
+const lightboxImg =
+    document.getElementById("lightboxImg");
+
+const lightboxClose =
+    document.getElementById("lightboxClose");
+
+
+function openLightbox(src){
+
+    lightboxImg.src =
+        src;
+
+    lightbox.classList.add(
+        "active"
     );
+
+}
+
+
+function closeLightbox(){
+
+    lightbox.classList.remove(
+        "active"
+    );
+
+}
+
+
+lightboxClose.addEventListener(
+    "click",
+    closeLightbox
+);
+
+
+lightbox.addEventListener(
+    "click",
+    function(e){
+
+        if(e.target === lightbox){
+
+            closeLightbox();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   滚动出现
+========================= */
+
+const reveals =
+    document.querySelectorAll(".reveal");
+
 
 const observer =
     new IntersectionObserver(
-        function(entries){
+        entries => {
 
-            entries.forEach(
-                function(entry){
+            entries.forEach(entry => {
 
-                    if(
-                        entry.isIntersecting
-                    ){
+                if(entry.isIntersecting){
 
-                        entry.target.classList.add(
-                            "show"
-                        );
-
-                    }
+                    entry.target.classList.add(
+                        "show"
+                    );
 
                 }
-            );
+
+            });
 
         },
         {
-            threshold:.18
+            threshold:.15
         }
     );
 
-cards.forEach(
-    function(card){
 
-        observer.observe(card);
-
-    }
+reveals.forEach(
+    el => observer.observe(el)
 );
 
 </script>
