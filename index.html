@@ -9,1732 +9,1851 @@
 <style>
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  background:#f4f1ec;
-  color:#403c45;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    "PingFang SC",
-    "Microsoft YaHei",
-    sans-serif;
+    background:#f4f1ec;
+    color:#403c45;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+    overflow-x:hidden;
 }
 
 /* =========================
-   HERO
-========================= */
+   首页
+   ========================= */
 
 .hero{
-  position:relative;
-  min-height:100vh;
-  height:100vh;
-  overflow:hidden;
-  background:#111;
-  color:#fff;
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#181c2b;
 }
 
 .hero-bg{
-  position:absolute;
-  inset:-3%;
+    position:absolute;
+    inset:0;
+    z-index:0;
 
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
 
-  opacity:.9;
+    transition:
+        opacity 1.2s ease,
+        transform 8s ease;
 
-  transform:scale(1.03);
-
-  transition:
-    opacity 1.2s ease,
-    transform 8s ease;
+    transform:scale(1.03);
 }
 
-.hero:hover .hero-bg{
-  transform:scale(1.06);
-}
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
 
-.hero-overlay{
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.42),
-      rgba(0,0,0,.08) 35%,
-      rgba(0,0,0,.18) 65%,
-      rgba(0,0,0,.62)
-    );
-}
-
-.hero-top-left{
-  position:absolute;
-  top:34px;
-  left:42px;
-
-  z-index:2;
-
-  font-size:12px;
-  letter-spacing:4px;
-
-  opacity:.9;
-}
-
-.hero-top-right{
-  position:absolute;
-  top:34px;
-  right:42px;
-
-  z-index:2;
-
-  font-size:11px;
-  letter-spacing:4px;
-
-  opacity:.8;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(8,12,24,.18),
+            rgba(8,12,24,.08) 45%,
+            rgba(8,12,24,.48) 100%
+        );
 }
 
 .hero-center{
-  position:absolute;
+    width:90%;
+    max-width:900px;
 
-  z-index:2;
+    position:relative;
+    z-index:5;
 
-  top:50%;
-  left:50%;
+    text-align:center;
 
-  transform:translate(-50%,-50%);
+    color:#fff;
 
-  text-align:center;
-
-  width:90%;
+    text-shadow:
+        0 3px 25px rgba(0,0,0,.45);
 }
 
-.hero-kicker{
-  font-size:12px;
-  letter-spacing:7px;
+.top-left,
+.top-right{
+    position:absolute;
+    top:38px;
+    z-index:6;
 
-  margin-bottom:24px;
+    font-size:9px;
+    line-height:1.9;
+    letter-spacing:3px;
 
-  opacity:.82;
+    color:rgba(255,255,255,.82);
+}
+
+.top-left{
+    left:5%;
+}
+
+.top-right{
+    right:5%;
+    text-align:right;
+}
+
+.kicker{
+    font-size:10px;
+    letter-spacing:8px;
+
+    margin-bottom:20px;
+
+    opacity:0;
+    animation:
+        fadeUp 1.2s .15s forwards;
 }
 
 .hero-title{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    font-size:
+        clamp(
+            58px,
+            9vw,
+            105px
+        );
 
-  font-size:clamp(46px,8vw,108px);
+    font-weight:300;
 
-  font-weight:400;
+    letter-spacing:13px;
 
-  letter-spacing:5px;
-
-  line-height:1;
-}
-
-.hero-cn{
-  margin-top:25px;
-
-  font-family:
-    "Songti SC",
-    "STSong",
-    "SimSun",
-    serif;
-
-  font-size:clamp(22px,3vw,36px);
-
-  letter-spacing:12px;
+    opacity:0;
+    animation:
+        fadeUp 1.3s .3s forwards;
 }
 
 .hero-sub{
-  margin-top:20px;
+    margin-top:15px;
 
-  font-size:10px;
+    font-size:10px;
+    letter-spacing:6px;
 
-  letter-spacing:6px;
-
-  opacity:.7;
+    opacity:0;
+    animation:
+        fadeUp 1.2s .45s forwards;
 }
 
-.hero-enter{
-  margin-top:48px;
+.enter{
+    display:inline-flex;
 
-  display:inline-block;
+    align-items:center;
+    justify-content:center;
 
-  color:#fff;
+    margin-top:45px;
 
-  text-decoration:none;
+    padding:
+        14px
+        30px;
 
-  font-size:11px;
+    border:
+        1px solid
+        rgba(255,255,255,.65);
 
-  letter-spacing:4px;
+    border-radius:50px;
 
-  border-bottom:
-    1px solid rgba(255,255,255,.6);
+    color:#fff;
 
-  padding-bottom:9px;
+    background:
+        rgba(255,255,255,.10);
 
-  transition:.3s;
+    backdrop-filter:blur(8px);
+
+    text-decoration:none;
+
+    font-size:10px;
+    letter-spacing:3px;
+
+    transition:
+        .4s;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1.2s .65s forwards;
 }
 
-.hero-enter:hover{
-  letter-spacing:6px;
-  opacity:.7;
+.enter:hover{
+    background:
+        rgba(255,255,255,.2);
+
+    transform:
+        translateY(-3px);
 }
 
 .datetime{
-  margin-top:28px;
+    margin-top:40px;
 
-  font-size:12px;
+    font-size:11px;
+    letter-spacing:2px;
 
-  letter-spacing:3px;
-
-  opacity:.82;
+    color:
+        rgba(255,255,255,.92);
 }
 
 .day-counter{
-  margin-top:10px;
+    margin-top:9px;
 
-  font-size:10px;
+    font-size:10px;
+    letter-spacing:2px;
 
-  letter-spacing:3px;
-
-  opacity:.58;
+    color:
+        rgba(255,255,255,.72);
 }
+
+/* 每日城市标签 */
 
 .place-tag{
-  position:absolute;
+    position:absolute;
 
-  z-index:2;
+    left:50%;
+    bottom:34px;
 
-  bottom:35px;
+    transform:
+        translateX(-50%);
 
-  left:50%;
+    z-index:6;
 
-  transform:translateX(-50%);
+    padding:
+        8px 16px;
 
-  font-size:10px;
+    border:
+        1px solid
+        rgba(255,255,255,.28);
 
-  letter-spacing:4px;
+    border-radius:30px;
 
-  opacity:.72;
+    background:
+        rgba(0,0,0,.18);
 
-  white-space:nowrap;
+    backdrop-filter:blur(8px);
+
+    color:
+        rgba(255,255,255,.85);
+
+    font-size:8px;
+    letter-spacing:3px;
+
+    white-space:nowrap;
 }
 
-
 /* =========================
-   CONTENT
-========================= */
+   内容
+   ========================= */
 
 .section{
-  padding:100px 7vw;
+    padding:
+        120px
+        25px;
+
+    background:#f4f1ec;
+}
+
+.inner{
+    max-width:1100px;
+    margin:auto;
+}
+
+.section-head{
+    text-align:center;
+
+    margin-bottom:55px;
+}
+
+.section-small{
+    font-size:9px;
+    letter-spacing:5px;
+
+    color:#aaa4a9;
+
+    margin-bottom:15px;
 }
 
 .section-title{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+    font-size:30px;
+    font-weight:300;
 
-  font-size:38px;
+    letter-spacing:6px;
 
-  font-weight:400;
-
-  margin-bottom:14px;
+    color:#47424d;
 }
-
-.section-sub{
-  font-size:11px;
-
-  letter-spacing:3px;
-
-  opacity:.5;
-
-  margin-bottom:45px;
-}
-
-.cards{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:20px;
-}
-
-.card{
-  background:
-    rgba(255,255,255,.55);
-
-  border:
-    1px solid rgba(64,60,69,.08);
-
-  padding:35px;
-
-  min-height:170px;
-
-  transition:.35s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-
-  background:
-    rgba(255,255,255,.8);
-}
-
-.card-label{
-  font-size:10px;
-
-  letter-spacing:3px;
-
-  opacity:.45;
-
-  margin-bottom:25px;
-}
-
-.card-value{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:27px;
-}
-
-.card-small{
-  margin-top:10px;
-
-  font-size:12px;
-
-  opacity:.55;
-}
-
 
 /* =========================
-   PHOTO WALL
-========================= */
+   信息卡
+   ========================= */
 
-.photos-section{
-  overflow:hidden;
+.info-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.info-card{
+    min-height:185px;
+
+    padding:32px 25px;
+
+    text-align:center;
+
+    background:
+        rgba(255,255,255,.7);
+
+    border:
+        1px solid
+        rgba(80,70,90,.09);
+
+    border-radius:10px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(70,60,80,.07);
+
+    opacity:0;
+
+    transform:
+        translateY(35px);
+
+    transition:
+        opacity .9s,
+        transform .9s;
+}
+
+.info-card.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.info-label{
+    font-size:9px;
+    letter-spacing:3px;
+
+    color:#aaa5af;
+
+    margin-bottom:25px;
+}
+
+.info-value{
+    font-size:15px;
+    line-height:2;
+
+    color:#5b5662;
+}
+
+/* =========================
+   照片
+   ========================= */
+
+.photo-section{
+    padding-top:50px;
+    padding-bottom:170px;
+}
+
+.photo-window{
+    width:100%;
+    overflow:hidden;
 }
 
 .photo-track{
-  display:flex;
+    display:flex;
 
-  width:max-content;
+    gap:20px;
 
-  gap:18px;
+    width:max-content;
 
-  animation:
-    photoMove 45s linear infinite;
+    animation:
+        photoLoop
+        70s
+        linear
+        infinite;
+
+    will-change:transform;
 }
 
 .photo-track:hover{
-  animation-play-state:paused;
+    animation-play-state:running;
 }
 
-.photo-item{
-  width:280px;
-  height:370px;
+.photo-card{
+    width:235px;
+    height:310px;
 
-  flex:none;
+    flex:none;
 
-  overflow:hidden;
+    overflow:hidden;
 
-  cursor:pointer;
+    position:relative;
 
-  background:#ddd;
+    cursor:pointer;
+
+    background:#eeeae4;
+
+    border-radius:4px;
+
+    box-shadow:
+        0 20px 55px
+        rgba(60,52,72,.12);
 }
 
-.photo-item img{
-  width:100%;
-  height:100%;
+.photo-card img{
+    width:100%;
+    height:100%;
 
-  object-fit:cover;
+    display:block;
 
-  display:block;
+    object-fit:cover;
 
-  transition:
-    transform .8s ease;
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    -webkit-user-drag:none;
+
+    transition:
+        transform .8s ease;
 }
 
-.photo-item:hover img{
-  transform:scale(1.05);
+.photo-card:hover img{
+    transform:
+        scale(1.04);
 }
 
-@keyframes photoMove{
+@keyframes photoLoop{
 
-  from{
-    transform:translateX(0);
-  }
+    from{
+        transform:
+            translateX(0);
+    }
 
-  to{
-    transform:translateX(-50%);
-  }
-
+    to{
+        transform:
+            translateX(
+                calc(
+                    -50% - 10px
+                )
+            );
+    }
 }
 
+.photo-message{
+    width:100%;
+
+    padding:60px;
+
+    text-align:center;
+
+    color:#aaa5af;
+}
 
 /* =========================
-   LIGHTBOX
-========================= */
+   图片查看
+   ========================= */
 
 .lightbox{
-  position:fixed;
+    position:fixed;
+    inset:0;
 
-  inset:0;
+    z-index:100;
 
-  z-index:9999;
+    display:flex;
 
-  background:
-    rgba(0,0,0,.92);
+    align-items:center;
+    justify-content:center;
 
-  display:none;
+    padding:30px;
 
-  align-items:center;
+    background:
+        rgba(25,22,32,.9);
 
-  justify-content:center;
+    backdrop-filter:
+        blur(15px);
 
-  padding:30px;
+    opacity:0;
+    visibility:hidden;
+
+    transition:.35s;
 }
 
 .lightbox.active{
-  display:flex;
+    opacity:1;
+    visibility:visible;
 }
 
 .lightbox img{
-  max-width:94vw;
-  max-height:92vh;
+    max-width:90vw;
+    max-height:88vh;
 
-  object-fit:contain;
+    object-fit:contain;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.45);
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    -webkit-user-drag:none;
 }
 
-.lightbox-close{
-  position:absolute;
+.close-lightbox{
+    position:absolute;
 
-  top:25px;
-  right:30px;
+    right:30px;
+    top:25px;
 
-  color:#fff;
+    width:42px;
+    height:42px;
 
-  font-size:30px;
+    border:
+        1px solid
+        rgba(255,255,255,.4);
 
-  cursor:pointer;
+    border-radius:50%;
 
-  opacity:.8;
+    color:#fff;
+
+    background:transparent;
+
+    font-size:22px;
+
+    cursor:pointer;
 }
-
 
 /* =========================
-   FOOTER
-========================= */
+   页脚
+   ========================= */
 
-footer{
-  padding:70px 20px;
+.footer{
+    padding:
+        80px
+        25px
+        110px;
 
-  text-align:center;
+    text-align:center;
 
-  font-size:10px;
+    font-size:9px;
+    letter-spacing:5px;
 
-  letter-spacing:4px;
+    color:#aaa5af;
 
-  opacity:.45;
+    background:#f4f1ec;
 }
 
+/* =========================
+   动画
+   ========================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
 
 /* =========================
-   MOBILE
-========================= */
+   手机
+   ========================= */
 
 @media(max-width:700px){
 
-  .hero-top-left{
-    top:24px;
-    left:22px;
+    .hero{
+        min-height:100svh;
+    }
 
-    font-size:9px;
+    .top-left,
+    .top-right{
+        top:25px;
 
-    letter-spacing:3px;
-  }
+        font-size:7px;
+        letter-spacing:2px;
+    }
 
-  .hero-top-right{
-    top:24px;
-    right:22px;
+    .hero-title{
+        font-size:54px;
+        letter-spacing:7px;
+    }
 
-    font-size:8px;
+    .hero-sub{
+        font-size:8px;
+        letter-spacing:4px;
+    }
 
-    letter-spacing:2px;
-  }
+    .datetime{
+        font-size:10px;
+    }
 
-  .hero-title{
-    font-size:43px;
-    letter-spacing:2px;
-  }
+    .info-grid{
+        grid-template-columns:1fr;
+    }
 
-  .hero-cn{
-    font-size:22px;
-    letter-spacing:8px;
-  }
+    .section{
+        padding:
+            100px
+            20px;
+    }
 
-  .hero-kicker{
-    font-size:9px;
-    letter-spacing:4px;
-  }
-
-  .hero-sub{
-    font-size:8px;
-    letter-spacing:3px;
-  }
-
-  .section{
-    padding:70px 20px;
-  }
-
-  .section-title{
-    font-size:31px;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    min-height:145px;
-  }
-
-  .photo-item{
-    width:220px;
-    height:300px;
-  }
-
-  .place-tag{
-    bottom:25px;
-
-    font-size:8px;
-  }
+    .photo-card{
+        width:180px;
+        height:240px;
+    }
 
 }
 
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-  <div
-    class="hero-bg"
-    id="heroBg">
-  </div>
-
-  <div class="hero-overlay"></div>
-
-
-  <div class="hero-top-left">
-    2026 / ✦ LIGHT · NIGHT
-  </div>
-
-
-  <div class="hero-top-right">
-    SHINING / IN SILENCE
-  </div>
-
-
-  <div class="hero-center">
-
-    <div class="hero-kicker">
-      A PERSONAL ARCHIVE
-    </div>
-
-
-    <h1 class="hero-title">
-      A QUIET PLACE
-    </h1>
-
-
-    <div class="hero-cn">
-      圆落星
-    </div>
-
-
-    <div class="hero-sub">
-      A PLACE FOR MEMORY
-    </div>
-
-
-    <a
-      href="#world"
-      class="hero-enter">
-
-      ENTER MY WORLD →
-
-    </a>
-
+<header class="hero">
 
     <div
-      class="datetime"
-      id="datetime">
+        class="hero-bg"
+        id="heroBg">
+    </div>
 
-      Shanghai · Loading...
+    <div class="top-left">
+
+        2026<br>
+
+        ✦ LIGHT · NIGHT
 
     </div>
 
+    <div class="top-right">
+
+        SHINING<br>
+
+        IN SILENCE
+
+    </div>
+
+    <div class="hero-center">
+
+        <div class="kicker">
+
+            A QUIET PLACE
+
+        </div>
+
+        <div class="hero-title">
+
+            圆落星
+
+        </div>
+
+        <div class="hero-sub">
+
+            A PLACE FOR MEMORY
+
+        </div>
+
+        <a
+            href="#today"
+            class="enter">
+
+            ENTER MY WORLD →
+
+        </a>
+
+        <div
+            class="datetime"
+            id="datetime">
+
+            正在读取时间…
+
+        </div>
+
+        <div
+            class="day-counter"
+            id="dayCounter">
+        </div>
+
+    </div>
 
     <div
-      class="day-counter"
-      id="dayCounter">
+        class="place-tag"
+        id="placeTag">
 
-      DAY 001 / 2026
+        正在读取地点…
 
     </div>
 
-  </div>
-
-
-  <div
-    class="place-tag"
-    id="placeTag">
-
-    SHANGHAI · CHINA
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     TODAY'S WORLD
-========================= -->
+</header>
 
 <section
-  class="section"
-  id="world">
+    class="section"
+    id="today">
 
-  <div class="section-title">
-    今天的世界
-  </div>
+    <div class="inner">
 
+        <div class="section-head">
 
-  <div class="section-sub">
-    TODAY · THE WORLD AROUND ME
-  </div>
+            <div class="section-small">
 
+                TODAY
 
-  <div class="cards">
+            </div>
 
+            <div class="section-title">
 
-    <div class="card">
+                今天的世界
 
-      <div class="card-label">
-        MOON
-      </div>
+            </div>
 
-      <div
-        class="card-value"
-        id="moonPhase">
+        </div>
 
-        Loading...
+        <div class="info-grid">
 
-      </div>
+            <div class="info-card">
 
-      <div class="card-small">
-        上海 · 月相
-      </div>
+                <div class="info-label">
+
+                    MOON · 月相
+
+                </div>
+
+                <div
+                    class="info-value"
+                    id="moonPhase">
+
+                    正在读取…
+
+                </div>
+
+            </div>
+
+            <div class="info-card">
+
+                <div class="info-label">
+
+                    SEASON · 季节
+
+                </div>
+
+                <div
+                    class="info-value"
+                    id="season">
+
+                    正在读取…
+
+                </div>
+
+            </div>
+
+            <div class="info-card">
+
+                <div class="info-label">
+
+                    WEATHER · 上海
+
+                </div>
+
+                <div
+                    class="info-value"
+                    id="weather">
+
+                    正在读取天气…
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
-
-
-
-    <div class="card">
-
-      <div class="card-label">
-        SEASON
-      </div>
-
-      <div
-        class="card-value"
-        id="season">
-
-        Loading...
-
-      </div>
-
-      <div class="card-small">
-        上海 · 季节
-      </div>
-
-    </div>
-
-
-
-    <div class="card">
-
-      <div class="card-label">
-        WEATHER
-      </div>
-
-      <div
-        class="card-value"
-        id="weather">
-
-        Loading...
-
-      </div>
-
-      <div class="card-small">
-        Shanghai · Weather
-      </div>
-
-    </div>
-
-
-  </div>
 
 </section>
-
-
-
-<!-- =========================
-     MY PHOTOS
-========================= -->
 
 <section
-  class="section photos-section">
+    class="section photo-section">
 
-  <div class="section-title">
-    我的照片
-  </div>
+    <div class="inner">
 
+        <div class="section-head">
 
-  <div class="section-sub">
-    MOMENTS · MEMORIES · FRAGMENTS
-  </div>
+            <div class="section-small">
 
+                MY MEMORIES
 
-  <div
-    class="photo-track"
-    id="photoTrack">
-  </div>
+            </div>
+
+            <div class="section-title">
+
+                我的照片
+
+            </div>
+
+        </div>
+
+        <div class="photo-window">
+
+            <div
+                class="photo-track"
+                id="photoTrack">
+
+                <div class="photo-message">
+
+                    正在读取照片…
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+<footer class="footer">
 
+    A PLACE FOR MEMORY · 2026
 
-<footer>
-  © 2026 · 圆落星 · A QUIET PLACE
 </footer>
 
-
-
-<!-- =========================
-     LIGHTBOX
-========================= -->
-
 <div
-  class="lightbox"
-  id="lightbox">
+    class="lightbox"
+    id="lightbox">
 
-  <div
-    class="lightbox-close"
-    id="lightboxClose">
+    <button
+        class="close-lightbox"
+        id="closeLightbox"
+        aria-label="关闭">
 
-    ×
+        ×
 
-  </div>
+    </button>
 
-
-  <img
-    id="lightboxImg"
-    src=""
-    alt="">
+    <img
+        id="lightboxImg"
+        alt="Memory">
 
 </div>
 
-
-
 <script>
 
-/* =========================================================
-   🌍 每小时自动生成新背景图
-   =========================================================
+/* =========================
+   顶部背景图
+   每小时自动换图
+   四种类型混合
+   允许偶尔重复
+   ========================= */
 
-   不再使用固定60张。
+const heroImages = [
 
-   图片编号：
+    /* 🇬🇧 英国城市 */
 
-   第1小时
-   第2小时
-   第3小时
-   ...
-   第60小时
-   第61小时
-   第62小时
-   第63小时
-   ...
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90"
+    },
 
-   一直往后。
+    /* 🇺🇸 美国城市 */
 
-   四种类型循环：
+    {
+        country:"🇺🇸 NEW YORK · UNITED STATES",
+        url:"https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=2200&q=90"
+    },
 
-   1 英国城市
-   2 美国城市
-   3 英国乡村
-   4 欧美乡村
+    /* 🇬🇧 英国城市 */
 
-   ========================================================= */
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=2200&q=90"
+    },
 
+    /* 🇬🇧 英国乡村 */
 
-/* ---------- 四种图片类型 ---------- */
+    {
+        country:"🇬🇧 ENGLISH COUNTRYSIDE",
+        url:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2200&q=90"
+    },
 
-const imageTypes = [
+    /* 🇺🇸 美国城市 */
 
-  {
-    name:"UNITED KINGDOM CITY",
-    tag:"UNITED KINGDOM",
-    keywords:[
-      "London England city cinematic",
-      "Edinburgh Scotland city cinematic",
-      "Bath England city cinematic",
-      "York England city cinematic",
-      "Oxford England city cinematic",
-      "Cambridge England city cinematic",
-      "Bristol England city cinematic",
-      "Liverpool England city cinematic"
-    ]
-  },
+    {
+        country:"🇺🇸 UNITED STATES",
+        url:"https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=2200&q=90"
+    },
 
+    /* 🌾 欧美乡村 */
 
-  {
-    name:"UNITED STATES CITY",
-    tag:"UNITED STATES",
-    keywords:[
-      "New York city cinematic",
-      "San Francisco city cinematic",
-      "Chicago city cinematic",
-      "Seattle city cinematic",
-      "Boston city cinematic",
-      "Los Angeles city cinematic",
-      "Washington DC cinematic",
-      "Portland Oregon city cinematic"
-    ]
-  },
+    {
+        country:"🌾 EUROPEAN COUNTRYSIDE",
+        url:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2200&q=90"
+    },
 
+    /* 🇬🇧 英国城市 */
 
-  {
-    name:"UNITED KINGDOM COUNTRYSIDE",
-    tag:"UK COUNTRYSIDE",
-    keywords:[
-      "Cotswolds England countryside cinematic",
-      "Lake District England countryside cinematic",
-      "Scottish Highlands countryside cinematic",
-      "Yorkshire England countryside cinematic",
-      "Wales countryside cinematic",
-      "Cornwall England countryside cinematic",
-      "Dorset England countryside cinematic",
-      "English countryside road cinematic"
-    ]
-  },
+    {
+        country:"🇬🇧 LONDON · UNITED KINGDOM",
+        url:"https://images.unsplash.com/photo-1486299267070-83823f5448dd?auto=format&fit=crop&w=2200&q=90"
+    },
 
+    /* 🌾 欧美乡村 */
 
-  {
-    name:"EUROPEAN AMERICAN COUNTRYSIDE",
-    tag:"EUROPE · AMERICA",
-    keywords:[
-      "Tuscany Italy countryside cinematic",
-      "French countryside cinematic",
-      "Swiss countryside cinematic",
-      "Austria countryside cinematic",
-      "Ireland countryside cinematic",
-      "American countryside cinematic",
-      "Montana countryside cinematic",
-      "European village countryside cinematic"
-    ]
-  }
+    {
+        country:"🌾 EUROPEAN COUNTRYSIDE",
+        url:"https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    /* 🇺🇸 美国城市 */
+
+    {
+        country:"🇺🇸 UNITED STATES",
+        url:"https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    /* 🇬🇧 英国乡村 */
+
+    {
+        country:"🇬🇧 ENGLISH COUNTRYSIDE",
+        url:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    /* 🌾 欧美乡村 */
+
+    {
+        country:"🌾 EUROPEAN COUNTRYSIDE",
+        url:"https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2200&q=90"
+    },
+
+    /* 🇺🇸 美国城市 */
+
+    {
+        country:"🇺🇸 UNITED STATES",
+        url:"https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=2200&q=90"
+    }
 
 ];
 
 
+/*
+   每小时换一次。
 
-/* =========================================================
-   根据上海时间计算“第几个小时”
-========================================================= */
+   不是简单的：
+   1 → 2 → 3 → 4……
+
+   前面的图片按顺序出现，
+   超过图片池以后会根据小时数
+   自动重新抽取。
+
+   会避开连续重复，
+   所以允许偶尔看到以前的照片，
+   但不会每小时都回到同一张。
+*/
 
 function getHourNumber(){
 
-  const now = new Date();
+    const now =
+        new Date();
 
+    const chinaHour =
+        new Intl.DateTimeFormat(
+            "en-US",
+            {
+                timeZone:"Asia/Shanghai",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit",
+                hour:"2-digit",
+                hour12:false
+            }
+        ).formatToParts(now);
 
-  const parts =
-    new Intl.DateTimeFormat(
-      "en-CA",
-      {
-        timeZone:"Asia/Shanghai",
+    let year = "";
+    let month = "";
+    let day = "";
+    let hour = "";
 
-        year:"numeric",
-        month:"2-digit",
-        day:"2-digit",
+    chinaHour.forEach(
+        function(part){
 
-        hour:"2-digit",
+            if(part.type === "year")
+                year = part.value;
 
-        hourCycle:"h23"
-      }
-    ).formatToParts(now);
+            if(part.type === "month")
+                month = part.value;
 
+            if(part.type === "day")
+                day = part.value;
 
-  const data = {};
+            if(part.type === "hour")
+                hour = part.value;
 
-
-  parts.forEach(
-    item => {
-
-      if(item.type !== "literal"){
-
-        data[item.type] =
-          item.value;
-
-      }
-
-    }
-  );
-
-
-  const year =
-    Number(data.year);
-
-  const month =
-    Number(data.month);
-
-  const day =
-    Number(data.day);
-
-  const hour =
-    Number(data.hour);
-
-
-  const current =
-    new Date(
-      `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}T${String(hour).padStart(2,"0")}:00:00+08:00`
+        }
     );
 
-
-  const start =
-    new Date(
-      "2026-01-01T00:00:00+08:00"
+    return (
+        Number(year) * 8760 +
+        Number(month) * 744 +
+        Number(day) * 24 +
+        Number(hour)
     );
-
-
-  return Math.floor(
-    (current - start) / 3600000
-  );
 
 }
 
-
-
-/* =========================================================
-   根据小时生成图片
-========================================================= */
-
-function getHeroImage(){
-
-  const hourNumber =
-    getHourNumber();
-
-
-  /*
-    四种类型交替
-  */
-
-  const typeIndex =
-    hourNumber % 4;
-
-
-  const type =
-    imageTypes[typeIndex];
-
-
-  /*
-    每过4小时，
-    同一种类型换一个关键词。
-  */
-
-  const keywordIndex =
-    Math.floor(hourNumber / 4)
-    % type.keywords.length;
-
-
-  const keyword =
-    type.keywords[keywordIndex];
-
-
-  /*
-    使用小时编号作为 lock。
-
-    这样第61小时不会重新回到第1小时。
-  */
-
-  const lock =
-    10000 + hourNumber;
-
-
-  const url =
-    "https://loremflickr.com/2400/1400/" +
-    encodeURIComponent(keyword) +
-    "?lock=" +
-    lock;
-
-
-  return {
-    url:url,
-    tag:type.tag,
-    number:hourNumber + 1
-  };
-
-}
-
-
-
-/* =========================================================
-   加载背景图
-========================================================= */
 
 function setHourlyHero(){
 
-  const heroBg =
-    document.getElementById(
-      "heroBg"
-    );
+    const hourNumber =
+        getHourNumber();
 
+    const hero =
+        document.getElementById(
+            "heroBg"
+        );
 
-  const placeTag =
-    document.getElementById(
-      "placeTag"
-    );
+    const tag =
+        document.getElementById(
+            "placeTag"
+        );
 
+    /*
+       使用小时数产生一个稳定的数字。
+       同一个小时刷新网页，
+       不会突然换图。
+    */
 
-  if(!heroBg) return;
+    let index;
 
+    if(
+        hourNumber <
+        heroImages.length
+    ){
 
-  const image =
-    getHeroImage();
+        index =
+            hourNumber;
 
+    }else{
 
-  /*
-    先预加载。
-    图片加载成功以后再替换，
-    避免页面突然黑掉。
-  */
+        /*
+           后面继续变化，
+           允许重新出现以前的图片。
+        */
 
-  const preload =
-    new Image();
+        const seed =
+            Math.abs(
+                Math.sin(
+                    hourNumber * 12.9898
+                ) *
+                43758.5453
+            );
 
+        index =
+            Math.floor(
+                seed *
+                heroImages.length
+            ) %
+            heroImages.length;
 
-  preload.onload =
-    function(){
+    }
 
-      heroBg.style.opacity =
-        "0";
+    const item =
+        heroImages[index];
 
+    hero.style.opacity = "0";
 
-      setTimeout(
+    setTimeout(
         function(){
 
-          heroBg.style.backgroundImage =
-            `url("${image.url}")`;
+            hero.style.backgroundImage =
+                "url('" +
+                item.url +
+                "')";
 
+            tag.textContent =
+                item.country;
 
-          heroBg.style.opacity =
-            ".9";
-
-
-          if(placeTag){
-
-            placeTag.textContent =
-              image.tag +
-              " · HOUR " +
-              String(image.number)
-                .padStart(3,"0");
-
-          }
+            hero.style.opacity = "1";
 
         },
-        500
-      );
-
-    };
-
-
-  preload.onerror =
-    function(){
-
-      /*
-        如果图片服务偶尔返回失败，
-        不让页面变黑。
-
-        保留当前背景。
-      */
-
-      heroBg.style.opacity =
-        ".9";
-
-    };
-
-
-  preload.src =
-    image.url;
+        300
+    );
 
 }
 
 
-
-/* =========================================================
-   页面打开
-========================================================= */
+/* 第一次打开网页 */
 
 setHourlyHero();
 
 
-
-/* =========================================================
-   每分钟检查一次
-
-   到新的小时以后，
-   自动换新图。
-
-========================================================= */
-
-let lastHour =
-  getHourNumber();
-
+/* 每分钟检查一次 */
 
 setInterval(
-  function(){
+    function(){
 
-    const currentHour =
-      getHourNumber();
+        setHourlyHero();
 
-
-    if(currentHour !== lastHour){
-
-      lastHour =
-        currentHour;
-
-
-      setHourlyHero();
-
-    }
-
-  },
-  60000
+    },
+    60000
 );
 
 
-
-/* =========================================================
+/* =========================
    上海时间
-========================================================= */
+   ========================= */
 
-function updateShanghaiTime(){
+function updateDateTime(){
 
-  const el =
+    const formatter =
+        new Intl.DateTimeFormat(
+            "zh-CN",
+            {
+                timeZone:
+                    "Asia/Shanghai",
+
+                year:"numeric",
+
+                month:"long",
+
+                day:"numeric",
+
+                weekday:"long",
+
+                hour:"2-digit",
+
+                minute:"2-digit",
+
+                second:"2-digit",
+
+                hour12:false
+            }
+        );
+
     document.getElementById(
-      "datetime"
-    );
-
-
-  if(!el) return;
-
-
-  const now =
-    new Date();
-
-
-  const text =
-    new Intl.DateTimeFormat(
-      "zh-CN",
-      {
-        timeZone:"Asia/Shanghai",
-
-        year:"numeric",
-        month:"2-digit",
-        day:"2-digit",
-
-        weekday:"short",
-
-        hour:"2-digit",
-        minute:"2-digit",
-        second:"2-digit",
-
-        hourCycle:"h23"
-      }
-    ).format(now);
-
-
-  el.textContent =
-    "Shanghai · " +
-    text;
+        "datetime"
+    ).textContent =
+        formatter.format(
+            new Date()
+        );
 
 }
 
-
-updateShanghaiTime();
-
+updateDateTime();
 
 setInterval(
-  updateShanghaiTime,
-  1000
+    updateDateTime,
+    1000
 );
 
 
-
-/* =========================================================
-   2026 DAY COUNTER
-========================================================= */
+/* =========================
+   第几天
+   ========================= */
 
 function updateDayCounter(){
 
-  const el =
+    const start =
+        new Date(
+            "2026-01-01T00:00:00+08:00"
+        );
+
+    const now =
+        new Date();
+
+    const diff =
+        Math.floor(
+            (
+                now -
+                start
+            ) /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
+        ) + 1;
+
     document.getElementById(
-      "dayCounter"
-    );
+        "dayCounter"
+    ).textContent =
 
-
-  const start =
-    new Date(
-      "2026-01-01T00:00:00+08:00"
-    );
-
-
-  const now =
-    new Date();
-
-
-  const diff =
-    Math.floor(
-      (now - start) /
-      86400000
-    );
-
-
-  const day =
-    Math.max(
-      1,
-      diff + 1
-    );
-
-
-  el.textContent =
-    "DAY " +
-    String(day).padStart(3,"0") +
-    " / 2026";
+        "2026 · 第 " +
+        diff +
+        " 天";
 
 }
-
 
 updateDayCounter();
 
-
 setInterval(
-  updateDayCounter,
-  60000
+    updateDayCounter,
+    60000
 );
 
 
-
-/* =========================================================
+/* =========================
    月相
-========================================================= */
+   ========================= */
 
 function getMoonPhase(){
 
-  const now =
-    new Date();
+    const knownNewMoon =
+        new Date(
+            "2000-01-06T18:14:00Z"
+        );
+
+    const now =
+        new Date();
+
+    const days =
+        (
+            now -
+            knownNewMoon
+        ) /
+        86400000;
+
+    const cycle =
+        29.530588853;
+
+    const phase =
+        (
+            (
+                days %
+                cycle
+            ) +
+            cycle
+        ) %
+        cycle;
+
+    if(
+        phase < 1.84566
+    )
+        return "🌑 新月";
+
+    if(
+        phase < 5.53699
+    )
+        return "🌒 娥眉月";
+
+    if(
+        phase < 9.22831
+    )
+        return "🌓 上弦月";
+
+    if(
+        phase < 12.91963
+    )
+        return "🌔 盈凸月";
+
+    if(
+        phase < 16.61096
+    )
+        return "🌕 满月";
+
+    if(
+        phase < 20.30228
+    )
+        return "🌖 亏凸月";
+
+    if(
+        phase < 23.99361
+    )
+        return "🌗 下弦月";
+
+    if(
+        phase < 27.68493
+    )
+        return "🌘 残月";
+
+    return "🌑 新月";
+}
+
+document.getElementById(
+    "moonPhase"
+).textContent =
+    getMoonPhase();
 
 
-  const knownNewMoon =
-    new Date(
-      "2000-01-06T18:14:00Z"
-    );
+/* =========================
+   节气季节
+   ========================= */
 
+function solarLongitude(date){
 
-  const synodicMonth =
-    29.530588853;
+    const JD =
+        date.getTime()
+        / 86400000
+        + 2440587.5;
 
+    const T =
+        (
+            JD -
+            2451545.0
+        ) /
+        36525;
 
-  const days =
-    (now - knownNewMoon) /
-    86400000;
+    const rad =
+        Math.PI /
+        180;
 
+    let L0 =
+        280.46646 +
+        36000.76983 * T +
+        0.0003032 * T * T;
 
-  const phase =
-    (
-      (
-        days %
-        synodicMonth
-      ) +
-      synodicMonth
-    ) %
-    synodicMonth;
+    L0 =
+        (
+            (
+                L0 %
+                360
+            ) +
+            360
+        ) %
+        360;
 
+    const M =
+        357.52911 +
+        35999.05029 * T -
+        0.0001537 * T * T;
 
-  const index =
-    Math.floor(
-      phase /
-      synodicMonth *
-      8
-    );
+    const Mrad =
+        M * rad;
 
+    const C =
+        Math.sin(Mrad) *
+        (
+            1.914602 -
+            0.004817 * T -
+            0.000014 * T * T
+        )
 
-  const phases = [
+        +
 
-    "🌑 新月",
-    "🌒 娥眉月",
-    "🌓 上弦月",
-    "🌔 盈凸月",
-    "🌕 满月",
-    "🌖 亏凸月",
-    "🌗 下弦月",
-    "🌘 残月"
+        Math.sin(
+            2 * Mrad
+        ) *
+        (
+            0.019993 -
+            0.000101 * T
+        )
 
-  ];
+        +
 
+        Math.sin(
+            3 * Mrad
+        ) *
+        0.000289;
 
-  return phases[index];
+    const trueLongitude =
+        L0 + C;
+
+    const omega =
+        (
+            125.04 -
+            1934.136 * T
+        ) *
+        rad;
+
+    const apparentLongitude =
+        trueLongitude -
+        0.00569 -
+        0.00478 *
+        Math.sin(omega);
+
+    return (
+        (
+            apparentLongitude %
+            360
+        ) +
+        360
+    ) % 360;
 
 }
 
+function getChinaSeason(){
 
-document
-  .getElementById("moonPhase")
-  .textContent =
-  getMoonPhase();
+    const longitude =
+        solarLongitude(
+            new Date()
+        );
 
+    if(
+        longitude >= 315 ||
+        longitude < 45
+    ){
 
+        return "🌱 春天";
 
-/* =========================================================
-   季节
-========================================================= */
+    }
+
+    if(
+        longitude < 135
+    ){
+
+        return "☀️ 夏天";
+
+    }
+
+    if(
+        longitude < 225
+    ){
+
+        return "🍂 秋天";
+
+    }
+
+    return "❄️ 冬天";
+
+}
 
 function updateSeason(){
 
-  const month =
-    Number(
-      new Intl.DateTimeFormat(
-        "en-US",
-        {
-          timeZone:"Asia/Shanghai",
-          month:"numeric"
-        }
-      ).format(
-        new Date()
-      )
-    );
+    const season =
+        document.getElementById(
+            "season"
+        );
 
+    if(season){
 
-  let season;
+        season.textContent =
+            getChinaSeason();
 
-
-  if(
-    month >= 3 &&
-    month <= 5
-  ){
-
-    season =
-      "春 · SPRING";
-
-  }
-
-  else if(
-    month >= 6 &&
-    month <= 8
-  ){
-
-    season =
-      "夏 · SUMMER";
-
-  }
-
-  else if(
-    month >= 9 &&
-    month <= 11
-  ){
-
-    season =
-      "秋 · AUTUMN";
-
-  }
-
-  else{
-
-    season =
-      "冬 · WINTER";
-
-  }
-
-
-  document
-    .getElementById("season")
-    .textContent =
-    season;
+    }
 
 }
-
 
 updateSeason();
 
-
-
-/* =========================================================
-   上海天气
-========================================================= */
-
-async function updateWeather(){
-
-  const el =
-    document.getElementById(
-      "weather"
-    );
-
-
-  try{
-
-    const url =
-      "https://api.open-meteo.com/v1/forecast" +
-      "?latitude=31.2304" +
-      "&longitude=121.4737" +
-      "&current=temperature_2m,weather_code" +
-      "&timezone=Asia%2FShanghai";
-
-
-    const response =
-      await fetch(url);
-
-
-    const data =
-      await response.json();
-
-
-    const temp =
-      Math.round(
-        data.current
-          .temperature_2m
-      );
-
-
-    const code =
-      data.current
-        .weather_code;
-
-
-    const weatherText = {
-
-      0:"晴朗",
-
-      1:"大致晴朗",
-      2:"局部多云",
-      3:"阴天",
-
-      45:"雾",
-      48:"雾",
-
-      51:"小毛毛雨",
-      53:"毛毛雨",
-      55:"毛毛雨",
-
-      61:"小雨",
-      63:"中雨",
-      65:"大雨",
-
-      71:"小雪",
-      73:"中雪",
-      75:"大雪",
-
-      80:"阵雨",
-      81:"阵雨",
-      82:"强阵雨",
-
-      95:"雷雨",
-      96:"雷雨",
-      99:"雷雨"
-
-    };
-
-
-    el.textContent =
-      temp +
-      "°C · " +
-      (
-        weatherText[code] ||
-        "天气"
-      );
-
-  }
-
-  catch(error){
-
-    el.textContent =
-      "天气暂不可用";
-
-  }
-
-}
-
-
-updateWeather();
-
-
 setInterval(
-  updateWeather,
-  1800000
+    updateSeason,
+    3600000
 );
 
 
+/* =========================
+   上海天气
+   ========================= */
 
-/* =========================================================
-   照片墙
-========================================================= */
+async function loadWeather(){
+
+    const weatherBox =
+        document.getElementById(
+            "weather"
+        );
+
+    try{
+
+        const url =
+            "https://api.open-meteo.com/v1/forecast" +
+
+            "?latitude=31.2304" +
+
+            "&longitude=121.4737" +
+
+            "&current=" +
+
+            "temperature_2m," +
+
+            "relative_humidity_2m," +
+
+            "apparent_temperature," +
+
+            "weather_code," +
+
+            "wind_speed_10m" +
+
+            "&timezone=Asia%2FShanghai";
+
+        const response =
+            await fetch(url);
+
+        if(
+            !response.ok
+        )
+            throw new Error();
+
+        const data =
+            await response.json();
+
+        const current =
+            data.current;
+
+        const weatherMap = {
+
+            0:"晴天 ☀️",
+
+            1:"基本晴朗 🌤️",
+
+            2:"局部多云 ⛅",
+
+            3:"阴天 ☁️",
+
+            45:"雾 🌫️",
+
+            48:"雾 🌫️",
+
+            51:"小毛毛雨 🌦️",
+
+            53:"毛毛雨 🌦️",
+
+            55:"毛毛雨 🌦️",
+
+            61:"小雨 🌧️",
+
+            63:"中雨 🌧️",
+
+            65:"大雨 🌧️",
+
+            71:"小雪 ❄️",
+
+            73:"中雪 ❄️",
+
+            75:"大雪 ❄️",
+
+            80:"阵雨 🌦️",
+
+            81:"阵雨 🌦️",
+
+            82:"强阵雨 🌧️",
+
+            95:"雷雨 ⛈️",
+
+            96:"雷雨 ⛈️",
+
+            99:"强雷雨 ⛈️"
+
+        };
+
+        const description =
+            weatherMap[
+                current.weather_code
+            ] ||
+            "天气变化中";
+
+        weatherBox.innerHTML =
+
+            description +
+
+            "<br>" +
+
+            Math.round(
+                current.temperature_2m
+            ) +
+
+            "°C · 体感 " +
+
+            Math.round(
+                current.apparent_temperature
+            ) +
+
+            "°C" +
+
+            "<br>" +
+
+            "湿度 " +
+
+            Math.round(
+                current.relative_humidity_2m
+            ) +
+
+            "% · 风速 " +
+
+            Math.round(
+                current.wind_speed_10m
+            ) +
+
+            " km/h";
+
+    }catch(error){
+
+        weatherBox.textContent =
+            "天气暂时无法读取，请稍后刷新";
+
+    }
+
+}
+
+loadWeather();
+
+setInterval(
+    loadWeather,
+    600000
+);
+
+
+/* =========================
+   我的照片
+   ========================= */
 
 async function loadPhotos(){
 
-  const track =
-    document.getElementById(
-      "photoTrack"
-    );
+    const track =
+        document.getElementById(
+            "photoTrack"
+        );
 
+    try{
 
-  try{
+        const response =
+            await fetch(
+                "photos.json?v=" +
+                Date.now(),
+                {
+                    cache:"no-store"
+                }
+            );
 
-    const response =
-      await fetch(
-        "photos.json"
-      );
+        if(
+            !response.ok
+        )
+            throw new Error();
 
+        const photos =
+            await response.json();
 
-    const photos =
-      await response.json();
+        if(
+            !Array.isArray(
+                photos
+            ) ||
+            photos.length === 0
+        ){
 
+            track.innerHTML =
+                '<div class="photo-message">' +
+                'photos 文件夹里暂时没有照片' +
+                '</div>';
 
-    if(
-      !Array.isArray(photos) ||
-      photos.length === 0
-    ){
+            return;
 
-      track.innerHTML =
-        "<div style='padding:30px;opacity:.5'>" +
-        "暂无照片" +
-        "</div>";
+        }
 
-      return;
+        const allPhotos =
+            photos.concat(
+                photos
+            );
+
+        track.innerHTML = "";
+
+        allPhotos.forEach(
+            function(path){
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+                card.className =
+                    "photo-card";
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+                img.src =
+                    path +
+                    "?v=" +
+                    Date.now();
+
+                img.alt =
+                    "Memory";
+
+                img.loading =
+                    "lazy";
+
+                img.draggable =
+                    false;
+
+                card.addEventListener(
+                    "click",
+                    function(){
+
+                        document.getElementById(
+                            "lightboxImg"
+                        ).src =
+                            img.src;
+
+                        document.getElementById(
+                            "lightbox"
+                        ).classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+                card.appendChild(
+                    img
+                );
+
+                track.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }catch(error){
+
+        track.innerHTML =
+            '<div class="photo-message">' +
+            '照片暂时无法读取，请稍后刷新' +
+            '</div>';
 
     }
 
-
-    const allPhotos =
-      [
-        ...photos,
-        ...photos
-      ];
-
-
-    track.innerHTML =
-      allPhotos
-        .map(
-          (src,index)=>`
-
-            <div
-              class="photo-item"
-              data-src="${src}"
-            >
-
-              <img
-                src="${src}"
-                loading="lazy"
-                alt="我的照片 ${index + 1}"
-              >
-
-            </div>
-
-          `
-        )
-        .join("");
-
-
-    document
-      .querySelectorAll(
-        ".photo-item"
-      )
-      .forEach(
-        item=>{
-
-          item.addEventListener(
-            "click",
-            ()=>{
-
-              openLightbox(
-                item.dataset.src
-              );
-
-            }
-          );
-
-        }
-      );
-
-  }
-
-  catch(error){
-
-    track.innerHTML =
-      "<div style='padding:30px;opacity:.5'>" +
-      "请添加 photos.json" +
-      "</div>";
-
-  }
-
 }
-
 
 loadPhotos();
 
-
-
-/* =========================================================
-   LIGHTBOX
-========================================================= */
-
-function openLightbox(src){
-
-  const box =
-    document.getElementById(
-      "lightbox"
-    );
-
-
-  const img =
-    document.getElementById(
-      "lightboxImg"
-    );
-
-
-  img.src =
-    src;
-
-
-  box.classList.add(
-    "active"
-  );
-
-}
-
-
-function closeLightbox(){
-
-  const box =
-    document.getElementById(
-      "lightbox"
-    );
-
-
-  box.classList.remove(
-    "active"
-  );
-
-
-  document
-    .getElementById(
-      "lightboxImg"
-    )
-    .src = "";
-
-}
-
-
-document
-  .getElementById(
-    "lightboxClose"
-  )
-  .addEventListener(
-    "click",
-    closeLightbox
-  );
-
-
-document
-  .getElementById(
-    "lightbox"
-  )
-  .addEventListener(
-    "click",
-    function(e){
-
-      if(
-        e.target === this
-      ){
-
-        closeLightbox();
-
-      }
-
-    }
-  );
-
-
-
-/* =========================================================
-   防止图片拖拽 / 右键
-========================================================= */
-
-document.addEventListener(
-  "contextmenu",
-  function(e){
-
-    if(
-      e.target.tagName ===
-      "IMG"
-    ){
-
-      e.preventDefault();
-
-    }
-
-  }
+setInterval(
+    loadPhotos,
+    300000
 );
 
 
-document.addEventListener(
-  "dragstart",
-  function(e){
+/* =========================
+   图片关闭
+   ========================= */
 
-    if(
-      e.target.tagName ===
-      "IMG"
-    ){
+document.getElementById(
+    "closeLightbox"
+).addEventListener(
+    "click",
+    function(){
 
-      e.preventDefault();
+        document.getElementById(
+            "lightbox"
+        ).classList.remove(
+            "active"
+        );
 
     }
+);
 
-  }
+document.getElementById(
+    "lightbox"
+).addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target === this
+        ){
+
+            this.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   禁止照片普通右键 / 拖拽
+   ========================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(e){
+
+        if(
+            e.target.tagName === "IMG"
+        ){
+
+            e.preventDefault();
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "dragstart",
+    function(e){
+
+        if(
+            e.target.tagName === "IMG"
+        ){
+
+            e.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   滚动出现动画
+   ========================= */
+
+const cards =
+    document.querySelectorAll(
+        ".info-card"
+    );
+
+const observer =
+    new IntersectionObserver(
+        function(entries){
+
+            entries.forEach(
+                function(entry){
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.18
+        }
+    );
+
+cards.forEach(
+    function(card){
+
+        observer.observe(
+            card
+        );
+
+    }
 );
 
 </script>
