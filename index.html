@@ -7,6 +7,7 @@
 <title>圆落星 · A QUIET PLACE</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -18,8 +19,8 @@ html{
 }
 
 body{
-    background:#f8f7f2;
-    color:#3d3a46;
+    background:#081522;
+    color:#f5f1e8;
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -34,15 +35,13 @@ body::before{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:20;
+    z-index:50;
     background:
-        radial-gradient(circle at 50% 20%,
-        rgba(188,174,226,.10),
-        transparent 30%);
-}
-
-a{
-    color:inherit;
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255,255,255,.05),
+            transparent 35%
+        );
 }
 
 /* =========================
@@ -56,276 +55,199 @@ a{
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    padding:50px 25px;
+
+    background-image:
+        linear-gradient(
+            rgba(4,13,23,.18),
+            rgba(4,13,23,.30)
+        ),
+        url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(4,13,23,.05),
+            rgba(4,13,23,.18) 55%,
+            #081522 100%
+        );
+
+    pointer-events:none;
+}
+
+.top-left,
+.top-right{
+    position:absolute;
+    z-index:5;
+    top:35px;
+
+    font-size:9px;
+    line-height:1.9;
+    letter-spacing:3px;
+    color:rgba(255,255,255,.8);
 }
 
 .top-left{
-    position:absolute;
     left:5%;
-    top:45px;
-    font-size:10px;
-    line-height:1.8;
-    letter-spacing:2px;
-    color:#aaa5af;
 }
 
 .top-right{
-    position:absolute;
     right:5%;
-    top:45px;
     text-align:right;
-    font-size:10px;
-    line-height:1.8;
-    letter-spacing:2px;
-    color:#aaa5af;
 }
 
 .hero-center{
-    width:100%;
-    max-width:900px;
-    text-align:center;
     position:relative;
-    z-index:3;
+    z-index:5;
+
+    width:90%;
+    max-width:850px;
+
+    text-align:center;
+
+    text-shadow:
+        0 3px 20px rgba(0,0,0,.4);
 }
 
 .kicker{
     font-size:10px;
-    letter-spacing:7px;
-    color:#aaa5af;
-    margin-bottom:22px;
+    letter-spacing:8px;
+    margin-bottom:20px;
+
     opacity:0;
-    animation:fadeUp 1.2s .1s forwards;
+    animation:fadeUp 1.2s .2s forwards;
 }
 
 .hero-title{
-    font-size:clamp(50px,9vw,100px);
+    font-size:clamp(58px,9vw,105px);
     font-weight:300;
-    letter-spacing:10px;
-    color:#4a4653;
+    letter-spacing:14px;
+
     opacity:0;
-    animation:fadeUp 1.3s .25s forwards;
+    animation:fadeUp 1.3s .35s forwards;
 }
 
 .hero-sub{
-    margin-top:16px;
-    font-size:11px;
-    letter-spacing:5px;
-    color:#aaa5af;
-    opacity:0;
-    animation:fadeUp 1.2s .4s forwards;
-}
+    margin-top:13px;
 
-/* =========================
-   紫色拱门
-   ========================= */
-
-.arch{
-    width:min(390px,62vw);
-    height:min(510px,65vh);
-    min-height:330px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-45%);
-    z-index:-1;
-    background:
-        linear-gradient(
-            145deg,
-            #b9aedc 0%,
-            #9f91cf 100%
-        );
-    border-radius:220px 220px 0 0;
-    box-shadow:
-        0 35px 80px rgba(104,91,145,.14);
-    opacity:0;
-    animation:archIn 1.8s .25s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-.arch::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:inherit;
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(255,255,255,.18),
-            transparent 45%
-        );
-}
-
-/* =========================
-   月亮
-   ========================= */
-
-.moon{
-    position:absolute;
-    width:72px;
-    height:72px;
-    border-radius:50%;
-    background:#f7e7a9;
-    box-shadow:
-        0 0 30px rgba(247,231,169,.55);
-    right:calc(50% - 245px);
-    top:calc(50% - 230px);
-    z-index:5;
-    opacity:0;
-    animation:
-        moonIn 1.3s .9s forwards,
-        moonFloat 5s 2.2s ease-in-out infinite;
-}
-
-.moon::after{
-    content:"";
-    position:absolute;
-    width:72px;
-    height:72px;
-    border-radius:50%;
-    background:#b0a2d4;
-    left:20px;
-    top:-7px;
-}
-
-/* =========================
-   小星星
-   ========================= */
-
-.star{
-    position:absolute;
-    z-index:6;
-    color:#d5a9c7;
-    font-size:15px;
-    opacity:0;
-}
-
-.star.s1{
-    left:calc(50% - 210px);
-    top:32%;
-    animation:starIn 1s 1s forwards,twinkle 3s 2s infinite;
-}
-
-.star.s2{
-    left:calc(50% + 190px);
-    top:43%;
     font-size:10px;
-    animation:starIn 1s 1.3s forwards,twinkle 2.5s 2.2s infinite;
-}
+    letter-spacing:6px;
 
-.star.s3{
-    left:calc(50% - 150px);
-    top:57%;
-    font-size:8px;
-    animation:starIn 1s 1.6s forwards,twinkle 4s 2.5s infinite;
-}
-
-/* =========================
-   装饰轨迹
-   ========================= */
-
-.orbit{
-    position:absolute;
-    width:500px;
-    height:240px;
-    border:1px solid rgba(132,118,157,.22);
-    border-radius:50%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) rotate(-18deg);
-    z-index:0;
     opacity:0;
-    animation:orbitIn 2s 1s forwards;
+    animation:fadeUp 1.2s .5s forwards;
 }
-
-.orbit::before{
-    content:"";
-    position:absolute;
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#d9b5cf;
-    left:12%;
-    top:22%;
-}
-
-/* =========================
-   进入按钮
-   ========================= */
 
 .enter{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    margin-top:48px;
-    padding:14px 28px;
-    border:1px solid rgba(72,67,81,.25);
+
+    margin-top:42px;
+
+    padding:14px 30px;
+
+    border:1px solid rgba(255,255,255,.55);
     border-radius:50px;
+
+    color:#fff;
+    background:rgba(0,0,0,.16);
+
     text-decoration:none;
+
     font-size:10px;
     letter-spacing:3px;
-    color:#514c58;
-    background:rgba(255,255,255,.25);
+
+    backdrop-filter:blur(8px);
+
     transition:
         background .4s,
         transform .4s,
         border-color .4s;
+
     opacity:0;
     animation:fadeUp 1.2s .7s forwards;
 }
 
 .enter:hover{
-    background:#fff;
-    border-color:rgba(72,67,81,.45);
+    background:rgba(255,255,255,.16);
+    border-color:#fff;
     transform:translateY(-3px);
 }
 
-/* =========================
-   时间
-   ========================= */
-
 .datetime{
-    margin-top:23px;
-    font-size:12px;
-    letter-spacing:1px;
-    color:#8f8995;
+    margin-top:48px;
+
+    font-size:11px;
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.9);
 }
 
 .day-counter{
-    margin-top:8px;
+    margin-top:10px;
+
     font-size:10px;
     letter-spacing:2px;
-    color:#b0abb2;
+
+    color:rgba(255,255,255,.7);
 }
 
 /* =========================
-   分区
+   主体
    ========================= */
 
 .section{
-    padding:150px 25px;
+    padding:110px 25px;
+    background:#081522;
 }
 
 .inner{
-    max-width:1100px;
+    width:100%;
+    max-width:1120px;
     margin:auto;
 }
 
 .section-head{
     text-align:center;
-    margin-bottom:65px;
+    margin-bottom:48px;
 }
 
 .section-small{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+
     font-size:9px;
     letter-spacing:5px;
-    color:#aaa5af;
-    margin-bottom:16px;
+    color:#aab5c1;
+}
+
+.section-small::before,
+.section-small::after{
+    content:"";
+    width:60px;
+    height:1px;
+
+    background:rgba(255,255,255,.35);
 }
 
 .section-title{
+    margin-top:15px;
+
     font-size:30px;
     font-weight:300;
-    letter-spacing:5px;
-    color:#4a4653;
+    letter-spacing:7px;
+
+    color:#f5f1e8;
 }
 
 /* =========================
@@ -334,23 +256,63 @@ a{
 
 .info-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
 }
 
 .info-card{
-    min-height:180px;
-    padding:35px 25px;
-    background:rgba(255,255,255,.6);
-    border:1px solid rgba(90,82,105,.08);
-    border-radius:2px;
-    text-align:center;
-    box-shadow:0 18px 60px rgba(70,60,90,.05);
+    min-height:190px;
+
+    padding:30px;
+
+    position:relative;
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(34,59,86,.88),
+            rgba(11,27,43,.92)
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+
     opacity:0;
-    transform:translateY(35px);
+    transform:translateY(30px);
+
     transition:
         opacity .9s,
         transform .9s;
+}
+
+.info-card::after{
+    content:"";
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-50px;
+    top:-50px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.08),
+            transparent 70%
+        );
 }
 
 .info-card.show{
@@ -359,16 +321,25 @@ a{
 }
 
 .info-label{
+    position:relative;
+    z-index:2;
+
     font-size:9px;
-    letter-spacing:3px;
-    color:#aaa5af;
-    margin-bottom:25px;
+    letter-spacing:4px;
+
+    color:#c1cad3;
+
+    margin-bottom:30px;
 }
 
 .info-value{
-    font-size:15px;
+    position:relative;
+    z-index:2;
+
+    font-size:17px;
     line-height:2;
-    color:#5b5662;
+
+    color:#fff;
 }
 
 /* =========================
@@ -376,7 +347,8 @@ a{
    ========================= */
 
 .photo-section{
-    padding-bottom:180px;
+    padding-top:50px;
+    padding-bottom:140px;
 }
 
 .photo-window{
@@ -387,9 +359,16 @@ a{
 
 .photo-track{
     display:flex;
-    gap:20px;
+    gap:14px;
+
     width:max-content;
-    animation:photoLoop 70s linear infinite;
+
+    animation:
+        photoLoop
+        70s
+        linear
+        infinite;
+
     will-change:transform;
 }
 
@@ -398,64 +377,95 @@ a{
 }
 
 .photo-card{
-    width:235px;
-    height:310px;
+    width:170px;
+    height:125px;
+
     flex:none;
+
     overflow:hidden;
-    background:#eeeae4;
+
     position:relative;
+
     cursor:pointer;
-    border-radius:2px;
-    box-shadow:0 20px 55px rgba(60,52,72,.12);
+
+    border-radius:7px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.35);
 }
 
 .photo-card img{
     width:100%;
     height:100%;
+
     display:block;
+
     object-fit:cover;
+
     user-select:none;
     -webkit-user-select:none;
     -webkit-user-drag:none;
-    transition:transform .8s ease;
+
+    transition:
+        transform .8s ease;
 }
 
 .photo-card:hover img{
-    transform:scale(1.04);
+    transform:scale(1.06);
 }
 
 @keyframes photoLoop{
+
     from{
         transform:translateX(0);
     }
+
     to{
-        transform:translateX(calc(-50% - 10px));
+        transform:
+            translateX(
+                calc(-50% - 7px)
+            );
     }
 }
 
 .photo-message{
     width:100%;
     padding:60px;
+
     text-align:center;
-    color:#aaa5af;
+
+    color:#8997a5;
 }
 
 /* =========================
-   图片查看
+   图片放大
    ========================= */
 
 .lightbox{
     position:fixed;
     inset:0;
+
     z-index:100;
-    background:rgba(30,27,38,.88);
-    backdrop-filter:blur(15px);
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:30px;
+
+    background:
+        rgba(2,8,15,.92);
+
+    backdrop-filter:blur(18px);
+
     opacity:0;
     visibility:hidden;
+
     transition:.35s;
 }
 
@@ -467,8 +477,13 @@ a{
 .lightbox img{
     max-width:90vw;
     max-height:88vh;
+
     object-fit:contain;
-    box-shadow:0 30px 100px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,.6);
+
     user-select:none;
     -webkit-user-select:none;
     -webkit-user-drag:none;
@@ -476,15 +491,24 @@ a{
 
 .close-lightbox{
     position:absolute;
+
     right:30px;
     top:25px;
+
     width:42px;
     height:42px;
-    border:1px solid rgba(255,255,255,.35);
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
     border-radius:50%;
+
     color:#fff;
     background:transparent;
+
     font-size:22px;
+
     cursor:pointer;
 }
 
@@ -493,11 +517,16 @@ a{
    ========================= */
 
 .footer{
-    padding:80px 25px 110px;
+    padding:55px 25px 80px;
+
     text-align:center;
+
     font-size:9px;
     letter-spacing:5px;
-    color:#aaa5af;
+
+    color:#7e8c99;
+
+    background:#081522;
 }
 
 /* =========================
@@ -505,75 +534,15 @@ a{
    ========================= */
 
 @keyframes fadeUp{
+
     from{
         opacity:0;
         transform:translateY(25px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
-    }
-}
-
-@keyframes archIn{
-    from{
-        opacity:0;
-        transform:translate(-50%,-40%) scale(.88);
-    }
-    to{
-        opacity:1;
-        transform:translate(-50%,-45%) scale(1);
-    }
-}
-
-@keyframes moonIn{
-    from{
-        opacity:0;
-        transform:scale(.5) rotate(-30deg);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) rotate(0);
-    }
-}
-
-@keyframes moonFloat{
-    0%,100%{
-        margin-top:0;
-    }
-    50%{
-        margin-top:-12px;
-    }
-}
-
-@keyframes starIn{
-    from{
-        opacity:0;
-        transform:scale(0);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-@keyframes twinkle{
-    0%,100%{
-        opacity:.35;
-    }
-    50%{
-        opacity:1;
-    }
-}
-
-@keyframes orbitIn{
-    from{
-        opacity:0;
-        transform:translate(-50%,-50%) rotate(-18deg) scale(.7);
-    }
-    to{
-        opacity:1;
-        transform:translate(-50%,-50%) rotate(-18deg) scale(1);
     }
 }
 
@@ -583,47 +552,34 @@ a{
 
 @media(max-width:700px){
 
+    .hero{
+        min-height:100svh;
+
+        background-position:
+            62% center;
+    }
+
     .top-left,
     .top-right{
-        top:25px;
-        font-size:8px;
+        top:24px;
+
+        font-size:7px;
+        letter-spacing:2px;
     }
 
     .hero-title{
-        font-size:54px;
-        letter-spacing:7px;
+        font-size:55px;
+        letter-spacing:8px;
     }
 
-    .arch{
-        width:68vw;
-        height:55vh;
+    .hero-sub{
+        font-size:8px;
+        letter-spacing:4px;
     }
 
-    .moon{
-        width:48px;
-        height:48px;
-        right:17%;
-        top:27%;
-    }
-
-    .moon::after{
-        width:48px;
-        height:48px;
-        left:13px;
-        top:-5px;
-    }
-
-    .orbit{
-        width:85vw;
-        height:180px;
-    }
-
-    .star.s1{
-        left:18%;
-    }
-
-    .star.s2{
-        left:78%;
+    .datetime{
+        margin-top:38px;
+        font-size:10px;
     }
 
     .info-grid{
@@ -631,18 +587,31 @@ a{
     }
 
     .section{
-        padding:110px 20px;
+        padding:
+            90px
+            18px;
+    }
+
+    .section-title{
+        font-size:25px;
+        letter-spacing:5px;
     }
 
     .photo-card{
-        width:180px;
-        height:240px;
+        width:155px;
+        height:115px;
     }
 }
+
 </style>
 </head>
 
 <body>
+
+<!-- =========================
+     首页
+     英国照片
+     ========================= -->
 
 <header class="hero">
 
@@ -655,16 +624,6 @@ a{
         SHINING<br>
         IN SILENCE
     </div>
-
-    <div class="orbit"></div>
-
-    <div class="arch"></div>
-
-    <div class="moon"></div>
-
-    <div class="star s1">✦</div>
-    <div class="star s2">✧</div>
-    <div class="star s3">·</div>
 
     <div class="hero-center">
 
@@ -680,21 +639,35 @@ a{
             A PLACE FOR MEMORY
         </div>
 
-        <a href="#today" class="enter">
+        <a
+            href="#today"
+            class="enter">
             ENTER MY WORLD →
         </a>
 
-        <div class="datetime" id="datetime">
+        <div
+            class="datetime"
+            id="datetime">
             正在读取时间…
         </div>
 
-        <div class="day-counter" id="dayCounter"></div>
+        <div
+            class="day-counter"
+            id="dayCounter">
+        </div>
 
     </div>
 
 </header>
 
-<section class="section" id="today">
+
+<!-- =========================
+     今天
+     ========================= -->
+
+<section
+    class="section"
+    id="today">
 
     <div class="inner">
 
@@ -710,7 +683,9 @@ a{
 
         </div>
 
+
         <div class="info-grid">
+
 
             <div class="info-card">
 
@@ -718,11 +693,14 @@ a{
                     MOON · 月相
                 </div>
 
-                <div class="info-value" id="moonPhase">
+                <div
+                    class="info-value"
+                    id="moonPhase">
                     正在读取…
                 </div>
 
             </div>
+
 
             <div class="info-card">
 
@@ -730,11 +708,14 @@ a{
                     SEASON · 季节
                 </div>
 
-                <div class="info-value" id="season">
+                <div
+                    class="info-value"
+                    id="season">
                     正在读取…
                 </div>
 
             </div>
+
 
             <div class="info-card">
 
@@ -742,7 +723,9 @@ a{
                     WEATHER · 上海
                 </div>
 
-                <div class="info-value" id="weather">
+                <div
+                    class="info-value"
+                    id="weather">
                     正在读取天气…
                 </div>
 
@@ -754,7 +737,13 @@ a{
 
 </section>
 
-<section class="section photo-section">
+
+<!-- =========================
+     我的照片
+     ========================= -->
+
+<section
+    class="section photo-section">
 
     <div class="inner">
 
@@ -770,9 +759,12 @@ a{
 
         </div>
 
+
         <div class="photo-window">
 
-            <div class="photo-track" id="photoTrack">
+            <div
+                class="photo-track"
+                id="photoTrack">
 
                 <div class="photo-message">
                     正在读取照片…
@@ -786,11 +778,19 @@ a{
 
 </section>
 
+
 <footer class="footer">
     A PLACE FOR MEMORY · 2026
 </footer>
 
-<div class="lightbox" id="lightbox">
+
+<!-- =========================
+     图片查看
+     ========================= -->
+
+<div
+    class="lightbox"
+    id="lightbox">
 
     <button
         class="close-lightbox"
@@ -799,64 +799,99 @@ a{
         ×
     </button>
 
-    <img id="lightboxImg" alt="Memory">
+    <img
+        id="lightboxImg"
+        alt="Memory">
 
 </div>
+
 
 <script>
 
 /* =========================
-   自动日期 + 时间
+   上海时间
    ========================= */
 
 function updateDateTime(){
 
     const formatter =
-        new Intl.DateTimeFormat("zh-CN",{
-            timeZone:"Asia/Shanghai",
-            year:"numeric",
-            month:"long",
-            day:"numeric",
-            weekday:"long",
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit",
-            hour12:false
-        });
+        new Intl.DateTimeFormat(
+            "zh-CN",
+            {
+                timeZone:
+                    "Asia/Shanghai",
 
-    document.getElementById("datetime").textContent =
-        formatter.format(new Date());
+                year:"numeric",
+                month:"long",
+                day:"numeric",
+                weekday:"long",
+
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+
+                hour12:false
+            }
+        );
+
+    document.getElementById(
+        "datetime"
+    ).textContent =
+        formatter.format(
+            new Date()
+        );
 }
 
 updateDateTime();
 
-setInterval(updateDateTime,1000);
+setInterval(
+    updateDateTime,
+    1000
+);
+
 
 /* =========================
-   天数
+   第几天
    ========================= */
 
 function updateDayCounter(){
 
     const start =
-        new Date("2026-01-01T00:00:00+08:00");
+        new Date(
+            "2026-01-01T00:00:00+08:00"
+        );
 
     const now =
         new Date();
 
     const diff =
         Math.floor(
-            (now - start) /
-            (1000 * 60 * 60 * 24)
+            (
+                now - start
+            ) /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
         ) + 1;
 
-    document.getElementById("dayCounter").textContent =
-        "2026 · 第 " + diff + " 天";
+    document.getElementById(
+        "dayCounter"
+    ).textContent =
+        "2026 · 第 " +
+        diff +
+        " 天";
 }
 
 updateDayCounter();
 
-setInterval(updateDayCounter,60000);
+setInterval(
+    updateDayCounter,
+    60000
+);
+
 
 /* =========================
    月相
@@ -865,20 +900,31 @@ setInterval(updateDayCounter,60000);
 function getMoonPhase(){
 
     const knownNewMoon =
-        new Date("2000-01-06T18:14:00Z");
+        new Date(
+            "2000-01-06T18:14:00Z"
+        );
 
     const now =
         new Date();
 
     const days =
-        (now - knownNewMoon) /
-        86400000;
+        (
+            now -
+            knownNewMoon
+        ) / 86400000;
 
     const cycle =
         29.530588853;
 
     const phase =
-        ((days % cycle) + cycle) % cycle;
+        (
+            (
+                days %
+                cycle
+            ) +
+            cycle
+        ) %
+        cycle;
 
     if(phase < 1.84566)
         return "🌑 新月";
@@ -907,30 +953,28 @@ function getMoonPhase(){
     return "🌑 新月";
 }
 
-document.getElementById("moonPhase").textContent =
+document.getElementById(
+    "moonPhase"
+).textContent =
     getMoonPhase();
+
 
 /* =========================
    中国节气季节
-   根据太阳黄经判断
-
-   立春 = 315°
-   立夏 = 45°
-   立秋 = 135°
-   立冬 = 225°
-
-   直接判断太阳黄经范围，
-   避免 0°/360° 跨界导致季节错误。
    ========================= */
 
 function solarLongitude(date){
 
     const JD =
-        date.getTime() / 86400000 +
-        2440587.5;
+        date.getTime()
+        / 86400000
+        + 2440587.5;
 
     const T =
-        (JD - 2451545.0) / 36525;
+        (
+            JD -
+            2451545.0
+        ) / 36525;
 
     const rad =
         Math.PI / 180;
@@ -941,7 +985,10 @@ function solarLongitude(date){
         0.0003032 * T * T;
 
     L0 =
-        ((L0 % 360) + 360) % 360;
+        (
+            (L0 % 360)
+            + 360
+        ) % 360;
 
     const M =
         357.52911 +
@@ -965,14 +1012,17 @@ function solarLongitude(date){
             0.000101 * T
         )
         +
-        Math.sin(3 * Mrad) *
-        0.000289;
+        Math.sin(3 * Mrad)
+        * 0.000289;
 
     const trueLongitude =
         L0 + C;
 
     const omega =
-        (125.04 - 1934.136 * T) * rad;
+        (
+            125.04 -
+            1934.136 * T
+        ) * rad;
 
     const apparentLongitude =
         trueLongitude -
@@ -981,8 +1031,10 @@ function solarLongitude(date){
         Math.sin(omega);
 
     return (
-        (apparentLongitude % 360) +
-        360
+        (
+            apparentLongitude
+            % 360
+        ) + 360
     ) % 360;
 }
 
@@ -990,12 +1042,10 @@ function solarLongitude(date){
 function getChinaSeason(){
 
     const longitude =
-        solarLongitude(new Date());
+        solarLongitude(
+            new Date()
+        );
 
-    /*
-       立春 → 立夏
-       315° → 360° → 45°
-    */
     if(
         longitude >= 315 ||
         longitude < 45
@@ -1003,30 +1053,18 @@ function getChinaSeason(){
         return "🌱 春天";
     }
 
-    /*
-       立夏 → 立秋
-       45° → 135°
-    */
     if(
         longitude < 135
     ){
         return "☀️ 夏天";
     }
 
-    /*
-       立秋 → 立冬
-       135° → 225°
-    */
     if(
         longitude < 225
     ){
         return "🍂 秋天";
     }
 
-    /*
-       立冬 → 下一年立春
-       225° → 315°
-    */
     return "❄️ 冬天";
 }
 
@@ -1053,6 +1091,7 @@ setInterval(
     3600000
 );
 
+
 /* =========================
    上海天气
    ========================= */
@@ -1060,7 +1099,9 @@ setInterval(
 async function loadWeather(){
 
     const weatherBox =
-        document.getElementById("weather");
+        document.getElementById(
+            "weather"
+        );
 
     try{
 
@@ -1068,7 +1109,12 @@ async function loadWeather(){
             "https://api.open-meteo.com/v1/forecast" +
             "?latitude=31.2304" +
             "&longitude=121.4737" +
-            "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m" +
+            "&current=" +
+            "temperature_2m," +
+            "relative_humidity_2m," +
+            "apparent_temperature," +
+            "weather_code," +
+            "wind_speed_10m" +
             "&timezone=Asia%2FShanghai";
 
         const response =
@@ -1151,8 +1197,9 @@ setInterval(
     600000
 );
 
+
 /* =========================
-   照片
+   我的照片
    ========================= */
 
 async function loadPhotos(){
@@ -1193,7 +1240,9 @@ async function loadPhotos(){
         }
 
         const allPhotos =
-            photos.concat(photos);
+            photos.concat(
+                photos
+            );
 
         track.innerHTML = "";
 
@@ -1269,6 +1318,7 @@ setInterval(
     300000
 );
 
+
 /* =========================
    图片关闭
    ========================= */
@@ -1294,7 +1344,9 @@ document.getElementById(
     "click",
     function(e){
 
-        if(e.target === this){
+        if(
+            e.target === this
+        ){
 
             this.classList.remove(
                 "active"
@@ -1305,8 +1357,9 @@ document.getElementById(
     }
 );
 
+
 /* =========================
-   禁止照片普通右键/拖拽
+   图片右键 / 拖拽
    ========================= */
 
 document.addEventListener(
@@ -1339,8 +1392,9 @@ document.addEventListener(
     }
 );
 
+
 /* =========================
-   滚动出现动画
+   信息卡滚动动画
    ========================= */
 
 const cards =
