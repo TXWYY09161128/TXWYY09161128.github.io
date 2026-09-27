@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>个人页面 · 圆落星</title>
+<title>Person One · 圆落星</title>
 
 <style>
 *{
@@ -55,6 +55,7 @@ body{
     max-width:1100px;
     margin:auto;
     padding:0 25px 100px;
+
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:25px;
@@ -65,6 +66,7 @@ body{
     display:block;
     border-radius:4px;
     cursor:pointer;
+
     transition:.4s;
 }
 
@@ -72,19 +74,21 @@ body{
     transform:scale(1.02);
 }
 
-@media(max-width:700px){
-    .gallery{
-        grid-template-columns:1fr;
-    }
-}
+
+/* =========================
+   大图
+========================= */
 
 .lightbox{
     position:fixed;
     inset:0;
+
     background:rgba(20,18,25,.92);
+
     display:none;
     align-items:center;
     justify-content:center;
+
     z-index:99;
     padding:20px;
 }
@@ -92,53 +96,133 @@ body{
 .lightbox img{
     max-width:95%;
     max-height:90%;
+    object-fit:contain;
 }
 
 .lightbox.show{
     display:flex;
 }
+
+
+/* =========================
+   手机
+========================= */
+
+@media(max-width:700px){
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        margin:30px auto 60px;
+    }
+
+}
 </style>
 </head>
 
+
 <body>
 
-<a class="back" href="index.html">← 返回首页</a>
+
+<a class="back" href="index.html">
+    ← 返回首页
+</a>
+
 
 <section class="hero">
-    <div class="title">PERSON 01</div>
-    <div class="sub">A QUIET MEMORY · 个人相册</div>
-</section>
 
-<section class="gallery">
+    <div class="title">
+        Person One
+    </div>
 
-    <!-- 把下面的照片文件名换成这个人的照片 -->
-    <img src="photos/照片1.jpg">
-    <img src="photos/照片2.jpg">
-    <img src="photos/照片3.jpg">
-    <img src="photos/照片4.jpg">
+    <div class="sub">
+        A QUIET MEMORY · 个人相册
+    </div>
 
 </section>
+
+
+<section class="gallery" id="gallery">
+</section>
+
 
 <div class="lightbox" id="lightbox">
+
     <img id="bigImage">
+
 </div>
 
+
 <script>
-const images = document.querySelectorAll(".gallery img");
-const lightbox = document.getElementById("lightbox");
-const bigImage = document.getElementById("bigImage");
 
-images.forEach(img=>{
-    img.addEventListener("click",()=>{
-        bigImage.src = img.src;
-        lightbox.classList.add("show");
+/* =========================
+   自动读取现有 photos.json
+========================= */
+
+const gallery =
+    document.getElementById("gallery");
+
+
+fetch("photos.json?v=" + Date.now(), {
+    cache:"no-store"
+})
+
+.then(response => response.json())
+
+.then(photos => {
+
+    photos.forEach(photo => {
+
+        const img =
+            document.createElement("img");
+
+        img.src = photo;
+
+        img.loading = "lazy";
+
+        gallery.appendChild(img);
+
     });
+
 });
 
-lightbox.addEventListener("click",()=>{
-    lightbox.classList.remove("show");
+
+/* =========================
+   点击照片看大图
+========================= */
+
+const lightbox =
+    document.getElementById("lightbox");
+
+const bigImage =
+    document.getElementById("bigImage");
+
+
+gallery.addEventListener("click", function(e){
+
+    if(e.target.tagName === "IMG"){
+
+        bigImage.src = e.target.src;
+
+        lightbox.classList.add("show");
+
+    }
+
 });
+
+
+/* 点击黑色背景关闭 */
+
+lightbox.addEventListener("click", function(){
+
+    lightbox.classList.remove("show");
+
+});
+
 </script>
+
 
 </body>
 </html>
