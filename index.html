@@ -2,486 +2,649 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>榆木 & 圆落星</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Noto+Serif+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>圆落星 × 榆木</title>
+
 <style>
-  :root {
-    box-sizing: border-box;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    --night-deep: #0d1220;
-    --night: #161d33;
-    --night-soft: #232d4d;
-    --wood-dark: #3a2717;
-    --wood: #6b4226;
-    --wood-light: #b98a58;
-    --leaf: #59704a;
-    --leaf-light: #7c9468;
-    --star: #f2c879;
-    --star-pale: #fbe6b8;
-    --paper: #f3ead6;
-    --paper-soft: #eadfc4;
-    --ink: #2b2013;
-    --ink-soft: #6b5a3e;
+html{
+    scroll-behavior:smooth;
+}
 
-    --serif: "Fraunces", "Noto Serif SC", serif;
-    --sans: "Inter", "Noto Sans SC", sans-serif;
-  }
+body{
+    background:#09090c;
+    color:#f4f1ea;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+    overflow-x:hidden;
+}
 
-  :root:not([data-theme="light"]) {
-    color-scheme: dark light;
-  }
+/* 星空背景 */
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --night-deep: #0d1220;
-      --night: #161d33;
-      --paper: #f3ead6;
-      --ink: #2b2013;
-    }
-  }
-
-  :root[data-theme="dark"] {
-    --night-deep: #0d1220;
-    --night: #161d33;
-    --paper: #f3ead6;
-    --ink: #2b2013;
-  }
-
-  html {
-    scroll-padding-top: env(safe-area-inset-top, 0px);
-    scroll-behavior: smooth;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--night-deep);
-    color: var(--paper);
-    font-family: var(--sans);
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  img, svg { max-width: 100%; }
-
-  section {
-    position: relative;
-    padding: clamp(64px, 12vw, 140px) clamp(24px, 6vw, 72px);
-    overflow: hidden;
-  }
-
-  .wrap {
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .wrap.wide { max-width: 880px; }
-
-  /* ---------- HERO ---------- */
-
-  #hero {
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: calc(env(safe-area-inset-top, 0px) + 40px);
-    background: radial-gradient(120% 90% at 50% 20%, #1c2544 0%, #0d1220 70%);
-  }
-
-  .hero-scene {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .hero-scene svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  .hero-inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    opacity: 0;
-    transform: translateY(14px);
-    animation: rise 1.4s cubic-bezier(.22,.9,.34,1) 0.3s forwards;
-  }
-
-  @keyframes rise {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-names {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(2.6rem, 8vw, 4.6rem);
-    line-height: 1.15;
-    letter-spacing: 0.01em;
-    color: var(--star-pale);
-    margin: 0;
-  }
-
-  .hero-and {
-    display: inline-block;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--star);
-    padding: 0 0.14em;
-  }
-
-  .hero-tagline {
-    font-size: clamp(0.95rem, 2.4vw, 1.1rem);
-    color: #c9cee0;
-    letter-spacing: 0.02em;
-    max-width: 26em;
-  }
-
-  .scroll-cue {
-    position: absolute;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    width: 1px;
-    height: 46px;
-    background: linear-gradient(to bottom, rgba(242,200,121,0.7), rgba(242,200,121,0));
-  }
-
-  .twinkle { animation: twinkle 4.5s ease-in-out infinite; }
-  .twinkle.d2 { animation-delay: 1.2s; }
-  .twinkle.d3 { animation-delay: 2.4s; }
-  .twinkle.d4 { animation-delay: 0.6s; }
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.25; }
-    50% { opacity: 0.95; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-inner { animation: none; opacity: 1; transform: none; }
-    .twinkle { animation: none; opacity: 0.7; }
-  }
-
-  /* ---------- STORY (paper) ---------- */
-
-  #story {
-    background: var(--paper);
-    color: var(--ink);
-  }
-
-  .kicker-mark {
-    width: 34px;
-    height: 2px;
-    background: var(--wood-light);
-    margin-bottom: 22px;
-  }
-
-  h2.section-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(1.7rem, 4vw, 2.3rem);
-    line-height: 1.3;
-    margin: 0 0 26px;
-    color: var(--ink);
-  }
-
-  #story .section-title { color: var(--ink); }
-
-  .prose {
-    font-size: 1.05rem;
-    line-height: 1.95;
-    color: var(--ink-soft);
-    max-width: 34em;
-  }
-
-  .prose p { margin: 0 0 1.4em; }
-  .prose p:last-child { margin-bottom: 0; }
-
-  /* ---------- NAMES (wood) ---------- */
-
-  #names {
-    background: linear-gradient(160deg, var(--wood-dark), #2c1c10);
-    color: var(--paper);
-  }
-
-  .names-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-
-  @media (min-width: 720px) {
-    .names-grid { grid-template-columns: 1fr 1fr; gap: 56px; }
-  }
-
-  .name-card h3 {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.7rem;
-    margin: 0 0 16px;
-    color: var(--star-pale);
-  }
-
-  .name-card p {
-    font-size: 0.98rem;
-    line-height: 1.9;
-    color: #e3d6c0;
-    margin: 0;
-    max-width: 30em;
-  }
-
-  .name-rule {
-    width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.14);
-    margin: 60px 0 0;
-  }
-
-  /* ---------- GALLERY ---------- */
-
-  #gallery {
-    background: var(--paper);
-    color: var(--ink);
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  @media (min-width: 640px) {
-    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .frame {
-    aspect-ratio: 4 / 5;
-    border-radius: 2px;
-    display: flex;
-    align-items: flex-end;
-    padding: 14px;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
     background:
-      linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0) 55%),
-      var(--f-color, var(--leaf));
-    position: relative;
-  }
+        radial-gradient(circle at 20% 20%,rgba(130,110,180,.12),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(90,110,160,.10),transparent 30%),
+        #09090c;
+}
 
-  .frame:nth-child(1) { --f-color: #6b4226; }
-  .frame:nth-child(2) { --f-color: #59704a; }
-  .frame:nth-child(3) { --f-color: #8a6a3f; }
-  .frame:nth-child(4) { --f-color: #232d4d; }
+.stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+    background-image:
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#fff 1px,transparent 1px);
+    background-size:190px 190px,270px 270px,350px 350px;
+    background-position:20px 40px,80px 120px,150px 70px;
+    opacity:.22;
+}
 
-  .frame span {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.92);
-  }
+/* 导航 */
 
-  .frame::after {
-    content: "＋";
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    color: rgba(255,255,255,0.55);
-    font-size: 1rem;
-  }
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:28px 7vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:20;
+    backdrop-filter:blur(12px);
+}
 
-  /* ---------- CLOSING ---------- */
+.logo{
+    font-size:14px;
+    letter-spacing:5px;
+    color:#ddd8cf;
+}
 
-  #closing {
-    background: radial-gradient(120% 100% at 50% 100%, #1c2544 0%, #0d1220 65%);
-    text-align: center;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-  }
+.nav-right{
+    display:flex;
+    gap:30px;
+    font-size:11px;
+    letter-spacing:3px;
+}
 
-  .closing-inner {
-    margin: 0 auto;
-  }
+.nav-right a{
+    color:#aaa5a0;
+    text-decoration:none;
+    transition:.3s;
+}
 
-  .closing-line {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(1.4rem, 4vw, 1.9rem);
-    color: var(--star-pale);
-    margin: 0 0 20px;
-  }
+.nav-right a:hover{
+    color:white;
+}
 
-  .closing-sub {
-    font-size: 0.92rem;
-    color: #a9b0c9;
-    letter-spacing: 0.02em;
-  }
+/* 首屏 */
 
-  .closing-sub b {
-    color: var(--star);
-    font-weight: 500;
-  }
+.hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
 
-  ::selection {
-    background: var(--star);
-    color: var(--ink);
-  }
+.hero-ring{
+    position:absolute;
+    width:min(650px,75vw);
+    height:min(650px,75vw);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:50%;
+}
+
+.hero-ring::before{
+    content:"";
+    position:absolute;
+    inset:70px;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:50%;
+}
+
+.moon{
+    position:absolute;
+    width:210px;
+    height:210px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 30%,#fff,#d8d3c9 50%,#8e8a85);
+    box-shadow:
+        0 0 80px rgba(255,255,255,.12);
+    opacity:.9;
+}
+
+.hero-content{
+    position:relative;
+    z-index:3;
+    text-align:center;
+}
+
+.small-title{
+    font-size:11px;
+    letter-spacing:8px;
+    color:#aaa5a0;
+    margin-bottom:30px;
+}
+
+.main-title{
+    font-family:serif;
+    font-size:clamp(65px,12vw,150px);
+    font-weight:300;
+    letter-spacing:18px;
+    margin-right:-18px;
+    line-height:1;
+}
+
+.cross{
+    margin:30px 0;
+    color:#888;
+    font-size:20px;
+}
+
+.subtitle{
+    font-size:11px;
+    letter-spacing:6px;
+    color:#8d8984;
+}
+
+.scroll{
+    position:absolute;
+    bottom:35px;
+    font-size:9px;
+    letter-spacing:4px;
+    color:#777;
+}
+
+/* 双人区域 */
+
+.people{
+    padding:160px 7vw;
+    position:relative;
+}
+
+.section-label{
+    text-align:center;
+    font-size:10px;
+    letter-spacing:6px;
+    color:#777;
+    margin-bottom:70px;
+}
+
+.people-grid{
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1px 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.divider{
+    height:420px;
+    background:linear-gradient(
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+}
+
+.person{
+    position:relative;
+    min-height:480px;
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.05),
+            rgba(255,255,255,.01)
+        );
+    transition:.5s;
+}
+
+.person:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,255,255,.2);
+}
+
+.person::before{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    filter:blur(60px);
+    opacity:.22;
+}
+
+.person.one::before{
+    background:#8f78b7;
+    top:-80px;
+    right:-70px;
+}
+
+.person.two::before{
+    background:#7696ad;
+    top:-80px;
+    right:-70px;
+}
+
+.number{
+    position:absolute;
+    top:35px;
+    left:40px;
+    font-size:10px;
+    letter-spacing:4px;
+    color:#666;
+}
+
+.person-name{
+    font-family:serif;
+    font-size:clamp(42px,5vw,75px);
+    font-weight:300;
+    letter-spacing:9px;
+    position:relative;
+}
+
+.person-en{
+    margin-top:12px;
+    font-size:9px;
+    letter-spacing:5px;
+    color:#777;
+    position:relative;
+}
+
+.person-line{
+    width:40px;
+    height:1px;
+    background:#777;
+    margin:28px 0;
+}
+
+.person-desc{
+    font-size:12px;
+    line-height:2;
+    color:#999;
+    max-width:280px;
+    position:relative;
+}
+
+/* 关于两个人 */
+
+.story{
+    min-height:80vh;
+    padding:150px 10vw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.story-inner{
+    max-width:800px;
+    text-align:center;
+}
+
+.story-title{
+    font-family:serif;
+    font-size:clamp(38px,6vw,75px);
+    font-weight:300;
+    letter-spacing:8px;
+}
+
+.story-text{
+    margin-top:40px;
+    color:#8d8984;
+    line-height:2.4;
+    font-size:13px;
+}
+
+/* 时间轴 */
+
+.memory{
+    padding:130px 7vw;
+}
+
+.memory-list{
+    max-width:850px;
+    margin:auto;
+}
+
+.memory-item{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:40px;
+    padding:40px 0;
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.memory-date{
+    font-size:10px;
+    letter-spacing:3px;
+    color:#666;
+}
+
+.memory-content h3{
+    font-family:serif;
+    font-size:25px;
+    font-weight:300;
+    margin-bottom:10px;
+}
+
+.memory-content p{
+    color:#777;
+    font-size:12px;
+    line-height:2;
+}
+
+/* 页尾 */
+
+footer{
+    padding:100px 7vw 50px;
+    text-align:center;
+}
+
+.footer-title{
+    font-family:serif;
+    font-size:40px;
+    letter-spacing:8px;
+}
+
+.footer-small{
+    margin-top:25px;
+    color:#555;
+    font-size:9px;
+    letter-spacing:4px;
+}
+
+@media(max-width:700px){
+
+    nav{
+        padding:22px 5vw;
+    }
+
+    .nav-right{
+        gap:12px;
+        font-size:8px;
+    }
+
+    .moon{
+        width:145px;
+        height:145px;
+    }
+
+    .main-title{
+        letter-spacing:9px;
+        margin-right:-9px;
+    }
+
+    .people{
+        padding:110px 5vw;
+    }
+
+    .people-grid{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .divider{
+        display:none;
+    }
+
+    .person{
+        min-height:400px;
+        padding:35px;
+    }
+
+    .memory-item{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<!-- ============ HERO ============ -->
-<section id="hero">
-  <div class="hero-scene" aria-hidden="true">
-    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1c2544"/>
-          <stop offset="70%" stop-color="#0d1220"/>
-        </linearGradient>
-        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#f2c879" stop-opacity="0.55"/>
-          <stop offset="100%" stop-color="#f2c879" stop-opacity="0"/>
-        </radialGradient>
-        <linearGradient id="trail" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#fbe6b8" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#fbe6b8" stop-opacity="0.9"/>
-        </linearGradient>
-        <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#241708"/>
-          <stop offset="100%" stop-color="#4a3018"/>
-        </linearGradient>
-      </defs>
+<div class="stars"></div>
 
-      <rect x="0" y="0" width="800" height="600" fill="url(#sky)"/>
+<nav>
+    <div class="logo">YLX × YM</div>
 
-      <!-- scattered stars -->
-      <g fill="#f6e6bd">
-        <circle class="twinkle" cx="80" cy="90" r="1.6"/>
-        <circle class="twinkle d2" cx="140" cy="180" r="1.1"/>
-        <circle class="twinkle d3" cx="220" cy="70" r="1.4"/>
-        <circle class="twinkle d4" cx="640" cy="60" r="1.3"/>
-        <circle class="twinkle d2" cx="700" cy="140" r="1.7"/>
-        <circle class="twinkle" cx="560" cy="100" r="1.1"/>
-        <circle class="twinkle d3" cx="470" cy="50" r="1.2"/>
-        <circle class="twinkle d4" cx="380" cy="90" r="1.5"/>
-        <circle class="twinkle" cx="60" cy="230" r="1.2"/>
-        <circle class="twinkle d2" cx="740" cy="220" r="1.1"/>
-      </g>
-
-      <!-- comet trail into canopy -->
-      <path d="M 640 40 Q 560 160 470 235" stroke="url(#trail)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-      <circle cx="470" cy="235" r="5" fill="#fbe6b8"/>
-      <circle cx="470" cy="235" r="46" fill="url(#glow)"/>
-
-      <!-- elm canopy: layered organic blobs -->
-      <g>
-        <path d="M 300 260
-                 C 230 250 190 300 205 350
-                 C 165 360 150 415 195 450
-                 C 230 480 300 470 330 445
-                 C 360 480 430 480 460 445
-                 C 500 470 560 450 560 400
-                 C 600 390 600 330 555 310
-                 C 565 260 510 225 460 240
-                 C 430 205 360 205 330 240
-                 C 300 225 260 235 300 260 Z"
-              fill="#4b5f3f"/>
-        <path d="M 330 280
-                 C 290 270 260 300 270 335
-                 C 300 360 350 365 385 345
-                 C 420 365 470 355 480 320
-                 C 510 315 520 280 485 265
-                 C 470 235 420 235 400 258
-                 C 375 240 335 250 330 280 Z"
-              fill="#5c7248"/>
-        <path d="M 400 300 C 420 290 450 300 452 322 C 470 328 468 355 445 360
-                 C 430 375 400 370 392 350 C 375 345 380 315 400 300 Z"
-              fill="#728a58" opacity="0.9"/>
-      </g>
-
-      <!-- trunk + branches -->
-      <path d="M 392 600 L 400 380 C 398 360 405 345 415 335
-               L 420 600 Z" fill="url(#trunkGrad)"/>
-      <path d="M 406 420 C 380 410 360 415 345 400" stroke="#3a2512" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <path d="M 412 400 C 435 388 455 392 470 378" stroke="#3a2512" stroke-width="5" fill="none" stroke-linecap="round"/>
-
-      <!-- ground line -->
-      <rect x="0" y="560" width="800" height="40" fill="#0a0e18"/>
-    </svg>
-  </div>
-
-  <div class="hero-inner">
-    <h1 class="hero-names">榆木<span class="hero-and">&amp;</span>圆落星</h1>
-    <p class="hero-tagline">一棵扎根的树,和一颗轻轻落下来的星星。</p>
-  </div>
-
-  <div class="scroll-cue" aria-hidden="true"></div>
-</section>
-
-<!-- ============ STORY ============ -->
-<section id="story">
-  <div class="wrap">
-    <div class="kicker-mark"></div>
-    <h2 class="section-title">相遇的地方</h2>
-    <div class="prose">
-      <p>传说里,星星落下来的时候,总要找一个地方停一停。有的落进海里,变成浪;有的落进土里,变成石头。这一颗,落进了一棵榆树的枝叶间。</p>
-      <p>榆木不太说话,只是把根扎得更深了一点,把枝叶张得更开了一点,给这颗突然到来的光留出一块地方。而那颗星星,原本大概只打算路过,却在这里,把光留了下来。</p>
-      <p>后来的故事,大概就是这样开始的——一个安静地生长,一个轻轻地发光,凑在一起,刚刚好。</p>
+    <div class="nav-right">
+        <a href="#people">TWO</a>
+        <a href="#story">STORY</a>
+        <a href="#memory">MEMORY</a>
     </div>
-  </div>
-</section>
+</nav>
 
-<!-- ============ NAMES ============ -->
-<section id="names">
-  <div class="wrap wide">
-    <div class="kicker-mark" style="background:var(--star);"></div>
-    <h2 class="section-title" style="color:var(--paper);">关于两个名字</h2>
-    <div class="names-grid">
-      <div class="name-card">
-        <h3>榆木</h3>
-        <p>榆树是很朴素的树,不开艳丽的花,也不急着追阳光长。但它的木质很韧,做成家具能用很多年;扎根的地方,风吹不倒。</p>
-      </div>
-      <div class="name-card">
-        <h3>圆落星</h3>
-        <p>流星划过的一瞬最亮,但"圆落"这两个字,像是在说它不只是划过——它找到了一个地方,稳稳地落下来,变成了一颗会发光、又留了下来的星星。</p>
-      </div>
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-ring"></div>
+
+    <div class="moon"></div>
+
+    <div class="hero-content">
+        <div class="small-title">
+            TWO PEOPLE · ONE WORLD
+        </div>
+
+        <h1 class="main-title">
+            圆落星
+        </h1>
+
+        <div class="cross">
+            ×
+        </div>
+
+        <div class="subtitle">
+            榆木
+        </div>
     </div>
-  </div>
-</section>
 
-<!-- ============ GALLERY ============ -->
-<section id="gallery">
-  <div class="wrap wide">
-    <div class="kicker-mark"></div>
-    <h2 class="section-title">留住的画面</h2>
-    <div class="gallery-grid">
-      <div class="frame"><span>第一张合照</span></div>
-      <div class="frame"><span>一起旅行</span></div>
-      <div class="frame"><span>普通的一天</span></div>
-      <div class="frame"><span>现在</span></div>
+    <div class="scroll">
+        SCROLL TO DISCOVER
     </div>
-  </div>
+
 </section>
 
-<!-- ============ CLOSING ============ -->
-<section id="closing">
-  <div class="wrap closing-inner">
-    <p class="closing-line">故事还在继续。</p>
-    <p class="closing-sub"><b>榆木</b> &amp; <b>圆落星</b> · 这个页面,为你们而做</p>
-  </div>
+
+<!-- 两个人 -->
+
+<section class="people" id="people">
+
+    <div class="section-label">
+        TWO DIFFERENT WORLDS
+    </div>
+
+    <div class="people-grid">
+
+        <div class="person one">
+
+            <div class="number">
+                01
+            </div>
+
+            <div class="person-name">
+                圆落星
+            </div>
+
+            <div class="person-en">
+                YUAN LUO XING
+            </div>
+
+            <div class="person-line"></div>
+
+            <div class="person-desc">
+                一个属于夜晚的人。
+                喜欢星光、安静和那些
+                不需要解释的瞬间。
+            </div>
+
+        </div>
+
+
+        <div class="divider"></div>
+
+
+        <div class="person two">
+
+            <div class="number">
+                02
+            </div>
+
+            <div class="person-name">
+                榆木
+            </div>
+
+            <div class="person-en">
+                YU MU
+            </div>
+
+            <div class="person-line"></div>
+
+            <div class="person-desc">
+                像一棵安静生长的树。
+                不急着表达，却一直
+                留在属于自己的地方。
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- 故事 -->
+
+<section class="story" id="story">
+
+    <div class="story-inner">
+
+        <div class="section-label">
+            A SMALL STORY
+        </div>
+
+        <div class="story-title">
+            两个人的世界
+        </div>
+
+        <div class="story-text">
+            世界很大，人与人的相遇却很奇妙。<br>
+            有些人只是路过，有些人会留下名字。<br>
+            圆落星与榆木，便是这样的一段故事。
+            <br><br>
+            不需要太多解释。<br>
+            有光的时候一起看光，安静的时候一起安静。
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MEMORY -->
+
+<section class="memory" id="memory">
+
+    <div class="section-label">
+        MEMORY · 01
+    </div>
+
+    <div class="memory-list">
+
+        <div class="memory-item">
+
+            <div class="memory-date">
+                DAY 001
+            </div>
+
+            <div class="memory-content">
+                <h3>第一次出现</h3>
+                <p>
+                    有些故事并没有特别的开始，
+                    只是某一天，两个人刚好出现在彼此的世界。
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <div class="memory-date">
+                DAY 032
+            </div>
+
+            <div class="memory-content">
+                <h3>慢慢熟悉</h3>
+                <p>
+                    从陌生到熟悉，
+                    原来时间真的可以把距离变得很小。
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <div class="memory-date">
+                DAY 100
+            </div>
+
+            <div class="memory-content">
+                <h3>仍然在这里</h3>
+                <p>
+                    故事没有结束。
+                    所以这一页，也不会是最后一页。
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-title">
+        圆落星 × 榆木
+    </div>
+
+    <div class="footer-small">
+        A QUIET PLACE FOR TWO
+    </div>
+
+</footer>
 
 </body>
 </html>
